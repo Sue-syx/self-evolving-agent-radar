@@ -521,58 +521,38 @@ a { color: var(--teal); text-decoration: none; }
   min-height: 640px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background:
-    radial-gradient(circle at 50% 50%, rgba(22, 163, 148, 0.06), transparent 45%),
-    radial-gradient(circle at 50% 45%, #ffffff, #f4f7fb 85%),
-    #f4f7fb;
+  background: #ffffff;
   overflow: hidden;
-}
-.radar-frame::before {
-  content: "";
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(23, 42, 70, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 42, 70, 0.045) 1px, transparent 1px);
-  background-size: 26px 26px;
-  mask-image: radial-gradient(circle at 50% 50%, #000, transparent 70%);
 }
 .radar-svg { position: relative; display: block; width: min(760px, 100%); height: auto; overflow: visible; }
 
-.radar-ring { fill: none; stroke: rgba(23, 42, 70, 0.14); stroke-width: 1; }
-.radar-ring.outer { stroke: rgba(23, 42, 70, 0.22); }
-.radar-axis { stroke: rgba(23, 42, 70, 0.09); stroke-width: 1; }
-.sector-arc { fill: none; stroke-width: 3; opacity: 0.9; filter: drop-shadow(0 0 5px currentColor); }
-.sector-name { font-size: 14px; font-weight: 800; letter-spacing: 0.01em; }
-.ring-label { fill: rgba(102, 117, 137, 0.7); font-size: 10.5px; font-weight: 700; }
-.radar-center { fill: var(--teal); filter: drop-shadow(0 0 6px var(--teal)); }
+.radar-ring { fill: none; stroke: rgba(23, 42, 70, 0.10); stroke-width: 1; }
+.radar-ring.outer { stroke: rgba(23, 42, 70, 0.16); }
+.radar-axis { stroke: rgba(23, 42, 70, 0.06); stroke-width: 1; }
+.sector-arc { fill: none; stroke-width: 2.5; opacity: 0.95; stroke-linecap: round; }
+.sector-name { font-size: 13.5px; font-weight: 800; letter-spacing: 0.01em; }
+.ring-label { fill: rgba(102, 117, 137, 0.65); font-size: 10px; font-weight: 700; }
+.radar-center { fill: var(--muted-2); }
 
-/* rotating sweep */
-.radar-sweep { transform-origin: center; animation: sweep 8s linear infinite; }
-@keyframes sweep { to { transform: rotate(360deg); } }
+.label-leader { stroke-width: 1; opacity: 0.32; }
+.radar-label text {
+  fill: var(--ink); font-size: 10.5px; font-weight: 600;
+  paint-order: stroke; stroke: #ffffff; stroke-width: 3px;
+  pointer-events: none;
+  transition: fill 0.14s ease;
+}
+.radar-label.is-active text { fill: var(--ink-strong); font-weight: 800; }
 
 .radar-point { outline: none; cursor: pointer; }
 .radar-point circle.dot {
   stroke: #ffffff;
-  stroke-width: 1.6;
-  transition: r 0.16s ease, filter 0.16s ease;
-  filter: drop-shadow(0 1px 3px rgba(16, 25, 42, 0.28));
+  stroke-width: 1.4;
+  transition: r 0.16s ease;
 }
-.radar-point circle.halo { fill: none; opacity: 0; transition: opacity 0.16s ease; }
-.radar-point text {
-  opacity: 0; pointer-events: none;
-  fill: var(--ink-strong); font-size: 10.5px; font-weight: 700;
-  paint-order: stroke; stroke: #ffffff; stroke-width: 3.5px;
-  transition: opacity 0.14s ease;
-}
+.radar-point circle.hit { cursor: pointer; }
 .radar-point:hover circle.dot,
 .radar-point:focus circle.dot,
-.radar-point.is-active circle.dot { r: 8.5; }
-.radar-point:hover circle.halo,
-.radar-point:focus circle.halo,
-.radar-point.is-active circle.halo { opacity: 0.5; }
-.radar-point:hover text,
-.radar-point:focus text,
-.radar-point.is-active text { opacity: 1; }
+.radar-point.is-active circle.dot { r: 7; }
 
 /* legend + taxonomy side */
 .legend-block { display: grid; gap: 10px; margin-top: 18px; }
@@ -942,5 +922,5 @@ a { color: var(--teal); text-decoration: none; }
   .figure-grid { grid-template-columns: 1fr; }
   .st-row { grid-template-columns: 22px 1fr; }
   .radar-frame { min-height: 440px; }
-  .radar-point text { display: none; }
+  .radar-label text { font-size: 9px; }
 }

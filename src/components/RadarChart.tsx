@@ -9,7 +9,8 @@ interface RadarChartProps {
 
 const size = 760;
 const center = size / 2;
-const maxRadius = 292;
+const maxRadius = 262;
+const minRadius = 78;
 
 const hash = (value: string) =>
   [...value].reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) % 997, 17);
@@ -26,88 +27,91 @@ const arcPath = (start: number, end: number, radius: number) => {
   return `M ${first.x} ${first.y} A ${radius} ${radius} 0 ${large} 1 ${last.x} ${last.y}`;
 };
 
+// three maturity bands mapped to radius: exploring (inner) -> growing -> mature (outer)
+const scoreToRadius = (score: number) => {
+  const clamped = Math.max(0, Math.min(1, score));
+  return minRadius + clamped * (maxRadius - minRadius);
+};
+
 export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProps) {
   const sector = (Math.PI * 2) / page.categories.length;
 
-  // Deterministic layout, then de-overlap by nudging points that land too close.
+  // Deterministic angular placement within each sector; radius encodes maturity.
   const placed = items.map((item) => {
     const categoryIndex = page.categories.findIndex((c) => c.id === item.category);
     const h = hash(item.id);
-    const angleOffset = ((h % 100) / 100 - 0.5) * sector * 0.62;
-    const radiusOffset = (((h * 7) % 100) / 100 - 0.5) * 22;
-    const angle = -Math.PI / 2 + categoryIndex * sector + sector / 2 + angleOffset;
-    const radius = Math.max(66, Math.min(maxRadius - 18, item.score * maxRadius + radiusOffset));
-    let point = polar(angle, radius);
-    return { item, point, angle, radius };
+    // spread points across the sector but keep a margin from the borders
+    const angleSpread = ((h % 100) / 100 - 0.5) * sector * 0.7;
+    const angle = -Math.PI / 2 + categoryIndex * sector + sector / 2 + angleSpread;
+    const radius = scoreToRadius(item.score);
+    const point = polar(angle, radius);
+    // label radiates outward along the point's angle; anchor by horizontal direction
+    const dir = Math.cos(angle);
+    const labelAnchor: "start" | "end" = dir >= -0.05 ? "start" : "end";
+    return { item, point, angle, radius, labelAnchor, labelY: point.y };
   });
 
-  // simple relaxation to reduce label/dot overlap
-  for (let iter = 0; iter < 40; iter++) {
-    for (let i = 0; i < placed.length; i++) {
-      for (let j = i + 1; j < placed.length; j++) {
-        const a = placed[i].point;
-        const b = placed[j].point;
-        const dx = b.x - a.x;
-        const dy = b.y - a.y;
-        const dist = Math.hypot(dx, dy) || 0.01;
-        const min = 20;
-        if (dist < min) {
-          const push = (min - dist) / 2;
-          const ux = dx / dist;
-          const uy = dy / dist;
-          a.x -= ux * push;
-          a.y -= uy * push;
-          b.x += ux * push;
-          b.y += uy * push;
-        }
+  // Vertical de-collision for labels only (keep dots on their maturity radius).
+  const sorted = [...placed].sort((a, b) => a.labelY - b.labelY);
+  const gap = 14;
+  for (let iter = 0; iter < 120; iter++) {
+    for (let i = 1; i < sorted.length; i++) {
+      const prev = sorted[i - 1];
+      const cur = sorted[i];
+      const near = Math.abs(cur.point.x - prev.point.x) < 118 && cur.labelAnchor === prev.labelAnchor;
+      if (near && cur.labelY - prev.labelY < gap) {
+        const shift = (gap - (cur.labelY - prev.labelY)) / 2;
+        prev.labelY -= shift;
+        cur.labelY += shift;
       }
     }
   }
+
+  const bands = [
+    { ratio: minRadius / maxRadius, label: maturityLabels.exploring },
+    { ratio: (minRadius + (maxRadius - minRadius) * 0.4) / maxRadius, label: maturityLabels.growing },
+    { ratio: 1, label: maturityLabels.mature },
+  ];
 
   return (
     <div className="radar-frame">
       <svg className="radar-svg" viewBox={`0 0 ${size} ${size}`} aria-label={`${page.title} radar`}>
         <defs>
-          <radialGradient id="sweepGrad">
-            <stop offset="0%" stopColor="rgba(47,210,192,0.28)" />
-            <stop offset="70%" stopColor="rgba(47,210,192,0)" />
+          <radialGradient id="radarFieldGrad">
+            <stop offset="0%" stopColor="rgba(20,160,143,0.10)" />
+            <stop offset="60%" stopColor="rgba(20,160,143,0.03)" />
+            <stop offset="100%" stopColor="rgba(20,160,143,0)" />
           </radialGradient>
         </defs>
 
-        {/* rotating sweep */}
-        <g className="radar-sweep">
-          <path
-            d={`M ${center} ${center} L ${center} ${center - maxRadius} A ${maxRadius} ${maxRadius} 0 0 1 ${
-              polar(-Math.PI / 2 + 0.9, maxRadius).x
-            } ${polar(-Math.PI / 2 + 0.9, maxRadius).y} Z`}
-            fill="url(#sweepGrad)"
-          />
-        </g>
+        <circle cx={center} cy={center} r={maxRadius} fill="url(#radarFieldGrad)" />
 
-        {[0.34, 0.67, 1].map((ratio, index) => (
+        {/* maturity rings */}
+        {bands.map((band, index) => (
           <circle
-            key={ratio}
-            className={`radar-ring ${index === 2 ? "outer" : ""}`}
+            key={band.label}
+            className={`radar-ring ${index === bands.length - 1 ? "outer" : ""}`}
             cx={center}
             cy={center}
-            r={maxRadius * ratio}
+            r={maxRadius * band.ratio}
           />
         ))}
 
+        {/* sector dividers + arc borders + names */}
         {page.categories.map((category, index) => {
           const start = -Math.PI / 2 + index * sector;
           const mid = start + sector / 2;
           const edge = polar(start, maxRadius);
-          const label = polar(mid, maxRadius + 42);
-          const textAnchor = Math.cos(mid) > 0.35 ? "start" : Math.cos(mid) < -0.35 ? "end" : "middle";
+          const label = polar(mid, maxRadius + 34);
+          const textAnchor =
+            Math.cos(mid) > 0.35 ? "start" : Math.cos(mid) < -0.35 ? "end" : "middle";
           return (
             <g key={category.id}>
               <line className="radar-axis" x1={center} y1={center} x2={edge.x} y2={edge.y} />
               <path
                 className="sector-arc"
-                d={arcPath(start + 0.01, start + sector - 0.01, maxRadius + 14)}
+                d={arcPath(start + 0.015, start + sector - 0.015, maxRadius)}
                 stroke={category.color}
-                style={{ color: category.color }}
               />
               <text
                 className="sector-name"
@@ -122,21 +126,48 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
           );
         })}
 
-        <text className="ring-label" x={center + 8} y={center - maxRadius * 0.34 + 15}>
-          {maturityLabels.exploring}
-        </text>
-        <text className="ring-label" x={center + 8} y={center - maxRadius * 0.67 + 15}>
-          {maturityLabels.growing}
-        </text>
-        <text className="ring-label" x={center + 8} y={center - maxRadius + 15}>
-          {maturityLabels.mature}
-        </text>
+        {/* ring labels (top axis) */}
+        {bands.map((band) => (
+          <text
+            key={band.label}
+            className="ring-label"
+            x={center + 6}
+            y={center - maxRadius * band.ratio + 14}
+          >
+            {band.label}
+          </text>
+        ))}
 
-        <circle className="radar-center" cx={center} cy={center} r="4.5" />
+        <circle className="radar-center" cx={center} cy={center} r="3.5" />
+
+        {/* leader lines + labels first so dots render on top */}
+        {placed.map(({ item, point, labelAnchor, labelY }) => {
+          const category = categoryById(page, item.category);
+          const color = category?.color ?? "#14a08f";
+          const active = item.id === selectedId;
+          const lx = point.x + (labelAnchor === "start" ? 12 : -12);
+          return (
+            <g key={`lbl-${item.id}`} className={`radar-label ${active ? "is-active" : ""}`}>
+              {Math.abs(labelY - point.y) > 2 && (
+                <line
+                  className="label-leader"
+                  x1={point.x}
+                  y1={point.y}
+                  x2={lx}
+                  y2={labelY}
+                  stroke={color}
+                />
+              )}
+              <text x={lx} y={labelY + 3.5} textAnchor={labelAnchor}>
+                {item.shortTitle}
+              </text>
+            </g>
+          );
+        })}
 
         {placed.map(({ item, point }) => {
           const category = categoryById(page, item.category);
-          const color = category?.color ?? "#2fd2c0";
+          const color = category?.color ?? "#14a08f";
           const active = item.id === selectedId;
           return (
             <g
@@ -152,9 +183,8 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
               aria-label={item.title}
               style={{ "--pt": color } as React.CSSProperties}
             >
-              <circle className="halo" r={14} fill={color} />
-              <circle className="dot" r={active ? 8.5 : 5.5} fill={color} />
-              <text x="11" y="-9">{item.shortTitle}</text>
+              <circle className="hit" r={12} fill="transparent" />
+              <circle className="dot" r={active ? 7 : 4.6} fill={color} />
             </g>
           );
         })}
