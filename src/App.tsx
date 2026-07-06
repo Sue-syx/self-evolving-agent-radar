@@ -207,8 +207,6 @@ function Overview({
     0,
   );
   const totalCategories = radarPages.reduce((count, page) => count + page.categories.length, 0);
-  const leadPage = pagesByKey.skill;
-  const leadItems = itemsByPage("skill");
   const overviewRows = radarPages.map((page) => {
     const items = itemsByPage(page.key);
     const mature = items.filter((item) => item.maturity === "mature").length;
@@ -220,121 +218,50 @@ function Overview({
 
   return (
     <section className="overview">
-      <div className="atlas-hero">
-        <section className="atlas-radar panel">
-          <div className="panel-title">
-            <div>
-              <p className="eyebrow">Self-Evolving Agent Survey · Radar Edition</p>
-              <h1>Skill Radar</h1>
-              <p>{leadItems.length} 个 Skill 方向条目。点击圆点查看摘要、方法核心、评测设置和局限性。</p>
-            </div>
-            <div className="count-pill">{leadItems.length} / {leadItems.length}</div>
-          </div>
-          <RadarChart page={leadPage} items={leadItems} onSelect={onSelect} />
-          <Legend pageKey="skill" />
-        </section>
+      <header className="overview-lab panel">
+        <div>
+          <p className="eyebrow">Self-Evolving Agent Research Radar</p>
+          <h1>Skill · Memory · Workflow · Evaluation</h1>
+          <p>四个方向分开读。雷达点进入单篇论文页；Open 进入完整方向页。</p>
+        </div>
+        <div className="overview-metrics" aria-label="Coverage summary">
+          <Stat value={String(totalItems)} label="entries" />
+          <Stat value={String(totalCategories)} label="taxonomy" />
+          <Stat value={String(matureItems)} label="mature" />
+          <Stat value="4" label="radars" />
+        </div>
+      </header>
 
-        <aside className="atlas-side">
-          <div className="atlas-title-card">
-            <span>Research Map</span>
-            <h2>Self-Evolving Agent</h2>
-            <p>Skill、Memory、Workflow、Evaluation 四个方向独立阅读；首页展示 Skill 方向完整雷达，用于定位论文簇与成熟度。</p>
-          </div>
-          <div className="survey-index" aria-label="Coverage summary">
-            <Stat value={String(totalItems)} label="entries" />
-            <Stat value={String(totalCategories)} label="taxonomy nodes" />
-            <Stat value={String(matureItems)} label="mature" />
-            <Stat value="3" label="maturity rings" />
-          </div>
-          <div className="atlas-nav-list">
-            {overviewRows.map(({ page, items, mature, growing, exploring }) => (
-              <button key={page.key} onClick={() => onOpenPage(page.key)}>
-                <strong>{page.title}</strong>
-                <span>{items.length} entries</span>
-                <span className="stage-stack">
-                  <i className="mature" style={{ width: `${Math.max(8, mature * 7)}px` }} />
-                  <i className="growing" style={{ width: `${Math.max(8, growing * 7)}px` }} />
-                  <i className="exploring" style={{ width: `${Math.max(8, exploring * 7)}px` }} />
-                </span>
+      <div className="overview-radar-wall">
+        {overviewRows.map(({ page, items, mature, growing, exploring, top }) => (
+          <section key={page.key} className="overview-radar-card panel">
+            <div className="overview-card-head">
+              <div>
+                <span>{page.key}</span>
+                <h2>{page.title}</h2>
+              </div>
+              <button className="open-radar" onClick={() => onOpenPage(page.key)}>
+                Open
               </button>
-            ))}
-          </div>
-        </aside>
-      </div>
-
-      <div className="survey-board">
-        <section className="survey-panel question-panel">
-          <div className="panel-kicker">Reading Frame</div>
-          <h2>研究对象</h2>
-          <p>
-            Self-evolving agent 研究可以按可更新对象划分：技能库、长期记忆、执行流程和评测反馈。首页只给定位和证据入口；
-            每个方向的详细比较放在独立雷达页中。
-          </p>
-          <div className="reading-notes">
-            <span>内圈：探索期</span>
-            <span>中圈：成长期</span>
-            <span>外圈：成熟期</span>
-          </div>
-        </section>
-
-        <section className="survey-panel matrix-panel">
-          <div className="panel-kicker">Coverage Matrix</div>
-          <div className="coverage-table">
-            <div className="coverage-head">
-              <span>Direction</span>
-              <span>Entries</span>
-              <span>Stage</span>
-              <span>Representative work</span>
             </div>
-            {overviewRows.map(({ page, items, mature, growing, exploring, top }) => (
-              <button key={page.key} className="coverage-row" onClick={() => onOpenPage(page.key)}>
-                <strong>{page.title.replace(" Radar", "")}</strong>
-                <span>{items.length}</span>
-                <span className="stage-stack">
-                  <i className="mature" style={{ width: `${Math.max(8, mature * 7)}px` }} />
-                  <i className="growing" style={{ width: `${Math.max(8, growing * 7)}px` }} />
-                  <i className="exploring" style={{ width: `${Math.max(8, exploring * 7)}px` }} />
-                </span>
-                <span>{top.map((item) => item.shortTitle).join(" · ")}</span>
-              </button>
-            ))}
-          </div>
-        </section>
-      </div>
-
-      <div className="direction-ledger">
-        {overviewRows.map(({ page, items, top }) => {
-          const categoryCounts = page.categories.map((category) => ({
-            category,
-            count: items.filter((item) => item.category === category.id).length,
-          }));
-          return (
-            <button key={page.key} className="ledger-card" onClick={() => onOpenPage(page.key)}>
-              <div className="ledger-top">
-                <span>{page.key.toUpperCase()}</span>
-                <b>{items.length}</b>
-              </div>
-              <h2>{page.title}</h2>
-              <p className="ledger-question">{page.researchQuestion}</p>
-              <div className="category-ledger">
-                {categoryCounts.map(({ category, count }) => (
-                  <div key={category.id}>
-                    <span>
-                      <i style={{ background: category.color }} />
-                      {category.name}
-                    </span>
-                    <b>{count}</b>
-                  </div>
-                ))}
-              </div>
-              <div className="paper-strip">
-                {top.map((item) => (
-                  <span key={item.id}>{item.shortTitle}</span>
-                ))}
-              </div>
-            </button>
-          );
-        })}
+            <div className="overview-card-meta">
+              <strong>{items.length}</strong>
+              <span className="stage-stack">
+                <i className="mature" style={{ width: `${Math.max(8, mature * 7)}px` }} />
+                <i className="growing" style={{ width: `${Math.max(8, growing * 7)}px` }} />
+                <i className="exploring" style={{ width: `${Math.max(8, exploring * 7)}px` }} />
+              </span>
+            </div>
+            <RadarChart page={page} items={items} onSelect={onSelect} />
+            <div className="overview-paper-strip">
+              {top.map((item) => (
+                <button key={item.id} onClick={() => onSelect(item)}>
+                  {item.shortTitle}
+                </button>
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </section>
   );
