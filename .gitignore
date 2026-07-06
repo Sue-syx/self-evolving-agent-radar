@@ -3,3 +3,9 @@ dist/
 .DS_Store
 npm-debug.log*
 .vite/
+
+# local preview / screenshot artifacts
+preview_bundle.html
+shot*.cjs
+s_*.png
+ref_*.jpg

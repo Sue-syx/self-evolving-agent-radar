@@ -178,7 +178,7 @@ function App() {
       {detailItem ? (
         <PaperDetail item={detailItem} onBack={() => setPage(detailItem.page)} onOpenPaper={openPaper} />
       ) : activePage === "insights" ? (
-        <Insights />
+        <Insights onOpenPage={(key) => setPage(key)} />
       ) : activePage === "overview" ? (
         <Overview onOpenPage={(key) => setPage(key)} onSelect={openPaper} />
       ) : (
