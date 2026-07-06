@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { FilterBar, FilterState } from "./components/FilterBar";
 import { PaperList } from "./components/PaperList";
 import { RadarChart } from "./components/RadarChart";
+import { Insights } from "./components/Insights";
 import {
   categoryById,
   itemsByPage,
@@ -20,39 +21,54 @@ const initialFilters: FilterState = {
   category: "all",
   maturity: "all",
   query: "",
+  sort: "score",
+  view: "grid",
 };
 
-const pageTabs: { key: PageKey; label: string }[] = [
-  { key: "overview", label: "Overview" },
+type NavKey = PageKey | "insights";
+
+const pageTabs: { key: NavKey; label: string }[] = [
+  { key: "overview", label: "技术图谱" },
   { key: "skill", label: "Skill" },
   { key: "memory", label: "Memory" },
   { key: "workflow", label: "Workflow" },
   { key: "evaluation", label: "Evaluation" },
+  { key: "insights", label: "演进洞察" },
 ];
 
-const hashPage = () => {
+const isPaperHash = (hash: string) => hash.startsWith("paper/");
+
+const hashPage = (): NavKey => {
   const hash = window.location.hash.replace("#", "");
-  if (hash.startsWith("paper/")) {
+  if (isPaperHash(hash)) {
     const item = radarItems.find((entry) => entry.id === hash.slice("paper/".length));
     return item?.page ?? "overview";
   }
-  return pageTabs.some((tab) => tab.key === hash) ? (hash as PageKey) : "overview";
+  if (hash === "insights") return "insights";
+  return pageTabs.some((tab) => tab.key === hash) ? (hash as NavKey) : "overview";
 };
 
 const hashPaperId = () => {
   const hash = window.location.hash.replace("#", "");
-  return hash.startsWith("paper/") ? hash.slice("paper/".length) : undefined;
+  return isPaperHash(hash) ? hash.slice("paper/".length) : undefined;
 };
 
+const weights = [
+  { pct: "30%", name: "技术成熟度", note: "从概念验证到大规模应用的演进程度", color: "#38e0ff" },
+  { pct: "25%", name: "创新性", note: "技术的原创性与前沿程度", color: "#a78bfa" },
+  { pct: "25%", name: "落地程度", note: "在实际产品 / 项目中的应用广度", color: "#2fd2c0" },
+  { pct: "20%", name: "生态活跃度", note: "社区贡献者数量与更新频率", color: "#f5b53d" },
+];
+
 function App() {
-  const [activePage, setActivePage] = useState<PageKey>(() => hashPage());
+  const [activePage, setActivePage] = useState<NavKey>(() => hashPage());
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [detailId, setDetailId] = useState<string | undefined>(() => hashPaperId());
 
   useEffect(() => {
     const syncFromHash = () => {
       const hash = window.location.hash.replace("#", "");
-      if (hash.startsWith("paper/")) {
+      if (isPaperHash(hash)) {
         const id = hash.slice("paper/".length);
         const item = radarItems.find((entry) => entry.id === id);
         setActivePage(item?.page ?? "overview");
@@ -60,8 +76,13 @@ function App() {
         setDetailId(id);
         return;
       }
+      if (hash === "insights") {
+        setActivePage("insights");
+        setDetailId(undefined);
+        return;
+      }
       if (pageTabs.some((tab) => tab.key === hash)) {
-        setActivePage(hash as PageKey);
+        setActivePage(hash as NavKey);
         setFilters(initialFilters);
         setDetailId(undefined);
       }
@@ -70,11 +91,12 @@ function App() {
     return () => window.removeEventListener("hashchange", syncFromHash);
   }, []);
 
-  const setPage = (page: PageKey) => {
+  const setPage = (page: NavKey) => {
     setActivePage(page);
     setFilters(initialFilters);
     setDetailId(undefined);
     window.history.replaceState(null, "", `#${page}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const openPaper = (item: RadarItem) => {
@@ -84,13 +106,22 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const page = activePage === "overview" ? pagesByKey.skill : pagesByKey[activePage];
-  const pageItems = activePage === "overview" ? [] : itemsByPage(activePage);
+  const isRadarPage = activePage !== "overview" && activePage !== "insights";
+  const page = isRadarPage ? pagesByKey[activePage as RadarPageKey] : pagesByKey.skill;
+  const pageItems = isRadarPage ? itemsByPage(activePage as RadarPageKey) : [];
   const detailItem = detailId ? radarItems.find((item) => item.id === detailId) : undefined;
+
+  const categoryCounts = useMemo(() => {
+    const byCategory: Record<string, number> = {};
+    pageItems.forEach((it) => {
+      byCategory[it.category] = (byCategory[it.category] ?? 0) + 1;
+    });
+    return { total: pageItems.length, byCategory };
+  }, [pageItems]);
 
   const filteredItems = useMemo(() => {
     const query = filters.query.trim().toLowerCase();
-    return pageItems.filter((item) => {
+    const list = pageItems.filter((item) => {
       const categoryMatch = filters.category === "all" || item.category === filters.category;
       const maturityMatch = filters.maturity === "all" || item.maturity === filters.maturity;
       const queryText = [
@@ -107,15 +138,22 @@ function App() {
         .toLowerCase();
       return categoryMatch && maturityMatch && (!query || queryText.includes(query));
     });
+    const sorted = [...list];
+    if (filters.sort === "score") sorted.sort((a, b) => b.score - a.score);
+    else if (filters.sort === "year") sorted.sort((a, b) => b.year - a.year);
+    else sorted.sort((a, b) => a.title.localeCompare(b.title));
+    return sorted;
   }, [filters, pageItems]);
 
   return (
     <main className="app-shell">
       <header className="topbar">
         <div className="brand">
-          <span />
+          <span className="brand-mark" />
           <div>
-            <strong>Self-Evolving Agent Radar</strong>
+            <strong>
+              SEA<b>Radar</b>
+            </strong>
             <small>Skill · Memory · Workflow · Evaluation</small>
           </div>
         </div>
@@ -124,16 +162,23 @@ function App() {
             <button
               key={tab.key}
               className={!detailItem && activePage === tab.key ? "is-active" : ""}
-              onClick={() => setPage(tab.key)}
+              onClick={() => setPage(tab.key as NavKey)}
             >
               {tab.label}
             </button>
           ))}
         </nav>
+        <div className="topbar-right">
+          <a className="ghost-link" href="https://github.com/" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+        </div>
       </header>
 
       {detailItem ? (
         <PaperDetail item={detailItem} onBack={() => setPage(detailItem.page)} onOpenPaper={openPaper} />
+      ) : activePage === "insights" ? (
+        <Insights />
       ) : activePage === "overview" ? (
         <Overview onOpenPage={(key) => setPage(key)} onSelect={openPaper} />
       ) : (
@@ -155,12 +200,14 @@ function App() {
               <div className="panel-title">
                 <div>
                   <h2>Research Radar</h2>
-                  <p>点击圆点查看方法细节、评测设置和局限性。</p>
+                  <p>越靠外 = 越成熟；点击圆点查看方法细节、评测设置与局限。</p>
                 </div>
-                <div className="count-pill">{filteredItems.length} / {pageItems.length}</div>
+                <div className="count-pill">
+                  {filteredItems.length} / {pageItems.length}
+                </div>
               </div>
               <RadarChart page={page} items={filteredItems} onSelect={openPaper} />
-              <Legend pageKey={activePage} />
+              <Legend pageKey={activePage as RadarPageKey} />
             </section>
 
             <aside className="panel side-panel">
@@ -170,6 +217,7 @@ function App() {
                   <button
                     key={category.id}
                     className={filters.category === category.id ? "is-active" : ""}
+                    style={{ ["--tx" as string]: category.color }}
                     onClick={() =>
                       setFilters({
                         ...filters,
@@ -186,8 +234,8 @@ function App() {
             </aside>
           </div>
 
-          <FilterBar page={page} filters={filters} onChange={setFilters} />
-          <PaperList page={page} items={filteredItems} onSelect={openPaper} />
+          <FilterBar page={page} filters={filters} counts={categoryCounts} onChange={setFilters} />
+          <PaperList page={page} items={filteredItems} view={filters.view} onSelect={openPaper} />
         </section>
       )}
     </main>
@@ -206,7 +254,12 @@ function Overview({
     (count, page) => count + itemsByPage(page.key).filter((item) => item.maturity === "mature").length,
     0,
   );
-  const totalCategories = radarPages.reduce((count, page) => count + page.categories.length, 0);
+  const growingItems = radarPages.reduce(
+    (count, page) => count + itemsByPage(page.key).filter((item) => item.maturity === "growing").length,
+    0,
+  );
+  const exploringItems = totalItems - matureItems - growingItems;
+
   const overviewRows = radarPages.map((page) => {
     const items = itemsByPage(page.key);
     const mature = items.filter((item) => item.maturity === "mature").length;
@@ -216,21 +269,50 @@ function Overview({
     return { page, items, mature, growing, exploring, top };
   });
 
+  const metrics = [
+    { value: totalItems, label: "收录条目", color: "#2fd2c0" },
+    { value: matureItems, label: "成熟期", color: "#34d399" },
+    { value: growingItems, label: "成长期", color: "#f5b53d" },
+    { value: exploringItems, label: "探索期", color: "#f2645a" },
+  ];
+
   return (
     <section className="overview">
-      <header className="overview-lab panel">
-        <div>
-          <p className="eyebrow">Self-Evolving Agent Research Radar</p>
-          <h1>Skill · Memory · Workflow · Evaluation</h1>
-          <p>四个方向分开读。雷达点进入单篇论文页；Open 进入完整方向页。</p>
-        </div>
-        <div className="overview-metrics" aria-label="Coverage summary">
-          <Stat value={String(totalItems)} label="entries" />
-          <Stat value={String(totalCategories)} label="taxonomy" />
-          <Stat value={String(matureItems)} label="mature" />
-          <Stat value="4" label="radars" />
+      <header className="hero">
+        <div className="hero-grid">
+          <div>
+            <p className="eyebrow">实时追踪 · 结构化演化地图</p>
+            <h1>
+              Self-Evolving
+              <br />
+              <span className="accent">Agent Radar</span>
+            </h1>
+            <p className="hero-lead">
+              追踪自进化 Agent 的四大能力方向——Skill、Memory、Workflow、Evaluation，
+              让每一项技术的成熟度、创新性与落地程度有迹可循。
+            </p>
+            <div className="hero-chips">
+              <span>Skill 生成 · 召回 · 执行</span>
+              <span>长期记忆与一致性</span>
+              <span>流程自搜索</span>
+              <span>演化可度量</span>
+            </div>
+          </div>
+          <div className="hero-metrics">
+            {metrics.map((m) => (
+              <div className="metric" key={m.label} style={{ ["--accent" as string]: m.color }}>
+                <b>{m.value}</b>
+                <span>{m.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </header>
+
+      <div className="section-head">
+        <h2>技术雷达全景图</h2>
+        <p>四个方向分别成图，越靠外越成熟；点击雷达点进入单篇论文页，Open 进入完整方向页。</p>
+      </div>
 
       <div className="overview-radar-wall">
         {overviewRows.map(({ page, items, mature, growing, exploring, top }) => (
@@ -241,15 +323,15 @@ function Overview({
                 <h2>{page.title}</h2>
               </div>
               <button className="open-radar" onClick={() => onOpenPage(page.key)}>
-                Open
+                Open →
               </button>
             </div>
             <div className="overview-card-meta">
               <strong>{items.length}</strong>
               <span className="stage-stack">
-                <i className="mature" style={{ width: `${Math.max(8, mature * 7)}px` }} />
-                <i className="growing" style={{ width: `${Math.max(8, growing * 7)}px` }} />
-                <i className="exploring" style={{ width: `${Math.max(8, exploring * 7)}px` }} />
+                <i className="mature" style={{ width: `${Math.max(8, mature * 6)}px` }} />
+                <i className="growing" style={{ width: `${Math.max(8, growing * 6)}px` }} />
+                <i className="exploring" style={{ width: `${Math.max(8, exploring * 6)}px` }} />
               </span>
             </div>
             <RadarChart page={page} items={items} onSelect={onSelect} />
@@ -263,16 +345,23 @@ function Overview({
           </section>
         ))}
       </div>
-    </section>
-  );
-}
 
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="stat">
-      <b>{value}</b>
-      <span>{label}</span>
-    </div>
+      <div className="section-head">
+        <h2>评分维度说明</h2>
+        <p>综合评分由四个维度加权计算，用于横向对比不同技术的整体成熟度。</p>
+      </div>
+      <div className="weight-grid">
+        {weights.map((w) => (
+          <div className="weight-card" key={w.name}>
+            <div className="weight-pct" style={{ ["--wc" as string]: w.color }}>
+              {w.pct}
+            </div>
+            <h3>{w.name}</h3>
+            <p>{w.note}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -295,14 +384,14 @@ function PaperDetail({
     <article className="paper-detail">
       <div className="paper-detail-top">
         <button className="back-button" onClick={onBack}>
-          返回 {page.title}
+          ← 返回 {page.title}
         </button>
         <span className="detail-page-label">{page.eyebrow}</span>
       </div>
 
       <header className="paper-hero panel">
         <div>
-          <span className="category-chip" style={{ "--chip": category?.color } as CSSProperties}>
+          <span className="chip" style={{ "--chip": category?.color } as CSSProperties}>
             {category?.name}
           </span>
           <h1>{item.title}</h1>
@@ -318,7 +407,10 @@ function PaperDetail({
         </div>
         <aside className="paper-score-card">
           <b>{item.score.toFixed(2)}</b>
-          <span className={`maturity-pill ${item.maturity}`}>{maturityLabels[item.maturity]}</span>
+          <span className={`maturity-pill ${item.maturity}`}>
+            <i />
+            {maturityLabels[item.maturity]}
+          </span>
           <p>{maturityNotes[item.maturity]}</p>
         </aside>
       </header>
@@ -330,26 +422,10 @@ function PaperDetail({
             title="Introduction"
             text={`这篇工作放在 ${category?.name ?? page.title} 方向下阅读。它讨论的问题是：${item.summary} 对 self-evolving agent 来说，关键在于把一次任务中的经验转化为后续可复用的资产，并让系统能判断何时使用、何时修订。`}
           />
-          <ReadingSection
-            label="02"
-            title="Method"
-            text={item.methodCore}
-          />
-          <ReadingSection
-            label="03"
-            title="Experiments"
-            text={item.evaluation}
-          />
-          <ReadingSection
-            label="04"
-            title="Main Findings"
-            text={item.mainFinding}
-          />
-          <ReadingSection
-            label="05"
-            title="Limitations"
-            text={item.limitations}
-          />
+          <ReadingSection label="02" title="Method" text={item.methodCore} />
+          <ReadingSection label="03" title="Experiments" text={item.evaluation} />
+          <ReadingSection label="04" title="Main Findings" text={item.mainFinding} />
+          <ReadingSection label="05" title="Limitations" text={item.limitations} />
 
           <section className="detail-section">
             <div className="section-index">06</div>
@@ -370,11 +446,13 @@ function PaperDetail({
         <aside className="paper-aside">
           <section className="panel paper-side-block">
             <h2>Score Vector</h2>
-            <Score label="清晰度" value={item.scores.clarity} />
-            <Score label="实验证据" value={item.scores.evidence} />
-            <Score label="可复现性" value={item.scores.reproducibility} />
-            <Score label="采用度" value={item.scores.adoption} />
-            <Score label="演化相关" value={item.scores.selfEvolution} />
+            <div className="score-grid">
+              <Score label="清晰度" value={item.scores.clarity} />
+              <Score label="实验证据" value={item.scores.evidence} />
+              <Score label="可复现性" value={item.scores.reproducibility} />
+              <Score label="采用度" value={item.scores.adoption} />
+              <Score label="演化相关" value={item.scores.selfEvolution} />
+            </div>
           </section>
 
           <section className="panel paper-side-block">
@@ -394,7 +472,7 @@ function PaperDetail({
               </div>
               <div>
                 <dt>Citation</dt>
-                <dd>{item.citation}</dd>
+                <dd className="citation">{item.citation}</dd>
               </div>
             </dl>
           </section>
@@ -448,7 +526,7 @@ function ReadingSection({ label, title, text }: { label: string; title: string; 
 function FigureSlot({ title, text }: { title: string; text: string }) {
   return (
     <div className="figure-slot">
-      <div />
+      <div className="fs-canvas" />
       <strong>{title}</strong>
       <span>{text}</span>
     </div>

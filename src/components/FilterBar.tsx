@@ -1,51 +1,120 @@
 import { maturityLabels, Maturity, RadarPage } from "../data/radarData";
 
+export type SortKey = "score" | "year" | "title";
+
 export interface FilterState {
   category: string;
   maturity: "all" | Maturity;
   query: string;
+  sort: SortKey;
+  view: "grid" | "list";
 }
 
-interface FilterBarProps {
+interface ToolbarProps {
   page: RadarPage;
   filters: FilterState;
+  counts: { total: number; byCategory: Record<string, number> };
   onChange: (filters: FilterState) => void;
 }
 
-export function FilterBar({ page, filters, onChange }: FilterBarProps) {
+const maturityOrder: ("all" | Maturity)[] = ["all", "mature", "growing", "exploring"];
+
+export function FilterBar({ page, filters, counts, onChange }: ToolbarProps) {
   return (
-    <div className="filter-bar">
-      <label>
-        <span>分类</span>
-        <select value={filters.category} onChange={(event) => onChange({ ...filters, category: event.target.value })}>
-          <option value="all">全部分类</option>
-          {page.categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label>
-        <span>阶段</span>
-        <select
-          value={filters.maturity}
-          onChange={(event) => onChange({ ...filters, maturity: event.target.value as FilterState["maturity"] })}
+    <>
+      {/* colored category tabs with counts */}
+      <div className="cat-tabs">
+        <button
+          className={`cat-tab all ${filters.category === "all" ? "is-active" : ""}`}
+          onClick={() => onChange({ ...filters, category: "all" })}
         >
-          <option value="all">全部阶段</option>
-          <option value="exploring">{maturityLabels.exploring}</option>
-          <option value="growing">{maturityLabels.growing}</option>
-          <option value="mature">{maturityLabels.mature}</option>
-        </select>
-      </label>
-      <label className="filter-search">
-        <span>检索</span>
-        <input
-          value={filters.query}
-          onChange={(event) => onChange({ ...filters, query: event.target.value })}
-          placeholder="论文、方法、标签"
-        />
-      </label>
-    </div>
+          <i />
+          全部
+          <b>{counts.total}</b>
+        </button>
+        {page.categories.map((category) => (
+          <button
+            key={category.id}
+            className={`cat-tab ${filters.category === category.id ? "is-active" : ""}`}
+            style={{ ["--dot" as string]: category.color }}
+            onClick={() =>
+              onChange({ ...filters, category: filters.category === category.id ? "all" : category.id })
+            }
+          >
+            <i />
+            {category.name}
+            <b>{counts.byCategory[category.id] ?? 0}</b>
+          </button>
+        ))}
+      </div>
+
+      {/* toolbar row */}
+      <div className="toolbar">
+        <div className="mat-tabs">
+          {maturityOrder.map((m) => (
+            <button
+              key={m}
+              className={`mat-tab ${m} ${filters.maturity === m ? "is-active" : ""}`}
+              onClick={() => onChange({ ...filters, maturity: m })}
+            >
+              <i />
+              {m === "all" ? "全部阶段" : maturityLabels[m]}
+            </button>
+          ))}
+        </div>
+
+        <div className="toolbar-spacer" />
+
+        <div className="search-box">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+            <circle cx="11" cy="11" r="7" />
+            <line x1="21" y1="21" x2="16.5" y2="16.5" />
+          </svg>
+          <input
+            value={filters.query}
+            onChange={(e) => onChange({ ...filters, query: e.target.value })}
+            placeholder="搜索论文、方法、标签"
+          />
+        </div>
+
+        <div className="view-toggle" role="group" aria-label="视图切换">
+          <button
+            className={filters.view === "grid" ? "is-active" : ""}
+            onClick={() => onChange({ ...filters, view: "grid" })}
+            aria-label="网格视图"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="3" y="3" width="8" height="8" rx="1.5" />
+              <rect x="13" y="3" width="8" height="8" rx="1.5" />
+              <rect x="3" y="13" width="8" height="8" rx="1.5" />
+              <rect x="13" y="13" width="8" height="8" rx="1.5" />
+            </svg>
+          </button>
+          <button
+            className={filters.view === "list" ? "is-active" : ""}
+            onClick={() => onChange({ ...filters, view: "list" })}
+            aria-label="列表视图"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="3" y="4" width="18" height="3" rx="1.5" />
+              <rect x="3" y="10.5" width="18" height="3" rx="1.5" />
+              <rect x="3" y="17" width="18" height="3" rx="1.5" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="sort-select">
+          <span>排序</span>
+          <select
+            value={filters.sort}
+            onChange={(e) => onChange({ ...filters, sort: e.target.value as SortKey })}
+          >
+            <option value="score">综合评分</option>
+            <option value="year">发表年份</option>
+            <option value="title">名称</option>
+          </select>
+        </div>
+      </div>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import { categoryById, maturityLabels, RadarItem, RadarPage } from "../data/radarData";
+import { categoryById, RadarItem, RadarPage, maturityLabels } from "../data/radarData";
 
 interface RadarChartProps {
   page: RadarPage;
@@ -29,17 +29,69 @@ const arcPath = (start: number, end: number, radius: number) => {
 export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProps) {
   const sector = (Math.PI * 2) / page.categories.length;
 
+  // Deterministic layout, then de-overlap by nudging points that land too close.
+  const placed = items.map((item) => {
+    const categoryIndex = page.categories.findIndex((c) => c.id === item.category);
+    const h = hash(item.id);
+    const angleOffset = ((h % 100) / 100 - 0.5) * sector * 0.62;
+    const radiusOffset = (((h * 7) % 100) / 100 - 0.5) * 22;
+    const angle = -Math.PI / 2 + categoryIndex * sector + sector / 2 + angleOffset;
+    const radius = Math.max(66, Math.min(maxRadius - 18, item.score * maxRadius + radiusOffset));
+    let point = polar(angle, radius);
+    return { item, point, angle, radius };
+  });
+
+  // simple relaxation to reduce label/dot overlap
+  for (let iter = 0; iter < 40; iter++) {
+    for (let i = 0; i < placed.length; i++) {
+      for (let j = i + 1; j < placed.length; j++) {
+        const a = placed[i].point;
+        const b = placed[j].point;
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.hypot(dx, dy) || 0.01;
+        const min = 20;
+        if (dist < min) {
+          const push = (min - dist) / 2;
+          const ux = dx / dist;
+          const uy = dy / dist;
+          a.x -= ux * push;
+          a.y -= uy * push;
+          b.x += ux * push;
+          b.y += uy * push;
+        }
+      }
+    }
+  }
+
   return (
     <div className="radar-frame">
       <svg className="radar-svg" viewBox={`0 0 ${size} ${size}`} aria-label={`${page.title} radar`}>
         <defs>
-          <filter id="pointShadow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="#0f172a" floodOpacity="0.18" />
-          </filter>
+          <radialGradient id="sweepGrad">
+            <stop offset="0%" stopColor="rgba(47,210,192,0.28)" />
+            <stop offset="70%" stopColor="rgba(47,210,192,0)" />
+          </radialGradient>
         </defs>
 
+        {/* rotating sweep */}
+        <g className="radar-sweep">
+          <path
+            d={`M ${center} ${center} L ${center} ${center - maxRadius} A ${maxRadius} ${maxRadius} 0 0 1 ${
+              polar(-Math.PI / 2 + 0.9, maxRadius).x
+            } ${polar(-Math.PI / 2 + 0.9, maxRadius).y} Z`}
+            fill="url(#sweepGrad)"
+          />
+        </g>
+
         {[0.34, 0.67, 1].map((ratio, index) => (
-          <circle key={ratio} className="radar-ring" cx={center} cy={center} r={maxRadius * ratio} />
+          <circle
+            key={ratio}
+            className={`radar-ring ${index === 2 ? "outer" : ""}`}
+            cx={center}
+            cy={center}
+            r={maxRadius * ratio}
+          />
         ))}
 
         {page.categories.map((category, index) => {
@@ -55,6 +107,7 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
                 className="sector-arc"
                 d={arcPath(start + 0.01, start + sector - 0.01, maxRadius + 14)}
                 stroke={category.color}
+                style={{ color: category.color }}
               />
               <text
                 className="sector-name"
@@ -69,29 +122,22 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
           );
         })}
 
-        <text className="ring-label" x={center + 8} y={center - maxRadius * 0.34 + 17}>
-          内圈：{maturityLabels.exploring}
+        <text className="ring-label" x={center + 8} y={center - maxRadius * 0.34 + 15}>
+          {maturityLabels.exploring}
         </text>
-        <text className="ring-label" x={center + 8} y={center - maxRadius * 0.67 + 17}>
-          中圈：{maturityLabels.growing}
+        <text className="ring-label" x={center + 8} y={center - maxRadius * 0.67 + 15}>
+          {maturityLabels.growing}
         </text>
-        <text className="ring-label" x={center + 8} y={center - maxRadius + 17}>
-          外圈：{maturityLabels.mature}
+        <text className="ring-label" x={center + 8} y={center - maxRadius + 15}>
+          {maturityLabels.mature}
         </text>
 
-        <circle className="radar-center" cx={center} cy={center} r="5" />
+        <circle className="radar-center" cx={center} cy={center} r="4.5" />
 
-        {items.map((item) => {
-          const categoryIndex = page.categories.findIndex((category) => category.id === item.category);
-          const h = hash(item.id);
-          const angleOffset = ((h % 100) / 100 - 0.5) * sector * 0.58;
-          const radiusOffset = (((h * 7) % 100) / 100 - 0.5) * 20;
-          const angle = -Math.PI / 2 + categoryIndex * sector + sector / 2 + angleOffset;
-          const radius = Math.max(62, Math.min(maxRadius - 16, item.score * maxRadius + radiusOffset));
-          const point = polar(angle, radius);
+        {placed.map(({ item, point }) => {
           const category = categoryById(page, item.category);
+          const color = category?.color ?? "#2fd2c0";
           const active = item.id === selectedId;
-
           return (
             <g
               key={item.id}
@@ -104,11 +150,11 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
                 if (event.key === "Enter" || event.key === " ") onSelect(item);
               }}
               aria-label={item.title}
+              style={{ "--pt": color } as React.CSSProperties}
             >
-              <circle r={active ? 10 : 7} fill={category?.color ?? "#0f766e"} />
-              <text x="12" y="-10">
-                {item.shortTitle}
-              </text>
+              <circle className="halo" r={14} fill={color} />
+              <circle className="dot" r={active ? 8.5 : 5.5} fill={color} />
+              <text x="11" y="-9">{item.shortTitle}</text>
             </g>
           );
         })}
