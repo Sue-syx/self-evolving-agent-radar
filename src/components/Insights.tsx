@@ -11,6 +11,13 @@ const dims: { key: "clarity" | "evidence" | "reproducibility" | "adoption"; labe
   { key: "adoption", label: "生态活跃度", color: "#e79c1a" },
 ];
 
+const domainColor: Record<RadarPageKey, string> = {
+  skill: "#14a08f",
+  memory: "#2aa9d6",
+  workflow: "#7c6cf0",
+  evaluation: "#e0982a",
+};
+
 const objectives: Record<RadarPageKey, string> = {
   skill: "让 agent 把任务经验沉淀为可检索、可复用、可自我修订的技能资产,并在合适时机准确召回与执行。",
   memory: "构建可写入、可遗忘、可反思的长期记忆机制,让 agent 跨会话保留关键上下文并从历史中持续学习。",
@@ -119,11 +126,11 @@ export function Insights({ onOpenPage }: { onOpenPage?: (key: RadarPageKey) => v
                   aria-expanded={open}
                 >
                   <span className={`st-caret ${open ? "open" : ""}`}>›</span>
-                  <div className="st-domain" style={{ ["--dc" as string]: page.categories[0].color }}>
+                  <div className="st-domain" style={{ ["--dc" as string]: domainColor[page.key] }}>
                     <i />
                     {page.title.replace(" Radar", "")}
                   </div>
-                  <div className="st-score" style={{ color: page.categories[0].color }}>
+                  <div className="st-score" style={{ color: domainColor[page.key] }}>
                     {overall.toFixed(2)}
                   </div>
                   {cells.map((c) => (
@@ -191,11 +198,11 @@ export function Insights({ onOpenPage }: { onOpenPage?: (key: RadarPageKey) => v
         </div>
         <div className="tl-track">
           {timeline.map((entry) => (
-            <div className="tl-item" key={entry.year}>
-              <div className="tl-year" style={{ color: entry.color }}>{entry.year}</div>
-              <div className="tl-card" style={{ ["--tc" as string]: entry.color }}>
+            <div className="tl-item" key={entry.year} style={{ ["--tc" as string]: entry.color }}>
+              <div className="tl-year">{entry.year}</div>
+              <div className="tl-card">
                 <div className="tl-card-head">
-                  <span className="tl-badge" style={{ background: entry.color }}>{entry.badge}</span>
+                  <span className="tl-badge">{entry.badge}</span>
                   <h4>{entry.title}</h4>
                 </div>
                 <p>{entry.text}</p>
