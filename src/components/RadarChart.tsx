@@ -7,6 +7,12 @@ interface RadarChartProps {
   onSelect: (item: RadarItem) => void;
 }
 
+const maturityColor: Record<string, string> = {
+  mature: "#2f9e6f",
+  growing: "#d1902b",
+  exploring: "#cf5f4c",
+};
+
 const size = 760;
 const center = size / 2;
 const maxRadius = 262;
@@ -167,7 +173,8 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
 
         {placed.map(({ item, point }) => {
           const category = categoryById(page, item.category);
-          const color = category?.color ?? "#14a08f";
+          const catColor = category?.color ?? "#14a08f";
+          const fill = maturityColor[item.maturity] ?? catColor;
           const active = item.id === selectedId;
           return (
             <g
@@ -181,10 +188,16 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
                 if (event.key === "Enter" || event.key === " ") onSelect(item);
               }}
               aria-label={item.title}
-              style={{ "--pt": color } as React.CSSProperties}
+              style={{ "--pt": catColor } as React.CSSProperties}
             >
               <circle className="hit" r={12} fill="transparent" />
-              <circle className="dot" r={active ? 7 : 4.6} fill={color} />
+              <circle
+                className="dot"
+                r={active ? 7 : 4.8}
+                fill={fill}
+                stroke={catColor}
+                strokeWidth={active ? 3 : 2}
+              />
             </g>
           );
         })}
