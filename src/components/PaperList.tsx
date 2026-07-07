@@ -6,6 +6,7 @@ interface PaperListProps {
   items: RadarItem[];
   selectedId?: string;
   view: "grid" | "list";
+  onHover?: (id: string | undefined) => void;
   onSelect: (item: RadarItem) => void;
 }
 
@@ -16,7 +17,7 @@ const miniDims: { key: keyof RadarItem["scores"]; label: string }[] = [
   { key: "selfEvolution", label: "演化" },
 ];
 
-export function PaperList({ page, items, selectedId, view, onSelect }: PaperListProps) {
+export function PaperList({ page, items, selectedId, view, onHover, onSelect }: PaperListProps) {
   if (items.length === 0) {
     return <div className="empty-state">没有符合当前筛选条件的条目，试试放宽分类或成熟度。</div>;
   }
@@ -31,6 +32,10 @@ export function PaperList({ page, items, selectedId, view, onSelect }: PaperList
             key={item.id}
             className={`paper-card ${isList ? "is-list-item" : ""} ${selectedId === item.id ? "is-active" : ""}`}
             onClick={() => onSelect(item)}
+            onMouseEnter={() => onHover?.(item.id)}
+            onMouseLeave={() => onHover?.(undefined)}
+            onFocus={() => onHover?.(item.id)}
+            onBlur={() => onHover?.(undefined)}
             style={{ "--chip": category?.color } as CSSProperties}
           >
             <div style={{ minWidth: 0 }}>

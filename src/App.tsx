@@ -13,6 +13,7 @@ import {
   pagesByKey,
   RadarItem,
   RadarPageKey,
+  ScoreVector,
   radarItems,
   radarPages,
 } from "./data/radarData";
@@ -23,9 +24,20 @@ const initialFilters: FilterState = {
   query: "",
   sort: "score",
   view: "grid",
+  minYear: 0,
+  minSelfEvolution: 0,
 };
 
 type NavKey = PageKey | "insights";
+type ScoreSortKey = keyof ScoreVector;
+
+const scoreSortKeys: ScoreSortKey[] = [
+  "clarity",
+  "evidence",
+  "reproducibility",
+  "adoption",
+  "selfEvolution",
+];
 
 const pageTabs: { key: NavKey; label: string }[] = [
   { key: "overview", label: "技术图谱" },
@@ -64,6 +76,7 @@ function App() {
   const [activePage, setActivePage] = useState<NavKey>(() => hashPage());
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [detailId, setDetailId] = useState<string | undefined>(() => hashPaperId());
+  const [spotlightId, setSpotlightId] = useState<string | undefined>();
 
   useEffect(() => {
     const syncFromHash = () => {
@@ -95,6 +108,7 @@ function App() {
     setActivePage(page);
     setFilters(initialFilters);
     setDetailId(undefined);
+    setSpotlightId(undefined);
     window.history.replaceState(null, "", `#${page}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -102,6 +116,7 @@ function App() {
   const openPaper = (item: RadarItem) => {
     setActivePage(item.page);
     setDetailId(item.id);
+    setSpotlightId(item.id);
     window.history.replaceState(null, "", `#paper/${item.id}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -124,6 +139,8 @@ function App() {
     const list = pageItems.filter((item) => {
       const categoryMatch = filters.category === "all" || item.category === filters.category;
       const maturityMatch = filters.maturity === "all" || item.maturity === filters.maturity;
+      const yearMatch = filters.minYear === 0 || item.year >= filters.minYear;
+      const evolutionMatch = item.scores.selfEvolution >= filters.minSelfEvolution;
       const queryText = [
         item.title,
         item.shortTitle,
@@ -136,12 +153,15 @@ function App() {
       ]
         .join(" ")
         .toLowerCase();
-      return categoryMatch && maturityMatch && (!query || queryText.includes(query));
+      return categoryMatch && maturityMatch && yearMatch && evolutionMatch && (!query || queryText.includes(query));
     });
     const sorted = [...list];
     if (filters.sort === "score") sorted.sort((a, b) => b.score - a.score);
     else if (filters.sort === "year") sorted.sort((a, b) => b.year - a.year);
-    else sorted.sort((a, b) => a.title.localeCompare(b.title));
+    else if (scoreSortKeys.includes(filters.sort as ScoreSortKey)) {
+      const sortKey = filters.sort as ScoreSortKey;
+      sorted.sort((a, b) => b.scores[sortKey] - a.scores[sortKey]);
+    } else sorted.sort((a, b) => a.title.localeCompare(b.title));
     return sorted;
   }, [filters, pageItems]);
 
@@ -206,7 +226,14 @@ function App() {
                   {filteredItems.length} / {pageItems.length}
                 </div>
               </div>
-              <RadarChart page={page} items={filteredItems} onSelect={openPaper} />
+              <RadarChart
+                page={page}
+                items={filteredItems}
+                selectedId={spotlightId}
+                activeCategory={filters.category === "all" ? undefined : filters.category}
+                onHover={setSpotlightId}
+                onSelect={openPaper}
+              />
               <Legend pageKey={activePage as RadarPageKey} />
             </section>
 
@@ -235,7 +262,14 @@ function App() {
           </div>
 
           <FilterBar page={page} filters={filters} counts={categoryCounts} onChange={setFilters} />
-          <PaperList page={page} items={filteredItems} view={filters.view} onSelect={openPaper} />
+          <PaperList
+            page={page}
+            items={filteredItems}
+            selectedId={spotlightId}
+            view={filters.view}
+            onHover={setSpotlightId}
+            onSelect={openPaper}
+          />
         </section>
       )}
     </main>
@@ -274,6 +308,29 @@ function Overview({
     { value: matureItems, label: "成熟期", color: "#34d399" },
     { value: growingItems, label: "成长期", color: "#f5b53d" },
     { value: exploringItems, label: "探索期", color: "#f2645a" },
+  ];
+  const researchQueues = [
+    {
+      label: "Top Mature",
+      note: "优先引用或作为基线阅读",
+      items: [...radarItems].filter((item) => item.maturity === "mature").sort((a, b) => b.score - a.score).slice(0, 5),
+    },
+    {
+      label: "Fast Growing",
+      note: "最值得跟踪后续工作的方向",
+      items: [...radarItems]
+        .filter((item) => item.maturity === "growing")
+        .sort((a, b) => b.scores.selfEvolution - a.scores.selfEvolution)
+        .slice(0, 5),
+    },
+    {
+      label: "Emerging",
+      note: "概念新但证据还在积累",
+      items: [...radarItems]
+        .filter((item) => item.maturity === "exploring")
+        .sort((a, b) => b.scores.selfEvolution - a.scores.selfEvolution)
+        .slice(0, 5),
+    },
   ];
 
   return (
@@ -317,6 +374,26 @@ function Overview({
         <p>四个方向分别成图，越靠外越成熟；点击雷达点进入单篇论文页，Open 进入完整方向页。</p>
       </div>
 
+      <div className="research-queue-grid">
+        {researchQueues.map((queue) => (
+          <section className="research-queue panel" key={queue.label}>
+            <div className="queue-head">
+              <h3>{queue.label}</h3>
+              <span>{queue.note}</span>
+            </div>
+            <div className="queue-list">
+              {queue.items.map((item) => (
+                <button key={item.id} onClick={() => onSelect(item)}>
+                  <span>{item.page}</span>
+                  <strong>{item.shortTitle}</strong>
+                  <b>{item.score.toFixed(2)}</b>
+                </button>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
       <div className="overview-radar-wall">
         {overviewRows.map(({ page, items, mature, growing, exploring, top }) => (
           <section key={page.key} className="overview-radar-card panel">
@@ -337,7 +414,7 @@ function Overview({
                 <i className="exploring" style={{ width: `${Math.max(8, exploring * 6)}px` }} />
               </span>
             </div>
-            <RadarChart page={page} items={items} onSelect={onSelect} />
+            <RadarChart page={page} items={items} compact onSelect={onSelect} />
             <div className="overview-paper-strip">
               {top.map((item) => (
                 <button key={item.id} onClick={() => onSelect(item)}>
@@ -382,6 +459,12 @@ function PaperDetail({
   const relatedItems = item.related
     .map((id) => radarItems.find((entry) => entry.id === id))
     .filter((entry): entry is RadarItem => Boolean(entry));
+  const [copied, setCopied] = useState(false);
+  const copyCitation = async () => {
+    await navigator.clipboard?.writeText(item.citation);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1400);
+  };
 
   return (
     <article className="paper-detail">
@@ -406,6 +489,20 @@ function PaperDetail({
             {item.tags.map((tag) => (
               <span key={tag}>{tag}</span>
             ))}
+          </div>
+          <div className="research-brief">
+            <div>
+              <span>TL;DR</span>
+              <p>{item.summary}</p>
+            </div>
+            <div>
+              <span>SEA Value</span>
+              <p>{item.mainFinding}</p>
+            </div>
+            <div>
+              <span>Use With Care</span>
+              <p>{item.limitations}</p>
+            </div>
           </div>
         </div>
         <aside className="paper-score-card">
@@ -444,6 +541,19 @@ function PaperDetail({
               </div>
             </div>
           </section>
+
+          <section className="detail-section">
+            <div className="section-index">07</div>
+            <div>
+              <h2>Why This Position</h2>
+              <p>
+                该条目被放入 {category?.name ?? page.title}，因为其方法核心是 {item.methodFamily}。综合评分主要由
+                清晰度 {item.scores.clarity.toFixed(2)}、实验证据 {item.scores.evidence.toFixed(2)}、可复现性{" "}
+                {item.scores.reproducibility.toFixed(2)}、采用度 {item.scores.adoption.toFixed(2)} 和演化相关性{" "}
+                {item.scores.selfEvolution.toFixed(2)} 共同决定。
+              </p>
+            </div>
+          </section>
         </main>
 
         <aside className="paper-aside">
@@ -478,6 +588,9 @@ function PaperDetail({
                 <dd className="citation">{item.citation}</dd>
               </div>
             </dl>
+            <button className="copy-citation" type="button" onClick={copyCitation}>
+              {copied ? "已复制" : "复制引用"}
+            </button>
           </section>
 
           <section className="panel paper-side-block">
