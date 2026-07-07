@@ -369,6 +369,12 @@ function Overview({
 }
 
 /* Split Chinese prose into clause-level bullets on 。；;! */
+function resolveAsset(src: string): string {
+  if (/^(https?:)?\/\//.test(src) || src.startsWith("data:")) return src;
+  const base = import.meta.env.BASE_URL || "/";
+  return base.replace(/\/$/, "") + "/" + src.replace(/^\//, "");
+}
+
 function splitClauses(text: string): string[] {
   return (text || "")
     .split(/(?<=[。；;！!])/)
@@ -523,7 +529,7 @@ function PaperDetail({
                 <div className="figure-notes">
                   {item.figures.map((fig, i) => (
                     <figure className="paper-figure" key={i}>
-                      <img src={fig.src} alt={fig.caption} loading="lazy" />
+                      <img src={resolveAsset(fig.src)} alt={fig.caption} loading="lazy" />
                       <figcaption>
                         <span className="fig-tag">图 {i + 1}</span>
                         <RichText text={fig.caption} />

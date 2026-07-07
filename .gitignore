@@ -11,3 +11,4 @@ shot*.cjs
 s_*.png
 ref_*.jpg
 .research/
+/figures/
