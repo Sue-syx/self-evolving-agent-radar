@@ -65,39 +65,39 @@ export const maturityNotes: Record<Maturity, string> = {
 };
 
 const skillCategories: RadarCategory[] = [
-  { id: "skill-generation", name: "Skill 生成", color: "#d94841", note: "从任务轨迹、失败样例、专家示范中形成可复用技能。" },
-  { id: "skill-retrieval", name: "Skill 召回", color: "#149b8f", note: "根据任务状态选择已有技能，控制检索粒度和上下文预算。" },
-  { id: "skill-execution", name: "Skill 执行", color: "#2374ab", note: "把技能转成可执行动作、代码、工具调用或策略片段。" },
-  { id: "skill-evaluation", name: "Skill 评测", color: "#6aa77b", note: "度量技能是否稳定、可迁移、可组合。" },
-  { id: "skill-optimization", name: "Skill 优化", color: "#9b6aa9", note: "压缩、合并、修订和再训练技能库。" },
-  { id: "skill-governance", name: "Skill 管理", color: "#7d8590", note: "维护权限、版本、依赖、失效和安全边界。" },
+  { id: "skill-generation", name: "Skill 生成", color: "#c05a45", note: "从任务轨迹、失败样例、专家示范中形成可复用技能。" },
+  { id: "skill-retrieval", name: "Skill 召回", color: "#2c8577", note: "根据任务状态选择已有技能，控制检索粒度和上下文预算。" },
+  { id: "skill-execution", name: "Skill 执行", color: "#43678f", note: "把技能转成可执行动作、代码、工具调用或策略片段。" },
+  { id: "skill-evaluation", name: "Skill 评测", color: "#7d9350", note: "度量技能是否稳定、可迁移、可组合。" },
+  { id: "skill-optimization", name: "Skill 优化", color: "#8a6497", note: "压缩、合并、修订和再训练技能库。" },
+  { id: "skill-governance", name: "Skill 管理", color: "#8c8377", note: "维护权限、版本、依赖、失效和安全边界。" },
 ];
 
 const memoryCategories: RadarCategory[] = [
-  { id: "memory-write", name: "记忆写入", color: "#c7473f", note: "决定何时把交互、事实、偏好和错误写入长期状态。" },
-  { id: "memory-retrieve", name: "记忆检索", color: "#138f83", note: "把任务上下文映射到相关记忆片段。" },
-  { id: "memory-compress", name: "记忆压缩", color: "#336fa5", note: "用摘要、聚类、图结构降低长期记忆成本。" },
-  { id: "memory-reflect", name: "反思更新", color: "#5e9f70", note: "基于新证据修订、合并或删除旧记忆。" },
-  { id: "memory-consistency", name: "长期一致性", color: "#8c67a7", note: "控制跨会话身份、偏好和事实冲突。" },
-  { id: "memory-eval", name: "记忆评测", color: "#6f7782", note: "评估记忆召回、抗干扰、遗忘和长期任务收益。" },
+  { id: "memory-write", name: "记忆写入", color: "#c05a45", note: "决定何时把交互、事实、偏好和错误写入长期状态。" },
+  { id: "memory-retrieve", name: "记忆检索", color: "#2c8577", note: "把任务上下文映射到相关记忆片段。" },
+  { id: "memory-compress", name: "记忆压缩", color: "#43678f", note: "用摘要、聚类、图结构降低长期记忆成本。" },
+  { id: "memory-reflect", name: "反思更新", color: "#7d9350", note: "基于新证据修订、合并或删除旧记忆。" },
+  { id: "memory-consistency", name: "长期一致性", color: "#8a6497", note: "控制跨会话身份、偏好和事实冲突。" },
+  { id: "memory-eval", name: "记忆评测", color: "#8c8377", note: "评估记忆召回、抗干扰、遗忘和长期任务收益。" },
 ];
 
 const workflowCategories: RadarCategory[] = [
-  { id: "workflow-search", name: "进化搜索", color: "#c7473f", note: "在节点、边和算子空间中搜索更优流程。" },
-  { id: "workflow-rl", name: "强化优化", color: "#138f83", note: "把流程执行轨迹转成策略学习信号。" },
-  { id: "workflow-cost", name: "成本效率", color: "#336fa5", note: "用代理评估、候选筛选和缓存降低搜索成本。" },
-  { id: "workflow-graph", name: "图结构生成", color: "#5e9f70", note: "自动生成或修改 DAG、状态机和工具链。" },
-  { id: "workflow-fsm", name: "可控状态机", color: "#8c67a7", note: "在可审计状态转移上做流程演化。" },
-  { id: "workflow-benchmark", name: "Workflow 评测", color: "#6f7782", note: "用图匹配、链匹配和任务结果评估流程质量。" },
+  { id: "workflow-search", name: "进化搜索", color: "#c05a45", note: "在节点、边和算子空间中搜索更优流程。" },
+  { id: "workflow-rl", name: "强化优化", color: "#2c8577", note: "把流程执行轨迹转成策略学习信号。" },
+  { id: "workflow-cost", name: "成本效率", color: "#43678f", note: "用代理评估、候选筛选和缓存降低搜索成本。" },
+  { id: "workflow-graph", name: "图结构生成", color: "#7d9350", note: "自动生成或修改 DAG、状态机和工具链。" },
+  { id: "workflow-fsm", name: "可控状态机", color: "#8a6497", note: "在可审计状态转移上做流程演化。" },
+  { id: "workflow-benchmark", name: "Workflow 评测", color: "#8c8377", note: "用图匹配、链匹配和任务结果评估流程质量。" },
 ];
 
 const evaluationCategories: RadarCategory[] = [
-  { id: "eval-task", name: "任务基准", color: "#c7473f", note: "面向任务完成度的基准集合。" },
-  { id: "eval-process", name: "过程评估", color: "#138f83", note: "检查中间步骤、工具调用和反思质量。" },
-  { id: "eval-trajectory", name: "轨迹匹配", color: "#336fa5", note: "比较动作链、状态链和图结构。" },
-  { id: "eval-judge", name: "自动评判", color: "#5e9f70", note: "使用裁判模型、规则和多评审聚合。" },
-  { id: "eval-safety", name: "安全评估", color: "#8c67a7", note: "追踪演化后权限、注入、越权和退化风险。" },
-  { id: "eval-long", name: "长期演化", color: "#6f7782", note: "评估多轮自我改进后的收益与漂移。" },
+  { id: "eval-task", name: "任务基准", color: "#c05a45", note: "面向任务完成度的基准集合。" },
+  { id: "eval-process", name: "过程评估", color: "#2c8577", note: "检查中间步骤、工具调用和反思质量。" },
+  { id: "eval-trajectory", name: "轨迹匹配", color: "#43678f", note: "比较动作链、状态链和图结构。" },
+  { id: "eval-judge", name: "自动评判", color: "#7d9350", note: "使用裁判模型、规则和多评审聚合。" },
+  { id: "eval-safety", name: "安全评估", color: "#8a6497", note: "追踪演化后权限、注入、越权和退化风险。" },
+  { id: "eval-long", name: "长期演化", color: "#8c8377", note: "评估多轮自我改进后的收益与漂移。" },
 ];
 
 export const radarPages: RadarPage[] = [

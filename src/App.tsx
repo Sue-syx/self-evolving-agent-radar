@@ -281,7 +281,10 @@ function Overview({
       <header className="hero">
         <div className="hero-grid">
           <div>
-            <p className="eyebrow">实时追踪 · 结构化演化地图</p>
+            <p className="hero-tag">
+              <i />
+              实时追踪 · 结构化演化地图
+            </p>
             <h1>
               Self-Evolving
               <br />

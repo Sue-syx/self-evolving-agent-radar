@@ -39,8 +39,21 @@ const scoreToRadius = (score: number) => {
   return minRadius + clamped * (maxRadius - minRadius);
 };
 
+// Only label the strongest items per sector to keep the field readable;
+// the rest stay as clean dots and surface their label on hover / selection.
+const LABELS_PER_SECTOR = 3;
+
 export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProps) {
   const sector = (Math.PI * 2) / page.categories.length;
+
+  // Rank within each category so we can show labels only for the top few.
+  const rankById = new Map<string, number>();
+  page.categories.forEach((category) => {
+    items
+      .filter((it) => it.category === category.id)
+      .sort((a, b) => b.score - a.score)
+      .forEach((it, index) => rankById.set(it.id, index));
+  });
 
   // Deterministic angular placement within each sector; radius encodes maturity.
   const placed = items.map((item) => {
@@ -54,11 +67,12 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
     // label radiates outward along the point's angle; anchor by horizontal direction
     const dir = Math.cos(angle);
     const labelAnchor: "start" | "end" = dir >= -0.05 ? "start" : "end";
-    return { item, point, angle, radius, labelAnchor, labelY: point.y };
+    const showLabel = (rankById.get(item.id) ?? 0) < LABELS_PER_SECTOR;
+    return { item, point, angle, radius, labelAnchor, labelY: point.y, showLabel };
   });
 
-  // Vertical de-collision for labels only (keep dots on their maturity radius).
-  const sorted = [...placed].sort((a, b) => a.labelY - b.labelY);
+  // Vertical de-collision for visible labels only (keep dots on their maturity radius).
+  const sorted = [...placed].filter((p) => p.showLabel).sort((a, b) => a.labelY - b.labelY);
   const gap = 14;
   for (let iter = 0; iter < 120; iter++) {
     for (let i = 1; i < sorted.length; i++) {
@@ -147,10 +161,11 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
         <circle className="radar-center" cx={center} cy={center} r="3.5" />
 
         {/* leader lines + labels first so dots render on top */}
-        {placed.map(({ item, point, labelAnchor, labelY }) => {
+        {placed.map(({ item, point, labelAnchor, labelY, showLabel }) => {
+          const active = item.id === selectedId;
+          if (!showLabel && !active) return null;
           const category = categoryById(page, item.category);
           const color = category?.color ?? "#14a08f";
-          const active = item.id === selectedId;
           const lx = point.x + (labelAnchor === "start" ? 12 : -12);
           return (
             <g key={`lbl-${item.id}`} className={`radar-label ${active ? "is-active" : ""}`}>
@@ -198,6 +213,7 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
                 stroke={catColor}
                 strokeWidth={active ? 3 : 2}
               />
+              <title>{item.title}</title>
             </g>
           );
         })}

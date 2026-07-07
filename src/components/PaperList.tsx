@@ -9,11 +9,11 @@ interface PaperListProps {
   onSelect: (item: RadarItem) => void;
 }
 
-const miniDims: { key: keyof RadarItem["scores"]; label: string; color: string }[] = [
-  { key: "clarity", label: "清晰", color: "#38e0ff" },
-  { key: "evidence", label: "证据", color: "#a78bfa" },
-  { key: "reproducibility", label: "复现", color: "#2fd2c0" },
-  { key: "selfEvolution", label: "演化", color: "#f5b53d" },
+const miniDims: { key: keyof RadarItem["scores"]; label: string }[] = [
+  { key: "clarity", label: "清晰" },
+  { key: "evidence", label: "证据" },
+  { key: "reproducibility", label: "复现" },
+  { key: "selfEvolution", label: "演化" },
 ];
 
 export function PaperList({ page, items, selectedId, view, onSelect }: PaperListProps) {
@@ -60,7 +60,7 @@ export function PaperList({ page, items, selectedId, view, onSelect }: PaperList
                   <div className="ms-track">
                     <span
                       className="ms-fill"
-                      style={{ width: `${item.scores[dim.key] * 100}%`, background: dim.color }}
+                      style={{ width: `${item.scores[dim.key] * 100}%` }}
                     />
                   </div>
                   <em>{dim.label}</em>
