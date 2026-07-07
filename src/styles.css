@@ -906,6 +906,22 @@ a { color: var(--teal); text-decoration: none; }
 .clause-list.check li::before { background: var(--mature); }
 .clause-list.warn li::before { background: var(--amber); }
 
+.figure-notes { display: grid; gap: 16px; margin-top: 20px; padding-top: 18px; border-top: 1px dashed var(--line); }
+.paper-figure { margin: 0; }
+.paper-figure img {
+  display: block; width: 100%; height: auto; border-radius: 10px;
+  border: 1px solid var(--line); background: #fff;
+}
+.paper-figure figcaption {
+  margin-top: 9px; color: var(--muted); font-size: 12.5px; line-height: 1.6;
+}
+.fig-tag {
+  display: inline-block; margin-right: 8px; padding: 1px 8px; border-radius: 999px;
+  background: color-mix(in srgb, var(--cat, var(--teal)) 12%, transparent);
+  color: var(--cat, var(--teal)); font-size: 11px; font-weight: 800; vertical-align: 1px;
+}
+.figure-empty { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); }
+
 .paper-aside { position: sticky; top: 86px; display: grid; gap: 12px; min-width: 0; }
 .paper-side-block { padding: 18px 20px; }
 .paper-side-block h2 { margin: 0 0 14px; font-size: 14px; font-weight: 850; color: var(--ink-strong); }

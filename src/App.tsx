@@ -519,6 +519,23 @@ function PaperDetail({
             <div className="dsec-full">
               <SectionHead icon="◈" title="核心方法" hint="Method" />
               <ClauseList text={item.methodCore} marker="dot" />
+              {item.figures && item.figures.length > 0 ? (
+                <div className="figure-notes">
+                  {item.figures.map((fig, i) => (
+                    <figure className="paper-figure" key={i}>
+                      <img src={fig.src} alt={fig.caption} loading="lazy" />
+                      <figcaption>
+                        <span className="fig-tag">图 {i + 1}</span>
+                        <RichText text={fig.caption} />
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ) : (
+                <p className="dsec-note figure-empty">
+                  ◧ 配图笔记：该条目暂未绑定论文原图。补充 figure 后，此处将展示框架图、算法图与关键流程图，并配图注解读。
+                </p>
+              )}
             </div>
           </section>
 
@@ -540,15 +557,6 @@ function PaperDetail({
             <div className="dsec-full">
               <SectionHead icon="⚠" title="局限与边界" hint="Limitations" />
               <ClauseList text={item.limitations} marker="warn" />
-            </div>
-          </section>
-
-          <section className="detail-section">
-            <div className="dsec-full">
-              <SectionHead icon="◧" title="配图笔记" hint="Figure Notes" />
-              <p className="dsec-note">
-                该条目暂未绑定论文原图。补充 figure 后，此处将展示问题定义图、系统框架图与主要实验表，并配段落解读。
-              </p>
             </div>
           </section>
         </main>
