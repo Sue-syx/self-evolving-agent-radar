@@ -96,9 +96,29 @@ a { color: var(--teal); text-decoration: none; }
   to { opacity: 1; }
 }
 
+@keyframes radar-sweep {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes hero-radar-sweep {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+@keyframes ring-pulse {
+  0%, 100% { opacity: 0.32; r: 10; }
+  50% { opacity: 0.72; r: 14; }
+}
+
+@keyframes shimmer-line {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(120%); }
+}
+
 @keyframes tooltip-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
 }
 
 /* ---------------------------------------------------------
@@ -138,6 +158,7 @@ a { color: var(--teal); text-decoration: none; }
   background:
     radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.55), transparent 42%),
     conic-gradient(from 140deg, var(--teal), var(--cyan) 55%, var(--teal-2));
+  transition: transform 700ms var(--ease-out);
 }
 .brand-mark::after {
   content: "";
@@ -147,6 +168,7 @@ a { color: var(--teal); text-decoration: none; }
   border-radius: 4px;
   background: var(--surface);
 }
+.brand:hover .brand-mark::before { transform: rotate(80deg) scale(1.08); }
 
 .brand strong {
   display: block;
@@ -277,6 +299,7 @@ a { color: var(--teal); text-decoration: none; }
   -webkit-mask-image: radial-gradient(circle at center, #000 60%, transparent 72%);
   mask-image: radial-gradient(circle at center, #000 60%, transparent 72%);
   pointer-events: none;
+  animation: hero-radar-sweep 28s linear infinite;
 }
 .hero::after {
   content: "";
@@ -477,7 +500,11 @@ a { color: var(--teal); text-decoration: none; }
   gap: 18px;
 }
 .overview-radar-card { padding: 20px; }
-.overview-radar-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--teal) 32%, transparent); box-shadow: var(--shadow-glow); }
+.overview-radar-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--teal) 46%, transparent);
+  box-shadow: 0 18px 44px rgba(38, 32, 22, 0.13), 0 0 0 1px rgba(15, 125, 110, 0.06);
+}
 .overview-card-head {
   display: flex; align-items: center; justify-content: space-between;
   gap: 14px; padding-bottom: 14px;
@@ -743,8 +770,33 @@ a { color: var(--teal); text-decoration: none; }
     #ffffff;
   overflow: hidden;
 }
+.radar-frame::before,
+.radar-frame::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(680px, 92%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.radar-frame::before {
+  background:
+    conic-gradient(from -20deg, transparent 0deg, transparent 300deg, rgba(15, 125, 110, 0.16) 330deg, transparent 360deg);
+  opacity: 0.75;
+  mix-blend-mode: multiply;
+  animation: radar-sweep 8s linear infinite;
+}
+.radar-frame::after {
+  border: 1px solid rgba(15, 125, 110, 0.06);
+  box-shadow:
+    inset 0 0 54px rgba(42, 143, 168, 0.08),
+    0 0 0 1px rgba(42, 143, 168, 0.04);
+  transform: translate(-50%, -50%);
+}
 .radar-frame.is-compact { min-height: 470px; }
-.radar-svg { position: relative; display: block; width: min(760px, 100%); height: auto; overflow: visible; }
+.radar-svg { position: relative; z-index: 1; display: block; width: min(760px, 100%); height: auto; overflow: visible; }
 
 .radar-ring {
   fill: none;
@@ -809,9 +861,12 @@ a { color: var(--teal); text-decoration: none; }
 .radar-point:not(.is-active) .selection-ring {
   opacity: 0;
 }
+.radar-point.is-active .selection-ring {
+  animation: ring-pulse 1.9s var(--ease-smooth) infinite;
+}
 .radar-tooltip {
-  filter: drop-shadow(0 10px 18px rgba(38, 32, 22, 0.12));
-  animation: tooltip-in 120ms var(--ease-smooth) both;
+  filter: drop-shadow(0 16px 24px rgba(38, 32, 22, 0.16));
+  animation: tooltip-in 180ms var(--ease-out) both;
 }
 .radar-tooltip rect {
   stroke-width: 1.2;
@@ -885,14 +940,33 @@ a { color: var(--teal); text-decoration: none; }
   background: var(--chip, var(--teal));
   opacity: 0.92;
 }
+.paper-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 42%;
+  left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-120%);
+}
 .paper-card:hover, .paper-card.is-active {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--chip, var(--teal)) 55%, transparent);
-  box-shadow: 0 10px 24px rgba(38, 32, 22, 0.1);
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--chip, var(--teal)) 68%, transparent);
+  box-shadow:
+    0 18px 38px rgba(38, 32, 22, 0.13),
+    0 0 0 1px color-mix(in srgb, var(--chip, var(--teal)) 18%, transparent);
+}
+.paper-card:hover::after,
+.paper-card.is-active::after {
+  opacity: 1;
+  animation: shimmer-line 900ms var(--ease-out) both;
 }
 .paper-card.is-active {
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--chip, var(--teal)) 5%, transparent), transparent 32%),
+    linear-gradient(180deg, color-mix(in srgb, var(--chip, var(--teal)) 8%, transparent), transparent 34%),
     var(--surface);
 }
 .paper-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -1281,6 +1355,7 @@ a { color: var(--teal); text-decoration: none; }
   .figure-grid { grid-template-columns: 1fr; }
   .st-row { grid-template-columns: 22px 1fr; }
   .radar-frame { min-height: 440px; }
+  .radar-frame::before { opacity: 0.36; animation-duration: 12s; }
   .radar-label text { font-size: 9px; }
   .queue-list button { grid-template-columns: 58px minmax(0, 1fr) 42px; }
   .queue-head { display: grid; }
@@ -1296,5 +1371,11 @@ a { color: var(--teal); text-decoration: none; }
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
   }
-  .hero::before { animation: none !important; }
+  .hero::before,
+  .radar-frame::before,
+  .radar-point.is-active .selection-ring,
+  .paper-card:hover::after,
+  .paper-card.is-active::after {
+    animation: none !important;
+  }
 }
