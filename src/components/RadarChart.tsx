@@ -229,7 +229,7 @@ export function RadarChart({ page, items, selectedId, activeCategory, compact = 
               style={{ "--pt": catColor, "--i": index } as React.CSSProperties}
             >
               <circle className="hit" r={12} fill="transparent" />
-              <circle className="pulse" r={active ? 15 : 0} fill="none" stroke={catColor} />
+              <circle className="selection-ring" r={active ? 11 : 0} fill="none" stroke={catColor} />
               <circle
                 className="dot"
                 r={active ? 7 : 4.8}
