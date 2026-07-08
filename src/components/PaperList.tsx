@@ -17,6 +17,12 @@ const miniDims: { key: keyof RadarItem["scores"]; label: string }[] = [
   { key: "selfEvolution", label: "演化" },
 ];
 
+function resolveAsset(src: string): string {
+  if (/^(https?:)?\/\//.test(src) || src.startsWith("data:")) return src;
+  const base = import.meta.env.BASE_URL || "/";
+  return base.replace(/\/$/, "") + "/" + src.replace(/^\//, "");
+}
+
 export function PaperList({ page, items, selectedId, view, onHover, onSelect }: PaperListProps) {
   if (items.length === 0) {
     return <div className="empty-state">没有符合当前筛选条件的条目，试试放宽分类或成熟度。</div>;
@@ -27,10 +33,13 @@ export function PaperList({ page, items, selectedId, view, onHover, onSelect }: 
       {items.map((item) => {
         const category = categoryById(page, item.category);
         const isList = view === "list";
+        const leadFigure = item.figures?.[0];
         return (
           <button
             key={item.id}
-            className={`paper-card ${isList ? "is-list-item" : ""} ${selectedId === item.id ? "is-active" : ""}`}
+            className={`paper-card ${isList ? "is-list-item" : ""} ${leadFigure ? "has-figure" : ""} ${
+              selectedId === item.id ? "is-active" : ""
+            }`}
             onClick={() => onSelect(item)}
             onMouseEnter={() => onHover?.(item.id)}
             onMouseLeave={() => onHover?.(undefined)}
@@ -38,6 +47,11 @@ export function PaperList({ page, items, selectedId, view, onHover, onSelect }: 
             onBlur={() => onHover?.(undefined)}
             style={{ "--chip": category?.color } as CSSProperties}
           >
+            {leadFigure && (
+              <div className="paper-thumb" aria-hidden>
+                <img src={resolveAsset(leadFigure.src)} alt="" loading="lazy" />
+              </div>
+            )}
             <div style={{ minWidth: 0 }}>
               <div className="paper-card-top">
                 <span className="chip" style={{ "--chip": category?.color } as CSSProperties}>

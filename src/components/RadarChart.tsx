@@ -48,6 +48,7 @@ const LABELS_PER_SECTOR = 3;
 
 export function RadarChart({ page, items, selectedId, activeCategory, compact = false, onHover, onSelect }: RadarChartProps) {
   const sector = (Math.PI * 2) / page.categories.length;
+  const gradId = `radarFieldGrad-${page.key}-${compact ? "compact" : "full"}`;
 
   // Rank within each category so we can show labels only for the top few.
   const rankById = new Map<string, number>();
@@ -107,14 +108,22 @@ export function RadarChart({ page, items, selectedId, activeCategory, compact = 
     <div className={`radar-frame ${compact ? "is-compact" : ""}`}>
       <svg className="radar-svg" viewBox={`0 0 ${size} ${size}`} aria-label={`${page.title} radar`}>
         <defs>
-          <radialGradient id="radarFieldGrad">
+          <radialGradient id={gradId}>
             <stop offset="0%" stopColor="rgba(20,160,143,0.10)" />
             <stop offset="60%" stopColor="rgba(20,160,143,0.03)" />
             <stop offset="100%" stopColor="rgba(20,160,143,0)" />
           </radialGradient>
         </defs>
 
-        <circle cx={center} cy={center} r={maxRadius} fill="url(#radarFieldGrad)" />
+        <circle cx={center} cy={center} r={maxRadius} fill={`url(#${gradId})`} />
+        <g className="radar-sweep-arm" aria-hidden="true">
+          <path
+            d={`M ${center} ${center} L ${center + 14} ${center - maxRadius + 18} L ${center - 5} ${
+              center - maxRadius + 4
+            } Z`}
+          />
+          <line x1={center} y1={center} x2={center} y2={center - maxRadius + 8} />
+        </g>
 
         {/* maturity rings */}
         {bands.map((band, index) => (
@@ -138,7 +147,9 @@ export function RadarChart({ page, items, selectedId, activeCategory, compact = 
           return (
             <g
               key={category.id}
-              className={`radar-sector ${activeCategory && activeCategory !== category.id ? "is-muted" : ""}`}
+              className={`radar-sector ${activeCategory === category.id ? "is-active" : ""} ${
+                activeCategory && activeCategory !== category.id ? "is-muted" : ""
+              }`}
             >
               <line className="radar-axis" x1={center} y1={center} x2={edge.x} y2={edge.y} />
               <path
