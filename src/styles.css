@@ -887,6 +887,18 @@ a { color: var(--teal); text-decoration: none; }
 .lede { margin: 0; color: var(--ink-strong); font-size: 16.5px; line-height: 1.75; font-weight: 500; }
 .kw { color: var(--teal-2); font-weight: 750; }
 
+.prose-body { display: grid; gap: 12px; }
+.prose-body .dsec-body { font-size: 15px; line-height: 1.9; }
+.prose-sub {
+  margin: 12px 0 -2px; font-size: 15.5px; font-weight: 800; color: var(--ink-strong);
+  letter-spacing: 0.005em; position: relative; padding-left: 13px;
+}
+.prose-sub::before {
+  content: ""; position: absolute; left: 0; top: 0.18em; bottom: 0.18em; width: 3.5px;
+  border-radius: 3px; background: var(--cat, var(--teal));
+}
+.prose-body .prose-sub:first-child { margin-top: 0; }
+
 .clause-list { list-style: none; display: grid; gap: 10px; margin: 0; padding: 0; }
 .clause-list li {
   position: relative; padding-left: 22px; color: var(--ink); font-size: 14.5px; line-height: 1.72;

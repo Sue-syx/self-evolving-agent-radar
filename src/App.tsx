@@ -439,6 +439,46 @@ function ClauseList({ text, marker }: { text: string; marker?: "dot" | "check" |
   );
 }
 
+/* Render long-form text as sub-headings ("## title") + flowing paragraphs,
+   so the Method section reads as prose rather than a wall of bullets. */
+function StructuredProse({ text }: { text: string }) {
+  const lines = (text || "").split("\n").map((l) => l.trim()).filter(Boolean);
+  const blocks: { type: "h" | "p"; text: string }[] = [];
+  for (const line of lines) {
+    if (line.startsWith("## ")) {
+      blocks.push({ type: "h", text: line.slice(3).trim() });
+    } else {
+      blocks.push({ type: "p", text: line });
+    }
+  }
+  if (!blocks.some((b) => b.type === "h")) {
+    return (
+      <div className="prose-body">
+        {blocks.map((b, i) => (
+          <p key={i} className="dsec-body">
+            <RichText text={b.text} />
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return (
+    <div className="prose-body">
+      {blocks.map((b, i) =>
+        b.type === "h" ? (
+          <h3 key={i} className="prose-sub">
+            {b.text}
+          </h3>
+        ) : (
+          <p key={i} className="dsec-body">
+            <RichText text={b.text} />
+          </p>
+        ),
+      )}
+    </div>
+  );
+}
+
 function PaperDetail({
   item,
   onBack,
@@ -524,7 +564,7 @@ function PaperDetail({
           <section className="detail-section">
             <div className="dsec-full">
               <SectionHead icon="◈" title="核心方法" hint="Method" />
-              <ClauseList text={item.methodCore} marker="dot" />
+              <StructuredProse text={item.methodCore} />
               {item.figures && item.figures.length > 0 ? (
                 <div className="figure-notes">
                   {item.figures.map((fig, i) => (
