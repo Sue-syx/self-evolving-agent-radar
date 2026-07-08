@@ -1,6 +1,7 @@
 import { importedSkillItems } from "./importedSkillItems";
 import { importedMemoryItems } from "./importedMemoryItems";
 import { importedEvaluationItems } from "./importedEvaluationItems";
+import { importedWorkflowItems } from "./importedWorkflowItems";
 
 export type PageKey = "overview" | "skill" | "memory" | "workflow" | "evaluation";
 export type RadarPageKey = Exclude<PageKey, "overview">;
@@ -1442,7 +1443,8 @@ export const radarItems: RadarItem[] = [
   ...importedSkillItems,
   ...importedMemoryItems,
   ...importedEvaluationItems,
-  ...seedItems.filter((item) => item.page !== "skill" && item.page !== "memory" && item.page !== "evaluation"),
+  ...importedWorkflowItems,
+  ...seedItems.filter((item) => item.page !== "skill" && item.page !== "memory" && item.page !== "evaluation" && item.page !== "workflow"),
 ];
 
 export const pagesByKey = Object.fromEntries(radarPages.map((page) => [page.key, page])) as Record<RadarPageKey, RadarPage>;
