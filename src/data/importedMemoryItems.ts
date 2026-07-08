@@ -1,127 +1,5979 @@
 import type { RadarItem } from "./radarData";
 
 export const importedMemoryItems: RadarItem[] = [
-  {"id": "memory-wr-memory-survey-zhang", "page": "memory", "title": "A Survey on the Memory Mechanism of Large Language Model based Agents", "shortTitle": "Memory Survey (Zhang)", "category": "memory-write", "maturity": "mature", "score": 0.9, "year": 2024, "venue": "arXiv 2024", "authors": "Zeyu Zhang et al.", "methodFamily": "记忆机制综述", "tags": ["综述", "记忆机制", "分析框架", "评测归纳"], "scores": {"clarity": 0.94, "evidence": 0.86, "reproducibility": 0.8, "adoption": 0.92, "selfEvolution": 0.55}, "summary": "系统梳理 LLM 智能体记忆机制的设计、评测与应用，提出「为什么需要、是什么、如何实现」的三段式分析框架。", "methodCore": "本文针对 LLM 智能体记忆机制散落于各篇论文、缺乏系统性梳理的现状,提出一篇从整体视角出发的全景式综述。它首先讨论「记忆是什么」与「为什么需要记忆」,指出相较原始 LLM,基于 LLM 的智能体以自我进化能力为特征,而支撑智能体与环境进行长期且复杂交互的关键组件正是记忆。随后综述系统回顾以往工作在如何设计与如何评测记忆模块上的思路,试图从中抽象出通用且有效的设计模式,以启发未来研究。综述还展示了记忆模块发挥重要作用的多种智能体应用场景,并在最后分析现有工作的局限与重要的未来方向,同时维护一个持续更新的开源文献仓库以跟进该领域最新进展,为读者提供统一的入口。", "evaluation": "以系统性文献综述形式,从整体视角汇总并比较大量分散的记忆机制工作,围绕记忆模块的设计与评测两条主线展开梳理,归纳其中通用而有效的设计模式,并列举记忆模块发挥重要作用的多种智能体应用场景;同时借助持续更新的开源仓库跟进该领域最新进展,便于读者对整体图景形成全局认识、快速定位不同方案在设计与评测上的差异,并据此判断各方案的适用条件。", "mainFinding": "该领域代表性的记忆机制专项综述,系统总结记忆的设计与评测思路并抽象通用设计模式,为后续记忆系统研究提供统一分析视角与文献参照。", "limitations": "作为发表时的阶段性快照,难以覆盖后续新范式;内容以分类与设计模式的描述性梳理为主,缺乏统一的定量横向对比实验。", "related": ["memory-wr-ai-meets-brain", "memory-wr-autonomous-agents-survey", "memory-wr-memory-in-ai-agents"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2404.13501"}], "citation": "Memory Survey (Zhang), arXiv 2024."},
-  {"id": "memory-wr-coala", "page": "memory", "title": "Cognitive Architectures for Language Agents", "shortTitle": "CoALA", "category": "memory-write", "maturity": "mature", "score": 0.89, "year": 2023, "venue": "TMLR 2024", "authors": "Theodore R. Sumers et al.", "methodFamily": "认知架构框架", "tags": ["认知架构", "记忆分类", "决策循环", "理论框架"], "scores": {"clarity": 0.95, "evidence": 0.82, "reproducibility": 0.78, "adoption": 0.9, "selfEvolution": 0.62}, "summary": "借鉴认知架构提出语言智能体的概念框架,把记忆划分为工作/情景/语义/程序性记忆并组织统一的决策循环。", "methodCore": "本文借鉴认知科学与符号人工智能的悠久传统,提出「语言智能体的认知架构」(CoALA)这一系统性框架,用以组织现有智能体并规划未来发展。CoALA 把一个语言智能体描述为三部分:模块化的记忆组件、用于与内部记忆及外部环境交互的结构化动作空间,以及在候选动作中做出选择的通用决策过程。它据此把记忆区分为不同的模块化组件,把动作区分为面向内部记忆的操作与面向外部环境的接地交互,并把决策过程刻画为在动作空间上不断选择动作的循环。作者用该框架回顾并组织了大量近期语言智能体工作,同时前瞻性地指出通往更强能力智能体的可行方向,把当今语言智能体置于人工智能更宏观的历史脉络中,勾勒出通往基于语言的通用智能的路径。", "evaluation": "以概念框架论文形式,用 CoALA 视角回顾性地梳理并组织大量近期语言智能体工作,通过把它们映射到框架的模块化记忆组件与结构化动作类型上,展示该框架对现有智能体的解释力与覆盖广度;并据此前瞻性地识别出通往更强能力智能体的可行方向,把当今语言智能体置于人工智能更宏观的历史脉络中作定性对照与组织,从而检验框架的普适性。", "mainFinding": "提出模块化记忆、结构化动作空间与通用决策循环的认知架构框架,把认知科学的记忆分类引入语言智能体,是被广泛引用的基石性组织框架。", "limitations": "偏概念框架,未提供可运行系统或统一基准评测;不同记忆模块之间的边界在具体工程实现中常常模糊,难以清晰界定。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2309.02427"}], "citation": "CoALA, TMLR 2024."},
-  {"id": "memory-wr-rise-of-llm-agents", "page": "memory", "title": "The Rise and Potential of Large Language Model Based Agents: A Survey", "shortTitle": "Rise of LLM Agents", "category": "memory-write", "maturity": "mature", "score": 0.85, "year": 2023, "venue": "Science China Information Sciences 2025", "authors": "Zhiheng Xi et al.", "methodFamily": "智能体总体综述", "tags": ["综述", "智能体构建", "多智能体", "记忆组件"], "scores": {"clarity": 0.9, "evidence": 0.8, "reproducibility": 0.72, "adoption": 0.88, "selfEvolution": 0.5}, "summary": "全面综述 LLM 智能体的构建(含记忆模块)、多智能体协作与社会应用,把记忆作为核心组件系统论述。", "methodCore": "本文对基于 LLM 的智能体进行全面综述。它先追溯智能体概念从哲学起源到人工智能领域的发展,并解释为何 LLM 因其多才多艺的能力被视为通用人工智能的潜在火花、适合作为构建通用智能体的基础;在此之上提出一个由「大脑、感知、行动」三大组件构成的通用智能体框架,可针对不同应用进行裁剪,其中大脑组件承担记忆、知识、推理与规划等认知功能。随后综述从单智能体、多智能体以及人机协作三个方面探讨智能体的广泛应用;并深入研究智能体社会,探讨智能体的行为与人格、由智能体社会涌现出的社会现象及其对人类社会的启示。文末讨论若干关键议题与开放问题,并维护相关论文仓库以持续跟踪该领域进展。", "evaluation": "以大规模文献综述形式,横向归纳智能体的构建方法与其在单智能体、多智能体、人机协作三类场景下的广泛应用,并对智能体社会中的行为、人格与由交互涌现出的社会现象作定性分析与探讨,同时维护相关论文仓库持续跟踪进展,提供理解记忆等认知组件在整体架构中定位的全局视角,而非以单点定量实验作对照。", "mainFinding": "提出大脑-感知-行动通用智能体框架,并把记忆等认知功能明确置于大脑组件的核心,是理解记忆在整体智能体架构中定位的高影响力全局综述。", "limitations": "覆盖面广但对记忆这一单一模块的专项深度有限;作为综述其内容的时效性受发表时间约束,难以纳入后续新范式。", "related": ["memory-wr-ai-meets-brain", "memory-wr-autonomous-agents-survey", "memory-wr-memory-in-ai-agents"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2309.07864"}], "citation": "Rise of LLM Agents, Science China Information Sciences 2025."},
-  {"id": "memory-wr-autonomous-agents-survey", "page": "memory", "title": "A Survey on Large Language Model based Autonomous Agents", "shortTitle": "Autonomous Agents Survey", "category": "memory-write", "maturity": "mature", "score": 0.84, "year": 2023, "venue": "Frontiers of Computer Science 2024", "authors": "Lei Wang et al.", "methodFamily": "自主智能体综述", "tags": ["综述", "记忆结构", "记忆格式", "读写操作"], "scores": {"clarity": 0.9, "evidence": 0.8, "reproducibility": 0.72, "adoption": 0.86, "selfEvolution": 0.48}, "summary": "从构建-应用-评估三维度综述自主智能体,最早系统归纳记忆结构、记忆格式与记忆读写操作维度之一。", "methodCore": "本文从整体视角对基于 LLM 的自主智能体进行系统综述。它指出以往研究多在孤立环境中用有限知识训练智能体,与人类学习过程相去甚远,导致智能体难以做出类人的决策;而近来 LLM 通过获取海量网络知识,展现出实现类人智能的潜力,从而激发了对基于 LLM 自主智能体的研究热潮。作者首先讨论这类自主智能体的构建,提出一个能涵盖大多数以往工作的统一框架;随后全面概述这些智能体在社会科学、自然科学与工程等领域的多样化应用;最后深入探讨其常用的评估策略。综述以构建、应用与评估三条主线组织内容,把分散的工作纳入统一框架进行对照,并据此提出若干挑战与未来方向,同时维护一个持续更新的参考文献仓库以跟踪该领域进展。", "evaluation": "以整体视角的综述形式,把大量基于 LLM 的自主智能体工作按构建、应用与评估三个维度进行归类与对照,并系统梳理该领域常用的主观与客观评估策略,给出可复用的评测归纳;同时借助持续维护的参考文献仓库跟踪进展,便于读者比较不同方案在统一框架各模块上的设计差异,并据此把握该领域面临的挑战与未来方向。", "mainFinding": "提出一个可涵盖大多数以往工作的统一自主智能体构建框架,并系统梳理其在多领域的应用与常用评估策略,是权威的自主智能体综述之一。", "limitations": "作为综述其内容的时效性受发表时间约束,难以纳入后续新范式;对记忆等单一模块缺乏深入的定量分析与横向对比。", "related": ["memory-wr-ai-meets-brain", "memory-wr-memory-in-ai-agents", "memory-wr-memory-survey-zhang"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2308.11432"}], "citation": "Autonomous Agents Survey, Frontiers of Computer Science 2024."},
-  {"id": "memory-wr-memory-in-ai-agents", "page": "memory", "title": "Memory in the Age of AI Agents", "shortTitle": "Memory in AI Agents", "category": "memory-write", "maturity": "growing", "score": 0.8, "year": 2025, "venue": "arXiv 2025", "authors": "Yaxiong Wu et al.", "methodFamily": "自进化记忆综述", "tags": ["综述", "自进化智能体", "记忆生命周期", "最新进展"], "scores": {"clarity": 0.88, "evidence": 0.76, "reproducibility": 0.7, "adoption": 0.72, "selfEvolution": 0.7}, "summary": "面向自进化智能体重新审视记忆,梳理记忆形态、生命周期与前沿方法的最新进展。", "methodCore": "本文针对智能体记忆研究快速扩张却日益碎片化、动机实现与评测协议差异巨大、且宽泛术语泛滥导致概念模糊的现状,提供一份最新的领域全景。它先清晰界定智能体记忆的范畴,并将其与 LLM 记忆、检索增强生成(RAG)、上下文工程等相关概念区分开;指出长短期记忆等传统分类已不足以刻画当代记忆系统的多样性。随后从形式、功能与动态三个统一视角审视智能体记忆:在形式上识别出 token 级、参数级与潜在(latent)三种主导实现;在功能上提出更细粒度的分类,区分事实性、经验性与工作记忆;在动态上分析记忆如何随时间形成、演化与检索。为支持实际开发,作者还汇编了记忆基准与开源框架的综合总结,并展望记忆自动化、强化学习整合、多模态记忆、多智能体记忆与可信性等前沿方向。", "evaluation": "以最新综述形式,从形式、功能与动态三个统一视角横向组织并比较代表性记忆工作,厘清其与 LLM 记忆、RAG、上下文工程等相关概念的边界,并系统汇编记忆基准与开源框架清单;便于读者按维度定位方法差异、把握记忆自动化与可信性等前沿空白,并为记忆研究与实际开发提供可复用的概念与工程参考。", "mainFinding": "提出从形式、功能、动态三个视角统一审视智能体记忆的新分类体系,并主张把记忆视为智能体设计中的一等原语,兼具时效性与前瞻性。", "limitations": "领域仍在快速演化、术语尚未统一,部分方法尚未定型;综述以概念梳理与汇编为主,缺乏统一的定量对比实验。", "related": ["memory-wr-ai-meets-brain", "memory-wr-autonomous-agents-survey", "memory-wr-memory-survey-zhang"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2512.13564"}], "citation": "Memory in AI Agents, arXiv 2025."},
-  {"id": "memory-wr-ai-meets-brain", "page": "memory", "title": "AI Meets Brain: A Unified Survey on Memory Systems from Cognitive Neuroscience to Autonomous Agents", "shortTitle": "AI Meets Brain", "category": "memory-write", "maturity": "growing", "score": 0.79, "year": 2025, "venue": "arXiv 2025", "authors": "Multi-author", "methodFamily": "跨学科记忆综述", "tags": ["综述", "认知神经科学", "统一框架", "安全评测"], "scores": {"clarity": 0.86, "evidence": 0.74, "reproducibility": 0.68, "adoption": 0.68, "selfEvolution": 0.6}, "summary": "跨认知神经科学与 LLM 智能体统一梳理记忆定义、分类、存储、管理生命周期及安全与评测基准。", "methodCore": "本文旨在打通认知神经科学与 LLM 驱动智能体之间的学科壁垒,系统综合关于记忆的跨学科知识,以吸收人类记忆机制的精髓。它先沿着从认知神经科学、经 LLM 到智能体的递进轨迹阐明记忆的定义与功能;随后从生物与人工两个视角,对记忆的分类、存储机制以及从获取到管理的完整生命周期进行比较分析。在此基础上,综述回顾了评估智能体记忆的主流基准,并进一步从攻击与防御双重视角探讨记忆安全问题。作者通过脑侧与智能体侧文献的双向对照,凸显人类记忆机制对人工记忆设计的启发,把生物记忆的分类与管理经验系统映射到人工记忆的设计之上,并在最后展望多模态记忆系统与技能获取等未来研究方向,为跨领域研究者提供参照。", "evaluation": "以跨学科综述形式,从生物与人工双重视角对记忆分类、存储机制与从获取到管理的完整生命周期作比较分析,回顾评估智能体记忆的主流基准,并单列记忆安全的攻击与防御两条议题;通过脑侧与智能体侧文献的双向对照,便于读者跨领域参照、查漏补缺,并把握记忆安全与技能获取等既关键又易被忽视的研究方向。", "mainFinding": "提供连接认知神经科学与智能体记忆的统一跨学科框架,把生物记忆的分类、存储与管理机制系统映射到人工记忆设计之上,研究视角独特。", "limitations": "跨学科映射存在类比松散之处;综述侧重概念综合与双向对照,工程可操作性弱于系统类工作,提出的框架难以直接落地实现。", "related": ["memory-wr-autonomous-agents-survey", "memory-wr-memory-in-ai-agents", "memory-wr-memory-survey-zhang"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2512.23343"}], "citation": "AI Meets Brain, arXiv 2025."},
-  {"id": "memory-wr-a-mem", "page": "memory", "title": "A-MEM: Agentic Memory for LLM Agents", "shortTitle": "A-MEM", "category": "memory-write", "maturity": "growing", "score": 0.82, "year": 2025, "venue": "arXiv 2025", "authors": "Wujiang Xu et al.", "methodFamily": "笔记网络记忆", "tags": ["Zettelkasten", "结构化笔记", "记忆链接", "动态演化"], "scores": {"clarity": 0.86, "evidence": 0.8, "reproducibility": 0.8, "adoption": 0.72, "selfEvolution": 0.7}, "summary": "受 Zettelkasten 启发,自动为每条记忆生成结构化笔记并动态建立/更新记忆间链接与演化。", "methodCore": "A-MEM 针对现有记忆系统仅支持基础存储检索、缺乏精巧记忆组织,且固定的操作与结构难以适配多样任务的问题,提出一种能以智能体方式动态组织记忆的系统。它遵循 Zettelkasten(卡片盒笔记法)的基本原则,通过动态索引与链接构建互联的知识网络。当加入一条新记忆时,系统生成一份包含上下文描述、关键词与标签等多种结构化属性的完整笔记;随后分析历史记忆以识别相关联系,在存在有意义相似性之处建立链接。此过程还支持记忆演化——随着新记忆被整合,它们可触发对已有历史记忆的上下文表示与属性的更新,使记忆网络不断精炼其理解。该方法把 Zettelkasten 的结构化组织原则与智能体驱动决策的灵活性结合起来,实现更具适应性与上下文感知能力的记忆管理。", "evaluation": "作者在六个基础模型上开展实证实验,与现有最先进(SOTA)基线进行系统对比,结果显示 A-MEM 带来显著提升;并同时开源了用于性能评估的代码与智能体记忆系统的实现,便于复现其互联笔记网络在需要跨条目关联的记忆任务上的优势,验证了动态索引与链接式组织在多个基础模型上的一致有效性。", "mainFinding": "提出写入即组织的智能体式记忆机制,把每一条新交互动态抽取为可自演化的互联笔记网络,在六个基础模型上均优于现有最先进基线。", "limitations": "笔记生成、链接建立与记忆演化均依赖 LLM 抽取质量;随着记忆规模增大,链接维护与更新的成本会相应上升。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2502.12110"}], "citation": "A-MEM, arXiv 2025."},
-  {"id": "memory-wr-zep", "page": "memory", "title": "Zep: A Temporal Knowledge Graph Architecture for Agent Memory", "shortTitle": "Zep", "category": "memory-write", "maturity": "growing", "score": 0.8, "year": 2025, "venue": "arXiv 2025", "authors": "Preston Rasmussen et al.", "methodFamily": "时序知识图谱记忆", "tags": ["时序知识图谱", "Graphiti", "工业级", "动态更新"], "scores": {"clarity": 0.85, "evidence": 0.78, "reproducibility": 0.75, "adoption": 0.74, "selfEvolution": 0.55}, "summary": "基于 Graphiti 引擎把对话与业务数据写入带时间戳的动态知识图谱记忆。", "methodCore": "Zep 提出一种面向 AI 智能体的新型记忆层服务,以应对现有 RAG 框架仅限静态文档检索、难以满足企业级动态知识整合需求的局限。其核心组件 Graphiti 是一个具备时间感知能力的知识图谱引擎,能动态地把非结构化对话数据与结构化业务数据一并综合进图谱,同时维护历史关系随时间的演变。通过为知识赋予时间维度,Zep 可在持续对话与业务数据不断变化的真实场景下整合来自多种来源的动态知识,支持跨会话的信息综合与长期上下文的维护,而不是像静态检索那样简单覆盖旧值。作者由此把记忆从静态文档检索扩展为可随时间演化的时序知识图谱,面向真实企业应用部署,在设计上兼顾复杂的时序推理能力与响应效率,力求达到生产可用的水平。", "evaluation": "在 MemGPT 团队设立的 Deep Memory Retrieval 基准上,Zep 取得 94.8% 对 93.4% 的更优表现;并在更贴近企业用例、含复杂时序推理任务的 LongMemEval 基准上,准确率最高提升 18.5%、同时把响应延迟降低 90%,在跨会话信息综合与长期上下文维护等企业关键任务上尤为明显。", "mainFinding": "提出时间感知知识图谱引擎 Graphiti 组织记忆,在 DMR 与 LongMemEval 上超越 MemGPT,兼顾检索准确率与生产可用的低延迟。", "limitations": "依赖图谱抽取与综合管线的质量,并需持续维护随时间演化的历史关系,图规模不断增大会带来相应的存储与维护开销。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2501.13956"}], "citation": "Zep, arXiv 2025."},
-  {"id": "memory-wr-memos", "page": "memory", "title": "MemOS: A Memory OS for AI System", "shortTitle": "MemOS", "category": "memory-write", "maturity": "exploring", "score": 0.78, "year": 2025, "venue": "arXiv 2025", "authors": "Zhiyu Li et al.", "methodFamily": "记忆操作系统", "tags": ["记忆OS", "MemCube", "参数/激活/明文记忆", "调度"], "scores": {"clarity": 0.82, "evidence": 0.72, "reproducibility": 0.66, "adoption": 0.66, "selfEvolution": 0.72}, "summary": "提出统一记忆操作系统,把参数记忆、激活记忆与明文记忆统一为可调度的 MemCube。", "methodCore": "MemOS 提出一种把记忆当作可管理系统资源的记忆操作系统,以弥补 LLM 缺乏良好定义的记忆管理系统、难以支撑长上下文推理、持续个性化与知识一致性的不足。它指出现有模型主要依赖静态参数与短暂的上下文状态,而 RAG 虽以明文引入外部知识,却仍是无状态的权宜之计,缺乏生命周期控制与持久表示的整合。MemOS 统一了明文记忆、基于激活的记忆与参数级记忆三种形态的表示、调度与演化,实现低成本的存储与检索。其基本单元 MemCube 同时封装记忆内容与来源、版本等元数据;多个 MemCube 可随时间组合、迁移与融合,从而在不同记忆类型之间灵活转换,并把检索与基于参数的学习桥接起来。作者由此建立以记忆为中心的系统框架,为 LLM 带来可控性、可塑性与可演化性。", "evaluation": "作者从记忆层次的视角论证在参数记忆与外部检索之间引入显式记忆层可显著降低训练与推理成本,并以 MemCube 为单元统一调度明文、激活与参数级记忆,支撑长上下文推理、持续个性化与知识一致性等能力,展示统一治理多形态记忆相较依赖静态参数与无状态 RAG 的方案在成本与可控性上的价值。", "mainFinding": "提出以 MemCube 为基本单元统一治理明文、激活与参数级记忆的记忆操作系统抽象,为持续学习与个性化建模奠定系统级框架基础。", "limitations": "系统较新且工程栈复杂,跨形态记忆转换的开销与一致性保证仍待大规模验证,离成熟稳定的落地部署尚有距离。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2507.03724"}], "citation": "MemOS, arXiv 2025."},
-  {"id": "memory-wr-memoryos", "page": "memory", "title": "Memory OS of AI Agent", "shortTitle": "MemoryOS", "category": "memory-write", "maturity": "exploring", "score": 0.76, "year": 2025, "venue": "arXiv 2025", "authors": "Jiazheng Kang et al.", "methodFamily": "分层换页记忆", "tags": ["OS内存管理", "分段页式", "热度换页", "短中长期"], "scores": {"clarity": 0.8, "evidence": 0.72, "reproducibility": 0.68, "adoption": 0.62, "selfEvolution": 0.66}, "summary": "借鉴操作系统内存管理,用分段页式存储与热度换页组织短/中/长期对话记忆。", "methodCore": "MemoryOS 针对固定上下文窗口与记忆管理不足导致长期记忆能力严重欠缺、个性化交互受限的问题,提出面向 AI 智能体的记忆操作系统,以实现全面而高效的记忆管理。它借鉴操作系统中的内存管理原则,设计分层存储架构,由记忆存储、更新、检索与生成四个关键模块组成。存储单元包含短期记忆、中期记忆与长期个人记忆三级。其中关键操作是各存储单元之间的动态更新:短期到中期的更新遵循基于对话链的先进先出(FIFO)原则,中期到长期的更新则采用分段的页式组织策略。通过这种分层整合与动态更新机制,MemoryOS 在有限上下文预算下维持长对话中的上下文连贯性与个性化记忆保持,把操作系统的分页与调度经验迁移到对话长期记忆的治理之中。", "evaluation": "在 LoCoMo 基准上的大量实验显示,基于 GPT-4o-mini,MemoryOS 相较基线在 F1 指标上平均提升 49.11%、在 BLEU-1 指标上平均提升 46.18%,展现出长对话中良好的上下文连贯性与个性化记忆保持能力,验证了分层存储架构与 FIFO、分段页式动态更新机制的有效性,并已开源实现代码以便复现其在长对话上的收益。", "mainFinding": "借鉴操作系统内存管理,以短、中、长三级分层存储与 FIFO、分段页式更新组织对话记忆,在 LoCoMo 上显著提升长对话表现。", "limitations": "存储单元间的更新遵循启发式规则,应用领域主要集中于对话;短、中、长三级层级边界的最优划分缺乏理论保证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2506.06326"}], "citation": "MemoryOS, arXiv 2025."},
-  {"id": "memory-wr-cognee", "page": "memory", "title": "Cognee: Memory for AI Agents in 5 Lines of Code", "shortTitle": "Cognee", "category": "memory-write", "maturity": "exploring", "score": 0.74, "year": 2025, "venue": "arXiv 2025", "authors": "Vasilije Marković et al.", "methodFamily": "图谱记忆管线", "tags": ["ECL管线", "知识图谱", "工程落地", "模块化"], "scores": {"clarity": 0.8, "evidence": 0.7, "reproducibility": 0.76, "adoption": 0.66, "selfEvolution": 0.5}, "summary": "提供模块化 ECL(抽取-认知-加载)管线,把异构数据写入可组合的知识图谱记忆。", "methodCore": "本文在 Cognee 这一模块化、端到端知识图谱构建与检索框架的背景下,研究把 LLM 与知识图谱(KG)集成所形成的复杂系统中被普遍忽视的系统性超参数优化问题。此类系统在检索增强生成中日益常见,却含有众多直接影响性能的超参数。作者围绕分块(chunking)、图谱构建、检索与提示等环节的相关参数进行系统优化,并把每种配置都用既有指标——精确匹配、F1 以及 DeepEval 基于 LLM 的正确性指标——进行打分。通过在多跳问答基准上的系统调参,研究考察超参数优化在这类复杂模块化系统中的作用,论证有针对性的调优能带来有意义的性能提升;同时指出提升虽然一致却并不均匀,凸显调优的价值与标准评估度量的局限,并主张未来进展不仅依赖架构创新,也依赖更清晰的优化与评估框架。", "evaluation": "在 HotPotQA、TwoWikiMultiHop 与 MuSiQue 三个多跳问答基准上,用精确匹配、F1 以及 DeepEval 基于 LLM 的正确性指标对每种配置打分,针对分块、图谱构建、检索与提示的参数系统调优,结果显示提升一致但在不同数据集与指标之间并不均匀,既体现调优价值也暴露标准评估度量的局限。", "mainFinding": "提供模块化的端到端知识图谱构建与检索框架,并系统证明针对分块、图谱构建、检索与提示的针对性调优能在多跳问答上带来一致但并不均匀的性能提升。", "limitations": "性能提升在不同数据集与指标间并不均匀,凸显标准评估度量的局限;系统含众多超参数,配置对性能较为敏感。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2505.24478"}], "citation": "Cognee, arXiv 2025."},
-  {"id": "memory-wr-graphrag", "page": "memory", "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization", "shortTitle": "GraphRAG", "category": "memory-write", "maturity": "growing", "score": 0.85, "year": 2024, "venue": "arXiv 2024", "authors": "Darren Edge et al.", "methodFamily": "图谱+社区摘要", "tags": ["实体图谱", "社区摘要", "全局查询", "层级组织"], "scores": {"clarity": 0.88, "evidence": 0.84, "reproducibility": 0.82, "adoption": 0.86, "selfEvolution": 0.4}, "summary": "从语料构建实体知识图谱并预先生成社区摘要,支持全局性(query-focused)聚焦总结。", "methodCore": "GraphRAG 针对朴素 RAG 在面向整个语料的全局性问题(如「数据集的主要主题是什么」)上失效——因为这本质上是查询聚焦摘要任务而非显式检索任务——而以往查询聚焦摘要方法又难以扩展到 RAG 系统所索引的大规模文本的矛盾,提出一种基于图的问答方法,可同时随用户问题的普遍性与源文本的规模扩展。它用 LLM 分两阶段构建图索引:先从源文档中推导出实体知识图谱,再为所有紧密相关实体的分组预先生成社区摘要。给定一个问题时,每个社区摘要用于生成一个部分回答,随后把所有部分回答再次汇总为给用户的最终回答。作者由此把全局意义建构问题转化为在层级社区摘要上的先分后合式聚合,兼顾问题的普遍性与语料规模,克服了朴素检索无法回答宏观性问题的局限。", "evaluation": "针对百万 token 量级数据集上的一类全局意义建构问题,作者以生成答案的全面性(comprehensiveness)与多样性(diversity)为标准,将 GraphRAG 与传统 RAG 基线进行对比评测,结果显示实体图谱加社区摘要的方法在这两项指标上均相较传统 RAG 带来显著提升。", "mainFinding": "提出实体知识图谱加层级社区摘要的两阶段图索引组织,显著提升面向整个语料的全局意义建构问题回答的全面性与多样性,常被用作记忆后端。", "limitations": "实体图谱与社区摘要的预生成成本较高;方法主要面向全局意义建构问题,对局部事实型检索查询的优势相对有限。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2404.16130"}], "citation": "GraphRAG, arXiv 2024."},
-  {"id": "memory-wr-memwalker", "page": "memory", "title": "Walking Down the Memory Maze: Beyond Context Limit through Interactive Reading", "shortTitle": "MemWalker", "category": "memory-write", "maturity": "growing", "score": 0.78, "year": 2023, "venue": "arXiv 2023", "authors": "Howard Chen et al.", "methodFamily": "树状摘要记忆", "tags": ["递归摘要", "树状结构", "交互式导航", "长文本"], "scores": {"clarity": 0.84, "evidence": 0.78, "reproducibility": 0.76, "adoption": 0.68, "selfEvolution": 0.42}, "summary": "把长文本递归摘要成树状记忆结构,让模型交互式导航节点进行阅读。", "methodCore": "MemWalker 针对自注意力一次处理并比较所有 token、导致预设上下文窗口必然受限、长文本理解仍具挑战的问题,提出把 LLM 当作交互式智能体、允许其通过迭代提示自行决定如何阅读文本的替代方案。它首先把长上下文处理成一棵摘要节点树:对文本分段并生成摘要,再自底向上递归归并为更高层的摘要节点。收到查询后,模型在这棵树上导航以搜索相关信息,当收集到足够信息时才作答。作者由此把长文本理解转化为在树状记忆上的可控搜索过程,避免一次性把全部文本塞入受限窗口;此外,该方法还通过高亮交互式阅读过程中的推理步骤、指出与查询相关的文本片段来增强可解释性,使模型的阅读与定位过程更加透明可追溯。", "evaluation": "在长文本问答任务上,作者将 MemWalker 与使用长上下文窗口、循环机制以及检索的多种基线方法进行对比,结果显示其表现全面更优;同时展示该方法能高亮交互式阅读过程中的推理步骤、精准定位与查询相关的文本片段,在有效阅读之外进一步增强了推理过程的可解释性与可追溯性,便于人工核查。", "mainFinding": "把长文本递归摘要成节点树并让模型交互式导航阅读,在长文本问答上超越长上下文、循环与检索基线,同时提升了阅读过程的可解释性。", "limitations": "导航依赖模型的逐步决策,决策错误可能沿导航路径不断累积;摘要树为一次性构建,难以随新增文本内容做增量更新。", "related": ["memory-wr-recursive-summary"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2310.05029"}], "citation": "MemWalker, arXiv 2023."},
-  {"id": "memory-wr-recursive-summary", "page": "memory", "title": "Recursively Summarizing Enables Long-Term Dialogue Memory in Large Language Models", "shortTitle": "Recursive Summary", "category": "memory-write", "maturity": "mature", "score": 0.78, "year": 2023, "venue": "arXiv 2023", "authors": "Qingyue Wang et al.", "methodFamily": "递归摘要记忆", "tags": ["递归摘要", "对话压缩", "长期记忆", "增量更新"], "scores": {"clarity": 0.85, "evidence": 0.78, "reproducibility": 0.8, "adoption": 0.72, "selfEvolution": 0.45}, "summary": "通过递归摘要持续压缩历史对话,形成不断更新的长期记忆表征。", "methodCore": "本文针对聊天机器人在长对话中无法回忆过往信息、容易产生前后不一致回复的问题,提出用 LLM 递归生成摘要/记忆来增强长期记忆能力。方法先激励 LLM 记住较小的对话上下文,然后利用先前的记忆与随后的上下文递归地产生新的记忆;如此滚动更新,记忆作为对历史的压缩表征随对话不断增量刷新,始终维持在可控长度之内。最终,聊天机器人可借助最新的记忆轻松生成与长上下文高度一致的回复。作者在开源与闭源 LLM 上评估该方法,并指出该策略能很好地补充长上下文(如 8K、16K)与检索增强的 LLM,进一步提升长期对话表现;由于以近似恒定的成本维持跨多轮的一致性,该方法被视为让 LLM 建模极长上下文的一种潜在解决方案。", "evaluation": "作者在开源与闭源 LLM 上评估该方法,并在广泛使用的公开数据集上开展实验,结果表明递归摘要能在长上下文对话中生成更一致的回复;同时展示该策略可与 8K、16K 长上下文以及检索增强的 LLM 互补,进一步提升长期对话表现,代码与脚本均已公开发布,便于在多种模型上复现其一致性收益。", "mainFinding": "提出递归摘要式的长期记忆写入,以近似恒定长度的滚动记忆维持长期对话一致性,并能与长上下文窗口和检索增强方法形成有效互补。", "limitations": "递归摘要会不断累积信息损失,细节容易在压缩中被丢弃;难以精确回溯早期的原始事实与被压缩掉的具体细节。", "related": ["memory-wr-lightrag", "memory-wr-memwalker"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2308.15022"}], "citation": "Recursive Summary, arXiv 2023."},
-  {"id": "memory-wr-secom", "page": "memory", "title": "On Memory Construction and Retrieval for Personalized Conversational Agents", "shortTitle": "SeCom", "category": "memory-write", "maturity": "growing", "score": 0.8, "year": 2025, "venue": "ICLR 2025", "authors": "Zhuoshi Pan et al.", "methodFamily": "记忆粒度构建", "tags": ["话题分段", "记忆粒度", "压缩去噪", "个性化对话"], "scores": {"clarity": 0.85, "evidence": 0.82, "reproducibility": 0.8, "adoption": 0.7, "selfEvolution": 0.45}, "summary": "提出以话题分段(segment)粒度构建记忆并做压缩去噪,系统研究记忆写入粒度的影响。", "methodCore": "SeCom 面向长期对话中连贯且个性化的响应生成,系统研究记忆构建与检索问题,并提出两点关键发现:其一,记忆单元的粒度很重要——轮级、会话级与基于摘要的方法在记忆检索准确率和检索内容的语义质量上各有局限;其二,提示压缩方法(如 LLMLingua-2)可有效充当去噪机制,提升不同粒度下的记忆检索准确率。基于这两点洞见,SeCom 在段(segment)级构建记忆库:引入一个对话分段模型,把长期对话划分为主题连贯的段,同时对记忆单元施加基于压缩的去噪以增强检索。该方法以段为记忆单元,在召回的完整性(段内保留足够上下文)与内容的信噪比(压缩去噪降低干扰)之间取得平衡,为个性化对话智能体提供更有效的记忆写入与检索单元。", "evaluation": "实验结果表明,SeCom 在长期对话基准 LOCOMO 与 Long-MT-Bench+ 上相较基线具有显著的性能优势;其所提出的对话分段方法在 DialSeg711、TIAGE 与 SuperDialSeg 等对话分段数据集上也表现出色,验证了段级构建配合基于压缩的去噪在记忆检索上的有效性。", "mainFinding": "系统研究记忆构建的粒度问题并提出以话题段为单位构建加压缩去噪,在长期对话基准上显著优于轮级、会话级与摘要式记忆构建基线。", "limitations": "段级记忆的效果依赖对话分段模型的分段质量;结论主要基于长期对话场景,向其他类型记忆任务的泛化能力仍有待验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2502.05589"}], "citation": "SeCom, ICLR 2025."},
-  {"id": "memory-wr-lightrag", "page": "memory", "title": "LightRAG: Simple and Fast Retrieval-Augmented Generation", "shortTitle": "LightRAG", "category": "memory-write", "maturity": "growing", "score": 0.82, "year": 2024, "venue": "EMNLP 2025 Findings", "authors": "Zirui Guo et al.", "methodFamily": "双层图索引", "tags": ["双层图索引", "增量更新", "实体+关系", "图谱记忆"], "scores": {"clarity": 0.85, "evidence": 0.82, "reproducibility": 0.84, "adoption": 0.8, "selfEvolution": 0.42}, "summary": "构建双层(局部实体+全局关系)图索引并支持增量更新的图谱式知识组织。", "methodCore": "LightRAG 针对现有 RAG 系统依赖扁平数据表示、上下文感知不足,从而产生无法刻画复杂相互依赖关系的割裂答案的问题,把图结构引入文本索引与检索过程。该框架采用双层检索系统,从低层与高层两种知识发现层面增强全面的信息检索:低层面向具体实体及其邻居,支持细粒度查询;高层则对关系主题做聚合,支持概括性查询。图结构与向量表示的结合便于高效检索相关实体及其关系,在提升响应速度的同时保持上下文相关性。此外,它还引入增量更新算法,确保新数据能及时整合,使系统在快速变化的数据环境中持续有效、及时响应,而无需对整张图谱与索引进行全量重建。作者由此把图式记忆的全局能力与低成本的增量更新有机结合起来,兼顾时效性与检索质量。", "evaluation": "大量实验验证表明,LightRAG 相较现有方法在检索准确率与效率上均取得可观提升,图结构与向量表示的结合带来更快的响应速度并保持上下文相关性,增量更新算法则保证新数据的及时整合;项目已开源以便复现其双层检索与增量更新能力,展示在保持图谱全局能力的同时降低检索与更新开销的实际价值。", "mainFinding": "提出双层图索引配合增量更新的记忆组织,在保持图谱全局知识发现能力的同时提升检索准确率与效率,并大幅降低了记忆的更新成本。", "limitations": "图谱质量仍依赖实体与关系抽取的准确性;双层检索键的最优配置需按具体领域数据的特点进行相应的调参与适配。", "related": ["memory-wr-recursive-summary"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2410.05779"}], "citation": "LightRAG, EMNLP 2025 Findings."},
-  {"id": "memory-wr-cam", "page": "memory", "title": "CAM: A Constructivist View of Agentic Memory for LLM-Based Reading Comprehension", "shortTitle": "CAM", "category": "memory-write", "maturity": "exploring", "score": 0.74, "year": 2025, "venue": "NeurIPS 2025", "authors": "Rui et al.", "methodFamily": "建构主义记忆", "tags": ["建构主义", "图式同化顺应", "层级图谱", "阅读理解"], "scores": {"clarity": 0.8, "evidence": 0.74, "reproducibility": 0.7, "adoption": 0.58, "selfEvolution": 0.58}, "summary": "借建构主义理论(结构化图式/同化/顺应)动态构建可自适应探索的层级图谱记忆。", "methodCore": "CAM 针对 LLM 在理解长篇文档时面临信息量过载、而现有启发式方法缺乏系统性记忆模块设计原则的问题,从皮亚杰的建构主义理论中获得灵感,提炼出智能体记忆的三个特质:结构化图式、灵活的同化与动态的顺应。据此作者开发了 CAM 这一建构主义智能体记忆的原型实现,同时体现结构性、灵活性与动态性。其核心是一种增量式重叠聚类算法,用于结构化记忆的构建,既支持连贯的层级摘要,也支持在线的批量整合;当新信息与现有图式相容时通过同化并入,与图式冲突时则通过顺应调整重构结构。在推理阶段,CAM 自适应地探索记忆结构以激活与查询相关的信息用于上下文响应,类似人类的联想过程,把认知科学的记忆更新机制转化为可操作的结构化记忆构建与探索策略。", "evaluation": "相比现有方法,CAM 在多样的长文本阅读理解任务——包括问答、基于查询的摘要与主张验证——上同时展现出性能与效率的双重优势,验证了以增量式重叠聚类构建的层级记忆、以及推理时自适应的记忆结构探索,在建构主义同化与顺应机制的驱动下,对多种阅读理解任务质量与运行效率的实际贡献与普适性。", "mainFinding": "以建构主义的结构化图式、灵活同化与动态顺应为原则,并借增量重叠聚类构建层级记忆,在多样长文本阅读理解上兼顾性能与运行效率。", "limitations": "理论驱动的同化与顺应机制在工程上实现较复杂;评测集中于阅读理解类任务,向更通用记忆场景的适用性仍待检验。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2510.05520"}], "citation": "CAM, NeurIPS 2025."},
-  {"id": "memory-wr-meminsight", "page": "memory", "title": "MemInsight: Autonomous Memory Augmentation for LLM Agents", "shortTitle": "MemInsight", "category": "memory-write", "maturity": "exploring", "score": 0.74, "year": 2025, "venue": "EMNLP 2025", "authors": "Rana Salama et al.", "methodFamily": "自主属性标注记忆", "tags": ["自主标注", "属性挖掘", "语义增强", "结构化组织"], "scores": {"clarity": 0.8, "evidence": 0.74, "reproducibility": 0.72, "adoption": 0.6, "selfEvolution": 0.6}, "summary": "让智能体自主挖掘关键属性对交互进行标注,增强记忆的语义表示与结构化组织。", "methodCore": "MemInsight 针对 LLM 智能体因整合长期记忆而带来的记忆规模增长与语义结构化需求所引发的挑战,提出一种自主的记忆增强方法,以增强语义数据表示与检索机制。它对历史交互施加自主增强:自动挖掘并标注关键属性,把原始的、非结构化的记忆增强为带结构化属性的语义表示,从而在语义层面对记忆进行更丰富的组织。借助这种对历史交互的自主增强,LLM 智能体被证明能给出更准确、更贴合上下文的响应。在检索阶段,系统可基于这些自主生成的属性进行更精准的过滤、匹配与聚合,而非仅依赖表层的向量相似度。这一自主属性标注的写入增强机制无需人工设计固定标签,由智能体依据内容自适应地生成属性体系,面向多任务场景提升记忆的语义组织与检索相关性。", "evaluation": "作者在对话推荐、问答与事件摘要三个任务场景上实证验证该方法:在 LLM-REDIAL 数据集上,MemInsight 将推荐的说服力最高提升 14%;在 LoCoMo 检索任务上,其召回率相较 RAG 基线高出 34%,实证结果展现出该方法跨多任务提升 LLM 智能体上下文性能的潜力。", "mainFinding": "提出自主属性标注式的记忆写入增强,由智能体自适应地为记忆附加结构化语义属性,在推荐说服力与检索召回率上均优于无属性标注的记忆基线。", "limitations": "属性挖掘依赖 LLM 输出的稳定性,额外的自主标注会带来写入开销;属性体系仍需随不同任务场景进行适配。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2503.21760"}], "citation": "MemInsight, EMNLP 2025."},
-  {"id": "memory-wr-magma", "page": "memory", "title": "MAGMA: A Multi-Graph based Agentic Memory Architecture for AI Agents", "shortTitle": "MAGMA", "category": "memory-write", "maturity": "exploring", "score": 0.83, "year": 2026, "venue": "arXiv 2026", "authors": "Dongming Jiang et al.", "methodFamily": "多图记忆架构", "tags": ["多图记忆", "策略引导遍历", "长程推理"], "scores": {"clarity": 0.84, "evidence": 0.8, "reproducibility": 0.7, "adoption": 0.62, "selfEvolution": 0.8}, "summary": "针对现有记忆把时间、因果、实体信息纠缠在单一存储的问题,MAGMA 用语义、时间、因果、实体四张正交图分别表示每条记忆,并以策略引导遍历实现查询自适应的结构化检索。", "methodCore": "MAGMA 针对记忆增强生成(MAG)大多在单一整体记忆库上做语义相似度检索、把时间、因果与实体信息纠缠在一起、从而限制可解释性并削弱查询意图与检索证据对齐、导致推理准确率欠佳的问题,提出一种多图智能体记忆架构。它把每个记忆项跨语义、时间、因果与实体四张正交的图分别表示,使不同类型的关联被解耦到独立的关系视图中。MAGMA 把检索形式化为在这些关系视图上由策略引导的遍历(policy-guided traversal),从而实现查询自适应的视图选择与结构化上下文构建。通过把记忆表示与检索逻辑相互解耦,MAGMA 提供透明的推理路径与对检索过程的细粒度控制,以改善长程推理的准确率与可解释性,克服单一记忆库中异质信息纠缠所带来的局限。", "evaluation": "在 LoCoMo 与 LongMemEval 两个长期记忆基准上的实验表明,MAGMA 在长程推理任务上持续超越当前最先进的智能体记忆系统,验证了把记忆跨语义、时间、因果与实体四张正交图解耦表示、并以策略引导遍历执行查询自适应结构化检索这一设计,在长程推理准确率与可解释性上的有效性与优越性。", "mainFinding": "把记忆按语义、时间、因果、实体解耦为四张正交图并以策略引导遍历检索,在长程推理任务上同时提升了检索准确率与推理可解释性。", "limitations": "需同时维护语义、时间、因果、实体四张正交图并执行策略引导遍历,增加了记忆构建与检索的系统复杂度和整体计算开销。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2601.03236"}], "citation": "MAGMA, arXiv 2026.", "figures": [{"src": "figures/memory-wr-magma.png", "caption": "MAGMA 总体架构:Agent(LLM)与动态演化的 Agentic Memory 双向交互——检索并构造新提示,再将输出结果回写更新记忆。"}]},
-  {"id": "memory-wr-adamemdistill", "page": "memory", "title": "What Deserves Memory: Adaptive Memory Distillation for LLM Agents", "shortTitle": "NEMORI", "category": "memory-write", "maturity": "exploring", "score": 0.82, "year": 2025, "venue": "arXiv 2025", "authors": "Wenquan Ma et al.", "methodFamily": "自适应记忆蒸馏", "tags": ["记忆蒸馏", "可预测性", "情景+语义记忆"], "scores": {"clarity": 0.82, "evidence": 0.78, "reproducibility": 0.72, "adoption": 0.6, "selfEvolution": 0.82}, "summary": "针对「什么信息值得记住」这一问题,NEMORI 不用预设的重要性分数或情感标签,而是把经验的未来效用建模为可预测性,从数据本身自适应地蒸馏值得保留的记忆。", "methodCore": "NEMORI 针对 LLM 智能体记忆系统难以判断「何种信息值得保留」的问题指出,现有方法依赖重要性分数、情感标签或事实模板等预设启发式,本质上编码的是设计者直觉而非从数据本身学习。受认知理念启发,NEMORI 提出一种自适应记忆蒸馏框架,把对经验未来效用的评估转化为可预测性问题。它由两个级联模块组成:情景记忆整合(Episodic Memory Integration)把原始交互转化为连贯的叙事;语义知识蒸馏(Semantic Knowledge Distillation)则通过预测误差抽取洞见——能被现有知识预测的内容价值低,预测误差大的才作为新知识被蒸馏保留。该框架以蒸馏为核心,对下游的记忆管理方式保持无关(agnostic)。作者主张观察交互序列的内在属性,为基于启发式的记忆设计提供了一种可行的数据驱动替代方案,从数据本身自适应地决定该记住什么。", "evaluation": "大量实验证实,NEMORI 取得了强劲的整体性能、效率与存储压缩表现,通过基于预测误差的语义知识蒸馏在减少存储占用的同时保持任务效果;结果表明观察交互序列自身的内在属性,为基于预设启发式的记忆设计提供了一种可行且有效的数据驱动替代方案,相关代码已开源以便复现其两阶段级联蒸馏流程。", "mainFinding": "用可预测性与预测误差从交互数据自身的内在属性中自适应地决定该记住什么,为记忆写入提供了摆脱人工预设启发式规则的数据驱动准则。", "limitations": "预测误差的估计依赖底层模型的质量;情景记忆整合与语义知识蒸馏两阶段级联流程会带来额外的记忆写入开销与延迟。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2508.03341"}], "citation": "NEMORI, arXiv 2025."},
-  {"id": "memory-wr-licomemory", "page": "memory", "title": "LiCoMemory: Lightweight and Cognitive Agentic Memory for Efficient Long-Term Reasoning", "shortTitle": "LiCoMemory", "category": "memory-write", "maturity": "exploring", "score": 0.81, "year": 2025, "venue": "arXiv 2025", "authors": "Zhengjun Huang et al.", "methodFamily": "轻量认知图记忆", "tags": ["CogniGraph", "层级图", "实时更新"], "scores": {"clarity": 0.82, "evidence": 0.8, "reproducibility": 0.74, "adoption": 0.62, "selfEvolution": 0.78}, "summary": "针对现有图记忆多为扁平、语义与拓扑纠缠导致冗余与低效的问题,LiCoMemory 用轻量层级图 CogniGraph 把实体和关系作为语义索引层,支持实时更新与检索。", "methodCore": "LiCoMemory 针对现有外部记忆架构常采用图式表示、却多为扁平且纠缠的结构、把语义与拓扑混在一起,从而造成表示冗余、检索无序以及效率与准确率下降的问题,提出一个面向实时更新与检索的端到端智能体记忆框架。它引入 CogniGraph——一张轻量的层级图,把实体与关系用作语义索引层来组织记忆;并采用兼顾时间与层级(temporal and hierarchy-aware)的搜索,配合集成的重排序(reranking),实现自适应且连贯的知识检索。整体设计强调轻量与低延迟,使记忆能在持续交互中被实时构建与更新,而非离线批量重建,以缓解 LLM 受限上下文窗口与缺乏持久记忆的约束,支撑长期对话中的时序推理与多会话一致性。", "evaluation": "在长期对话基准 LoCoMo 与 LongMemEval 上的实验显示,LiCoMemory 不仅在时序推理、多会话一致性与检索效率上超越既有基线,还显著降低了更新延迟,验证了轻量层级图 CogniGraph 配合时序层级搜索与重排序在实时记忆构建与检索上的有效性,官方代码与数据已开源。", "mainFinding": "以轻量层级认知图 CogniGraph 组织记忆并配合时序层级搜索与重排序,兼顾时序推理准确率、多会话一致性与低更新延迟。", "limitations": "层级图构建与重排序依赖实体、关系抽取的质量;在复杂多跳关联情形下,其轻量层级结构的表达力仍有待进一步检验。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2511.01448"}], "citation": "LiCoMemory, arXiv 2025."},
-  {"id": "memory-wr-sgmem", "page": "memory", "title": "SGMem: Sentence Graph Memory for Long-Term Conversational Agents", "shortTitle": "SGMem", "category": "memory-write", "maturity": "exploring", "score": 0.79, "year": 2025, "venue": "arXiv 2025", "authors": "Yaxiong Wu et al.", "methodFamily": "句子图记忆", "tags": ["句子图", "多粒度", "长期对话"], "scores": {"clarity": 0.82, "evidence": 0.78, "reproducibility": 0.74, "adoption": 0.6, "selfEvolution": 0.75}, "summary": "针对事实抽取或摘要难以跨粒度组织与检索的问题,SGMem 把对话表示为分块单元内的句子级图,并把检索到的原始对话与生成的摘要、事实、洞见结合起来供 LLM 生成回复。", "methodCore": "SGMem 针对长期对话智能体需处理超出 LLM 上下文窗口的对话历史、而基于事实抽取或摘要的方法虽减少冗余却难以跨不同粒度组织与检索相关信息的问题,提出句子图记忆(Sentence Graph Memory)。它把对话表示为分块单元(chunked units)内的句子级图,以句子为节点建立关联,捕捉跨轮(turn)、跨回合(round)与跨会话(session)三种粒度上下文之间的联系,从而克服单纯事实抽取或摘要在不同粒度间难以组织与检索的局限。在生成回复时,SGMem 把检索到的原始对话与系统生成的记忆(如摘要、事实与洞见)结合起来,为 LLM 提供连贯且相关的上下文,兼顾原文细节与提炼知识两类信息来源,以支撑长期对话问答中的连贯性与相关性。", "evaluation": "在 LongMemEval 与 LoCoMo 上的实验表明,SGMem 持续提升长期对话问答的准确率,并优于多个强基线,验证了以句子级图跨轮、跨回合、跨会话多粒度组织记忆、并把检索到的原始对话与系统生成的摘要、事实、洞见相结合的策略,在长期对话问答任务上所带来的连贯性与相关性优势。", "mainFinding": "以句子级图跨轮、回合、会话多粒度组织记忆并融合原文与生成的摘要事实洞见,在长期对话问答上持续提升准确率并优于多个强基线。", "limitations": "句子级图的节点数量众多,随记忆规模不断增大,图的构建与检索开销以及噪声控制会成为需要认真应对的挑战。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2509.21212"}], "citation": "SGMem, arXiv 2025."},
-  {"id": "memory-wr-evermemos", "page": "memory", "title": "EverMemOS: A Self-Organizing Memory Operating System for Structured Long-Horizon Reasoning", "shortTitle": "EverMemOS", "category": "memory-write", "maturity": "exploring", "score": 0.83, "year": 2026, "venue": "arXiv 2026", "authors": "Chuanrui Hu et al.", "methodFamily": "自组织记忆操作系统", "tags": ["记忆OS", "engram生命周期", "语义巩固"], "scores": {"clarity": 0.83, "evidence": 0.82, "reproducibility": 0.72, "adoption": 0.62, "selfEvolution": 0.85}, "summary": "针对现有记忆存储孤立记录、难以巩固演化的用户状态并解决冲突的问题,EverMemOS 提出受记忆痕迹(engram)启发的生命周期,把对话流转为 MemCell 并巩固为主题化的 MemScene。", "methodCore": "EverMemOS 针对 LLM 作为长期交互智能体时受限于上下文窗口、而现有记忆系统常存储孤立记录并仅检索片段、难以巩固演化中的用户状态并解决冲突的问题,提出一个自组织的记忆操作系统,实现受记忆痕迹(engram)启发的计算记忆生命周期。情景痕迹形成(Episodic Trace Formation)把对话流转化为 MemCell,捕捉情景痕迹、原子事实与有时限的 Foresight(前瞻)信号;语义巩固(Semantic Consolidation)把这些 MemCell 组织为主题化的 MemScene,蒸馏出稳定的语义结构并更新用户画像;重构式回忆(Reconstructive Recollection)则以 MemScene 为引导执行智能体式检索,为下游推理组装「必要且充分」的上下文。该三阶段生命周期显式解决了孤立记录难以巩固演化用户状态与解决冲突的问题,支撑跨长时间交互的连贯行为。", "evaluation": "在 LoCoMo 与 LongMemEval 上的实验表明,EverMemOS 在记忆增强推理任务上取得最新最优(state-of-the-art)表现;作者还在 PersonaMem v2 上报告了用户画像研究,并以定性案例展示用户画像与 Foresight 前瞻等面向对话的能力,代码已开源以便复现。", "mainFinding": "以 engram 式三阶段生命周期把对话流巩固为主题化语义结构,在 LoCoMo 与 LongMemEval 记忆增强推理上取得最先进表现。", "limitations": "三阶段生命周期与主题巩固流程较为复杂,巩固与语义结构蒸馏的质量高度依赖抽取与组织环节的稳定性,系统构建门槛较高。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2601.02163"}], "citation": "EverMemOS, arXiv 2026."},
-  {"id": "memory-wr-himem", "page": "memory", "title": "HiMem: Hierarchical Long-Term Memory for LLM Long-Horizon Agents", "shortTitle": "HiMem", "category": "memory-write", "maturity": "exploring", "score": 0.81, "year": 2026, "venue": "arXiv 2026", "authors": "Ningning Zhang et al.", "methodFamily": "层级长期记忆", "tags": ["层级记忆", "冲突感知重巩固", "记忆自进化"], "scores": {"clarity": 0.82, "evidence": 0.8, "reproducibility": 0.72, "adoption": 0.6, "selfEvolution": 0.86}, "summary": "针对长期记忆在适应性、可扩展性与自进化上的不足，HiMem 用主题感知的事件-意外双通道分段构建情景记忆、用多阶段抽取构建笔记记忆，并以冲突感知的记忆重巩固支持持续自进化。", "methodCore": "HiMem 针对长期记忆系统在持续交互设定下于适应性、可扩展性与自进化上仍有明显局限的问题,受认知理论启发,提出面向长程对话的层级长期记忆框架,支持记忆的构建、检索与动态更新。它用「主题感知的事件-意外双通道分段」(Topic-Aware Event--Surprise Dual-Channel Segmentation)策略构建认知一致的情景记忆(Episode Memory),并通过多阶段信息抽取管线构建捕捉稳定知识的笔记记忆(Note Memory);两类记忆在语义上相互链接,形成连接具体交互事件与抽象知识的层级结构,在不牺牲信息保真度的前提下实现高效检索。HiMem 支持混合(hybrid)与尽力而为(best-effort)两种检索策略以权衡准确率与效率,并引入冲突感知的记忆重巩固(Memory Reconsolidation),依据检索反馈修订与补充已存知识,从而实现长期使用中的记忆持续自进化,提供一种有原则且可扩展的设计范式。", "evaluation": "在长程对话基准上的实验结果表明,HiMem 在准确率、一致性与长期推理上持续优于代表性基线,同时保持较好的运行效率,验证了层级式情景记忆与笔记记忆结构、主题感知的事件-意外双通道分段,以及冲突感知的记忆重巩固机制在长程对话记忆管理上的整体有效性与可扩展性,相关代码已开源以便复现。", "mainFinding": "以情景记忆加笔记记忆的层级结构与冲突感知的记忆重巩固,为长程对话智能体提供了可持续自进化、有原则且可扩展的记忆设计范式。", "limitations": "主题感知双通道分段与多阶段抽取管线较为复杂;记忆重巩固的效果依赖冲突检测的准确性与检索反馈信号的质量。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2601.06377"}], "citation": "HiMem, arXiv 2026.", "figures": [{"src": "figures/memory-wr-himem.png", "caption": "HiMem 总览:(A) 分层记忆组织——Episode Memory 与 Note Memory 语义连接,桥接具体交互事件与抽象知识,支持冲突感知的再巩固。"}]},
-  {"id": "memory-wr-promem", "page": "memory", "title": "Beyond Static Summarization: Proactive Memory Extraction for LLM Agents", "shortTitle": "ProMem", "category": "memory-write", "maturity": "exploring", "score": 0.8, "year": 2026, "venue": "arXiv 2026", "authors": "Chengyuan Yang et al.", "methodFamily": "主动式记忆抽取", "tags": ["主动抽取", "自我提问", "反馈回路"], "scores": {"clarity": 0.82, "evidence": 0.78, "reproducibility": 0.72, "adoption": 0.6, "selfEvolution": 0.8}, "summary": "针对多数工作只关注记忆组织与使用、忽视初始抽取阶段的问题，ProMem 把摘要式抽取从「一次性前馈」改造为带自我提问反馈回路的迭代式认知过程，以恢复遗漏信息并纠错。", "methodCore": "ProMem 指出记忆管理对 LLM 智能体处理长期交互与个性化至关重要,但多数研究关注如何组织与使用记忆摘要,却往往忽视了初始的记忆抽取阶段。基于循环加工理论(recurrent processing theory),作者指出现有摘要式方法有两大缺陷:其一,摘要是「提前的」、盲目的前馈过程,因为不知道未来任务而遗漏重要细节;其二,抽取通常「一次性」完成,缺乏验证事实的反馈回路,导致信息损失不断累积。为解决这些问题,ProMem 提出主动式记忆抽取,把抽取当作一个迭代式认知过程:引入一个循环反馈回路,让智能体通过自我提问(self-questioning)主动探查对话历史,据此恢复遗漏的信息并纠正错误,从而显著提升所抽取记忆的完整性,而非停留在静态的一次性摘要上,为下游的记忆组织与使用提供更完整的写入源头。", "evaluation": "实验显示,ProMem 显著提升了所抽取记忆的完整性与下游的问答准确率,并在抽取质量与 token 成本之间取得了明显优于静态摘要方法的更好权衡,充分验证了以循环反馈回路与自我提问驱动的迭代式主动抽取,相较盲目的一次性前馈摘要,在所抽取记忆的完整性与最终问答准确率两方面的实质优势。", "mainFinding": "把记忆的初始抽取从盲目的一次性前馈改为自我提问式的迭代反馈过程,显著提升了所抽取记忆的完整性与下游问答任务的最终准确率。", "limitations": "迭代式自我提问增加了推理调用次数与 token 开销;随反馈轮次增加,其所带来收益的边际递减需要在实践中权衡取舍。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2601.04463"}], "citation": "ProMem, arXiv 2026."},
-  {"id": "memory-wr-traingraphmem", "page": "memory", "title": "From Experience to Strategy: Empowering LLM Agents with Trainable Graph Memory", "shortTitle": "Trainable Graph Memory", "category": "memory-write", "maturity": "exploring", "score": 0.82, "year": 2025, "venue": "arXiv 2025", "authors": "Siyu Xia et al.", "methodFamily": "可训练图记忆", "tags": ["可训练图记忆", "元认知", "强化学习"], "scores": {"clarity": 0.8, "evidence": 0.8, "reproducibility": 0.7, "adoption": 0.58, "selfEvolution": 0.85}, "summary": "针对隐式记忆(训练)易灾难遗忘、显式记忆(提示)缺乏适应性的两难，本文提出以智能体为中心的可训练多层图记忆，把轨迹抽象为状态机决策路径并蒸馏为可解释的策略元认知，用强化学习优化其权重。", "methodCore": "本文针对 LLM 智能体利用先验经验的两难:经训练获得的隐式记忆存在灾难遗忘与可解释性差的问题,而经提示获得的显式记忆又缺乏适应性,提出一种以智能体为中心、可训练的多层图记忆框架,并评估上下文记忆如何增强 LLM 利用参数化信息的能力。该图把原始智能体轨迹抽象为状态机中的结构化决策路径,并进一步蒸馏为高层、可被人理解的策略性元认知(strategic meta-cognition)。为使记忆可适应,作者提出一套基于强化的权重优化流程,依据下游任务的奖励反馈估计每条元认知的经验效用;这些被优化的策略随后通过元认知提示(meta-cognitive prompting)动态整合进 LLM 智能体的训练循环,使记忆既可解释又能随反馈自我优化,把从经验到策略的转化建模为可学习、可优化的过程。", "evaluation": "实证结果表明,该可学习的图记忆具备稳健的泛化能力,提升了 LLM 智能体的策略推理表现,并在强化学习(RL)训练过程中带来持续、一致的收益,验证了把智能体轨迹抽象为状态机决策路径、蒸馏为策略元认知、并用基于奖励的权重优化提升其经验效用这一整体设计,在策略推理与训练稳定性上的有效性。", "mainFinding": "把智能体的原始交互轨迹蒸馏为可训练、可解释的图式策略元认知,并用强化学习优化其经验效用,为记忆架起了从经验到策略的桥梁。", "limitations": "方法依赖下游任务的奖励反馈与 RL 训练过程;轨迹到状态机决策路径的抽象质量会影响策略元认知的蒸馏效果。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2511.07800"}], "citation": "Trainable Graph Memory, arXiv 2025."},
-  {"id": "memory-wr-deltamem", "page": "memory", "title": "DeltaMem: Towards Agentic Memory Management via Reinforcement Learning", "shortTitle": "DeltaMem", "category": "memory-write", "maturity": "exploring", "score": 0.82, "year": 2026, "venue": "arXiv 2026", "authors": "Qi Zhang et al.", "methodFamily": "强化学习记忆管理", "tags": ["单智能体记忆管理", "强化学习", "编辑距离奖励"], "scores": {"clarity": 0.8, "evidence": 0.82, "reproducibility": 0.7, "adoption": 0.6, "selfEvolution": 0.85}, "summary": "针对多智能体持久化记忆框架易信息丢失、跨场景脆弱的问题，DeltaMem 把以人物画像为中心的记忆管理形式化为单智能体端到端任务，并用新的记忆编辑距离奖励与强化学习强化其更新能力。", "methodCore": "DeltaMem 针对以人物画像(persona)为中心的记忆多依赖复杂多智能体系统、常出现信息丢失且跨不同场景脆弱、性能欠佳的问题,提出一种智能体式记忆管理系统,把以人物画像为中心的记忆管理形式化为单智能体设置下的端到端任务,由单一记忆管理器统一负责更新决策。为进一步提升该记忆管理器的表现,作者借鉴人类记忆的演化,合成了一份用户-助手对话数据集及对应的操作级(operation-level)记忆更新标签;在此基础上,提出新颖的「基于记忆的 Levenshtein 距离」(Memory-based Levenshtein Distance)来形式化记忆更新奖励,并设计一套定制的强化学习框架进一步增强 DeltaMem 的管理能力。作者由此把记忆更新决策转化为可用奖励优化的学习问题,并同时提供免训练与经 RL 训练两种版本以适配不同需求。", "evaluation": "大量实验表明,免训练与经强化学习训练的 DeltaMem 两种版本均在包括 LoCoMo、HaluMem 与 PersonaMem 在内的多样长期记忆基准上超越所有产品级基线,验证了把人物画像记忆管理形式化为单智能体端到端任务、并以基于记忆的编辑距离奖励与定制 RL 框架优化更新决策的有效性。", "mainFinding": "把人物画像记忆管理形式化为单智能体端到端任务,并用编辑距离奖励与定制 RL 训练,在多个长期记忆基准上超越所有产品级基线。", "limitations": "方法依赖合成的操作级记忆更新标签与 RL 训练过程;奖励设计对记忆更新的粒度较为敏感,需要谨慎设计与调校才能稳定发挥。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2604.01560"}], "citation": "DeltaMem, arXiv 2026."},
-  {"id": "memory-rt-rag", "page": "memory", "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", "shortTitle": "RAG", "category": "memory-retrieve", "maturity": "mature", "score": 0.92, "year": 2020, "venue": "NeurIPS 2020", "authors": "Patrick Lewis et al.", "methodFamily": "检索增强生成", "tags": ["RAG", "非参数记忆", "开放域QA"], "scores": {"clarity": 0.95, "evidence": 0.9, "reproducibility": 0.9, "adoption": 0.98, "selfEvolution": 0.6}, "summary": "提出将预训练 seq2seq 的参数化记忆与 Wikipedia 密集向量索引的非参数化记忆结合的通用微调范式,用检索到的文档增强生成。", "methodCore": "RAG 把预训练 seq2seq 的参数化记忆与显式非参数化记忆结合成统一可微架构:参数化记忆是预训练的 seq2seq 生成器,非参数化记忆是 Wikipedia 的密集向量索引,由预训练的神经检索器访问。给定输入,先用密集检索器从索引取回 Top-K 相关文档,再以这些文档为条件生成输出;检索这一步可微,使检索与生成能端到端联合微调。论文比较两种边缘化形式:RAG-Sequence 让整段生成序列条件于同一批检索文档,RAG-Token 允许逐 token 使用不同文档,从而在不同粒度上融合多篇证据。由于知识存于可插拔的外部索引而非权重,更新世界知识只需替换索引而无需重训模型,并天然为生成结果提供来源溯源(provenance)。", "evaluation": "论文在广泛的知识密集型 NLP 任务上微调并评测。在三项开放域 QA 任务上刷新 SOTA,同时超越纯参数化的 seq2seq 模型以及专门的检索-抽取式(retrieve-and-extract)架构。在语言生成类任务上,相较仅参数化的强 seq2seq 基线,RAG 生成的文本被发现更具体、更多样,也更符合事实,展示了非参数记忆对生成质量与事实性的正向贡献。", "mainFinding": "确立'参数化+非参数化记忆'的经典范式,证明可通过替换外部索引来更新模型知识而无需重新训练,是把检索当作可编辑长期记忆的奠基性工作。", "limitations": "检索质量成为性能上限,单次检索难以应对多跳与复杂信息需求;检索器 query 编码器与生成器的端到端联合微调成本较高。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2005.11401"}], "citation": "RAG, NeurIPS 2020.", "figures": [{"src": "figures/memory-rt-rag.png", "caption": "RAG 方法总览:预训练检索器(Query/Doc Encoder + MIPS)从非参数索引中取回 Top-K 文档,再由 seq2seq 生成器以文档为条件边缘化生成答案。"}]},
-  {"id": "memory-rt-realm", "page": "memory", "title": "REALM: Retrieval-Augmented Language Model Pre-Training", "shortTitle": "REALM", "category": "memory-retrieve", "maturity": "mature", "score": 0.85, "year": 2020, "venue": "ICML 2020", "authors": "Kelvin Guu et al.", "methodFamily": "检索增强预训练", "tags": ["潜变量检索", "MLM预训练", "端到端"], "scores": {"clarity": 0.88, "evidence": 0.85, "reproducibility": 0.75, "adoption": 0.8, "selfEvolution": 0.65}, "summary": "在语言模型预训练阶段引入可微的潜在知识检索器,让模型从 Wikipedia 语料检索并注意相关文档,以更模块化、可解释的方式获取知识。", "methodCore": "REALM 在语言模型预训练中引入一个潜在知识检索器,让模型可从 Wikipedia 等大规模语料中检索并注意相关文档,且该检索在预训练、微调、推理三阶段全程使用。核心贡献是首次展示如何以无监督方式预训练这样一个知识检索器:以掩码语言建模(MLM)作为唯一学习信号,先检索一篇文档、再在其条件下预测被掩码词,并对涉及数百万候选文档的检索步骤做反向传播——若检索到的文档能帮助降低 MLM 损失,则检索器获得正向梯度。检索通过在海量候选上的搜索实现,并需在训练中周期性刷新文档表示以保持索引有效。相比把知识隐式塞进越来越大网络参数的做法,REALM 以更模块化、可解释的方式捕获知识,使外部语料成为模型可主动查询的显式记忆。", "evaluation": "论文在具挑战性的 Open-domain QA 任务上微调评测,并与显式与隐式知识存储的 SOTA 模型在三个流行 Open-QA 基准上系统对比。结果显示 REALM 以 4-16% 的绝对准确率显著超越所有此前方法,取得大幅领先;与此同时还带来检索文档所提供的可解释性与模块化等定性优势,表明显式检索式记忆兼具性能与透明度。", "mainFinding": "首次证明可用 MLM 无监督信号端到端预训练一个可微检索器,把外部语料变成模型可主动查询的知识记忆,为后续 RAG 系统奠定检索器训练方法论。", "limitations": "对涉及数百万文档的检索步骤反向传播、并需异步周期性刷新文档索引,工程实现复杂;检索器与大规模语料的联合优化成本较高。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2002.08909"}], "citation": "REALM, ICML 2020."},
-  {"id": "memory-rt-in-context-ralm", "page": "memory", "title": "In-Context Retrieval-Augmented Language Models", "shortTitle": "In-Context RALM", "category": "memory-retrieve", "maturity": "mature", "score": 0.82, "year": 2023, "venue": "TACL 2023", "authors": "Ori Ram et al.", "methodFamily": "上下文检索增强", "tags": ["黑盒LM", "重排序", "免训练"], "scores": {"clarity": 0.9, "evidence": 0.85, "reproducibility": 0.85, "adoption": 0.78, "selfEvolution": 0.5}, "summary": "提出无需改动语言模型、直接把检索文档拼进上下文的 In-Context RALM 框架,并研究检索频率与重排序对语言建模的影响。", "methodCore": "In-Context RALM 提出一个不改动 LM 架构、不再训练 LM 的简单方案:仅把从 grounding 语料检索到的文档直接前置拼接到输入,再让现成 LM 续写,从而极大简化部署,甚至适用于只能 API 访问的模型。它基于现成通用检索器即可获得可观增益,并进一步表明文档检索与排序机制可针对 RALM 设定专门定制以提升性能:一方面研究检索时机,可每隔固定数量 token 用最近生成内容重新检索,使 grounding 随生成推进保持相关;另一方面研究文档选择与重排序,包括利用 LM 自身信号做零样本重排,以及训练专门的重排序器,从候选中选出最能帮助后续生成、降低困惑度的段落注入上下文。整体把检索增强变为即插即用的外部记忆机制。", "evaluation": "论文在多种模型规模与多样语料上评测语言建模性能。结果显示,建立在现成通用检索器之上的 In-Context RALM 就能带来出人意料的大幅增益,跨模型规模与语料一致有效;进一步将文档检索与排序机制针对 RALM 设定专门化后性能再获提升,且全程无需再训练 LM,凸显免训练 grounding 在必须以 API 或原样使用预训练 LM 场景下的巨大潜力。", "mainFinding": "表明检索增强可作为一种廉价、即插即用的外部记忆机制显著提升现有 LM,而检索频率与文档重排序是其中关键的设计维度,推动了免训练 RAG 的普及。", "limitations": "拼接上下文受 LM 窗口长度限制;每隔若干 token 频繁重检索会增加推理开销,而重排序质量又依赖 LM 自身打分信号的可靠性。", "related": ["memory-rt-rewrite-retrieve-read"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2302.00083"}], "citation": "In-Context RALM, TACL 2023."},
-  {"id": "memory-rt-when-not-to-trust-popqa", "page": "memory", "title": "When Not to Trust Language Models: Investigating Effectiveness of Parametric and Non-Parametric Memories", "shortTitle": "When Not to Trust (PopQA)", "category": "memory-retrieve", "maturity": "mature", "score": 0.8, "year": 2023, "venue": "ACL 2023", "authors": "Alex Mallen et al.", "methodFamily": "何时检索门控", "tags": ["长尾知识", "自适应检索", "PopQA"], "scores": {"clarity": 0.9, "evidence": 0.88, "reproducibility": 0.85, "adoption": 0.72, "selfEvolution": 0.55}, "summary": "通过大规模知识探测揭示 LM 在长尾事实上的弱点,并据此提出仅在必要时才调用非参数记忆的自适应检索方法。", "methodCore": "该工作旨在理解 LM 记忆事实知识的强项与边界,构建了含 14k 问题的开放域 QA 新数据集 PopQA,对 10 个模型与 4 种增强方法做大规模知识探测。分析发现:LM 在冷门(long tail)事实上表现挣扎,而单纯扩大模型规模并不能明显改善对长尾事实的记忆;检索增强的 LM 能大幅超越数量级更大的纯参数化模型,但对高流行度实体的问题,无检索的 LM 仍具竞争力。基于这些发现,论文设计了一个简单而有效的方法:仅在必要时才检索非参数化记忆——对模型大概率已在参数中记住的高流行度问题直接作答,只对低流行度问题触发检索,以此把'何时检索'变成由问题特性驱动的自适应门控,兼顾准确率与推理成本。", "evaluation": "论文在自建的 PopQA 数据集及相关探测设定上评测 10 个模型与 4 种增强方法。检索增强的 LM 准确率大幅超越数量级更大的纯参数化模型,冷门长尾子集提升尤为显著,而无检索 LM 仅在高流行度实体问题上仍具竞争力。'仅在必要时检索'的自适应方法在显著提升整体性能的同时降低了推理成本,验证了按需门控检索的有效性。", "mainFinding": "量化证明扩大模型规模无法记住长尾知识、而检索能显著弥补,并给出'何时该检索'的经验判据,是记忆检索门控(when-to-retrieve)方向的关键实证工作。", "limitations": "门控信号依赖实体流行度这一代理指标,难以推广到没有明确实体、或需要多跳推理的复杂查询场景,通用性有限。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2212.10511"}], "citation": "When Not to Trust (PopQA), ACL 2023."},
-  {"id": "memory-rt-rewrite-retrieve-read", "page": "memory", "title": "Query Rewriting for Retrieval-Augmented Large Language Models", "shortTitle": "Rewrite-Retrieve-Read", "category": "memory-retrieve", "maturity": "growing", "score": 0.78, "year": 2023, "venue": "EMNLP 2023", "authors": "Xinbei Ma et al.", "methodFamily": "查询改写", "tags": ["查询改写", "强化学习", "黑盒LM"], "scores": {"clarity": 0.88, "evidence": 0.8, "reproducibility": 0.78, "adoption": 0.75, "selfEvolution": 0.6}, "summary": "提出 Rewrite-Retrieve-Read 范式,在检索前先改写查询以弥合输入文本与所需知识之间的语义鸿沟。", "methodCore": "针对 LLM 在 retrieve-then-read 流水线中充当黑盒阅读器的设定,本文从查询改写视角提出 Rewrite-Retrieve-Read 新框架,指出输入文本与检索所需知识之间存在天然语义鸿沟,因而应适配查询本身,而非只适配检索器或阅读器。流程是:先提示一个 LLM 依据原问题生成更利于检索的查询,再用网络搜索引擎检索上下文,最后交给冻结的黑盒 LLM 阅读作答。为让查询更好地对齐固定的检索器与阅读器,论文进一步提出可训练方案:采用一个小型语言模型作为可训练改写器,用黑盒 LLM 阅读器的反馈通过强化学习进行训练,使改写策略朝着提升最终答案质量的方向优化,而无需触碰检索器与阅读器的参数。该框架被证明有效且可扩展。", "evaluation": "论文在下游的开放域 QA 与多选 QA 任务上评测。查询改写相较标准 retrieve-then-read 带来一致的性能提升;进一步引入基于强化学习的小型可训练改写器后,效果再获改善,验证了对查询侧做适配的有效性与可扩展性。实验结果表明该框架为检索增强 LLM 提供了一个新的、行之有效的范式,而非仅局限于适配检索器或阅读器。", "mainFinding": "指出查询与所需记忆之间存在天然语义鸿沟,通过可学习的查询改写把当前任务上下文映射为更好的检索查询,是查询侧检索优化的代表性工作。", "limitations": "依赖外部网络搜索引擎与强化学习训练成本;改写器质量受阅读器最终答案反馈这一相对稀疏奖励信号的影响,收敛不易。", "related": ["memory-rt-in-context-ralm"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.14283"}], "citation": "Rewrite-Retrieve-Read, EMNLP 2023."},
-  {"id": "memory-rt-self-rag", "page": "memory", "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection", "shortTitle": "Self-RAG", "category": "memory-retrieve", "maturity": "mature", "score": 0.9, "year": 2023, "venue": "ICLR 2024", "authors": "Akari Asai et al.", "methodFamily": "自反思检索", "tags": ["自反思", "反思token", "按需检索"], "scores": {"clarity": 0.9, "evidence": 0.9, "reproducibility": 0.85, "adoption": 0.9, "selfEvolution": 0.75}, "summary": "训练模型通过生成反思 token 自主决定何时检索,并对检索内容与自身生成进行细粒度自我批判。", "methodCore": "Self-RAG 针对固定数量、不加判别地检索并拼接段落会削弱 LM 通用性、甚至引入无用内容的问题,训练单一 LM 通过按需检索与自我反思来提升质量与事实性。模型在生成中产出特殊的反思 token:一类决定当前是否需要检索(可完全跳过或多次触发),另几类对检索段落是否相关、生成内容是否被段落支持、以及整体是否有用做细粒度自我批判。解码时可并行处理多个候选段落,用这些反思 token 对续写打分并择优,选出最相关、最被证据支持的输出。由于反思 token 显式生成,模型在推理阶段变得可控,可通过阈值针对不同任务需求灵活调节检索与批判行为,而不必以牺牲多样性为代价。", "evaluation": "论文用 7B 与 13B 参数的 Self-RAG 在多样任务上评测,显著超越 SOTA LLM 与检索增强模型。具体地,在开放域 QA、推理与事实核查任务上优于 ChatGPT 与检索增强的 Llama2-chat;在长文本生成上,相较这些模型在事实性(factuality)与引用准确率(citation accuracy)上取得明显提升,且可在推理时通过阈值灵活调节其检索与反思行为以适配不同任务。", "mainFinding": "把'是否检索/检索是否有用/是否被证据支持'内化为模型自身可预测的反思信号,使检索从固定流程变为自适应、可批判的过程,是自反思检索的标杆。", "limitations": "需构造反思 token 训练数据并对模型微调;反思判定本身可能出错,并将错误传播到最终生成的答案上。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2310.11511"}], "citation": "Self-RAG, ICLR 2024."},
-  {"id": "memory-rt-flare", "page": "memory", "title": "Active Retrieval Augmented Generation", "shortTitle": "FLARE", "category": "memory-retrieve", "maturity": "growing", "score": 0.85, "year": 2023, "venue": "EMNLP 2023", "authors": "Zhengbao Jiang et al.", "methodFamily": "迭代主动检索", "tags": ["主动检索", "前瞻预测", "长文本生成"], "scores": {"clarity": 0.88, "evidence": 0.85, "reproducibility": 0.78, "adoption": 0.82, "selfEvolution": 0.65}, "summary": "提出前瞻式主动检索(FLARE),在长文本生成中根据即将生成句子的置信度动态决定何时、以何内容检索。", "methodCore": "针对多数检索增强 LM 只在输入时检索一次、难以支撑长文本生成中持续获取信息的局限,FLARE 给出主动检索增强生成的通用视角——在生成全程主动决定何时检索、检索什么。其核心机制是前瞻(forward-looking):每一步先临时生成即将输出的下一句作为对未来内容的预测;若该预测句包含低置信(低概率)token,则表明模型在此处缺乏可靠知识,于是用这句(或其改写)作为查询检索相关文档,并据检索结果重新生成该句;若所有 token 置信度都高则无需检索直接采纳。如此迭代地把检索贯穿整个生成过程,使查询自然反映当下正在生成的内容,而非仅依赖初始输入,兼顾何时检索与检索什么两个维度。", "evaluation": "论文在 4 个长文本、知识密集型生成任务/数据集上,将 FLARE 与不检索、单次检索以及固定间隔检索等多种基线做全面对比。结果显示 FLARE 在所有任务上均取得更优或相当(superior or competitive)的表现,验证了按预测置信度触发前瞻式主动检索的有效性;论文还开源了代码与数据集以便复现与后续研究。", "mainFinding": "指出长文本生成需要在生成过程中持续动态检索,并创新性地用模型自身生成的未来内容作为检索查询,是迭代/主动检索(active retrieval)方向的代表方法。", "limitations": "多轮检索与重生成带来显著的推理延迟;低置信阈值需人工设定,对不同任务与领域较为敏感,不易做到通用调优。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.06983"}], "citation": "FLARE, EMNLP 2023."},
-  {"id": "memory-rt-iter-retgen", "page": "memory", "title": "Enhancing Retrieval-Augmented Large Language Models with Iterative Retrieval-Generation Synergy", "shortTitle": "Iter-RetGen", "category": "memory-retrieve", "maturity": "growing", "score": 0.77, "year": 2023, "venue": "EMNLP 2023 (Findings)", "authors": "Zhihong Shao et al.", "methodFamily": "迭代检索生成", "tags": ["迭代检索", "多跳推理", "生成即查询"], "scores": {"clarity": 0.85, "evidence": 0.82, "reproducibility": 0.78, "adoption": 0.68, "selfEvolution": 0.6}, "summary": "提出 Iter-RetGen,以上一轮模型生成作为新的检索上下文,迭代地协同检索与生成以获取更相关的知识。", "methodCore": "Iter-RetGen 针对检索器难以捕获复杂信息需求下相关性的问题,让检索与生成以迭代方式相互增强。每一轮把上一轮 LLM 的完整输出与原问题一起作为新的检索上下文——模型输出揭示了完成任务还需要什么,从而为检索更相关知识提供信息量更高的线索;检索到的知识再帮助 LLM 在下一轮生成更好的输出,如此往复形成闭环。与那些在产出单条输出时把检索与生成逐句交错的近期工作不同,Iter-RetGen 把每轮检索到的知识作为整体一次性处理,不对生成施加结构约束,从而大幅保留生成的灵活性;它能灵活调用参数化与非参数化知识。论文还指出可通过生成增强的检索适配进一步提升性能。", "evaluation": "论文在多跳问答、事实核查与常识推理三类任务上评测。Iter-RetGen 优于或媲美包括交错式检索-生成在内的 SOTA 检索增强基线,同时相较逐句交错检索-生成的方法造成更少的检索与生成开销,展现效率优势;并表明可进一步通过生成增强的检索适配(generation-augmented retrieval adaptation)提升性能,体现迭代协同框架的灵活性与可扩展性。", "mainFinding": "证明模型自身的整段生成是弥合查询-知识语义鸿沟的高质量检索线索,'生成即查询'的迭代协同是一种高效且低开销的多跳记忆检索范式。", "limitations": "迭代轮数需在效果与开销间权衡;早期的错误生成可能误导后续轮次的检索,进而造成累积偏差与错误逐步放大。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.15294"}], "citation": "Iter-RetGen, EMNLP 2023 (Findings)."},
-  {"id": "memory-rt-recomp", "page": "memory", "title": "RECOMP: Improving Retrieval-Augmented LMs with Compression and Selective Augmentation", "shortTitle": "RECOMP", "category": "memory-retrieve", "maturity": "growing", "score": 0.76, "year": 2023, "venue": "ICLR 2024", "authors": "Fangyuan Xu et al.", "methodFamily": "检索压缩与筛选", "tags": ["上下文压缩", "选择性增强", "抽取+摘要"], "scores": {"clarity": 0.85, "evidence": 0.82, "reproducibility": 0.78, "adoption": 0.65, "selfEvolution": 0.5}, "summary": "在把检索文档送入上下文前先压缩成简短摘要,并在文档无用时返回空串实现选择性增强。", "methodCore": "RECOMP 针对检索文档常达数百词、显著抬高推理成本且加重 LM 从长文中辨认相关信息负担的问题,提出在把文档整合进上下文之前先将其压缩成文本摘要。论文给出两类互补压缩器:抽取式压缩器从检索文档中挑选有用的句子,抽象式压缩器综合多篇文档合成一段摘要。两者都以'把生成的摘要前置后能提升 LM 在终端任务上的表现'为训练目标,同时约束摘要保持简洁。关键设计是选择性增强:当检索文档与输入无关或不提供增量信息时,压缩器可直接返回空字符串,由此有条件地决定是否向上下文注入这段记忆,既降算力又减噪。此外压缩既减少推理成本,也缓解 LM 在长文档中定位相关内容的负担。", "evaluation": "论文在语言建模与开放域问答两类任务上评测。RECOMP 可将检索文本压缩到低至约 6% 的长度而性能损失极小,在两项任务上均显著优于现成的摘要模型;并展示出良好的迁移性——为某个 LM 训练的压缩器可迁移到其他 LM 使用,且在语言建模上生成的摘要对检索文档基本忠实(faithful),兼顾了压缩率、性能与保真度。", "mainFinding": "揭示检索粒度与噪声是 RAG 的瓶颈,通过面向查询的压缩既降低算力又减轻 LM 从长文档中辨认相关信息的负担,是检索内容筛选方向的代表工作。", "limitations": "压缩可能丢失细粒度证据;抽象式摘要存在事实性风险,且压缩器需针对具体的下游任务分别训练才能达到最佳效果。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2310.04408"}], "citation": "RECOMP, ICLR 2024."},
-  {"id": "memory-rt-raptor", "page": "memory", "title": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval", "shortTitle": "RAPTOR", "category": "memory-retrieve", "maturity": "growing", "score": 0.82, "year": 2024, "venue": "ICLR 2024", "authors": "Parth Sarthi et al.", "methodFamily": "层次化记忆检索", "tags": ["树状摘要", "多层抽象", "长文档"], "scores": {"clarity": 0.88, "evidence": 0.85, "reproducibility": 0.8, "adoption": 0.78, "selfEvolution": 0.6}, "summary": "递归地对文本块嵌入、聚类、摘要,自底向上构建多层抽象的摘要树,推理时跨层检索以整合长文档信息。", "methodCore": "针对多数检索方法只从语料取回短的连续文本块、限制对整体文档上下文的整体理解的问题,RAPTOR 提出递归地对文本块做嵌入、聚类与摘要,自底向上构建一棵具有不同摘要层级的树。具体地,先对原始文本块嵌入并聚类,对每个簇用模型生成摘要,把摘要作为更高层节点再次嵌入-聚类-摘要,递归直至根部,得到覆盖不同抽象层次的树结构。推理时 RAPTOR 从这棵树检索,既能取回叶层细粒度片段,也能取回中高层跨段落的全局摘要,从而在不同抽象层次上整合贯穿长文档的信息。受控实验将带递归摘要的检索与传统检索增强 LM 对比,表明其能同时兼顾局部细节与整体语义,克服只取相邻短块、缺乏全局理解的缺陷。", "evaluation": "论文通过受控实验将带递归摘要的检索与传统检索增强 LM 对比,显示 RAPTOR 在多个任务上均有显著提升。在涉及复杂多步推理的问答任务上取得 SOTA:例如把 RAPTOR 检索与 GPT-4 结合,能将 QuALITY 基准的最佳成绩提升 20% 的绝对准确率,证明层次化、多粒度检索对需要整体理解与多步推理的长文档任务具明显优势。", "mainFinding": "证明层次化、多粒度的记忆组织能显著提升模型跨长文档的信息整合与检索能力,是分层/树状记忆检索方向一项具代表性的奠基方法。", "limitations": "构建摘要树需要大量 LLM 摘要调用,索引构建成本高;当语料动态更新时,树结构的维护与重建代价较大。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2401.18059"}], "citation": "RAPTOR, ICLR 2024."},
-  {"id": "memory-rt-hipporag", "page": "memory", "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models", "shortTitle": "HippoRAG", "category": "memory-retrieve", "maturity": "growing", "score": 0.84, "year": 2024, "venue": "NeurIPS 2024", "authors": "Bernal Jiménez Gutiérrez et al.", "methodFamily": "图结构记忆检索", "tags": ["知识图谱", "PersonalizedPageRank", "多跳检索"], "scores": {"clarity": 0.86, "evidence": 0.86, "reproducibility": 0.82, "adoption": 0.78, "selfEvolution": 0.78}, "summary": "受海马索引理论启发,协同 LLM、知识图谱与 Personalized PageRank,构建可持续整合新知识的长期记忆检索框架。", "methodCore": "HippoRAG 受人类长期记忆的海马索引理论启发,协同编排 LLM、知识图谱与 Personalized PageRank 算法,以模拟新皮层与海马体在记忆中的不同角色,实现对新经验更深、更高效的知识整合。离线阶段用 LLM(充当负责语义存储的新皮层)从文档抽取,构建一张知识图谱作为模拟海马索引的关联结构。查询时先把问题中的实体链接到图中对应节点作为种子,再在知识图谱上运行 Personalized PageRank,使概率从种子沿边扩散,聚合多跳关联的段落并排序返回。这种单步的图上关联检索能一次性整合跨文档、跨多跳的知识,而无需反复迭代检索或重训模型,从而缓解 LLM 即便有 RAG 仍难在预训练后高效整合大量新经验、避免灾难性遗忘的问题。", "evaluation": "论文在多跳问答上与现有 RAG 方法对比,HippoRAG 显著超越 SOTA,最高提升约 20%。其单步检索即达到甚至优于 IRCoT 等迭代式多步检索的效果,同时便宜 10-30 倍、快 6-13 倍;把 HippoRAG 接入 IRCoT 还能带来进一步的实质增益,并能处理现有方法难以触及的新类型场景,代码与数据已开源。", "mainFinding": "把检索从向量相似度匹配升级为知识图谱上的关联传播,更接近人类联想记忆,是把 RAG 推向长期记忆与跨任务知识整合的重要一步。", "limitations": "依赖 LLM 抽取三元组的质量,构建的知识图谱存在噪声;对超大规模语料的可扩展性与存储开销仍有待进一步验证。", "related": ["memory-rt-hipporag-2"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2405.14831"}], "citation": "HippoRAG, NeurIPS 2024."},
-  {"id": "memory-rt-hipporag-2", "page": "memory", "title": "From RAG to Memory: Non-Parametric Continual Learning for Large Language Models", "shortTitle": "HippoRAG 2", "category": "memory-retrieve", "maturity": "growing", "score": 0.83, "year": 2025, "venue": "ICML 2025", "authors": "Bernal Jiménez Gutiérrez et al.", "methodFamily": "图结构记忆检索", "tags": ["持续学习", "关联记忆", "sense-making"], "scores": {"clarity": 0.85, "evidence": 0.86, "reproducibility": 0.8, "adoption": 0.7, "selfEvolution": 0.82}, "summary": "在 HippoRAG 基础上加深段落整合与在线 LLM 使用,构建在事实、意义构建与关联记忆任务上全面超越标准 RAG 的记忆框架。", "methodCore": "HippoRAG 2 针对当前 RAG 依赖向量检索、难以模拟人类长期记忆动态互联特性,以及此前用知识图谱等结构增强向量的方法虽改善了 sense-making 与关联性、却在基础事实记忆任务上明显退化的问题,提出一个在事实、意义构建与关联三类记忆任务上全面超越标准 RAG 的框架。它沿用 HippoRAG 的 Personalized PageRank 图上关联检索,并作两处关键增强:更深的段落整合(deeper passage integration),把稠密段落表示纳入原以实体三元组为主的图;以及更有效的在线 LLM 使用,用 LLM 做更上下文化的链接与类似人脑识别记忆的过滤。二者结合把该 RAG 系统推向更接近人类长期记忆的效果,为 LLM 的非参数化持续学习铺路。", "evaluation": "论文在事实、意义构建(sense-making)与关联(associative)三类记忆任务上评测,HippoRAG 2 全面优于标准 RAG,修复了此前结构增强方法在基础事实任务上的退化。其在关联记忆任务上较 SOTA 嵌入模型取得 7% 的提升,同时展现出更强的事实知识与意义构建记忆能力,整体更接近人类长期记忆的效果,为非参数化持续学习铺路。", "mainFinding": "展示了以非参数化外部记忆实现 LLM 持续学习的路径,让新知识可被识别、关联并用于未来检索,是记忆检索走向自演化的代表性工作。", "limitations": "知识图谱构建与在线 LLM 调用带来额外成本;类人脑'识别记忆'过滤机制的可靠性,归根到底依赖底层 LLM 的判断质量。", "related": ["memory-rt-hipporag"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2502.14802"}], "citation": "HippoRAG 2, ICML 2025."},
-  {"id": "memory-rt-memgpt", "page": "memory", "title": "MemGPT: Towards LLMs as Operating Systems", "shortTitle": "MemGPT", "category": "memory-retrieve", "maturity": "growing", "score": 0.8, "year": 2023, "venue": "arXiv 2023", "authors": "Charles Packer et al.", "methodFamily": "分层记忆分页检索", "tags": ["虚拟上下文", "分页", "多轮对话记忆"], "scores": {"clarity": 0.85, "evidence": 0.75, "reproducibility": 0.75, "adoption": 0.85, "selfEvolution": 0.8}, "summary": "借鉴操作系统分层内存与分页机制,让 LLM 自主在主上下文与外部存储间调页,以突破固定上下文窗口。", "methodCore": "MemGPT 针对 LLM 受限于固定上下文窗口、在长对话与文档分析中受制的问题,提出虚拟上下文管理(virtual context management),借鉴传统操作系统的分层记忆系统——通过在快、慢两级存储间搬运数据,营造出拥有大容量记忆的假象。系统智能地管理不同记忆层级,把有限的上下文窗口类比为主存、把外部存储类比为磁盘,让 LLM 通过函数调用自主地在层级间换入换出信息,以在受限窗口内有效提供扩展上下文;并利用中断(interrupts)来管理自身与用户之间的控制流。由此当上下文将满时,agent 可主动检索调入重要历史、写出不常用内容,在远超窗口的交互中维持连贯记忆,并能记住、反思并动态演化对用户的认识。", "evaluation": "论文在两个现代 LLM 有限窗口严重掣肘性能的领域评测。文档分析中,MemGPT 能分析远超底层 LLM 上下文窗口的大型文档;多会话聊天中,它能构建可跨会话记忆、反思并随长期交互动态演化的对话 agent。两类场景均表明 MemGPT 能有效突破固定窗口约束、维持长期连贯记忆,超越只能截断或滑窗的基线,作者并开源了代码与数据。", "mainFinding": "将检索建模为 agent 主动的、OS 式的记忆分页调度,让 LLM 自主决定何时把哪部分记忆调入上下文,是自演化 agent 记忆管理与检索的代表性框架。", "limitations": "严重依赖底层 LLM 的函数调用与决策可靠性;缺乏大规模量化基准,且记忆调度一旦出错容易级联放大影响后续交互。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2310.08560"}], "citation": "MemGPT, arXiv 2023."},
-  {"id": "memory-rt-memorizing-transformers", "page": "memory", "title": "Memorizing Transformers", "shortTitle": "Memorizing Transformers", "category": "memory-retrieve", "maturity": "mature", "score": 0.83, "year": 2022, "venue": "ICLR 2022", "authors": "Yuhuai Wu et al.", "methodFamily": "记忆增强注意力", "tags": ["kNN注意力", "外部记忆", "长上下文"], "scores": {"clarity": 0.85, "evidence": 0.88, "reproducibility": 0.75, "adoption": 0.78, "selfEvolution": 0.55}, "summary": "为 Transformer 增加一个非可微的近期(键,值)记忆库,通过近似 kNN 查找扩展注意力上下文,提升语言建模。", "methodCore": "Memorizing Transformers 设想无需训练或微调、在推理时即可读入并记住新数据从而立即获得新知识的语言模型,为此扩展 Transformer 使其能记忆过去输入的内部表示。具体做法是把处理过的(key, value)对存入一个不参与梯度更新的非可微记忆库;当前 query 在做常规(局部)注意力之外,还通过近似 kNN 查找从该记忆库中检索最相关的历史键值,再将检索到的记忆注意力与局部注意力融合。由于记忆非可微,可将可访问上下文扩展到很大规模而不引入需训练的参数,使模型能在测试时利用新定义的函数与定理等信息。论文表明这种简单的 kNN 键值检索即可有效把外部记忆接入注意力,提升多种任务上的语言建模能力。", "evaluation": "论文在通用网页文本(C4)、数学论文(arXiv)、书籍(PG-19)、代码(GitHub)与形式化定理(Isabelle)等多种基准与任务上评测,均改善了语言建模表现。性能随记忆规模增大而稳步提升,最高扩展至 262K token;在代码与数学等基准上,模型被发现能在测试时利用新定义的函数与定理,验证了推理时读入并记忆新数据以即时获取知识的可行性。", "mainFinding": "证明用简单的 kNN 键值检索即可把外部记忆接入注意力,是把'检索'作为记忆机制融入模型内部的奠基性工作,启发了后续大量记忆增强注意力方法。", "limitations": "近似 kNN 查找带来工程实现与检索精度的权衡,且早期编码的键值可能随训练而陈旧;评测主要集中于语言建模而非交互式任务。", "related": ["memory-rt-longmem"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2203.08913"}], "citation": "Memorizing Transformers, ICLR 2022."},
-  {"id": "memory-rt-longmem", "page": "memory", "title": "Augmenting Language Models with Long-Term Memory", "shortTitle": "LongMem", "category": "memory-retrieve", "maturity": "growing", "score": 0.8, "year": 2023, "venue": "NeurIPS 2023", "authors": "Weizhi Wang et al.", "methodFamily": "记忆增强注意力", "tags": ["解耦记忆", "SideNet", "长历史缓存"], "scores": {"clarity": 0.84, "evidence": 0.83, "reproducibility": 0.72, "adoption": 0.68, "selfEvolution": 0.6}, "summary": "提出 LongMem 框架,用解耦的记忆模块让冻结的 LLM 缓存并检索超长历史上下文,缓解记忆陈旧问题。", "methodCore": "LongMem 针对现有 LLM 因输入长度上限只能接受固定大小输入、无法利用过去输入中丰富长上下文信息的问题,提出让 LLM 记忆长历史的框架。其核心是一种解耦式网络设计:把原始骨干 LLM 冻结,仅用作记忆编码器,把过去上下文编码成(key, value)对存入记忆库;另设一个自适应的残差侧网络(residual side-network)专门充当记忆检索器与读取器。由于骨干冻结,记忆库可轻松缓存与更新长期历史而不受记忆陈旧(staleness)困扰。再配合记忆增强的适配训练,LongMem 能记住并利用长历史进行语言建模;其记忆检索模块可处理记忆库中不限长度的上下文,典型可把长程记忆扩展到 65k token,足以缓存 many-shot 的额外示例作为长程记忆用于上下文学习。", "evaluation": "论文在具挑战性的长上下文建模基准 ChapterBreak 上评测,LongMem 优于多个强长上下文模型;在把大量 in-context 示例缓存为长程记忆的记忆增强上下文学习(memory-augmented in-context learning)设定下,相较普通 LLM 取得显著的准确率提升。结果表明该方法能有效帮助语言模型记忆并利用长内容,代码已开源。", "mainFinding": "用解耦冻结骨干加可训练侧网络的设计,优雅地解决了记忆增强中的陈旧问题,展示了把海量历史/示例作为可检索长期记忆用于上下文学习的可行性。", "limitations": "需训练额外的残差侧网络并维护大型记忆库;记忆按块检索,对细粒度、跨片段关联信息的建模能力仍然比较有限。", "related": ["memory-rt-memorizing-transformers", "memory-rt-unlimiformer"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2306.07174"}], "citation": "LongMem, NeurIPS 2023."},
-  {"id": "memory-rt-unlimiformer", "page": "memory", "title": "Unlimiformer: Long-Range Transformers with Unlimited Length Input", "shortTitle": "Unlimiformer", "category": "memory-retrieve", "maturity": "growing", "score": 0.79, "year": 2023, "venue": "NeurIPS 2023", "authors": "Amanda Bertsch et al.", "methodFamily": "记忆增强注意力", "tags": ["kNN交叉注意力", "无限输入", "长文档摘要"], "scores": {"clarity": 0.86, "evidence": 0.84, "reproducibility": 0.8, "adoption": 0.68, "selfEvolution": 0.45}, "summary": "把交叉注意力计算卸载到单个 kNN 索引,使任意预训练编码器-解码器模型无需改权重即可处理近乎无限长的输入。", "methodCore": "Unlimiformer 针对 Transformer 因需注意输入中每个 token 而受限于有界输入长度的问题,提出一种可包装任意现成预训练编码器-解码器 Transformer 的通用方法:把交叉注意力计算卸载到单个 k 近邻(kNN)索引,并令返回的 kNN 距离直接充当注意力点积分数。具体地,把全部输入 token 的编码器隐状态存入这一索引(可放在 GPU 或 CPU 内存)并可在亚线性时间内查询,由此可对几乎无限长的输入序列建立索引;解码时每个解码层的每个注意力头不再对所有键做注意力,而只检索并注意其 Top-k 键。该单一索引在所有层、所有头间共享,不引入任何额外学习到的权重、也不修改原模型代码,因而可零训练地把 BART、Longformer 等模型扩展到无限长输入。", "evaluation": "论文在多个长文档与书籍摘要基准上评测。Unlimiformer 可在测试时处理 BookSum 数据集中长达 500k token 的输入而无需任何截断;并在不引入额外学习权重、也不修改代码的前提下,提升 BART、Longformer 等预训练模型的摘要表现,将它们扩展到无限长输入。作者公开了代码与模型以支持复现和推广。", "mainFinding": "把长上下文注意力重构为对外部记忆的 kNN 检索,是'检索即注意力'思想在编码器-解码器架构上的通用化,证明可零训练地扩展输入长度。", "limitations": "主要面向编码器-解码器的摘要类任务;每个头、每一层的 kNN 检索都会带来索引构建与查询开销,从而增加生成延迟。", "related": ["memory-rt-memorizing-transformers", "memory-rt-longmem"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.01625"}], "citation": "Unlimiformer, NeurIPS 2023."},
-  {"id": "memory-rt-former", "page": "memory", "title": "∞-former: Infinite Memory Transformer", "shortTitle": "∞-former", "category": "memory-retrieve", "maturity": "exploring", "score": 0.72, "year": 2022, "venue": "ACL 2022", "authors": "Pedro Henrique Martins et al.", "methodFamily": "连续空间记忆", "tags": ["连续注意力", "无界记忆", "长期记忆"], "scores": {"clarity": 0.78, "evidence": 0.76, "reproducibility": 0.6, "adoption": 0.55, "selfEvolution": 0.5}, "summary": "用连续空间注意力把过去表示为连续信号,为 Transformer 引入不受长度限制、计算与上下文长度解耦的无界长期记忆。", "methodCore": "∞-former 针对 Transformer 因计算量随上下文长度增长而难以有效建模长期记忆、且各类高效变体记忆容量仍有限被迫丢弃旧信息的问题,为普通 Transformer 扩展了一个无界长期记忆。其核心是用连续空间注意力机制来注意长期记忆:把过去的表示拟合成连续信号并对其做注意力,使注意力复杂度不再依赖上下文长度,而是以记忆长度换取精度——无论历史多长,记忆表示与注意力开销都保持恒定,从而近似表示无界的过去。为控制在何处需要更高精度,∞-former 维护 sticky memories 机制,把被频繁关注的关键片段以更高分辨率长期保留,从而在固定计算预算下建模任意长的上下文,实现对无界历史的可检索访问。", "evaluation": "论文在合成的排序任务、语言建模以及基于文档的对话生成(document grounded dialogue generation)三类设定上评测。实验展示了 ∞-former 在有界计算预算下从长序列中保留信息的能力,能建模远超普通 Transformer 的长期上下文并保持有竞争力的表现;同时验证 sticky memories 机制在按注意力得分保留关键长期信息方面的作用,体现连续空间记忆的独特优势。", "mainFinding": "提出以连续信号表示无界记忆的独特思路,让记忆容量彻底摆脱离散序列长度的限制,是记忆表示与检索机制方向上的探索性代表工作。", "limitations": "连续空间注意力实现复杂、复现门槛较高;信号近似与有限分辨率保留会引入信息损失,故大规模工程落地采用有限。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2109.00301"}], "citation": "∞-former, ACL 2022."},
-  {"id": "memory-rt-xmemory", "page": "memory", "title": "Beyond RAG for Agent Memory: Retrieval by Decoupling and Aggregation", "shortTitle": "xMemory", "category": "memory-retrieve", "maturity": "exploring", "score": 0.79, "year": 2026, "venue": "arXiv 2026", "authors": "Zhanghao Hu et al.", "methodFamily": "解耦聚合层次记忆", "tags": ["agent记忆", "层次检索", "去冗余"], "scores": {"clarity": 0.82, "evidence": 0.8, "reproducibility": 0.68, "adoption": 0.6, "selfEvolution": 0.78}, "summary": "指出标准 RAG 不适配 agent 记忆流,提出'先解耦再聚合'的 xMemory,构建可修订层次结构并自顶向下检索,提升答案质量与 token 效率。", "methodCore": "xMemory 指出标准 RAG 与 agent 记忆不匹配:不同于庞大异构语料,agent 记忆是有界且连贯的交互流,许多片段高度相关甚至近乎重复,导致扁平 top-k 相似检索常返回冗余上下文,而以摘要为中心的层次又会模糊区分候选的细节。为此提出'先解耦再聚合(decoupling before aggregation)'原则:系统应先从相似历史中隔离出可复用事实、更新与区分性细节,再组织以便高效检索。据此构建从原始消息到片段、记忆组件、组的可修订层次结构:把交互史切分为局部事件,再把每个片段解耦为记忆组件,用稀疏性—语义忠实度目标把相关组件聚合成高层组,并随记忆演化增量维护。推理时自顶向下检索,先选出互补组与组件构成紧凑主干,仅当补充证据能降低阅读器不确定性时,才展开到片段与原始消息。", "evaluation": "论文在 LoCoMo 与 PerLTQA 两个记忆基准上,跨多种开源与闭源 LLM 做实验。结果显示 xMemory 在答案质量与推理 token 效率两方面均取得一致提升,证明自顶向下、按需展开的层次检索兼顾准确与省 token;论文还辅以对检索上下文冗余度、证据密度与覆盖度的分析,进一步佐证'先解耦再聚合'带来的收益来源。", "mainFinding": "证明 agent 记忆应遵循'先解耦再聚合'而非直接套用 RAG,自顶向下、按需展开的层次检索能同时提升答案准确性与推理 token 效率。", "limitations": "层次结构的构建与增量维护较复杂;解耦与聚合质量依赖底层 LLM,且评测仅覆盖 LoCoMo 与 PerLTQA 两个记忆基准。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2602.02007"}], "citation": "xMemory, arXiv 2026."},
-  {"id": "memory-rt-gmemory", "page": "memory", "title": "G-Memory: Tracing Hierarchical Memory for Multi-Agent Systems", "shortTitle": "G-Memory", "category": "memory-retrieve", "maturity": "exploring", "score": 0.81, "year": 2025, "venue": "arXiv 2025", "authors": "Guibin Zhang et al.", "methodFamily": "多智能体图层次记忆", "tags": ["多智能体", "三层图", "双向检索"], "scores": {"clarity": 0.83, "evidence": 0.84, "reproducibility": 0.72, "adoption": 0.62, "selfEvolution": 0.82}, "summary": "面向多智能体系统提出受组织记忆理论启发的层次化记忆 G-Memory,用洞见、查询、交互三层图管理协作轨迹,双向遍历检索并随任务演化。", "methodCore": "G-Memory 针对多智能体系统(MAS)自演化受制于记忆架构不成熟的问题,指出现有 MAS 记忆过于简单、完全忽视智能体间细腻的协作轨迹,且缺乏跨试验与智能体特定的定制。受组织记忆理论启发,它用三层图层次来管理冗长的 MAS 交互:洞见图(insight)存放高层可泛化经验,查询图(query)组织历史查询,交互图(interaction)保存细粒度协作轨迹。收到新查询时执行双向记忆遍历,既取回高层、可泛化的洞见以复用跨试验知识,又取回细粒度、经压缩的交互轨迹以紧凑编码既往协作经验。任务执行后,整个层次通过吸收新的协作轨迹自我演化,持续培育智能体团队能力,且无需对原有 MAS 框架做任何修改。", "evaluation": "论文在五个基准、三种 LLM 骨干与三种流行 MAS 框架上开展广泛实验。G-Memory 在具身行动(embodied action)任务的成功率与知识问答任务的准确率上,分别最高提升约 20.89% 与 10.12%,且这些增益是在不对原始 MAS 框架做任何修改的前提下取得的,展现良好的通用性与即插即用特性;作者已开源代码。", "mainFinding": "证明为多智能体系统引入分层图式的协作记忆、并让其随任务不断自我演化,可在不改动原框架的前提下显著提升团队成功率与问答准确率。", "limitations": "三层图的构建与双向遍历开销较大;收益依赖底层 MAS 框架与 LLM,且记忆随任务长期演化的稳定性仍待验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2506.07398"}], "citation": "G-Memory, arXiv 2025."},
-  {"id": "memory-rt-assomem", "page": "memory", "title": "AssoMem: Scalable Memory QA with Multi-Signal Associative Retrieval", "shortTitle": "AssoMem", "category": "memory-retrieve", "maturity": "exploring", "score": 0.78, "year": 2025, "venue": "arXiv 2025", "authors": "Kai Zhang et al.", "methodFamily": "关联记忆多信号检索", "tags": ["关联记忆图", "多信号融合", "记忆QA"], "scores": {"clarity": 0.81, "evidence": 0.82, "reproducibility": 0.68, "adoption": 0.58, "selfEvolution": 0.72}, "summary": "面向大规模记忆问答,提出受人类联想启发的 AssoMem,构建把对话话语锚定到自动抽取线索的关联记忆图,并用多信号自适应融合排序,提升相似密集场景下的召回。", "methodCore": "AssoMem 针对记忆增强 AI 助手在大规模记忆问答中的核心挑战——尤其在相似度密集(similarity dense)场景下,现有方法主要靠与查询的语义距离检索而易失败。受人类以联想方式关联信息的启发,它构建一张关联记忆图,把对话中的话语(utterances)锚定到自动抽取出的线索(clues)上,从而提供关于会话上下文的丰富组织视图,并支持基于重要性的排序。检索时,AssoMem 整合多维检索信号——与查询的相关性(relevance)、话语自身的重要性(importance)以及时间对齐度(temporal alignment),并采用一种基于自适应互信息(MI)的融合策略动态加权这些信号,得到兼顾语义、重要性与时序的上下文感知召回结果,从而在相似密集场景下改善召回质量。", "evaluation": "论文在三个已有基准以及新提出的会议问答数据集 MeetingQA 上进行大量实验。结果显示 AssoMem 一致地优于 SOTA 基线,验证了其在上下文感知记忆召回、尤其是相似度密集场景下的优越性;新引入的 MeetingQA 也为评测大规模、相似密集的记忆问答提供了额外的测试平台,进一步佐证多信号关联检索的有效性。", "mainFinding": "证明在语义相似度之外融合重要性与时间对齐等多维信号、并借助关联记忆图组织上下文,能显著改善大规模相似密集记忆的召回质量。", "limitations": "线索抽取与关联图构建依赖 LLM 的质量;多信号互信息融合较为复杂,且新数据集 MeetingQA 的规模与泛化性有限。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2510.10397"}], "citation": "AssoMem, arXiv 2025."},
-  {"id": "memory-rt-exprag", "page": "memory", "title": "Retrieval-Augmented LLM Agents: Learning to Learn from Experience", "shortTitle": "ExpRAG", "category": "memory-retrieve", "maturity": "exploring", "score": 0.77, "year": 2026, "venue": "arXiv 2026", "authors": "Thomas Palmeira Ferraz et al.", "methodFamily": "经验检索微调结合", "tags": ["经验记忆", "轨迹检索", "泛化"], "scores": {"clarity": 0.8, "evidence": 0.79, "reproducibility": 0.66, "adoption": 0.56, "selfEvolution": 0.8}, "summary": "系统研究如何训练检索增强的 LLM 智能体有效利用检索到的经验轨迹,把微调与经验检索结合,提出将经验检索融入微调的流程以显著提升对未见任务的泛化。", "methodCore": "该工作针对通用 LLM 智能体难以稳健泛化到未见任务的挑战,指出现有两条路线各有短板:微调常无法外推到新任务,而免训练的经验检索(检索过往轨迹在上下文中使用)又常逊于有监督基线。为此本文主张把二者结合,并系统研究如何训练检索增强的 LLM 智能体在上下文中有效利用被检索的轨迹。其贡献分三步:首先建立一套基于 LoRA 的稳健有监督微调(SFT)配方,超越多个 SOTA 智能体训练流程;其次详细分析经验检索的关键设计选择,给出存储(storage)、查询(querying)与轨迹选择(trajectory selection)的最优策略;最后提出一条把经验检索直接整合进微调过程的流水线,使模型在训练时就学会消费被检索的轨迹,即真正学会从经验中学习。", "evaluation": "实验结果表明,把经验检索整合进微调的组合方法,相较单纯微调或单纯经验检索,显著提升了对未见任务(unseen tasks)的泛化能力。该工作由此提供了一个可扩展、有效地构建'学会从经验中学习'智能体的框架,并给出关于经验存储、查询构造与轨迹选择的最优设计经验,验证了训练与检索联合的价值。", "mainFinding": "证明把可检索的经验记忆与微调联合训练,能让智能体在训练时就学会在上下文中利用过往轨迹,从而显著改善对未见任务的泛化能力。", "limitations": "依赖 LoRA 微调与轨迹存储成本;经验检索设计需精细调参,且方法对未见任务的分布覆盖范围仍然受限。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2603.18272"}], "citation": "ExpRAG, arXiv 2026."},
-  {"id": "memory-rt-gam", "page": "memory", "title": "General Agentic Memory Via Deep Research", "shortTitle": "GAM", "category": "memory-retrieve", "maturity": "exploring", "score": 0.8, "year": 2025, "venue": "arXiv 2025", "authors": "B. Y. Yan et al.", "methodFamily": "即时编译智能体记忆", "tags": ["JIT记忆", "深度研究", "运行时检索"], "scores": {"clarity": 0.81, "evidence": 0.8, "reproducibility": 0.66, "adoption": 0.58, "selfEvolution": 0.83}, "summary": "针对静态记忆预先构建导致的信息损失,提出遵循'即时编译'原则的通用智能体记忆 GAM,离线仅保留简单有用记忆,运行时为客户端动态构造最优上下文。", "methodCore": "GAM 针对被广泛采用的静态记忆——试图提前备好可直接取用的记忆、却不可避免地严重丢失信息——提出遵循'即时编译(just-in-time, JIT)'原则的通用智能体记忆框架:离线阶段只保留简单但有用的记忆,把为客户端创建优化上下文的工作推迟到运行时。为此采用双组件设计:Memorizer 用一个轻量记忆突出关键历史信息,同时把完整历史保存在通用的 page-store 页存储中;Researcher 在收到在线请求时,以预构建的记忆为向导,从 page-store 检索并整合有用信息以构造优化上下文。该设计充分利用前沿 LLM 的智能体能力与测试时可扩展性,并可通过强化学习进行端到端性能优化,从而把记忆构建从离线固化转为运行时按需深度检索与即时整合。", "evaluation": "论文在多种以记忆为基础的任务完成(memory-grounded task completion)场景中开展实验研究。结果显示,GAM 相较现有各类记忆系统均取得实质性的显著改进,验证了'离线只留轻量记忆、运行时按需深度检索并即时构造优化上下文'这一 JIT 路线的有效性,以及借助前沿 LLM 智能体能力与测试时扩展性带来的可扩展优势。", "mainFinding": "证明与其离线固化易丢信息的静态记忆,不如离线只留轻量记忆、运行时按需深度检索整合上下文,更契合前沿 LLM 的能力与测试时扩展。", "limitations": "运行时的深度检索会带来更高的在线推理开销;page-store 的存储成本以及强化学习端到端优化的稳定性仍有待考察。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2511.18423"}], "citation": "GAM, arXiv 2025.", "figures": [{"src": "figures/memory-rt-gam.png", "caption": "GAM 总览:Memorizer 离线构造轻量记忆并保留完整页面存储,Researcher 在线按 JIT 原则检索整合,组成最优上下文。"}]},
-  {"id": "memory-rf-reflexion", "page": "memory", "title": "Reflexion: Language Agents with Verbal Reinforcement Learning", "shortTitle": "Reflexion", "category": "memory-reflect", "maturity": "mature", "score": 0.95, "year": 2023, "venue": "NeurIPS 2023", "authors": "Noah Shinn et al.", "methodFamily": "语言化反思记忆", "tags": ["反思", "情景记忆", "免训练"], "scores": {"clarity": 0.95, "evidence": 0.9, "reproducibility": 0.9, "adoption": 0.97, "selfEvolution": 0.92}, "summary": "将环境反馈转化为语言化自我反思并存入情景记忆缓冲区,指导后续试错中的决策改进。", "methodCore": "Reflexion 的核心主张是:不通过更新模型权重、而是通过语言化反馈来强化语言智能体。整体架构由三个模块构成:Actor 负责生成推理与动作,Evaluator 对完成的轨迹给出评分,Self-Reflection 模块据此把失败信号归纳成一段文本形式的自我反思。一次尝试失败后,评估器打分,反思模块诊断失败根因并写成经验教训,存入一个情景记忆缓冲区(episodic memory buffer);下一次尝试时,该反思作为附加上下文注入提示,引导 Actor 修正行为。该机制足够灵活,可接纳标量或自由文本两种反馈形式,也可接纳外部或内部自模拟两种反馈来源,把稀疏奖励转化为可读的语言化信用分配。缓冲区在多轮试错中滚动更新,实现跨轮次的经验积累与决策改进,记忆本身即自演化的载体。", "evaluation": "在序贯决策(AlfWorld)、编程(HumanEval)与语言推理(HotPotQA)三类任务上评测,较基线智能体取得显著提升。abstract 明确 HumanEval 上达到 91% pass@1,超过此前 SOTA GPT-4 的 80%。并就不同反馈信号、反馈整合方式与智能体类型做了消融与分析,验证语言反思相较固定提示基线对性能提升的关键作用方向。", "mainFinding": "无需微调,语言智能体即可通过语言化反馈自我强化,反思文本作为可读记忆是自演化的核心载体,提供比标量奖励更可解释的跨轮次信用分配。", "limitations": "依赖任务成败信号的可获得性;反思质量受基座模型自评能力限制;长期记忆缓冲区缺乏冲突消解与去冗余机制。", "related": ["memory-rf-generative-agents", "memory-rf-retroformer"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2303.11366"}], "citation": "Reflexion, NeurIPS 2023."},
-  {"id": "memory-rf-self-refine", "page": "memory", "title": "Self-Refine: Iterative Refinement with Self-Feedback", "shortTitle": "Self-Refine", "category": "memory-reflect", "maturity": "mature", "score": 0.9, "year": 2023, "venue": "NeurIPS 2023", "authors": "Aman Madaan et al.", "methodFamily": "自反馈迭代精炼", "tags": ["自反馈", "迭代精炼", "免训练"], "scores": {"clarity": 0.95, "evidence": 0.88, "reproducibility": 0.92, "adoption": 0.93, "selfEvolution": 0.8}, "summary": "同一 LLM 先生成输出、再对自身输出给出反馈并据此迭代精炼,无需训练即可提升质量。", "methodCore": "Self-Refine 受人类反复修改文稿的启发,用同一个 LLM 分饰生成器、反馈器与精炼器三种角色,全程不需任何监督训练数据、额外训练或强化学习,仅靠少样本提示切换角色。流程是:先用 LLM 生成一个初始输出;随后同一模型对该输出给出反馈,并据反馈迭代地精炼自身产物,形成 FEEDBACK→REFINE 的循环。关键在于反馈是针对性的、可操作的,指出具体待改进之处而非仅给分数,再连同上一版输出一并送回做改写,直到反馈判定满意或达到迭代上限。这一即插即用的独立范式把反思式改写当作测试时的工作记忆更新,不依赖外部工具或额外模型,展示了强模型在推理阶段仍有自我提升空间。", "evaluation": "在对话生成到数学推理等 7 类多样任务上,用 GPT-3.5、ChatGPT 与 GPT-4 三种当时最先进的模型评测。abstract 指出,所有任务上经 Self-Refine 的输出在人类偏好与自动指标上均优于同一模型的一步生成,任务表现平均绝对提升约 20%,凸显反馈质量与迭代改写对结果的正向作用。", "mainFinding": "即便 GPT-4 这样的强模型,测试时通过简单的自反馈迭代仍可进一步提升;反思式精炼是一种即插即用、无需训练的工作记忆更新方式。", "limitations": "属单轮任务内的短期精炼,反思不跨任务持久化;效果高度依赖模型自身反馈的可靠性,弱模型下收益有限甚至可能反向恶化。", "related": ["memory-rf-reflexion"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2303.17651"}], "citation": "Self-Refine, NeurIPS 2023."},
-  {"id": "memory-rf-expel", "page": "memory", "title": "ExpeL: LLM Agents Are Experiential Learners", "shortTitle": "ExpeL", "category": "memory-reflect", "maturity": "mature", "score": 0.9, "year": 2023, "venue": "AAAI 2024", "authors": "Andrew Zhao et al.", "methodFamily": "跨任务经验抽象", "tags": ["经验学习", "洞见抽取", "跨任务迁移"], "scores": {"clarity": 0.9, "evidence": 0.88, "reproducibility": 0.9, "adoption": 0.85, "selfEvolution": 0.95}, "summary": "智能体自主采集训练任务经验并用自然语言抽取可复用洞见,推理时召回洞见与过往经验以提升决策。", "methodCore": "ExpeL 面向无法微调、仅能 API 调用的黑盒 LLM,提出在不做任何参数更新的前提下从经验中学习。训练阶段,智能体在一批训练任务上自主收集成功与失败的交互轨迹,构建经验池;随后用自然语言从轨迹中抽取知识,做两类抽象:一是跨任务比较成功与失败,归纳出通用的自然语言洞见(insights),二是保留具代表性的过往经验实例。推理时,面对新任务同时召回最相关的洞见与相似经验,一并注入提示以做出更明智的决策。整个流程把示范学习、反思与经验迁移统一进一个免训练框架,能力随经验积累而持续增长,既规避了微调的资源开销,也避免损害模型的泛化能力,是纯自然语言记忆驱动的自演化范式。", "evaluation": "abstract 报告实证结果显示 ExpeL 学习成效稳健,任务性能随经验的持续积累而稳定提升;并通过定性观察与额外实验探索了其涌现能力与迁移学习潜力,展示从源训练任务抽取的自然语言洞见可前向迁移到目标任务,全程不做任何梯度更新即获得增益。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "LLM 智能体能像人一样从经验中学习并抽象出可迁移知识,无需微调即可稳定增益;跨任务洞见抽象是免训练自演化记忆的关键范式。", "limitations": "洞见质量依赖训练任务分布与抽取提示;经验池增大后检索与去冗余成本上升,并可能引入无关噪声干扰决策。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2308.10144"}], "citation": "ExpeL, AAAI 2024."},
-  {"id": "memory-rf-generative-agents", "page": "memory", "title": "Generative Agents: Interactive Simulacra of Human Behavior", "shortTitle": "Generative Agents", "category": "memory-reflect", "maturity": "mature", "score": 0.93, "year": 2023, "venue": "UIST 2023", "authors": "Joon Sung Park et al.", "methodFamily": "记忆流与反思合成", "tags": ["记忆流", "反思", "行为模拟"], "scores": {"clarity": 0.92, "evidence": 0.88, "reproducibility": 0.85, "adoption": 0.95, "selfEvolution": 0.88}, "summary": "用记忆流完整记录经验,并周期性把观察合成为更高层反思,动态检索以规划可信的人类行为。", "methodCore": "该工作在 LLM 之上扩展出一套完整架构,以自然语言完整记录智能体感知到的全部经验,并随时间将这些记忆合成为更高层的反思,再动态检索以规划行为。记忆流(memory stream)以时间序列存储观察;检索模型按新近度、重要性、相关性三项打分对记忆加权,召回与当前情境最相关的条目送入提示。反思模块在累积的重要观察超过阈值时周期性触发,先自问最关键的高层问题,再从记忆中归纳出更抽象的结论作为反思,回写记忆流,与底层观察共同支撑后续检索。规划模块据此把长期意图分解为日程与具体动作,并随环境反应动态重规划,形成观察-规划-反思的闭环,使个体与群体行为在长期模拟中保持连贯可信,是把经验抽象后回写记忆的经典设计。", "evaluation": "在受《模拟人生》启发、含 25 个智能体的交互式沙盒小镇中实例化。abstract 描述其产生可信的个体与涌现社交行为:仅给定一个智能体想办情人节派对的初始意图,智能体们两天内自发传播邀请、结识新友、相约赴会并协同准时到场。消融证明观察、规划、反思三组件对行为可信度均起关键作用,缺一即显著下降。", "mainFinding": "记忆流加周期性反思的分层结构能产生可信的个体与群体涌现行为;反思即把观察抽象后回写记忆流,是自演化记忆架构的经典范式与后续大量工作的源头。", "limitations": "记忆流随时间无界增长带来检索开销;反思的正确性与幻觉风险未被系统量化,难以直接审计其合成结论。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-reflexion", "memory-rf-retroformer"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2304.03442"}], "citation": "Generative Agents, UIST 2023."},
-  {"id": "memory-rf-awm", "page": "memory", "title": "Agent Workflow Memory", "shortTitle": "AWM", "category": "memory-reflect", "maturity": "growing", "score": 0.88, "year": 2024, "venue": "ICML 2025", "authors": "Zora Zhiruo Wang et al.", "methodFamily": "工作流归纳记忆", "tags": ["工作流", "网页智能体", "经验复用"], "scores": {"clarity": 0.9, "evidence": 0.88, "reproducibility": 0.88, "adoption": 0.82, "selfEvolution": 0.9}, "summary": "从过往轨迹归纳出可复用的工作流并选择性注入记忆,指导后续网页任务的生成。", "methodCore": "AWM 借鉴人类把重复经验固化为可复用例程的方式,提出从智能体的历史轨迹中归纳出常用工作流(workflow),即带自然语言描述与可复用步骤序列的子程序,并选择性地把相关工作流提供给智能体以指导后续生成。它灵活适用于离线与在线两种场景:离线模式事先从带标注的训练样例中一次性归纳工作流,在线模式则在没有标注时从测试查询的自身轨迹即时归纳并累积。推理时按当前任务检索相关工作流注入提示,引导后续动作生成,把碎片化动作组织成高层可复用单元,处于原始轨迹与抽象洞见之间的中间粒度,专门缓解长程复杂动作序列任务上的困难,使智能体像人一样把过往经验固化为例程并灵活复用,加速后续网页任务的求解。", "evaluation": "在 Mind2Web 与 WebArena 两大网页导航基准(合计 1000+ 任务、200+ 域,覆盖旅行、购物、社交等)上评测,abstract 报告相对成功率分别提升 24.6% 与 51.1%,同时减少成功解决 WebArena 任务所需步数;在线 AWM 在跨任务、跨网站、跨域评测中稳健泛化,随训练-测试分布差距拉大仍超基线 8.9 至 14.0 个绝对点。", "mainFinding": "把经验抽象为结构化工作流并回写记忆,可大幅提升长程网页任务表现且降低步数;工作流是介于原始轨迹与洞见之间的高价值经验形态。", "limitations": "工作流归纳依赖轨迹质量,网页结构动态变化时可复用性下降;在线模式下错误工作流可能被累积并传播。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-skillweaver"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2409.07429"}], "citation": "AWM, ICML 2025."},
-  {"id": "memory-rf-reasoningbank", "page": "memory", "title": "ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory", "shortTitle": "ReasoningBank", "category": "memory-reflect", "maturity": "growing", "score": 0.9, "year": 2025, "venue": "ICLR 2026", "authors": "Siru Ouyang et al.", "methodFamily": "推理策略记忆", "tags": ["推理记忆", "自演化", "测试时扩展"], "scores": {"clarity": 0.9, "evidence": 0.9, "reproducibility": 0.8, "adoption": 0.72, "selfEvolution": 0.97}, "summary": "从自判成败的经验中蒸馏可泛化推理策略存入记忆,并配合记忆感知的测试时扩展放大自演化。", "methodCore": "ReasoningBank 针对智能体在持续真实任务流中不会从累积交互历史学习、丢弃有价值洞见并重复犯错的问题,提出一个从智能体自我判定的成功与失败经验中双向蒸馏可泛化推理策略的记忆框架,把策略组织为结构化记忆条目。测试时检索相关记忆指导当前交互,交互结束后再把新学到的策略整合回记忆,使智能体随时间越来越强。在此经验学习器之上,进一步提出记忆感知的测试时扩展(MaTTS):为每个任务分配更多算力,通过并行采样或串行迭代生成丰富多样的经验,为合成更高质量记忆提供对比信号;更好的记忆又指导更有效的扩展,使记忆与测试时算力形成正反馈,确立记忆驱动的经验扩展为一个新的扩展维度,并让自演化中自然涌现新行为。", "evaluation": "在网页浏览与软件工程基准上评测,相较仅存原始轨迹或仅存成功例程的既有记忆机制,ReasoningBank 在有效性与效率上均持续更优;有效性最高提升约 34.2%、交互步数减少约 16.0%,MaTTS 在并行与串行两种扩展下进一步放大增益,验证记忆与测试时算力的正向协同。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "从成败经验双向蒸馏推理策略比只学成功更有效;记忆质量与测试时算力形成正反馈,确立记忆驱动的经验扩展为一个新的自演化扩展维度。", "limitations": "自判成败可能引入噪声标签;记忆持续增长的长期一致性与冲突消解仍待系统验证。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-self"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2509.25140"}], "citation": "ReasoningBank, ICLR 2026."},
-  {"id": "memory-rf-retroformer", "page": "memory", "title": "Retroformer: Retrospective Large Language Agents with Policy Gradient Optimization", "shortTitle": "Retroformer", "category": "memory-reflect", "maturity": "growing", "score": 0.84, "year": 2023, "venue": "ICLR 2024", "authors": "Weiran Yao et al.", "methodFamily": "回顾模型策略梯度", "tags": ["反思", "策略梯度", "可训练回顾模型"], "scores": {"clarity": 0.85, "evidence": 0.85, "reproducibility": 0.78, "adoption": 0.72, "selfEvolution": 0.9}, "summary": "训练一个可优化的回顾模型,通过策略梯度从环境奖励自动微调智能体反思提示。", "methodCore": "Retroformer 提出一个用策略梯度强化语言智能体的原则性框架,核心是学习一个可优化的回顾模型(retrospective model)。它把智能体拆成两部分:一个冻结的大型 actor LLM 负责生成推理与动作,一个较小的、可本地训练的回顾模型负责在每轮失败后总结失败根因并提出改进的行动计划,据此自动改写 actor 下一轮的提示。与仅用固定提示做语言反馈的方法不同,Retroformer 让反思与规划以兼容梯度学习的方式进行:用跨多个环境与任务累积的环境奖励作为信号,通过策略梯度微调回顾模型,使其产出的反思越来越能提升 actor 的成功率,把自我反思从启发式提示升级为可学习组件,是最早用策略梯度优化语言智能体的工作之一。", "evaluation": "abstract 表示在多种任务上的实验显示语言智能体随时间持续改进,且该方法显著优于未恰当利用环境梯度的基线,证明用策略梯度优化语言智能体前景可观,并指出该思路可推广到优化智能体架构中的其他模型,以持续增强整体表现。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "把反思提示的生成本身变成可学习对象,用策略梯度优化回顾模型,能系统性提升智能体的自我改进能力,使反思机制从启发式走向可训练。", "limitations": "需训练额外的回顾模型,引入训练成本与稳定性问题;奖励信号稀疏时策略梯度优化困难且易不稳。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-generative-agents", "memory-rf-reflexion"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2308.02151"}], "citation": "Retroformer, ICLR 2024."},
-  {"id": "memory-rf-self-rewarding-lm", "page": "memory", "title": "Self-Rewarding Language Models", "shortTitle": "Self-Rewarding LM", "category": "memory-reflect", "maturity": "growing", "score": 0.87, "year": 2024, "venue": "ICML 2024", "authors": "Weizhe Yuan et al.", "methodFamily": "自奖励迭代训练", "tags": ["自奖励", "LLM-as-Judge", "迭代DPO"], "scores": {"clarity": 0.88, "evidence": 0.86, "reproducibility": 0.75, "adoption": 0.8, "selfEvolution": 0.92}, "summary": "模型用 LLM-as-Judge 为自身生成奖励并迭代 DPO 训练,同时提升指令跟随与自评能力。", "methodCore": "自奖励语言模型主张:要迈向超人智能体,未来模型需要超人级反馈作为训练信号,而从人类偏好训练的奖励模型会被人类水平所瓶颈,且冻结的独立奖励模型无法随 LLM 训练一同改进。为此,让语言模型自身通过 LLM-as-a-Judge 提示为自己提供奖励。同一模型同时承担指令跟随器与评判者两个角色:先自生成新提示与多个候选回复,再以评判者身份为这些回复打分,构造出偏好对;随后用迭代式 DPO 更新模型。关键发现是,在迭代 DPO 训练中不仅指令跟随能力提升,模型给自己提供高质量奖励的评判能力也一同提升,形成生成与评判协同上升的自我改进闭环,打破人类偏好数据的瓶颈,是参数层面持续自演化的代表路径。", "evaluation": "abstract 报告在 Llama 2 70B 上迭代三轮微调,所得模型在 AlpacaEval 2.0 排行榜上超越许多现有系统,包括 Claude 2、Gemini Pro 与 GPT-4 0613;同时展示模型作为评判者提供高质量奖励的能力也随迭代增强,验证两轴能力协同增长。", "mainFinding": "把奖励模型内化进 LLM 自身可打破人类偏好数据瓶颈,指令跟随与自我评判两种能力协同增长,是参数层面持续自演化的代表路径。", "limitations": "仅迭代三轮,长期能否持续提升未知;自奖励可能放大模型自身偏差,形成自我强化的偏好漂移。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2401.10020"}], "citation": "Self-Rewarding LM, ICML 2024."},
-  {"id": "memory-rf-rome", "page": "memory", "title": "Locating and Editing Factual Associations in GPT", "shortTitle": "ROME", "category": "memory-reflect", "maturity": "mature", "score": 0.92, "year": 2022, "venue": "NeurIPS 2022", "authors": "Kevin Meng et al.", "methodFamily": "参数化知识编辑", "tags": ["知识编辑", "因果追踪", "秩一编辑"], "scores": {"clarity": 0.9, "evidence": 0.92, "reproducibility": 0.92, "adoption": 0.9, "selfEvolution": 0.72}, "summary": "用因果追踪定位事实存储于中层 MLP,并以秩一模型编辑直接改写权重更新单条事实。", "methodCore": "该工作分析自回归 Transformer 中事实关联的存储与回忆,发现这些关联对应于可定位、可直接编辑的局部计算。它先设计因果干预(causal tracing):破坏并逐步恢复中间隐状态,识别出对正确事实预测起决定作用的神经元激活,揭示在处理主语 token 时中层前馈(MLP)模块承担关键的中介存储角色。为验证这些计算即对应事实回忆,作者把该 MLP 层视为线性关联记忆,提出秩一模型编辑(ROME):在保持其它键值映射不变的约束下,求解一个秩一权重更新,把(主语键→新属性值)的关联直接写入前馈权重,从而在不重训、不外挂检索的前提下修改单条事实,是一种直接操控计算机制的自修改记忆形式。", "evaluation": "abstract 指出 ROME 在标准零样本关系抽取(zsRE)编辑任务上有效,与既有方法相当;为做更敏感的评估,作者进一步构造 CounterFact 反事实断言数据集,ROME 在其上同时保持特异性(不误伤无关事实)与泛化性(改写措辞仍成立),而其它编辑方法往往顾此失彼、只能兼顾其一。", "mainFinding": "事实知识对应可定位、可直接编辑的局部计算,中层前馈模块承担关键存储角色;参数化编辑是一种直接操控计算机制的自修改记忆形式。", "limitations": "一次仅编辑单条关联,批量更新不适用;编辑可能破坏相关知识的一致性,副作用难以完全约束。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-memit"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2202.05262"}], "citation": "ROME, NeurIPS 2022."},
-  {"id": "memory-rf-memit", "page": "memory", "title": "Mass-Editing Memory in a Transformer", "shortTitle": "MEMIT", "category": "memory-reflect", "maturity": "mature", "score": 0.9, "year": 2022, "venue": "ICLR 2023", "authors": "Kevin Meng et al.", "methodFamily": "参数化批量知识编辑", "tags": ["知识编辑", "批量编辑", "记忆更新"], "scores": {"clarity": 0.88, "evidence": 0.9, "reproducibility": 0.9, "adoption": 0.88, "selfEvolution": 0.75}, "summary": "在多个关键 MLP 层直接更新权重,一次性向 Transformer 写入上千条事实关联。", "methodCore": "MEMIT 是 ROME 的规模化后继工作。既有模型编辑多局限于更新单条关联,ROME 只在单个中层做秩一编辑,难以承载大量新知识;MEMIT 则针对直接向语言模型写入大量记忆的现实需求,把因果追踪识别出的一系列关键前馈(MLP)层作为共同的存储介质,把待写入的大批(主语键,属性值)关联分摊到这些层上。它通过求解闭式的权重更新,在满足新关联的同时约束对既有映射的扰动,从而把成千上万条事实一次性写入模型参数,而非逐条编辑,支持大规模替换过时信息或增补专门知识。这使参数化记忆的批量更新从少数关联扩展到工程可用的规模,是可扩展的自修改参数记忆实现,为持续维护模型知识提供了直接、可控的手段。", "evaluation": "abstract 明确 MEMIT 可在 GPT-J(6B)与 GPT-NeoX(20B)上扩展到一次编辑上千条关联,规模超越此前工作若干数量级(orders of magnitude);实验验证了大批量直接更新的可行性,表明批量写入并未使编辑质量随规模明显崩塌。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "参数化记忆可被大规模、直接、可控地批量更新,为持续替换过时知识提供了工程化路径,是自修改记忆迈向可扩展实现的关键一步。这为自演化智能体的记忆设计提供了有价值的经验证据。", "limitations": "极大批量编辑仍可能累积副作用与遗忘;编辑后知识的时序一致性与冲突管理未被完全解决。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-mem0", "memory-rf-rome"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2210.07229"}], "citation": "MEMIT, ICLR 2023."},
-  {"id": "memory-rf-memoryllm", "page": "memory", "title": "MemoryLLM: Towards Self-Updatable Large Language Models", "shortTitle": "MemoryLLM", "category": "memory-reflect", "maturity": "growing", "score": 0.84, "year": 2024, "venue": "ICML 2024", "authors": "Yu Wang et al.", "methodFamily": "自更新参数化记忆池", "tags": ["自更新", "记忆池", "受控遗忘"], "scores": {"clarity": 0.84, "evidence": 0.85, "reproducibility": 0.78, "adoption": 0.7, "selfEvolution": 0.9}, "summary": "在 Transformer 潜空间内置固定大小记忆池,通过自更新机制吸收新知识并逐步淡出旧知识。", "methodCore": "MemoryLLM 针对现有 LLM 部署后保持静态、难以注入新知识的问题,目标是构建包含相当比例可自更新参数的模型。它由一个 Transformer 主干与嵌入其潜空间的固定大小记忆池组成,记忆以隐向量形式的记忆 token 存在。生成阶段,主干隐状态对记忆 token 做注意力,把已存知识引入当前推理;自更新阶段,模型把新输入的隐状态与部分记忆拼接、经主干产出新的记忆 token,用它们替换池中一部分旧记忆,把新知识逐层向下传播。由于每次只替换一部分而非全部记忆,早先注入的知识随多次更新被渐进稀释,实现受控遗忘,使模型部署后能高效吸收新知识并长期记住此前注入的内容,无需外部检索或全量重训。", "evaluation": "abstract 报告在模型编辑基准上验证其有效吸收新知识的能力;通过自定义设计的评估与长上下文基准验证其长期信息保持能力;且模型在经历近乎百万次(nearly a million)记忆更新后仍无任何性能退化迹象,充分展现自更新机制的稳定性与抗退化能力。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "让模型拥有大量可自更新参数(记忆池),可在部署后持续注入知识并受控淡出旧记忆,是把记忆内化为可自修改参数的代表性工作。这为自演化智能体的记忆设计提供了有价值的经验证据。", "limitations": "记忆池容量固定,限制长期知识积累上限;需专门预训练自更新机制,迁移到新模型成本较高。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2402.04624"}], "citation": "MemoryLLM, ICML 2024."},
-  {"id": "memory-rf-self", "page": "memory", "title": "SELF: Self-Evolution with Language Feedback", "shortTitle": "SELF", "category": "memory-reflect", "maturity": "growing", "score": 0.82, "year": 2023, "venue": "arXiv 2023 (ICLR'24 投稿)", "authors": "Jianqiao Lu et al.", "methodFamily": "元技能自演化训练", "tags": ["自演化", "元技能", "自训练"], "scores": {"clarity": 0.82, "evidence": 0.82, "reproducibility": 0.72, "adoption": 0.68, "selfEvolution": 0.93}, "summary": "先习得自反馈与自精炼元技能,再自生成并精炼数据用于迭代自训练,实现无人工干预的持续进化。", "methodCore": "SELF(Self-Evolution with Language Feedback)使 LLM 能像人类学习那样通过自我反思自我改进,把进化拆成两步。第一步是元技能学习:用少量带语言反馈与精炼示范的数据,赋予模型两项核心元技能——对自身回复给出语言反馈的自反馈能力,以及据反馈改写回复的自精炼能力。第二步进入迭代式自演化循环:面向大量无标注指令,模型自主生成初始回复,再经自反馈与自精炼增强质量,随后用这些增强后的数据对自身做微调,逐轮渐进提升。多轮迭代中数据质量与模型能力交替上升;此外,SELF 框架还能在推理阶段应用自精炼进一步提高回复质量,全程无需人类干预,把外显的反思能力沉淀进参数,推动模型从被动接收者转变为主动的自我发展参与者。", "evaluation": "abstract 表示在数学与通用任务上的实验证明 SELF 能在无人类干预下增强 LLM 能力,自演化迭代持续提升内在表现,并显示推理阶段的自精炼可进一步改善输出质量,验证元技能学习加迭代自训练通路的可行性,自生成数据质量与模型能力交互式共同上升。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "自反馈/自精炼元技能加迭代自训练可构成自主模型进化通路,模拟人类自驱学习,把反思能力沉淀为可迭代训练的元技能。这为自演化智能体的记忆设计提供了有价值的经验证据。", "limitations": "自生成数据质量控制困难,存在误差累积风险;迭代收敛性与能力上限缺乏充分的理论刻画。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-reasoningbank"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2310.00533"}], "citation": "SELF, arXiv 2023 (ICLR'24 投稿)."},
-  {"id": "memory-rf-voyager", "page": "memory", "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models", "shortTitle": "Voyager", "category": "memory-reflect", "maturity": "mature", "score": 0.9, "year": 2023, "venue": "TMLR 2024", "authors": "Guanzhi Wang et al.", "methodFamily": "技能库终身学习", "tags": ["技能库", "终身学习", "自验证"], "scores": {"clarity": 0.9, "evidence": 0.88, "reproducibility": 0.85, "adoption": 0.9, "selfEvolution": 0.92}, "summary": "在 Minecraft 中通过自动课程、可增长的可执行代码技能库与迭代提示实现无监督终身学习。", "methodCore": "Voyager 是首个 LLM 驱动的开放式具身终身学习智能体,在 Minecraft 中无人类干预地持续探索、习得多样技能并做出新发现,由三个协同组件构成。自动课程根据智能体当前状态最大化探索,提出难度递增的新任务驱动持续学习;可不断增长的技能库把每次学到的复杂行为写成可执行代码程序,建立索引以存储与检索,面对新任务时检索相关技能组合复用,使技能在时间上可延展、可解释、可组合,快速复利式增强能力并缓解灾难性遗忘;新的迭代提示机制综合环境反馈、执行错误与 LLM 自验证结果,循环修正生成的程序直至通过。Voyager 通过黑盒查询与 GPT-4 交互,全程绕过模型参数微调,是把技能存为可检索、可复用、可组合代码的程序化记忆范式。", "evaluation": "abstract 报告在 Minecraft 中展现强上下文终身学习能力,相较此前 SOTA(如 ReAct、Reflexion、AutoGPT):获得独特物品数多 3.3 倍、行进距离长 2.3 倍、解锁关键科技树里程碑快达 15.3 倍;且能把已学技能库迁移到全新 Minecraft 世界从零解决新任务,而其它技术难以泛化。", "mainFinding": "把技能存为可检索、可复用、可组合的代码是终身学习的有效记忆形态;不断增长的程序化技能库作为记忆持续复利式增强能力并缓解灾难性遗忘。", "limitations": "依赖 GPT-4 且每任务多轮迭代成本高;技能正确性依赖自验证,错误技能可能污染库并被复用。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.16291"}], "citation": "Voyager, TMLR 2024."},
-  {"id": "memory-rf-tim", "page": "memory", "title": "Think-in-Memory: Recalling and Post-thinking Enable LLMs with Long-Term Memory", "shortTitle": "TiM", "category": "memory-reflect", "maturity": "growing", "score": 0.8, "year": 2023, "venue": "arXiv 2023", "authors": "Lei Liu et al.", "methodFamily": "思维演化记忆", "tags": ["思维记忆", "插入/遗忘/合并", "长期对话"], "scores": {"clarity": 0.82, "evidence": 0.78, "reproducibility": 0.72, "adoption": 0.68, "selfEvolution": 0.85}, "summary": "存储历史思维而非原始历史,回复前召回、回复后再思考并以插入/遗忘/合并演化记忆。", "methodCore": "TiM(Think-in-Memory)针对记忆增强 LLM 在长期交互中反复对同一历史做召回-推理、易产生偏颇思维与前后不一致的问题,提出存储处理后的思维而非原始历史。它沿对话流维护一份不断演化的记忆:每次生成回复前,先从记忆中召回与当前问题相关的思维;生成回复后进入 post-think 阶段,把历史思维与新产生的思维整合、更新回记忆。由此把 post-thinking 的思维直接存为历史,消除重复推理带来的不一致偏差。记忆的组织被形式化为三类基本可组合操作——insert 插入新思维、forget 遗忘过时或错误思维、merge 合并重复或相关思维,支持思维的动态更新与演化;并引入局部敏感哈希(LSH)对长期对话实现高效检索。", "evaluation": "abstract 报告在覆盖广泛话题的真实与模拟对话上做了定性与定量实验,结果表明为既有 LLM 装配 TiM 能显著增强其在长期交互中生成回复的表现;因直接复用已存思维而消除了重复召回-推理带来的不一致偏差,并验证了 LSH 检索在长期对话下的高效性。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "存储处理后的思维并显式支持插入、遗忘与合并操作,避免了重复推理导致的不一致;把记忆更新形式化为可组合操作是其重要贡献。这为自演化智能体的记忆设计提供了有价值的经验证据。", "limitations": "思维抽取质量依赖基座模型;遗忘/合并策略较启发式,冲突消解不够系统,可能误删有效思维。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2311.08719"}], "citation": "TiM, arXiv 2023."},
-  {"id": "memory-rf-memorybank", "page": "memory", "title": "MemoryBank: Enhancing Large Language Models with Long-Term Memory", "shortTitle": "MemoryBank", "category": "memory-reflect", "maturity": "growing", "score": 0.8, "year": 2023, "venue": "AAAI 2024", "authors": "Wanjun Zhong et al.", "methodFamily": "遗忘曲线记忆更新", "tags": ["长期记忆", "艾宾浩斯遗忘", "个性适应"], "scores": {"clarity": 0.84, "evidence": 0.78, "reproducibility": 0.75, "adoption": 0.75, "selfEvolution": 0.8}, "summary": "借艾宾浩斯遗忘曲线随时间与重要性遗忘或强化记忆,持续演化并适应用户个性。", "methodCore": "MemoryBank 为 LLM 提供一套面向长期交互的记忆机制,具备三种能力:按需召回与当前对话相关的过往记忆、通过持续的记忆更新让记忆不断演化、综合历史交互理解并适应用户的性格与偏好。其核心创新是受心理学艾宾浩斯遗忘曲线(Ebbinghaus Forgetting Curve)启发的记忆更新机制:每条记忆随时间自然衰减,但被再次提及或访问时得到强化,系统据记忆的存留时间与相对重要性动态决定遗忘或巩固,从而模拟拟人化的、有选择的记忆行为,让 AI 既能淡出琐碎信息又能牢记关键事件,并据此逐步刻画用户画像。该机制通用,可兼容 ChatGPT 等闭源模型与 ChatGLM 等开源模型。", "evaluation": "abstract 描述作者据此构建长期 AI 伴侣聊天机器人 SiliconFriend,并用心理对话进一步微调以增强共情。评测含真实用户对话的定性分析与模拟对话的定量分析(由 ChatGPT 扮演多样性格用户生成长期对话),结果显示 SiliconFriend 具备强长期陪伴能力,能共情回复、召回相关记忆并理解用户个性。", "mainFinding": "把心理学艾宾浩斯遗忘曲线引入记忆更新,使 AI 能有选择地保留与淡出记忆;遗忘作为主动的记忆演化机制在长期陪伴交互中具重要价值。", "limitations": "遗忘曲线参数较启发式,缺乏对遗忘正确性的定量评估;主要在对话陪伴场景验证,泛化性待考。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-mem0"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.10250"}], "citation": "MemoryBank, AAAI 2024."},
-  {"id": "memory-rf-mem0", "page": "memory", "title": "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory", "shortTitle": "Mem0", "category": "memory-reflect", "maturity": "growing", "score": 0.83, "year": 2025, "venue": "ECAI 2025", "authors": "Prateek Chhikara et al.", "methodFamily": "动态记忆抽取更新", "tags": ["长期记忆", "记忆更新", "图记忆"], "scores": {"clarity": 0.86, "evidence": 0.84, "reproducibility": 0.8, "adoption": 0.85, "selfEvolution": 0.82}, "summary": "动态抽取、整合与检索对话关键信息,并以图记忆变体建模元素间关系维持长期一致性。", "methodCore": "Mem0 是一套面向生产、以记忆为中心的可扩展架构,专门应对固定上下文窗口难以维持长时多会话对话一致性的问题。它把记忆作为持续维护的动态资产而非只追加的日志:从进行中的对话里动态抽取显著信息,并做整合处理——与已有记忆比对后进行更新、合并或删除,以消解冲突、去除冗余,从而突破固定上下文窗口的限制,构成抽取-整合-检索的闭环。在此基础上进一步提出增强变体,利用基于图(graph-based)的记忆表示捕捉会话元素之间复杂的关系结构,支持关系型的存储与检索,使跨会话的单跳、时序、多跳与开放域问答更易保持一致。整体强调结构化、持久化的记忆机制而非向量库式的记忆堆叠,兼顾先进推理能力与实际部署约束。", "evaluation": "abstract 报告在 LOCOMO 基准上系统对比六类基线(记忆增强系统、不同分块与 k 值的 RAG、全上下文、开源记忆方案、专有模型、专用记忆平台)。以 LLM-as-a-Judge 衡量,Mem0 较 OpenAI 提升 26% 相对指标,图记忆变体再高约 2%;同时 p95 延迟降低 91%、token 成本节省 90% 以上。", "mainFinding": "生产级长期记忆需要动态抽取-整合-检索的闭环与结构化更新,才能在多轮多会话中兼顾一致性与效率;记忆更新是长期一致性的关键。", "limitations": "抽取/更新依赖 LLM 判断,可能引入错误或冲突;评测主要集中于对话一致性场景,任务多样性有限。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-memit", "memory-rf-memorybank"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2504.19413"}], "citation": "Mem0, ECAI 2025."},
-  {"id": "memory-rf-knowledge-unlearning", "page": "memory", "title": "Knowledge Unlearning for Mitigating Privacy Risks in Language Models", "shortTitle": "Knowledge Unlearning", "category": "memory-reflect", "maturity": "growing", "score": 0.8, "year": 2022, "venue": "ACL 2023", "authors": "Joel Jang et al.", "methodFamily": "参数化知识遗忘", "tags": ["知识遗忘", "隐私", "梯度上升"], "scores": {"clarity": 0.86, "evidence": 0.84, "reproducibility": 0.82, "adoption": 0.7, "selfEvolution": 0.7}, "summary": "通过对目标序列做梯度上升实现事后知识遗忘,高效地从模型参数中移除隐私信息。", "methodCore": "该工作提出知识遗忘(knowledge unlearning)作为事后降低语言模型隐私风险的轻量替代方法,不同于以往需重训底座模型的数据预处理与差分隐私方法。其核心操作出人意料地简单:对需要被遗忘的目标 token 序列执行梯度上升,即最大化其语言建模损失,使模型对这些序列的记忆被主动擦除;该操作直接作用于参数,无需访问全部训练数据或从头重训,对较大模型几乎不损害通用语言建模性能,少数迭代下有时甚至提升。作者还系统研究遗忘策略:发现按序逐批的顺序遗忘优于一次性遗忘全部数据,且遗忘的难易高度取决于被遗忘数据所属领域,为可控的参数化遗忘提供经验准则,是支撑冲突消解与隐私合规的自修改记忆一环。", "evaluation": "abstract 表示实验以抽取攻击(extraction attack)成功可能性量化隐私风险,并与已知能缓解隐私风险的数据预处理方法及解码方法对比;结果显示在事先已知易受攻击数据的场景下,知识遗忘提供更强的经验隐私保证,同时比这些替代方案更高效、更鲁棒,少数迭代即可完成。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "无需重训即可高效、鲁棒地从参数记忆中移除特定知识;主动遗忘是自修改记忆的重要一环,支撑记忆冲突消解与隐私合规。这为自演化智能体的记忆设计提供了有价值的经验证据。", "limitations": "梯度上升可能损伤相邻能力;遗忘的彻底性与对模型整体性能的副作用需权衡,难以精准限定影响范围。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2210.01504"}], "citation": "Knowledge Unlearning, ACL 2023."},
-  {"id": "memory-rf-critic", "page": "memory", "title": "CRITIC: Large Language Models Can Self-Correct with Tool-Interactive Critiquing", "shortTitle": "CRITIC", "category": "memory-reflect", "maturity": "growing", "score": 0.82, "year": 2023, "venue": "ICLR 2024", "authors": "Zhibin Gou et al.", "methodFamily": "工具交互式自我批判", "tags": ["自我纠错", "工具反馈", "批判-修正"], "scores": {"clarity": 0.86, "evidence": 0.84, "reproducibility": 0.82, "adoption": 0.78, "selfEvolution": 0.7}, "summary": "LLM 借助外部工具验证自身输出生成批判,再据批判迭代修正,无需训练。", "methodCore": "CRITIC 让本质为黑盒的 LLM 模仿人类使用工具核对并修正内容的方式,实现自我校正,无需任何训练或额外模型。从模型的初始输出出发,框架调用与任务匹配的外部工具——如搜索引擎核实事实、代码解释器调试程序、计算器验算、毒性 API 检测有害内容——来评估输出的特定方面,把工具返回的证据组织成针对性的批判(critiques);随后模型基于该验证过程获得的反馈修正输出,再次验证,循环执行 verify→correct 直至满意。其关键在于把外部世界的客观信号引入自我改进过程,以外部锚定的反馈替代不可靠的纯自评,避免模型自评空转,凸显外部反馈在推动 LLM 持续自我改进中的核心作用。", "evaluation": "abstract 报告在自由形式问答、数学程序合成与毒性降低三类任务上的综合评测显示 CRITIC 持续提升 LLM 表现;研究进一步强调外部反馈对推动持续自我改进至关重要,去掉外部工具、仅靠模型自我验证时改进几乎消失甚至下降,凸显外部锚定信号不可替代。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "外部工具反馈对 LLM 的自我改进至关重要,单纯自我验证不可靠;反思若无外部锚定信号则易失真,对自演化记忆的可信度有警示意义。", "limitations": "依赖合适外部工具的可得性;对无法工具化验证的任务难以适用,且工具调用带来额外延迟与成本。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.11738"}], "citation": "CRITIC, ICLR 2024."},
-  {"id": "memory-rf-agent-r", "page": "memory", "title": "Agent-R: Training Language Model Agents to Reflect via Iterative Self-Training", "shortTitle": "Agent-R", "category": "memory-reflect", "maturity": "growing", "score": 0.83, "year": 2025, "venue": "arXiv 2025", "authors": "Siyu Yuan et al.", "methodFamily": "反思轨迹自训练", "tags": ["自我反思", "MCTS", "迭代自训练"], "scores": {"clarity": 0.84, "evidence": 0.84, "reproducibility": 0.76, "adoption": 0.66, "selfEvolution": 0.92}, "summary": "用 MCTS 从错误轨迹恢复正确轨迹构造修正样本,迭代自训练让智能体在线及时反思纠错。", "methodCore": "Agent-R 是一个迭代式自训练框架,让语言智能体能在推理过程中及时反思纠错,而非等一次 rollout 结束才靠正确性奖惩修正,同时解决步级批判数据昂贵难采的问题。方法分两阶段。首先是模型引导的批判轨迹构造:用蒙特卡洛树搜索(MCTS)探索,得到从错误轨迹恢复到正确路径的训练数据;关键是由 actor 模型自身识别失败轨迹中(其当前能力范围内的)首个出错步,从该点出发,与树中共享同一父节点的相邻正确路径拼接,构造出体现纠错过程的修正轨迹,使模型基于当前策略学习反思、提升学习效率。随后把修正轨迹与优良轨迹混合,对模型做迭代自训练,并探索纠错能力与数据构造的可扩展迭代提升,把及时反思内化为参数能力,还能避免陷入循环。", "evaluation": "abstract 报告在三个交互式环境上评测,Agent-R 有效使智能体纠正错误动作并避免陷入循环,较基线方法取得更优表现(+5.59%);研究发现其持续提升模型从错误中恢复的能力,并使错误修正发生得更及时、更早,而非等到整个 rollout 结束。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "把反思能力通过 MCTS 构造的修正轨迹蒸馏进模型参数,可实现在线及时纠错,把反思从推理时提示内化为可训练的参数能力。这为自演化智能体的记忆设计提供了有价值的经验证据。", "limitations": "MCTS 轨迹构造成本较高;及时纠错能力受 actor 识别首个错误步的准确度限制,识别偏差会削弱效果。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2501.11425"}], "citation": "Agent-R, arXiv 2025."},
-  {"id": "memory-rf-memoryr1", "page": "memory", "title": "Memory-R1: Enhancing Large Language Model Agents to Manage and Utilize Memories via Reinforcement Learning", "shortTitle": "Memory-R1", "category": "memory-reflect", "maturity": "exploring", "score": 0.83, "year": 2025, "venue": "arXiv 2025", "authors": "Sikuan Yan et al.", "methodFamily": "强化学习记忆管理", "tags": ["强化学习", "记忆操作", "记忆管理"], "scores": {"clarity": 0.86, "evidence": 0.84, "reproducibility": 0.76, "adoption": 0.7, "selfEvolution": 0.86}, "summary": "针对现有外部记忆库多为静态、启发式驱动的问题,用强化学习训练记忆管理器与回答智能体,让 LLM 自主决策记忆的增删改与检索利用,仅需极少监督即可自适应管理记忆。", "methodCore": "Memory-R1 针对现有外部记忆库多为静态、启发式驱动、缺乏学习式决策机制的问题,提出用强化学习赋予 LLM 主动管理与利用外部记忆的能力。框架含两个专职智能体:记忆管理器(Memory Manager)学习对记忆库执行结构化操作,包括 ADD、UPDATE、DELETE 与 NOOP,决定何时存、何时改、何时删、何时不动;回答智能体(Answer Agent)先从记忆中预筛相关条目,再在其上推理作答。两者均以结果驱动的强化学习微调,采用 PPO 与 GRPO,仅用最终问答正确与否作为奖励,实现最小监督下的自适应记忆管理,把记忆决策从人工启发式规则升级为可学习的策略,克服 LLM 本身无状态、受限上下文窗口的长程推理瓶颈。", "evaluation": "abstract 明确仅用 152 条训练 QA 对训练,Memory-R1 即超越多个强基线,并在多种问题类型、三个基准(LoCoMo、MSC、LongMemEval)以及 3B 到 14B 多种模型规模上稳定泛化,展示出突出的样本高效性与跨设置的鲁棒性。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "用结果驱动的 RL 让智能体自主学会何时增删改查记忆,仅 152 条训练样本即超越静态启发式管线,并跨问题类型、三基准与多种模型规模稳定泛化。", "limitations": "奖励仅来自问答正确性,可能忽视记忆本身质量;记忆管理器与回答智能体协同的训练稳定性仍待考察。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2508.19828"}], "citation": "Memory-R1, arXiv 2025.", "figures": [{"src": "figures/memory-rf-memoryr1.png", "caption": "Memory-R1 与朴素 LLM 记忆系统对比:多会话场景下,RL 训练的记忆管理器能正确增删改记忆并召回关键事实,避免朴素方案的信息冲突与遗漏。"}]},
-  {"id": "memory-rf-memalpha", "page": "memory", "title": "Mem-α: Learning Memory Construction via Reinforcement Learning", "shortTitle": "Mem-α", "category": "memory-reflect", "maturity": "exploring", "score": 0.82, "year": 2025, "venue": "arXiv 2025", "authors": "Yu Wang et al.", "methodFamily": "强化学习记忆构建", "tags": ["强化学习", "记忆构建", "长上下文泛化"], "scores": {"clarity": 0.84, "evidence": 0.83, "reproducibility": 0.74, "adoption": 0.66, "selfEvolution": 0.87}, "summary": "针对模型不知该存什么、如何组织、何时更新的问题,用强化学习训练智能体学会抽取、结构化与更新复杂记忆系统,以下游问答准确率作奖励端到端优化记忆构建。", "methodCore": "Mem-α 指出现有记忆增强智能体多依赖预设指令与工具做更新,当记忆系统变复杂时模型往往判断不出该存什么、如何组织、何时更新,导致构建次优与信息丢失。为此提出一个强化学习框架,训练智能体通过与信息流的交互和反馈学会有效管理复杂记忆系统。作者构建了覆盖多样多轮交互模式、并配套评估问题的专用训练集;训练时智能体顺序处理信息块,学习抽取并存储相关内容,再更新记忆系统,奖励信号直接来自对完整交互历史的下游问答准确率,从而端到端地优化记忆构建。为验证框架,他们设计了一套包含核心(core)、情景(episodic)与语义(semantic)三类组件、并配多种记忆操作工具的记忆架构,让 RL 直接优化记忆的抽取与结构化行为。", "evaluation": "abstract 报告实证评测显示 Mem-α 相较现有记忆增强智能体基线取得显著提升;尤为突出的是,尽管训练实例最大长度仅 30k token,智能体却能泛化到超过 400k token 的序列,达训练长度的 13 倍以上,凸显该 RL 框架的鲁棒性与长上下文外推能力。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "把记忆构建当作 RL 优化目标可让智能体学会更优的抽取与结构化;虽仅在 30k token 内训练,却能强泛化到超 400k token、达训练长度 13 倍以上的序列。", "limitations": "依赖专门构建的多轮交互训练集与核心/情景/语义多组件记忆架构;奖励仅由下游问答准确率驱动,信号较单一。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2509.25911"}], "citation": "Mem-α, arXiv 2025.", "figures": [{"src": "figures/memory-rf-memalpha.png", "caption": "Mem-α 训练示意:用强化学习教会智能体在交互中自主选择记忆工具(写入/更新/检索),把记忆构造建模为可学习的策略。"}]},
-  {"id": "memory-rf-arcmemo", "page": "memory", "title": "ArcMemo: Abstract Reasoning Composition with Lifelong LLM Memory", "shortTitle": "ArcMemo", "category": "memory-reflect", "maturity": "exploring", "score": 0.81, "year": 2025, "venue": "arXiv 2025", "authors": "Matthew Ho et al.", "methodFamily": "概念级终身记忆", "tags": ["概念记忆", "抽象推理", "测试时学习"], "scores": {"clarity": 0.85, "evidence": 0.82, "reproducibility": 0.76, "adoption": 0.64, "selfEvolution": 0.85}, "summary": "针对推理轨迹发现的模式在上下文重置后被丢弃的问题,把轨迹蒸馏为概念级可复用抽象存入终身记忆,新查询按需检索整合,实现免权重更新的测试时持续学习。", "methodCore": "ArcMemo 针对推理时扩展下模型在长推理轨迹中发现的模式与洞见,一旦上下文窗口为新查询重置便被立即丢弃的问题,主张用外部记忆持久化这些发现,并把它做得更可复用、可扩展。它从实例级记忆(精确的查询/回复对,或与原题上下文紧耦合的摘要)转向概念级记忆:从解题轨迹中蒸馏出可复用、模块化、以自然语言表达的抽象概念。面对新查询时,系统选择性检索相关概念并整合进提示,从而在不更新权重的前提下实现测试时的持续学习。方法引入了从 rollout 中抽象要点的新策略,以及为新查询检索条目的机制,促进复用并让记忆随经验不断扩展,把零散经验沉淀为可组合的推理构件,构成一种自我改进。", "evaluation": "abstract 报告在强调组合泛化与抽象推理的 ARC-AGI 基准上评测,较强的无记忆基线取得 7.5% 相对提升,且性能随推理算力持续扩展;抽象概念是最稳定的记忆设计,在所有测试算力档位均超越基线;测试时动态更新记忆优于固定设置,支持累积与抽象带来自我改进的假设。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "概念级抽象记忆比实例级更可复用,在 ARC-AGI 上带来约 7.5% 相对提升;配合测试时动态更新可持续自我改进,并随推理算力持续扩展。", "limitations": "主要在 ARC-AGI 单一抽象推理基准验证;概念抽取与检索质量依赖基座能力,跨域迁移性尚未充分检验。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2509.04439"}], "citation": "ArcMemo, arXiv 2025.", "figures": [{"src": "figures/memory-rf-arcmemo.png", "caption": "实例级记忆 vs 抽象概念记忆:ArcMemo 将 ARC-AGI 任务中反复出现的推理模式抽象为可组合的终身概念,而非存储具体实例。"}]},
-  {"id": "memory-rf-memgen", "page": "memory", "title": "MemGen: Weaving Generative Latent Memory for Self-Evolving Agents", "shortTitle": "MemGen", "category": "memory-reflect", "maturity": "exploring", "score": 0.82, "year": 2025, "venue": "arXiv 2025", "authors": "Guibin Zhang et al.", "methodFamily": "生成式潜在记忆", "tags": ["潜在记忆", "自演化", "推理交织"], "scores": {"clarity": 0.83, "evidence": 0.84, "reproducibility": 0.72, "adoption": 0.64, "selfEvolution": 0.9}, "summary": "认为参数记忆与检索记忆都未能捕捉推理与记忆的流动交织,以记忆触发器与记忆编织器动态生成潜在 token 记忆注入推理,把记忆与认知交织成类人的认知闭环。", "methodCore": "MemGen 认为现有记忆范式各有局限:参数记忆强行改动模型权重,检索式记忆把经验外化为结构化数据库,二者都未能捕捉人类认知中推理与记忆流动交织的特性。为弥合此缺口,它提出一个动态生成式记忆框架,赋予智能体类人的认知机能,由两部分组成:记忆触发器(memory trigger)监控智能体的推理状态,判定何时需要显式调用记忆;记忆编织器(memory weaver)以智能体当前状态为激励,构造一段潜在 token 序列作为机器原生记忆(machine-native memory),注入并丰富其推理。如此,记忆可在推理全过程被随时回忆与增强,形成记忆与认知紧密交织的循环,而非事前检索再拼接,推动更自然的机器认知形态。", "evaluation": "abstract 报告在八个基准上广泛实验,MemGen 相较 ExpeL、AWM 等领先外部记忆系统最高提升约 38.22%,超过 GRPO 最高约 13.44%,并展现强跨域泛化;更值得注意的是,在无显式监督下模型自发演化出规划记忆、程序记忆与工作记忆等类人记忆机能,呈现走向更自然机器认知的迹象。", "mainFinding": "把记忆生成为潜在 token 并与推理交织,能超越外部记忆系统,并在无监督下自发涌现出规划、程序、工作记忆等类人机能,趋向更自然的机器认知。", "limitations": "潜在 token 记忆可解释性弱,难以审计与调试;涌现机能的稳定性与可控性仍待进一步研究。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-expel", "memory-rf-awm"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2509.24704"}], "citation": "MemGen, arXiv 2025."},
-  {"id": "memory-rf-agentevolver", "page": "memory", "title": "AgentEvolver: Towards Efficient Self-Evolving Agent System", "shortTitle": "AgentEvolver", "category": "memory-reflect", "maturity": "exploring", "score": 0.79, "year": 2025, "venue": "arXiv 2025", "authors": "Yunpeng Zhai et al.", "methodFamily": "自演化智能体系统", "tags": ["自演化", "自主探索", "样本效率"], "scores": {"clarity": 0.82, "evidence": 0.78, "reproducibility": 0.7, "adoption": 0.62, "selfEvolution": 0.9}, "summary": "针对智能体开发依赖人工数据集与低效随机探索的问题,以自提问、自导航、自归因三机制驱动智能体自主学习,降低数据构建成本并提升探索效率与样本利用率。", "methodCore": "AgentEvolver 针对当前智能体开发依赖人工构建任务数据集与含大量随机探索的 RL 管线、导致数据构建成本高、探索效率低、样本利用差的问题,提出一个借助 LLM 语义理解与推理能力驱动自主学习的自演化系统。它引入三个协同机制:自提问(self-questioning)在陌生环境中以好奇心驱动地生成任务,减少对手工数据集的依赖;自导航(self-navigating)通过经验复用与混合策略引导提升探索效率;自归因(self-attributing)依据轨迹中各状态与动作的贡献分配差异化奖励,提高样本效率。三者统一进一个框架,使智能体能可扩展、低成本地持续提升能力,把任务生成、探索与信用分配都交由 LLM 自驱完成。", "evaluation": "abstract 表示初步实验(preliminary experiments)表明,相较传统基于 RL 的基线,AgentEvolver 实现了更高效的探索、更好的样本利用率与更快的适应速度,验证自提问、自导航、自归因三机制在降低数据构建成本与提升整体学习效率上的协同作用与可扩展性。", "mainFinding": "把任务生成、探索与信用分配都交给 LLM 自驱的三机制,可在少人工数据下实现更高效探索、更好样本利用与更快适应,推动可扩展的智能体自演化。", "limitations": "仅报告初步实验,规模化与稳定性证据有限;三机制的相互作用与最优配置尚缺深入分析。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2511.10395"}], "citation": "AgentEvolver, arXiv 2025.", "figures": [{"src": "figures/memory-rf-agentevolver.png", "caption": "AgentEvolver 在 AppWorld 与 BFCL-v3 上的性能对比:自演化机制显著提升智能体任务成功率,验证了经验驱动的自我改进效率。"}]},
-  {"id": "memory-rf-mem2evolve", "page": "memory", "title": "Mem2Evolve: Towards Self-Evolving Agents via Co-Evolutionary Capability Expansion and Experience Distillation", "shortTitle": "Mem2Evolve", "category": "memory-reflect", "maturity": "exploring", "score": 0.8, "year": 2026, "venue": "arXiv 2026", "authors": "Zihao Cheng et al.", "methodFamily": "经验与资产协同演化", "tags": ["协同演化", "经验记忆", "资产记忆"], "scores": {"clarity": 0.82, "evidence": 0.84, "reproducibility": 0.7, "adoption": 0.6, "selfEvolution": 0.9}, "summary": "针对经验积累与资产创造两条演化路径被割裂的问题,让经验记忆与资产记忆协同演化:用积累经验引导动态创造工具或专家智能体,并在使用中同步获取新经验。", "methodCore": "Mem2Evolve 指出现有自演化框架把两条进化路径割裂:仅靠积累经验会受限于人工预设的静态工具集,仅靠动态创造新资产(工具或专家智能体)又缺乏经验指导而从零生成,导致能力增长有限、演化不稳。为此提出能力扩展与经验蒸馏协同演化(co-evolutionary Capability Expansion and Experience Distillation)的新范式,落地为 Mem2Evolve,内含两个核心组件:经验记忆(Experience Memory)沉淀交互中蒸馏的经验,资产记忆(Asset Memory)保存动态创造的工具与专家智能体。框架用已积累经验引导资产的动态创造,扩展智能体能力空间,同时在使用新资产的过程中获取新经验回填经验记忆,使二者互相促进、共同进化,兼顾能力增长与演化稳定。", "evaluation": "abstract 报告在 6 类任务、8 个基准上广泛实验,Mem2Evolve 相较标准 LLM 提升 18.53%,相较仅靠经验演化的智能体提升 11.80%,相较仅靠资产创造演化的提升 6.46%,确立其为一个更有效且更稳定的自演化智能体框架。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "经验与资产两条演化路径协同互促,相较标准 LLM 提升 18.53%,显著优于仅靠经验或仅靠资产创造的单独路径,兼顾能力增长与演化稳定。", "limitations": "双记忆协同引入额外的系统复杂度;动态创造的资产质量仍高度依赖基座模型能力,弱基座下增益受限。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2604.10923"}], "citation": "Mem2Evolve, arXiv 2026."},
-  {"id": "memory-rf-expreflective", "page": "memory", "title": "Experiential Reflective Learning for Self-Improving LLM Agents", "shortTitle": "ERL", "category": "memory-reflect", "maturity": "exploring", "score": 0.79, "year": 2026, "venue": "arXiv 2026", "authors": "Marc-Antoine Allard et al.", "methodFamily": "经验反思启发式", "tags": ["反思", "启发式抽取", "环境适应"], "scores": {"clarity": 0.84, "evidence": 0.82, "reproducibility": 0.76, "adoption": 0.62, "selfEvolution": 0.85}, "summary": "针对智能体每次从零开始、不复用过往交互的问题,对单次任务轨迹与结果反思抽取可跨任务迁移的启发式,测试时选择性检索注入上下文以引导执行并实现自我改进。", "methodCore": "ERL(Experiential Reflective Learning)针对现有自主智能体难以适应专门环境、且不复用过往交互、每次都从零开始应对新任务的问题,提出一个简单的自我改进框架,通过经验学习实现快速环境适应。其核心是对任务轨迹与结果进行反思,从中生成启发式(heuristics)——可操作、可跨任务迁移的经验教训。测试时依据当前任务选择性检索相关启发式,注入智能体上下文以引导执行。方法强调从单次尝试(single-attempt)经验中提炼可迁移抽象,而非依赖多轮重试或大量示范;并通过系统消融揭示选择性检索的必要性,以及启发式相较少样本轨迹提示能提供更可迁移的抽象,是轻量、免权重更新的经验反思记忆范式。", "evaluation": "abstract 报告在 Gaia2 基准上,ERL 相较 ReAct 基线将成功率提升 7.8%,在任务完成可靠性上取得大幅增益,并超越先前的经验学习方法;系统消融显示选择性检索至关重要,且启发式相较少样本轨迹提示能提供更可迁移的抽象。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "对单次尝试经验反思抽取可迁移启发式并选择性检索,即在 Gaia2 上较 ReAct 提升 7.8%,实现有效且轻量的智能体自我改进。", "limitations": "主要在 Gaia2 单一基准验证;启发式质量与检索策略高度依赖基座模型,跨基准泛化尚待检验。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-reflexion", "memory-rf-expel"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2603.24639"}], "citation": "ERL, arXiv 2026."},
-  {"id": "memory-rf-expinternalize", "page": "memory", "title": "Rethinking Continual Experience Internalization for Self-Evolving LLM Agents", "shortTitle": "Experience Internalization", "category": "memory-reflect", "maturity": "exploring", "score": 0.81, "year": 2026, "venue": "arXiv 2026", "authors": "Jingwen Chen et al.", "methodFamily": "经验内化持续学习", "tags": ["经验内化", "持续学习", "能力坍缩"], "scores": {"clarity": 0.85, "evidence": 0.83, "reproducibility": 0.74, "adoption": 0.6, "selfEvolution": 0.86}, "summary": "把上下文经验转化为参数能力的经验内化在多轮学习下会出现能力坍缩,论文从经验粒度、注入模式与内化方式三个维度系统剖析,给出稳定可持续内化的简单配方。", "methodCore": "经验内化(experience internalization)把过往交互的上下文经验转化为可复用的参数能力,是 LLM 持续学习的有希望路径。作者发现先前工作多聚焦单轮迁移,而在多轮经验学习下现有方法会出现渐进式能力坍缩(progressive capability collapse)而非复利式提升。为诊断该失败,他们从三个关键维度系统考察:经验粒度上,原则级(principle-level)经验比实例级更持久,因它能把可迁移策略从轨迹特定细节中抽象出来;注入模式上,按步(step-wise)注入通过与中间决策状态对齐,显著优于全局注入,对长程工具使用尤为关键;内化方式上,在高质量教师轨迹上做离策略上下文蒸馏(off-policy context-distillation)比在策略蒸馏提供更稳定的训练信号,后者受限于对学生诱发的错误状态的局部修正。三点综合得到一个简单而稳健的内化配方。", "evaluation": "abstract 表明论文通过在经验粒度、注入模式、内化方式三个维度的对照分析与论证,验证原则级经验、按步注入与离策略上下文蒸馏各自的优势,证明该组合能带来稳定、可持续的经验内化,避免多轮迭代下的渐进式能力坍缩,为工程化自演化与持续学习 LLM 提供具体可操作的指导。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "原则级经验、按步注入与离策略上下文蒸馏三者结合,是避免多轮内化能力坍缩、实现稳定持续自演化的关键配方,为工程化提供明确指导。", "limitations": "侧重方法论剖析与配方总结,尚未在大规模长期部署与更多任务域中验证其能力上限与外推边界。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2606.04703"}], "citation": "Experience Internalization, arXiv 2026."},
-  {"id": "memory-rf-maa", "page": "memory", "title": "Marginal Advantage Accumulation for Memory-Driven Agent Self-Evolution", "shortTitle": "MAA", "category": "memory-reflect", "maturity": "exploring", "score": 0.8, "year": 2026, "venue": "arXiv 2026", "authors": "Mingyu Yang et al.", "methodFamily": "跨批次证据累积", "tags": ["轨迹蒸馏", "证据累积", "记忆操作评估"], "scores": {"clarity": 0.82, "evidence": 0.85, "reproducibility": 0.74, "adoption": 0.6, "selfEvolution": 0.85}, "summary": "针对批式轨迹蒸馏中同一记忆操作跨批次收到矛盾反馈的问题,跨批次累积记忆操作的边际优势带符号证据,区分稳定有效操作与偶然命中,作为后处理架构提升蒸馏质量。", "methodCore": "MAA 针对批式轨迹蒸馏(batch-style trace distillation)中同一记忆操作在不同批次可能收到相互矛盾反馈的问题:现有方法缺乏跨批次、操作级的证据累积机制,无法区分稳定有效的操作与偶然命中。论文把该需求形式化为两个结构条件——可对齐性(alignability)与可比较性(comparability),并提出边际优势累积(Marginal Advantage Accumulation, MAA)。MAA 构造差分信号使不同批次间的操作可比较,通过指数移动平均(EMA)为每个操作累积带符号(signed)的证据,并借助语义身份合并(semantic identity merging)确保跨批次的可追溯。它以后处理架构(post-processing architecture)的形式工作,不改动主训练流程,即可从噪声批次反馈中筛出真正稳健的记忆操作,提升蒸馏质量。", "evaluation": "abstract 报告作为后处理架构,MAA 在 4 个基准、4 个目标模型共 16 个设置中的 14 个取得最佳结果,持续超越现有批级蒸馏基线,并在多数设置下匹配或超过在线替代方案,同时把优化阶段的 token 消耗降低约 75%,兼顾效果与效率。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "跨批次累积操作级带符号证据可稳健区分有效记忆操作,后处理即在 16 个设置中 14 个取得最佳,并把优化阶段 token 消耗降低约 75%。", "limitations": "作为后处理依赖上游批式蒸馏产出的质量;语义身份合并的准确性直接影响跨批次证据累积的可靠性。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2606.20475"}], "citation": "MAA, arXiv 2026."},
-  {"id": "memory-rf-rsea", "page": "memory", "title": "Recursive Self-Evolving Agents via Held-Out Selection", "shortTitle": "RSEA", "category": "memory-reflect", "maturity": "exploring", "score": 0.81, "year": 2026, "venue": "arXiv 2026", "authors": "Michael Nguyen et al.", "methodFamily": "留出集守门自演化", "tags": ["递归自演化", "留出验证", "单调安全"], "scores": {"clarity": 0.84, "evidence": 0.85, "reproducibility": 0.76, "adoption": 0.62, "selfEvolution": 0.88}, "summary": "研究靠演化自然语言产物条件化冻结策略的自演化方法,维护命令式策略、可复用技能、程序化手册三层状态并逐代改写,仅在留出集不退化时提交,实现单调安全的递归自演化。", "methodCore": "RSEA 研究一类不更新权重、靠演化自然语言产物(反思、工作流、手册、备忘单或优化提示)来条件化冻结策略的自演化方法,并指出它们常只在其擅长的单一基准上报喜。它提出递归自演化智能体(Recursive Self-Evolving Agent),携带一份紧凑的三层自然语言状态:命令式策略(imperative strategy)、可复用技能(reusable skills)与程序化手册(procedural playbook)。跨代演化时,RSEA 从自身轨迹重写全部三层,但只有当候选在一个不相交的留出划分(held-out split)上不发生退化时才提交,采用严格的 keep-better 守门规则;若演化后的上下文会造成损害,则回退到 vanilla ReAct,从而保证递归自演化的单调安全(monotone-safe)。", "evaluation": "abstract 报告在 ALFWorld、GAIA、τ-bench、WebShop 四基准与 ReAct、Reflexion、GEPA、AWM、ACE、Dynamic Cheatsheet 六基线上同骨干对比:RSEA 是 ALFWorld 上最强单遍方法,达 69.3%(ReAct 64.6%,McNemar p=0.015),带重试 79.4% 为最佳;而无守门的 Dynamic Cheatsheet 在 WebShop 由 0.43 崩至 0.14。", "mainFinding": "没有单一自然语言产物能通吃所有基准;严格的留出集守门是使递归自演化单调安全、绝不在任一基准上显著劣于基线的关键设计。这为自演化智能体的记忆设计提供了有价值的经验证据。", "limitations": "留出集守门需额外评估开销;不同任务上最优产物形态各异,缺乏统一赢家,通用性受限。该方向的普适性与长期部署下的稳健性仍有待更充分验证。", "related": ["memory-rf-awm", "memory-rf-reflexion"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2606.28374"}], "citation": "RSEA, arXiv 2026."},
-  {"id": "memory-rf-agemem", "page": "memory", "title": "Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for Large Language Model Agents", "shortTitle": "AgeMem", "category": "memory-reflect", "maturity": "exploring", "score": 0.82, "year": 2026, "venue": "arXiv 2026", "authors": "Yi Yu et al.", "methodFamily": "统一长短期记忆管理", "tags": ["长短期记忆", "强化学习", "工具化操作"], "scores": {"clarity": 0.84, "evidence": 0.84, "reproducibility": 0.72, "adoption": 0.62, "selfEvolution": 0.86}, "summary": "针对长短期记忆被当作分离组件、依赖启发式的问题,把长短期记忆管理统一进智能体策略,以工具化记忆操作与三阶段强化学习端到端优化记忆的读写与整理。", "methodCore": "AgeMem(Agentic Memory)针对现有方法把长期记忆(LTM)与短期记忆(STM)当作分离组件、依赖启发式或辅助控制器、从而限制适应性与端到端优化的问题,提出一个统一框架,把 LTM 与 STM 的管理直接整合进智能体的策略。它把记忆操作暴露为基于工具的动作(tool-based actions),使 LLM 智能体能自主决定何时以及存什么、检索、更新、摘要或丢弃信息,而非交由外部启发式或控制器。为训练这种统一行为,作者提出三阶段渐进式强化学习策略,并设计按步(step-wise)的 GRPO 来应对记忆操作引起的稀疏且不连续的奖励,从而在同一策略下端到端地协调长短期记忆的读、写与整理,突破有限上下文窗口对长程推理的限制。", "evaluation": "abstract 报告在五个长程基准上评测,AgeMem 在多种 LLM 骨干下均持续超越强记忆增强基线,取得更优的任务表现、更高质量的长期记忆以及更高效的上下文使用,验证了统一策略管理与三阶段渐进式 RL、按步 GRPO 的有效性。整体实验方向支持其核心设计假设,但绝对数值仅取自 abstract 明确报告者。", "mainFinding": "把长短期记忆的读写整理统一为策略内的工具动作并用分阶段 RL 训练,可端到端提升任务表现与记忆质量,并更高效地使用上下文。", "limitations": "三阶段 RL 与按步 GRPO 训练复杂、成本高;稀疏且不连续的记忆操作奖励下的训练稳定性仍需更多验证。", "related": ["memory-rf-memoryr1"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2601.01885"}], "citation": "AgeMem, arXiv 2026."},
-  {"id": "memory-wr-gitm", "page": "memory", "title": "Ghost in the Minecraft: Generally Capable Agents for Open-World Environments via LLMs with Text-based Knowledge and Memory", "shortTitle": "GITM", "category": "memory-skill", "maturity": "mature", "score": 0.8, "year": 2023, "venue": "arXiv 2023", "authors": "Xizhou Zhu et al.", "methodFamily": "文本知识记忆", "tags": ["Minecraft", "文本记忆", "行动分解", "可复用经验"], "scores": {"clarity": 0.84, "evidence": 0.8, "reproducibility": 0.72, "adoption": 0.74, "selfEvolution": 0.72}, "summary": "GITM 用文本化知识与记忆结合 LLM,在 Minecraft 中把成功的行动分解序列沉淀为可复用的参考经验。", "methodCore": "GITM 以 LLM 作为决策大脑,把开放世界的高层目标递归分解为一系列结构化子目标,再映射到一组预定义的 structured actions 加以执行,并借文本化的知识与常识引导规划,避免在稀疏奖励环境中从零探索。执行成功后,系统把有效的目标分解流程连同对应的执行动作序列以自然语言形式沉淀进文本记忆库,构成可按语义检索的参考经验;当后续遇到相似目标时,按相关性召回这些成功流程并注入提示,指导新一轮规划与控制。整个循环形成检索历史经验、复用成功流程、执行后回写新经验的闭环,把开放世界中的成功分解序列积累为可复用的技能知识。技能表征为纯自然语言文本而非参数,整套方法不做梯度更新或强化学习,仅需 CPU 即可运行,新颖之处在于用文本记忆替代 RL 控制器来实现长程任务的可迁移规划。", "evaluation": "在 Minecraft 上评测,覆盖 ObtainDiamond 等任务并考察对整个技术树的泛化。与基于强化学习的控制器对比,GITM 在 ObtainDiamond 上成功率相对提升 +47.5%,鲁棒性显著优于传统 RL 方案;且是首个采集到 Overworld 技术树全部物品的智能体。训练无需 GPU,单个 32 核 CPU 节点即可运行。", "mainFinding": "以文本记忆沉淀成功分解流程作为可复用技能,使 LLM 智能体在 Minecraft 首次解锁 Overworld 全技术树。", "limitations": "依赖环境的文本化交互接口;记忆为特定游戏经验,跨环境迁移能力受限。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.17144"}], "citation": "GITM, arXiv 2023."},
-  {"id": "memory-rt-jarvis-1", "page": "memory", "title": "JARVIS-1: Open-World Multi-task Agents with Memory-Augmented Multimodal Language Models", "shortTitle": "JARVIS-1", "category": "memory-skill", "maturity": "mature", "score": 0.81, "year": 2023, "venue": "IEEE TPAMI 2025", "authors": "Zihao Wang et al.", "methodFamily": "多模态经验记忆", "tags": ["多模态记忆", "计划检索", "自我改进", "长程规划"], "scores": {"clarity": 0.84, "evidence": 0.82, "reproducibility": 0.72, "adoption": 0.72, "selfEvolution": 0.7}, "summary": "JARVIS-1 用多模态记忆存储成功的多任务计划,检索历史经验以自我改进长程规划与控制。", "methodCore": "JARVIS-1 构建在预训练多模态语言模型之上,统一把视觉观测与人类文本指令映射为复杂计划,再交由目标条件化的底层控制器执行具身动作,覆盖任务理解、规划与控制全链路。它为智能体配备一个 multimodal memory,把成功完成任务的计划连同当时的多模态观测一并存入;面对新任务时,按情境与视觉状态的相似度检索历史成功计划,作为示例注入规划提示,使规划既利用预训练知识又利用真实生存经验,从而降低长程任务的探索代价。执行完成后新的成功经验回写记忆,形成检索、复用、回写的自我改进闭环,使智能体随游戏时间推进逐步提升多任务完成能力。技能以计划加多模态观测的检索式经验形式存储、不涉及参数更新,新颖之处在于把多模态记忆引入开放世界通用智能体,支持从短程到长程任务的持续改进。", "evaluation": "在 Minecraft 中评测,可用与人类相近的观测与控制空间完成 200 余项不同任务,从砍树等短程任务到获取钻石镐等长程任务。短程任务近乎完美;在经典的 ObtainDiamondPickaxe 长程任务上,可靠性达到当前最先进智能体的约 5 倍,并能完成更长时序、更具挑战的任务。", "mainFinding": "多模态记忆存放成功计划并按视觉情境检索复用,使开放世界长程任务可靠性达到 SOTA 的约 5 倍。", "limitations": "记忆检索质量决定复用效果;评测局限于 Minecraft,多模态记忆维护成本较高。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2311.05997"}], "citation": "JARVIS-1, IEEE TPAMI 2025."},
-  {"id": "memory-rt-synapse", "page": "memory", "title": "Synapse: Trajectory-as-Exemplar Prompting with Memory for Computer Control", "shortTitle": "Synapse", "category": "memory-skill", "maturity": "growing", "score": 0.78, "year": 2023, "venue": "ICLR 2024", "authors": "Longtao Zheng et al.", "methodFamily": "轨迹示例记忆", "tags": ["状态抽象", "轨迹示例", "相似度检索", "计算机控制"], "scores": {"clarity": 0.83, "evidence": 0.8, "reproducibility": 0.76, "adoption": 0.68, "selfEvolution": 0.55}, "summary": "Synapse 用状态抽象与完整轨迹作为示例,并将轨迹存入记忆按相似度检索,指导计算机控制任务。", "methodCore": "Synapse 针对计算机控制中原始状态冗长、单个网页即可占满上下文,以及现有示例(高层计划、多选题)无法表征完整轨迹、任务专用示例泛化差的问题,提出三个核心组件。其一 state abstraction,过滤原始状态中与任务无关的信息,压缩上下文以容纳更多示例;其二 trajectory-as-exemplar prompting,把由抽象状态与动作构成的完整交互轨迹作为示例提示 LLM,提升多步决策质量;其三 exemplar memory,把示例的向量嵌入存入记忆库,面对新任务时按相似度检索最相关的历史轨迹注入提示。这样成功轨迹被当作可检索的技能样例复用,兼顾上下文预算与示例相关性;技能表征为文本轨迹嵌入、无参数更新,靠 in-context learning 生效,新颖之处在于以完整轨迹而非片段作为示例并借相似度检索实现跨任务泛化。", "evaluation": "在标准任务套件 MiniWoB++ 与真实网站基准 Mind2Web 上评测。MiniWoB++ 上仅用 48 个任务的演示即在 64 个任务上达到 99.2% 平均成功率(相对提升 10%),并首次以 ICL 方式解出 book-flight 任务;Mind2Web 上平均步成功率相对此前最优提示方案提升 56%。", "mainFinding": "以完整成功轨迹为示例存入记忆并按相似度检索复用,显著提升计算机控制的多步决策与新任务泛化。", "limitations": "状态抽象需人工设计;轨迹示例随任务多样性增长,检索与上下文预算压力上升。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2306.07863"}], "citation": "Synapse, ICLR 2024."},
-  {"id": "memory-rt-skill-induction", "page": "memory", "title": "Skill Induction and Planning with Latent Language", "shortTitle": "Skill Induction", "category": "memory-skill", "maturity": "mature", "score": 0.75, "year": 2022, "venue": "ACL 2022", "authors": "Pratyusha Sharma et al.", "methodFamily": "语言索引技能库", "tags": ["技能归纳", "自然语言索引", "组合式技能库", "规划"], "scores": {"clarity": 0.8, "evidence": 0.78, "reproducibility": 0.74, "adoption": 0.62, "selfEvolution": 0.5}, "summary": "用稀疏自然语言标注从演示中归纳分层可复用技能,语言命令索引一个组合式技能库以进行规划。", "methodCore": "该工作面向指令跟随与规划,从少量带稀疏自然语言标注的演示中归纳出分层、可复用的技能片段:每个技能对应一段可执行的低层行为序列,并与其自然语言描述相关联,由此构成一个可按语言命令检索与组合的技能库。规划阶段,模型把高层任务指令解析为一串潜在语言命令(latent language),用这些命令依次索引技能库并串接相应技能来完成新任务,从而把任务求解建模为语言命令到技能的映射与组合。由于技能以自然语言为接口且可组合调用,系统能在仅有稀疏监督的条件下,把演示中的行为知识沉淀为可检索复用的技能记忆,并支持组合式规划以泛化到训练中未见过的指令组合。技能表征为语言索引的行为片段库、不依赖密集标注,新颖之处在于用潜在语言作为技能的抽象接口连接归纳与规划两端。", "evaluation": "在指令跟随与组合泛化设置下评测,与端到端及非分层基线对比对新指令组合的泛化能力,并考察在稀疏自然语言标注条件下技能归纳与语言命令索引所支撑的规划成功率。(注:该论文摘要缺失,评测细节据方法与摘要外信息保守概述,未含具体数值。)", "mainFinding": "从稀疏语言标注归纳分层技能库并以潜在语言命令索引组合,支撑更强的组合式规划与泛化。", "limitations": "依赖演示与稀疏标注质量;技能边界的自动划分对复杂长程任务仍具挑战。", "related": [], "links": [{"label": "ACL Anthology", "href": "https://aclanthology.org/2022.acl-long.120"}], "citation": "Skill Induction, ACL 2022."},
-  {"id": "memory-wr-creator", "page": "memory", "title": "CREATOR: Tool Creation for Disentangling Abstract and Concrete Reasoning of Large Language Models", "shortTitle": "CREATOR", "category": "memory-skill", "maturity": "growing", "score": 0.76, "year": 2023, "venue": "Findings of EMNLP 2023", "authors": "Cheng Qian et al.", "methodFamily": "工具创建记忆", "tags": ["工具创建", "抽象/具体解耦", "可复用工具", "代码技能"], "scores": {"clarity": 0.82, "evidence": 0.78, "reproducibility": 0.74, "adoption": 0.64, "selfEvolution": 0.6}, "summary": "CREATOR 让 LLM 通过文档与代码自行创建可复用工具,把抽象工具创建与具体决策执行解耦以提升表现。", "methodCore": "CREATOR 针对 LLM 工具使用受限于 API 可得性与隐式推理不稳定(规划与执行混杂时尤甚)的问题,把解题过程拆分为抽象与具体两层。抽象层让模型根据问题撰写文档并以代码实现方式生成通用、可复用的工具函数,专注于建模问题背后的通用方法;具体层让模型调用所创建的工具执行具体决策、处理返回结果并给出答案。这种 disentangle 缓解了模型在同一次推理中既要设计方法又要精确计算的负担,并提升了鲁棒性。所创建的工具本质上是以代码形式沉淀的可复用技能,可迁移到后续同类问题,使工具创建成为面向复杂推理的技能积累机制。技能表征为文档加代码实现、无参数更新,新颖之处在于把抽象工具创建与具体执行解耦,并证明 LLM 作为工具创造者能促进知识迁移。", "evaluation": "在数学竞赛题基准 MATH 与多样表格内容基准 TabMWP 上评测,CREATOR 优于 chain-of-thought、program-of-thought 及工具使用基线;并新引入包含 2K 多样问题的 Creation Challenge 数据集以凸显工具创建能力的必要性,进一步显示其促进知识迁移、适应多样情境。", "mainFinding": "以文档加代码自建工具作为沉淀技能,解耦抽象创建与具体执行,显著提升复杂推理表现并促进迁移。", "limitations": "工具正确性依赖代码生成质量;工具库的检索与去重在规模化时需额外机制。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.14318"}], "citation": "CREATOR, Findings of EMNLP 2023."},
-  {"id": "memory-wr-trove", "page": "memory", "title": "TroVE: Inducing Verifiable and Efficient Toolboxes for Solving Programmatic Tasks", "shortTitle": "TroVE", "category": "memory-skill", "maturity": "growing", "score": 0.77, "year": 2024, "venue": "ICML 2024", "authors": "Zhiruo Wang et al.", "methodFamily": "工具箱归纳", "tags": ["可验证工具", "用-增-裁", "工具库维护", "程序任务"], "scores": {"clarity": 0.82, "evidence": 0.8, "reproducibility": 0.78, "adoption": 0.64, "selfEvolution": 0.62}, "summary": "TroVE 无需训练地归纳可验证高层函数工具箱,通过「用-增-裁」循环维护一个精简可复用的工具库。", "methodCore": "TroVE 面向以写程序求解的任务,针对原语函数导致程序冗长易错、而高层函数需专家设计的矛盾,提出一种无需训练的方法,让代码 LM 自主策展可复用的高层函数工具箱并用它写解。其核心是通过 using、growing、periodically trimming 三种操作的循环动态维护工具箱:求解每个问题时,模型可复用已有工具、生成新的候选高层函数,或周期性裁剪低价值工具以保持库精简。为保证正确性,方法对同一问题采样多种实现并借一致性验证挑选可靠的工具与答案,从而持续归纳出可验证、可复用的高层技能。技能表征为可执行的高层函数、不涉及参数更新,靠生成时验证保证质量,新颖之处在于用「用-增-裁」自维护出一个规模受控、可验证且便于人工核验的工具箱。", "evaluation": "在数学、表格问答与图像推理共 11 个数据集上评测,TroVE 相较使用 CODELLAMA 的基线与此前基于 GPT 的方法,持续给出更简洁且更准确的解,同时工具箱规模缩小 79-98%;并使人工核验相较基线快 31%、准确率高 13%,展示可验证性与可复用性。", "mainFinding": "用「用-增-裁」循环加一致性验证自维护可验证工具箱,解更简洁准确且工具库缩小 79-98%。", "limitations": "适用范围以可执行程序任务为主;工具验证依赖可自动判分的场景。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2401.12869"}], "citation": "TroVE, ICML 2024."},
-  {"id": "memory-rt-learn-by-interact", "page": "memory", "title": "Learn-by-interact: A Data-Centric Framework for Self-Adaptive Agents in Realistic Environments", "shortTitle": "Learn-by-interact", "category": "memory-skill", "maturity": "growing", "score": 0.79, "year": 2025, "venue": "ICML 2025", "authors": "Hongjin Su et al.", "methodFamily": "交互合成经验", "tags": ["数据中心", "轨迹合成", "反向构造指令", "ICL检索"], "scores": {"clarity": 0.83, "evidence": 0.8, "reproducibility": 0.76, "adoption": 0.66, "selfEvolution": 0.72}, "summary": "无需人工标注,通过与环境交互合成轨迹并反向构造指令,形成可用于 ICL 检索与训练的经验数据。", "methodCore": "Learn-by-interact 是一个以数据为中心的框架,旨在无人工标注地把 LLM 智能体适配到任意环境。它先让智能体依据文档等信息自主与真实环境交互,合成大量执行轨迹;再通过 backward construction,对交互历史做总结或抽象,反向构造出对应的自然语言指令,从而批量得到高质量的指令-轨迹经验数据。所得数据支持两条复用路径:既可作为检索式上下文学习(ICL)的示例库,在推理时用面向智能体优化的检索方法按相关性召回相关经验注入提示;也可用于对模型进行训练/微调。两条路径共同把交互经验转化为可复用的技能数据,使智能体在部署环境中自适应提升表现。技能表征为合成的指令-轨迹数据,ICL 路径不改参数、训练路径更新参数,新颖之处在于反向构造与面向智能体的检索管线,及其作为通用 agent 数据合成基础的定位。", "evaluation": "在 SWE-bench、WebArena、OSWorld 与 Spider2-V 等真实编码、网页与桌面环境上评测。基线结果最多提升:ICL 用 Claude-3.5 提升达 12.2%,训练用 Codestral-22B 提升达 19.5%;backward construction 对训练贡献达 14.0%。消融显示合成数据在 ICL 中的效率,以及其检索管线优于常规 RAG。", "mainFinding": "自主交互合成轨迹并反向构造指令,得到可检索或可训练的经验数据,在多个真实环境显著提升成功率。", "limitations": "反向构造的指令质量影响数据可用性;交互合成成本随环境复杂度上升。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2501.10893"}], "citation": "Learn-by-interact, ICML 2025."},
-  {"id": "memory-rf-skillweaver", "page": "memory", "title": "SkillWeaver: Web Agents can Self-Improve by Discovering and Honing Skills", "shortTitle": "SkillWeaver", "category": "memory-skill", "maturity": "exploring", "score": 0.76, "year": 2025, "venue": "arXiv 2025", "authors": "Boyuan Zheng et al.", "methodFamily": "自主技能发现", "tags": ["网页智能体", "技能发现", "API蒸馏", "技能迁移"], "scores": {"clarity": 0.8, "evidence": 0.74, "reproducibility": 0.68, "adoption": 0.58, "selfEvolution": 0.85}, "summary": "SkillWeaver 让网页智能体自主发现技能、练习并蒸馏为稳健的 API,持续扩充可插拔技能库并支持技能迁移。", "methodCore": "SkillWeaver 是一个以技能为中心的框架,让网页智能体通过自主合成可复用技能(封装为 API)来实现自我改进,弥补现有智能体在程序知识抽象、技能精炼与组合上的不足。给定一个新网站,智能体自主发现候选技能,通过执行去实践,并把练习经验蒸馏为稳健、带清晰接口的 API;迭代式探索不断扩充一个轻量、即插即用的 API 库,后续任务可直接检索并组合调用而无需重新探索,从而显著增强能力。由于技能以标准化 API 封装,它们既是智能体自身的长期程序记忆,又能跨智能体迁移复用,使能力较弱的智能体也受益,形成自主发现、打磨、沉淀与迁移的能力演化循环。技能表征为可调用的代码 API、不依赖参数更新,新颖之处在于以「发现-实践-蒸馏」自建可迁移技能库并验证跨智能体共享。", "evaluation": "在 WebArena 与真实网站上评测自我改进效果,相对成功率提升分别达 31.8% 与 39.8%,随探索技能库扩充能力持续增强;此外由强智能体合成的 API 迁移给弱智能体,在 WebArena 上带来最高 54.3% 的提升,验证技能的可迁移共享。", "mainFinding": "自主发现并蒸馏出可插拔 API 技能库作为长期记忆,可检索复用并跨智能体迁移,显著改进网页智能体。", "limitations": "自主探索的样本效率与安全性待提升;技能库的质量管控与失效检测仍较初步。", "related": ["memory-rf-awm"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2504.07079"}], "citation": "SkillWeaver, arXiv 2025."},
-  {"id": "memory-sk-skillsd", "page": "memory", "title": "Skill-SD: Skill-Conditioned Self-Distillation for Multi-turn LLM Agents", "shortTitle": "Skill-SD", "category": "memory-skill", "maturity": "exploring", "score": 0.8, "year": 2026, "venue": "arXiv 2026", "authors": "Guozhi Wang et al.", "methodFamily": "技能条件自蒸馏", "tags": ["自蒸馏", "技能条件", "多轮智能体", "强化学习"], "scores": {"clarity": 0.82, "evidence": 0.83, "reproducibility": 0.7, "adoption": 0.66, "selfEvolution": 0.85}, "summary": "Skill-SD 把智能体自身轨迹总结为自然语言技能,作为动态特权信息条件化教师,通过蒸馏提升多轮智能体训练效率。", "methodCore": "Skill-SD 面向用强化学习训练多轮交互智能体时稀疏奖励与长时序导致的低样本效率问题。它指出 on-policy self-distillation(OPSD)虽能借掌握真值的特权教师提供稠密 token 级监督,但固定特权信息无法覆盖智能体任务中多样的有效策略,且朴素地把 OPSD 与 RL 结合常导致训练崩溃。为此 Skill-SD 把智能体自身完成的轨迹总结为紧凑的自然语言技能,描述成功行为、常见错误与工作流程,并仅用这些技能作为动态特权信息条件化教师;学生始终在普通任务提示下行动,通过蒸馏内化教师指导。为稳定训练,方法推导出重要性加权的 reverse-KL 损失以提供梯度正确的 token 级蒸馏,并让教师随学生改进而动态同步。技能表征为自然语言且只用于训练端,学生参数被更新,新颖之处在于把自生技能作为动态特权监督来稳定 RL 蒸馏。", "evaluation": "在 AppWorld 与 Sokoban 等智能体基准上评测。Skill-SD 相较标准 GRPO 分别提升 +14.0% 与 +10.9%,相较朴素 on-policy 蒸馏(OPD)分别提升 +42.1% 与 +40.6%,显著优于强化学习基线,验证动态技能特权监督与稳定化损失的有效性。", "mainFinding": "把自身轨迹提炼为自然语言技能作为教师端动态特权信息,以稳定化蒸馏大幅提升多轮智能体训练效率。", "limitations": "依赖教师-学生蒸馏与自动可判分环境;技能总结质量影响监督信号可靠性。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2604.10674"}], "citation": "Skill-SD, arXiv 2026."},
-  {"id": "memory-sk-memskill", "page": "memory", "title": "MemSkill: Learning and Evolving Memory Skills for Self-Evolving Agents", "shortTitle": "MemSkill", "category": "memory-skill", "maturity": "exploring", "score": 0.84, "year": 2026, "venue": "arXiv 2026", "authors": "Haozhen Zhang et al.", "methodFamily": "可学习记忆技能", "tags": ["记忆技能", "技能演化", "控制器-执行器", "闭环"], "scores": {"clarity": 0.85, "evidence": 0.82, "reproducibility": 0.72, "adoption": 0.68, "selfEvolution": 0.9}, "summary": "MemSkill 把记忆的抽取、整合、裁剪操作重构为可学习、可演化的记忆技能,形成自我改进的闭环记忆管理。", "methodCore": "MemSkill 针对现有 LLM 智能体记忆系统依赖少量静态、手工设计的抽取操作、把「存什么、如何修订」硬编码为人类先验、在多样交互与长历史下僵化低效的问题,把这些操作重构为可学习、可演化的 memory skills——即用于从交互轨迹中抽取、整合(consolidate)与裁剪(prune)信息的结构化可复用例程。系统借鉴 agent skill 的设计理念,包含一个学会选取少量相关技能的 controller,与一个基于 LLM、按所选技能生成记忆的 executor。此外引入一个 designer,周期性复盘所选技能产生错误或不完整记忆的困难案例,提出精炼并新增技能来演化技能集。控制器的选择策略与技能集本身被共同优化,构成闭环:技能表征为结构化文本例程、可增删改,系统不更新基座权重,新颖之处在于把记忆管理操作本身升级为可自演化的技能而非固定流程。", "evaluation": "在 LoCoMo、LongMemEval、HotpotQA 与 ALFWorld 上评测,MemSkill 在任务性能上优于强基线并在不同设置下良好泛化;进一步的分析揭示了技能如何随困难案例逐步演化,为更自适应、自演化的记忆管理提供洞见。", "mainFinding": "把记忆抽取/整合/裁剪重构为可学习可演化技能,控制器选技能、设计者演化技能集,实现自演化记忆管理。", "limitations": "涉及控制器、执行器、设计者多组件,系统与调参较复杂;技能演化依赖困难案例识别质量。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2602.02474"}], "citation": "MemSkill, arXiv 2026."},
-  {"id": "memory-sk-polyskill", "page": "memory", "title": "PolySkill: Learning Generalizable Skills Through Polymorphic Abstraction", "shortTitle": "PolySkill", "category": "memory-skill", "maturity": "exploring", "score": 0.82, "year": 2025, "venue": "arXiv 2025", "authors": "Gang Li et al.", "methodFamily": "多态技能抽象", "tags": ["技能泛化", "多态抽象", "目标/实现解耦", "网页智能体"], "scores": {"clarity": 0.84, "evidence": 0.82, "reproducibility": 0.74, "adoption": 0.66, "selfEvolution": 0.85}, "summary": "PolySkill 借鉴软件多态思想,将技能的抽象目标与具体实现解耦,让网页智能体学到可泛化、可组合的技能。", "methodCore": "PolySkill 针对现有技能学习方法常产生过度专用于单一网站、难以泛化的技能这一问题,借鉴软件工程中的多态(polymorphism)思想,把一个技能的 abstract goal(它完成什么)与 concrete implementation(如何执行)解耦。抽象目标定义可跨站点复用的能力接口,而具体实现随环境适配,从而支持技能在不同网站间的复用与组合,让智能体在网页导航等持续交互中学到可泛化、可组合的技能。在没有指定任务的自我探索设置下,框架还让智能体识别并优化自身目标,提升所提任务的质量,进而习得更好的学习课程(curriculum)并学到跨站点通用的技能,推动开放网页上的持续学习。技能表征为「抽象目标+可适配实现」的结构、随交互增量学习、不依赖参数更新,新颖之处在于用多态抽象解决技能过拟合单站点的泛化难题。", "evaluation": "实验显示 PolySkill 在已见网站上把技能复用率提升 1.7 倍;在 Mind2Web 上成功率最高提升 9.4%,在未见网站上提升 13.9%,同时执行步数减少超 20%;在无指定任务的自我探索设置下,还提升了所提任务的质量并让智能体学到跨站点可泛化的技能。", "mainFinding": "以多态抽象解耦技能的目标与实现,学到可跨站点泛化、可组合的技能,复用率与成功率显著提升。", "limitations": "验证以网页导航场景为主;抽象目标与实现的划分质量影响泛化效果。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2510.15863"}], "citation": "PolySkill, arXiv 2025.", "figures": [{"src": "figures/memory-sk-polyskill.png", "caption": "PolySkill 概览:让网页智能体通过多态抽象学习可跨站点泛化的技能,将具体操作序列归纳为参数化、可复用的技能单元。"}]},
-  {"id": "memory-sk-cascade", "page": "memory", "title": "CASCADE: Cumulative Agentic Skill Creation through Autonomous Development and Evolution", "shortTitle": "CASCADE", "category": "memory-skill", "maturity": "exploring", "score": 0.83, "year": 2025, "venue": "arXiv 2025", "authors": "Junwu Chen et al.", "methodFamily": "累积技能创建", "tags": ["技能获取", "科学智能体", "元技能", "跨智能体共享"], "scores": {"clarity": 0.83, "evidence": 0.84, "reproducibility": 0.7, "adoption": 0.66, "selfEvolution": 0.88}, "summary": "CASCADE 是一个自演化框架,通过两种元技能让智能体掌握复杂工具并编码知识,实现从「用工具」到「获取技能」的转变。", "methodCore": "CASCADE 针对 LLM 智能体依赖预定义工具或早期阶段的工具生成、难以适配并扩展到复杂科学任务的问题,提出一个自演化框架,代表从「LLM + tool use」向「LLM + skill acquisition」转变的早期实例。它依靠两种元技能驱动能力演化:其一 continuous learning,通过网页搜索、代码抽取与记忆利用不断吸收新知识、掌握复杂外部工具;其二 self-reflection,借助内省、知识图谱探索等方式修正与巩固经验。结合人机协作与记忆巩固,CASCADE 持续累积可执行的技能,并使这些技能能够在不同智能体与科研人员之间共享复用,朝可扩展的 AI 辅助科研迈进。技能表征为可执行的、编码知识的技能条目并随两种元技能不断累积与修正,框架层面不强调基座参数更新,新颖之处在于以两种元技能把工具掌握升级为可累积、可共享的技能获取。", "evaluation": "在 SciSkillBench(116 项材料科学与化学研究任务)上评测,使用 GPT-5 达到 93.3% 成功率,而无演化机制时仅 35.4%;并在计算分析、自主实验室实验与已发表论文的选择性复现等真实场景中验证应用,展示技能可跨智能体与科研人员共享。", "mainFinding": "以持续学习与自我反思两种元技能累积可共享的可执行技能,大幅提升复杂科学任务成功率。", "limitations": "评测集中于材料与化学科研任务;高成功率依赖强基座模型(GPT-5)。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2512.23880"}], "citation": "CASCADE, arXiv 2025."},
-  {"id": "memory-sk-skillgen", "page": "memory", "title": "SkillGen: Verified Inference-Time Agent Skill Synthesis", "shortTitle": "SkillGen", "category": "memory-skill", "maturity": "exploring", "score": 0.82, "year": 2026, "venue": "arXiv 2026", "authors": "Yuchen Ma et al.", "methodFamily": "对比归纳技能合成", "tags": ["技能合成", "对比归纳", "干预验证", "跨模型迁移"], "scores": {"clarity": 0.84, "evidence": 0.83, "reproducibility": 0.72, "adoption": 0.66, "selfEvolution": 0.83}, "summary": "SkillGen 是一个多智能体框架,从轨迹中对比归纳出单个可审计技能,并以干预方式实证验证其净效果。", "methodCore": "SkillGen 面向无需重训即可增强 LLM 智能体、且保持所加程序可复用可控的技能范式,针对高质量技能仍多靠人工撰写的现状,提出一个多智能体框架,从基础智能体生成的轨迹中合成单个可读、可在使用前审计的技能产物。它不止于对轨迹做总结,而是对成功与失败轨迹进行 contrastive induction,识别可复用的成功模式、反复出现的失败模式,以及那些出现在临近成功轨迹却在失败轨迹中缺失的关键行为;随后生成候选技能并迭代精炼。其核心创新是把 agent skill 建模为 intervention:在同一批实例上对比加入与不加入该技能的结果,同时计入 repair(修好原本失败的样例)与 regression(破坏原本成功的样例),从而实证度量技能对整体表现的净效果。技能表征为人类可读文本产物、不涉及参数更新,新颖之处在于对比归纳加干预式验证的净效果度量。", "evaluation": "在广泛的智能体与数据集上评测,SkillGen 持续提升留出集(held-out)表现,优于已有技能生成基线,且所生成的技能能够跨模型迁移复用;结果以定性方向呈现,验证对比归纳与干预式净效果验证的有效性。", "mainFinding": "对比成功与失败轨迹归纳可审计技能,并以干预方式验证净效果,持续提升留出表现且可跨模型迁移。", "limitations": "每次合成单个技能,面向技能库规模化组织的机制有限;对比归纳依赖成败轨迹的可得性。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2605.10999"}], "citation": "SkillGen, arXiv 2026."},
-  {"id": "memory-sk-mindskill", "page": "memory", "title": "MIND-Skill: Quality-Guaranteed Skill Generation via Multi-Agent Induction and Deduction", "shortTitle": "MIND-Skill", "category": "memory-skill", "maturity": "exploring", "score": 0.82, "year": 2026, "venue": "arXiv 2026", "authors": "Mingshu Cai et al.", "methodFamily": "归纳-演绎技能生成", "tags": ["技能归纳", "演绎重构", "TextGrad", "质量保证"], "scores": {"clarity": 0.83, "evidence": 0.82, "reproducibility": 0.72, "adoption": 0.64, "selfEvolution": 0.82}, "summary": "MIND-Skill 用归纳与演绎两个智能体自动从成功轨迹提炼可泛化技能,并通过三重文本损失保证技能质量。", "methodCore": "MIND-Skill 针对可复用智能体技能长期依赖人工专家把领域知识提炼为可执行指南、难以规模化的问题,提出归纳-演绎的多智能体框架,自动从成功轨迹中归纳出可泛化技能并给出稳健的质量保证。框架含两个智能体:induction agent 从成功轨迹中抽象出可复用技能,deduction agent 则尝试仅依照所归纳的技能重构轨迹。为保证技能质量,方法引入三种文本损失:比较输入与重构轨迹的 reconstruction loss、约束重构轨迹正确性的 outcome loss,以及依据预定义标准评估文档质量并调节抽象层次的 rubric loss。这些文本损失通过 TextGrad 联合优化,最终得到的技能在优化阶段未见过的留出任务上评估。技能表征为文档化的可执行指南、通过文本梯度而非参数梯度优化,新颖之处在于用归纳-演绎闭环加三重文本损失为自动技能提炼提供可验证的质量保证。", "evaluation": "在 AppWorld 与 BFCL-v3 上评测,MIND-Skill 持续优于同期技能生成方法;通过 reconstruction、outcome 与 rubric 三重文本损失的 TextGrad 联合优化,并在优化未见过的留出任务上评估,验证所生成技能的质量与泛化。", "mainFinding": "归纳提炼技能、演绎重构轨迹并以三重文本损失联合优化,自动生成质量有保证且可泛化的技能。", "limitations": "依赖 TextGrad 文本优化与可判分任务;评测集中于两类工具/函数调用基准。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2605.08670"}], "citation": "MIND-Skill, arXiv 2026."},
-  {"id": "memory-sk-skilltta", "page": "memory", "title": "Skills on the Fly: Test-Time Adaptive Skill Synthesis for LLM Agents", "shortTitle": "SkillTTA", "category": "memory-skill", "maturity": "exploring", "score": 0.81, "year": 2026, "venue": "arXiv 2026", "authors": "Jingxing Wang et al.", "methodFamily": "测试时技能合成", "tags": ["测试时自适应", "轨迹检索", "临时技能", "失败轨迹"], "scores": {"clarity": 0.83, "evidence": 0.82, "reproducibility": 0.74, "adoption": 0.64, "selfEvolution": 0.82}, "summary": "SkillTTA 在测试时检索少量相关训练轨迹,合成针对当前任务的临时文本技能,不更新参数即实现自适应。", "methodCore": "SkillTTA 针对测试时任务往往需要比静态技能库更具体指导的问题,提出 Test-Time Adaptive Skill Synthesis:面对当前任务时,先检索少量与之相关的训练轨迹,再把它们合成为一段临时、面向该任务的文本技能注入提示。求解模型(solver)保持固定,自适应完全通过生成的上下文而非参数更新实现,因而轻量且即插即用。方法强调合成而非直接堆叠原始轨迹:消融显示合成技能优于原始轨迹提示,top-k 检索应保持较小,且失败轨迹尤其有用,因为它们暴露了反复出现、面向评估器(evaluator-facing)的错误模式,有助于生成更具针对性的指导。技能表征为一次性合成的任务专属文本、不持久沉淀、无参数更新,新颖之处在于把技能合成从离线常驻库转为测试时按需生成,并系统化利用失败轨迹。", "evaluation": "在 SpreadsheetBench、ALFWorld 与 BigCodeBench 上评测。相比用 GPT-5.5 的静态轨迹到技能合成,任务专属技能把 SpreadsheetBench Pass@1 从 0.397 提升到 0.505、BigCodeBench Pass@1 从 0.517 提升到 0.651;ALFWorld 上与更重的记忆学习基线成功率相差不到 4 个点,且成功轨迹最短。", "mainFinding": "测试时检索少量轨迹合成任务专属临时文本技能,不更新参数即提升成功率,失败轨迹尤其有价值。", "limitations": "临时技能不持久沉淀,复用性弱于常驻技能库;效果依赖检索轨迹的相关性。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2605.16986"}], "citation": "SkillTTA, arXiv 2026."},
-  {"id": "memory-sk-nsi", "page": "memory", "title": "Lifting Traces to Logic: Programmatic Skill Induction with Neuro-Symbolic Learning for Long-Horizon Agentic Tasks", "shortTitle": "NSI", "category": "memory-skill", "maturity": "exploring", "score": 0.81, "year": 2026, "venue": "arXiv 2026", "authors": "Jie-Jing Shao et al.", "methodFamily": "神经符号技能归纳", "tags": ["神经符号", "程序化技能", "控制流", "长程任务"], "scores": {"clarity": 0.82, "evidence": 0.81, "reproducibility": 0.7, "adoption": 0.62, "selfEvolution": 0.83}, "summary": "NSI 把交互轨迹提升为逻辑基础的模块化程序,合成显式控制流与动态变量绑定,让智能体懂得何时与为何行动。", "methodCore": "NSI 针对基础模型驱动的智能体因纯提示式推理的瞬时性而难以长程规划,而现有技能归纳方法把经验蒸馏为 state-blind 的参数化脚本、无法捕捉动态环境中稳健执行所需条件逻辑的问题,提出 Neuro-Symbolic Skill Induction 框架:把交互轨迹提升(lift)为模块化、以逻辑为基础(logic-grounded)的程序。通过合成显式的控制流(control flow)与动态的变量绑定(variable binding),NSI 让智能体理解在何时(when)、为何(why)采取动作,而非机械重放固定序列,从而把技能表征为带条件逻辑的可执行程序而非线性脚本。该范式支持高效泛化,使智能体能够从少样本示例中归纳技能,并灵活适配未见目标,把自身演化为逻辑基础技能的构建者(architects)。技能表征为神经符号程序、不依赖参数更新,新颖之处在于用符号化控制流与变量绑定补足纯参数脚本缺失的条件逻辑。", "evaluation": "在一系列智能体任务上评测,NSI 持续优于最新基线;实验展示其能从少样本示例归纳出逻辑基础的技能,并灵活泛化到未见目标,支撑长程规划。摘要未报告具体数值指标,结果以定性方向呈现。", "mainFinding": "把轨迹提升为含控制流与变量绑定的逻辑程序技能,让智能体掌握何时与为何行动,泛化到未见目标。", "limitations": "程序合成对可符号化环境依赖较强;论文未报告具体数值指标。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2605.01293"}], "citation": "NSI, arXiv 2026."},
-  {"id": "memory-sk-skillpyramid", "page": "memory", "title": "SkillPyramid: A Hierarchical Skill Consolidation Framework for Self-Evolving Agents", "shortTitle": "SkillPyramid", "category": "memory-skill", "maturity": "exploring", "score": 0.83, "year": 2026, "venue": "arXiv 2026", "authors": "Yuan Xiong et al.", "methodFamily": "分层技能巩固", "tags": ["技能巩固", "分层拓扑", "自演化", "技能迁移"], "scores": {"clarity": 0.83, "evidence": 0.83, "reproducibility": 0.72, "adoption": 0.66, "selfEvolution": 0.88}, "summary": "SkillPyramid 以分层技能拓扑巩固与复用经验,并在执行中组合、验证、纳入新技能,把技能池变为动态演化系统。", "methodCore": "SkillPyramid 针对智能体因缺乏系统化的技能构建、累积与迁移,导致在不同任务间冗余构建相似能力、难以把经验转化为可复用资产、也难以把任务专用技能泛化到新场景的问题,提出一个技能巩固(consolidation)框架,复用已有技能经验以支持更广的任务泛化。它在一个 hierarchical skill topology(分层技能拓扑)上运行,并引入自演化机制:在任务执行过程中让智能体 compose(组合)已有技能、validate(验证)其有效性,并把新技能 incorporate(纳入)拓扑。由此,原本静态的技能集合被转化为一个能够持续构建、累积与迁移技能的动态演化系统,减少重复建设并提升跨场景泛化。技能表征为分层组织的可复用技能条目、随执行增量演化、不依赖基座参数更新,新颖之处在于用分层拓扑加执行中的组合-验证-纳入闭环把技能池升级为自演化系统。", "evaluation": "在 ALFWorld、WebShop 与 ScienceWorld 上跨四种基座模型评测,SkillPyramid 使平均奖励提升 38.0%、执行步数减少 27.7%,验证分层技能巩固与自演化机制在多种具身/购物/科学模拟环境下带来的泛化与效率增益。", "mainFinding": "以分层技能拓扑加执行中组合、验证、纳入的自演化,把静态技能池转为动态系统,提升奖励并减少步数。", "limitations": "分层拓扑的构建与维护带来额外系统开销;评测集中于三类具身/购物/科学模拟环境。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2606.03692"}], "citation": "SkillPyramid, arXiv 2026."},
-  {"id": "memory-sk-skemex", "page": "memory", "title": "Experience Makes Skillful: Enabling Generalizable Medical Agent Reasoning via Self-Evolving Skill Memory", "shortTitle": "SkeMex", "category": "memory-skill", "maturity": "exploring", "score": 0.82, "year": 2026, "venue": "arXiv 2026", "authors": "Wenjie Li et al.", "methodFamily": "技能式记忆", "tags": ["医疗智能体", "技能记忆", "价值感知检索", "读写评治"], "scores": {"clarity": 0.83, "evidence": 0.82, "reproducibility": 0.7, "adoption": 0.64, "selfEvolution": 0.87}, "summary": "SkeMex 是一个部署后自演化框架,把交互轨迹蒸馏为结构化技能记忆,用价值感知检索与治理支撑长程临床推理。", "methodCore": "SkeMex 面向交互式临床决策场景,针对医疗智能体现有记忆常保留冗余、嘈杂且难治理的原始历史轨迹、且很少区分哪些记忆真正对未来推理有用的问题,提出一个无需更新模型权重的部署后自演化(post-deployment self-evolution)框架。它把有信息量的交互轨迹蒸馏为编码可复用程序知识的结构化技能,并把它们组织为跨越 general、task-specific 与 action-level 的多分支仓库(multi-branch repository)。为判断哪些记忆应被复用与保留,SkeMex 依据环境反馈估计与情境相关的效用(context-dependent utility),用以指导价值感知(value-aware)的检索与仓库治理;并通过 Read-Write-Assess-Govern 的闭环生命周期持续演化:写入新技能、更新效用、提升有用记忆并移除有害条目。技能表征为结构化文本、按效用治理、不更新基座权重,新颖之处在于以效用估计驱动记忆的价值感知检索与读写评治闭环。", "evaluation": "在多样临床任务上进行离线与在线评测,SkeMex 均持续优于代表性的基于记忆的智能体;并验证其在不同模型基座上的泛化能力以及技能记忆的可迁移性,表明其能积累紧凑可靠的经验支撑长程临床推理。", "mainFinding": "把轨迹蒸馏为多分支技能记忆并以价值感知检索与读写评治闭环治理,提升可泛化的长程临床推理。", "limitations": "面向医疗临床场景,跨领域迁移待验证;效用估计依赖可靠的环境反馈。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2606.09365"}], "citation": "SkeMex, arXiv 2026."},
-  {"id": "memory-sk-skillharness", "page": "memory", "title": "SkillHarness: Harnessing Safe Skills for Computer-Use Agents", "shortTitle": "SkillHarness", "category": "memory-skill", "maturity": "exploring", "score": 0.81, "year": 2026, "venue": "arXiv 2026", "authors": "Yurun Chen et al.", "methodFamily": "安全技能约束", "tags": ["计算机使用智能体", "安全技能", "技能边界", "选择性复用"], "scores": {"clarity": 0.82, "evidence": 0.82, "reproducibility": 0.72, "adoption": 0.64, "selfEvolution": 0.8}, "summary": "SkillHarness 面向计算机使用智能体,把技能学习与使用建模为安全约束的交互过程,识别安全技能并选择性复用。", "methodCore": "SkillHarness 面向计算机使用智能体(CUA)在动态交互环境中持续学习技能的需求,针对现有从成功轨迹学技能的方法普遍假设环境静态且安全、忽视对抗交互(如 prompt injection)与环境动态(如弹窗)风险、易学到危险技能并导致脆弱执行的问题,提出安全技能驾驭框架。它超越静态技能抽象,把技能的学习与使用建模为受安全约束的交互过程:引入 skill boundary(技能边界),利用多源监督信号从交互轨迹中识别安全技能,并在技能全生命周期中构建自我改进的安全约束;同时提出 selective skill reuse,按上下文引导任务分解,通过选择性激活技能子集来完成任务,兼顾安全与执行稳定性。技能表征为受安全约束的可复用条目、随生命周期自我改进、不依赖参数更新,新颖之处在于把安全性作为技能学习与复用的一等约束纳入建模。", "evaluation": "实验显示 SkillHarness 将所学技能的不安全率(unsafe rate)显著降低 57.1%,并在动态环境变化下持续提升执行稳定性,整体优于已有技能学习基线;结果侧重安全性与稳定性维度的定量与定性验证。", "mainFinding": "以技能边界与生命周期安全约束识别安全技能、选择性复用,大幅降低不安全率并提升动态环境执行稳定性。", "limitations": "聚焦安全性与稳定性,任务成功率提升幅度未量化;安全信号依赖多源监督的可得性。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2606.20636"}], "citation": "SkillHarness, arXiv 2026."},
-  {"id": "memory-ev-longmemeval", "page": "memory", "title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory", "shortTitle": "LongMemEval", "category": "memory-eval", "maturity": "mature", "score": 0.92, "year": 2024, "venue": "ICLR 2025", "authors": "Di Wu et al.", "methodFamily": "长期交互记忆基准", "tags": ["长期记忆", "多会话", "时序推理", "对话助手"], "scores": {"clarity": 0.95, "evidence": 0.9, "reproducibility": 0.9, "adoption": 0.9, "selfEvolution": 0.4}, "summary": "面向聊天助手长期交互记忆的综合基准，测评信息抽取、多会话推理、时序推理、知识更新与拒答五种核心能力。", "methodCore": "LongMemEval是面向聊天助手长期交互记忆的综合基准，聚焦被以往研究忽视的持续交互记忆能力。它围绕信息抽取(information extraction)、多会话推理(multi-session reasoning)、时序推理(temporal reasoning)、知识更新(knowledge updates)与拒答(abstention)五种核心记忆能力设计任务。数据集精心构造500道问题，并把它们嵌入可自由扩展的用户-助手聊天历史中，历史长度可任意放大以逼近真实的长期对话场景。任务形式是在冗长交互史上作答的问答，考察系统能否在跨会话累积的信息中定位并整合关键证据。基准同时把长期记忆系统统一拆解为索引(indexing)、检索(retrieval)、阅读(reading)三阶段框架，并据实验洞察提出会话分解、事实增强键扩展、时间感知查询扩展等优化，用记忆召回率与下游问答准确率共同衡量各设计。", "evaluation": "基准评测了商用聊天助手与长上下文LLM，发现它们在跨持续交互记忆信息时出现约30%的准确率下降，暴露长期记忆能力的普遍薄弱。进一步的大量实验表明，会话分解(session decomposition)、事实增强键扩展(fact-augmented key expansion)与时间感知查询扩展(time-aware query expansion)等记忆设计优化，能同时显著提升记忆召回率与下游问答表现，为长期记忆系统的索引、检索与阅读三阶段设计提供了明确且可操作的方向。", "mainFinding": "长上下文能力并不等于长期记忆能力：商用助手与长上下文模型在跨会话记忆信息时准确率约下降30%，凸显专门的分阶段记忆机制的必要性。", "limitations": "问题为精心合成且仅500道、规模有限，主要评估记忆的检索与阅读，而非经验的持续演化、自我改进与在线更新。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2410.10813"}], "citation": "LongMemEval, ICLR 2025."},
-  {"id": "memory-ev-locomo", "page": "memory", "title": "Evaluating Very Long-Term Conversational Memory of LLM Agents", "shortTitle": "LOCOMO", "category": "memory-eval", "maturity": "mature", "score": 0.9, "year": 2024, "venue": "ACL 2024", "authors": "Adyasha Maharana et al.", "methodFamily": "超长对话记忆基准", "tags": ["长期对话", "多模态", "事件图", "问答"], "scores": {"clarity": 0.9, "evidence": 0.88, "reproducibility": 0.9, "adoption": 0.95, "selfEvolution": 0.35}, "summary": "通过人机协同管线生成基于人格与时序事件图的超长对话，构建评测LLM超长期对话记忆的基准LoCoMo。", "methodCore": "LoCoMo面向此前研究仅覆盖不超过五个会话的空白，专门评测LLM智能体在超长期对话中的记忆能力。它采用人机协同管线生成高质量超长对话：先用基于人格画像(personas)与时序事件图(temporal event graphs)的LLM智能体架构生成对话，并赋予每个智能体分享与回应图像的能力，再由人工标注者校验编辑以保证长程一致性与对事件图的忠实性。最终收集的LoCoMo数据集平均每段约300轮、9K token、跨最多35个会话。基于这些对话，基准构建问答、事件摘要(event summarization)与多模态对话生成(multi-modal dialogue generation)三类评测任务，全面衡量模型对冗长对话的理解及对长程时序与因果动态的把握，考察记忆与推理在超长交互史上的结合表现。", "evaluation": "基准评测了长上下文LLM与检索增强生成(RAG)方法在问答、事件摘要与多模态对话生成上的表现。结果显示模型在理解冗长对话、把握长程时序与因果动态上仍面临明显挑战，且易出现说话人误配等问题；采用长上下文或RAG策略能带来一定改善，但整体表现仍显著落后于人类水平，暴露超长期对话记忆的普遍瓶颈。", "mainFinding": "即便借助长上下文或RAG，模型在超长对话的记忆、时序与因果推理上仍远逊于人类，说明超长期对话记忆能力至今尚未被真正解决。", "limitations": "对话由LLM合成且仅50段、规模较小，事件摘要与多模态对话生成等任务的评价较主观、且依赖人工校验与构造假设。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2402.17753"}], "citation": "LOCOMO, ACL 2024."},
-  {"id": "memory-ev-ruler", "page": "memory", "title": "RULER: What's the Real Context Size of Your Long-Context Language Models?", "shortTitle": "RULER", "category": "memory-eval", "maturity": "mature", "score": 0.91, "year": 2024, "venue": "COLM 2024", "authors": "Cheng-Ping Hsieh et al.", "methodFamily": "合成长上下文基准", "tags": ["大海捞针", "合成任务", "有效上下文", "长度可配"], "scores": {"clarity": 0.92, "evidence": 0.9, "reproducibility": 0.95, "adoption": 0.95, "selfEvolution": 0.2}, "summary": "扩展大海捞针测试的合成基准，用可配置序列长度与任务复杂度评估长上下文模型的真实有效上下文。", "methodCore": "RULER针对大海捞针(NIAH)测试仅反映浅层长上下文理解的局限，构建可灵活配置序列长度与任务复杂度的合成基准。它在原始NIAH之上大幅扩展，纳入不同类型与数量的针的变体，并新增多跳追踪(multi-hop tracing)与聚合(aggregation)两类任务，以检验超越单纯上下文检索的行为。全基准含13个代表性任务，覆盖检索、多跳追踪、聚合、问答等类别，每个任务的序列长度、针数量与干扰复杂度均可编程配置，从而在从数千到128K的不同长度上自动生成受控样本。评测以模型能否在指定长度稳定完成任务、其准确率跌破满意阈值前的最大长度来界定真实有效上下文，而非其宣称的窗口大小，从而暴露宣称长度与有效长度之间的显著落差。", "evaluation": "基准对17个长上下文LM在13个代表性任务上进行系统评测。尽管几乎所有模型在原始NIAH上近乎满分，但随上下文增长普遍出现大幅性能下降；模型虽宣称支持32K或更长上下文，仅约半数能在32K维持满意表现。对支持200K的Yi-34B的分析进一步显示，随输入长度与任务复杂度提升仍有很大改进空间，宣称长度显著高于有效长度。", "mainFinding": "模型宣称的上下文长度远大于其真实有效长度：NIAH满分掩盖了随长度增长的严重性能衰减，亟需更严格的综合评测来揭示真实能力。", "limitations": "任务全为合成构造，与真实应用场景存在差距，且不评测记忆更新、跨会话交互或经验累积等更高阶能力。仅刻画有效上下文长度而非记忆机制本身。", "related": ["memory-ev-nolima"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2404.06654"}], "citation": "RULER, COLM 2024."},
-  {"id": "memory-ev-bench-infinitebench", "page": "memory", "title": "∞Bench: Extending Long Context Evaluation Beyond 100K Tokens", "shortTitle": "∞Bench/InfiniteBench", "category": "memory-eval", "maturity": "mature", "score": 0.86, "year": 2024, "venue": "ACL 2024", "authors": "Xinrong Zhang et al.", "methodFamily": "超长上下文基准", "tags": ["100K+", "中英双语", "合成与真实", "长依赖"], "scores": {"clarity": 0.88, "evidence": 0.85, "reproducibility": 0.9, "adoption": 0.9, "selfEvolution": 0.2}, "summary": "首个平均数据长度超过10万token的LLM长上下文基准，覆盖合成与真实的多领域任务。", "methodCore": "∞Bench针对现有公开基准多聚焦约10K token、难以评估100K+长上下文能力的问题，构建首个平均数据长度超过10万token的LLM长上下文基准。它由合成与真实两类任务组成，跨越多个领域并以中英双语呈现。任务被刻意设计为需充分理解上下文中的长程依赖，使得仅从上下文检索少量片段不足以求解，从而区分真正的全局理解与局部定位。合成侧含密钥检索、数字与键值检索等诊断项，真实侧含长篇小说问答、代码调试与运行、数学计算与查找等任务，以各子任务的准确率或匹配分作为指标。通过在超百万上下文规模上评测，∞Bench考察模型对全局信息的整合能力，并给出关于LLM处理长上下文行为的多项分析。", "evaluation": "基准评测了面向长上下文优化的最先进专有与开源LLM，覆盖合成与真实的中英双语任务。结果表明现有长上下文模型在有效处理100K+上下文时仍需显著改进，尤其在需要全局理解而非局部片段检索的任务上表现薄弱；论文还给出三项关于模型处理长上下文行为的有趣分析，进一步揭示其在超长输入下的失效模式与规律。", "mainFinding": "平均超100K token的评测揭示，现有长上下文模型仍难以真正整合全局信息、而非仅做局部片段检索，其宣称的长上下文能力被明显高估。", "limitations": "部分任务为合成构造，模型迭代快导致榜单易过时，且不涉及交互式或跨会话记忆的读写与更新评测。评测偏静态长文档而非交互式对话历史。", "related": ["memory-ev-longbench"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2402.13718"}], "citation": "∞Bench/InfiniteBench, ACL 2024."},
-  {"id": "memory-ev-longbench", "page": "memory", "title": "LongBench: A Bilingual, Multitask Benchmark for Long Context Understanding", "shortTitle": "LongBench", "category": "memory-eval", "maturity": "mature", "score": 0.89, "year": 2023, "venue": "ACL 2024", "authors": "Yushi Bai et al.", "methodFamily": "双语多任务长上下文基准", "tags": ["中英双语", "多任务", "真实任务", "长度分析"], "scores": {"clarity": 0.9, "evidence": 0.88, "reproducibility": 0.95, "adoption": 0.95, "selfEvolution": 0.15}, "summary": "首个双语、多任务、综合评估大模型长上下文理解能力的基准，覆盖21个数据集六大任务类别。", "methodCore": "LongBench针对缺乏面向长上下文理解的综合基准这一空白，构建首个双语、多任务的长上下文理解评测基准，以更严格地评估扩展上下文窗口与记忆机制带来的收益。它由21个数据集组成、覆盖六大任务类别：单文档QA、多文档QA、摘要、少样本学习、合成任务与代码补全，兼含中英文，英文平均约6711词、中文约13386字，覆盖书籍、报告、代码库等真实长文本应用领域。所有数据集被标准化为统一格式，便于对LLM进行轻松的自动评估，采用F1、Rouge、准确率等自动指标。基准可按输入长度分析同一模型在不同长度区间的性能变化趋势，从而刻画长序列处理的能力边界，并检验位置编码缩放、长序列微调、检索压缩等技术对长上下文理解的作用。", "evaluation": "基准综合评测了8个LLM。发现：商用模型GPT-3.5-Turbo-16k优于其他开源模型，但在更长上下文上仍显吃力；缩放位置编码与在更长序列上微调能带来显著提升；检索等上下文压缩技术可改善弱长上下文模型，但仍落后于本身具备强长上下文理解能力的模型，无法完全弥补差距。综合结果为长上下文技术路线的取舍提供了实证依据。", "mainFinding": "随输入长度增加LLM性能显著下降，凸显长序列处理的普遍瓶颈，且强长上下文理解能力难以仅靠检索等上下文压缩技术弥补。这为长上下文技术改进指明了明确方向。", "limitations": "多数任务平均长度仅约6-13k，对100K+超长上下文覆盖不足，且为静态文档评测而非交互式跨会话记忆读写。", "related": ["memory-ev-bench-infinitebench"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2308.14508"}], "citation": "LongBench, ACL 2024."},
-  {"id": "memory-ev-longbench-v2", "page": "memory", "title": "LongBench v2: Towards Deeper Understanding and Reasoning on Realistic Long-context Multitasks", "shortTitle": "LongBench v2", "category": "memory-eval", "maturity": "growing", "score": 0.87, "year": 2024, "venue": "ACL 2025", "authors": "Yushi Bai et al.", "methodFamily": "深度推理长上下文基准", "tags": ["深度推理", "多选题", "长对话历史", "推理时算力"], "scores": {"clarity": 0.88, "evidence": 0.86, "reproducibility": 0.9, "adoption": 0.85, "selfEvolution": 0.2}, "summary": "面向真实长上下文多任务、强调深度理解与推理的高难度多选基准。", "methodCore": "LongBench v2面向真实长上下文多任务、强调需要深度理解与推理的问题，构建高难度多选基准。它包含503道富有挑战性的四选一多选题，上下文长度从8k词跨越至2M词，覆盖六大任务类别：单文档QA、多文档QA、长上下文学习(long in-context learning)、长对话历史理解、代码仓库理解与长结构化数据理解。为保证广度与实用性，数据采集自近100位具有多样专业背景的高学历人士，并结合自动与人工双重审核以维持高质量与高难度，使人类专家在15分钟限时下仅达53.7%准确率。基准采用统一的多选准确率指标，并特别对比含更长推理的模型设置，以检验增强推理能力与扩展推理时算力对攻克长上下文难题的作用。", "evaluation": "基准评测显示，表现最佳的模型直接作答仅达50.1%准确率，而含更长推理的o1-preview达到57.7%、超出人类专家基线约4%；人类专家在15分钟限时下也仅达53.7%，足见任务之难。这些结果凸显了增强推理能力与扩展推理时算力(inference-time compute)对攻克长上下文挑战的关键作用。", "mainFinding": "长上下文难题的关键在推理：直接作答的模型不及人类，而具备更长推理的模型可反超人类基线，说明推理时算力是重要突破口。也为长上下文评测树立了更高的推理难度标尺。", "limitations": "题量相对有限(仅503题)，以四选一多选形式衡量、可能低估生成能力，且并非交互式跨会话记忆的评测。上下文虽跨越至2M词但真实超长样本占比不高。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2412.15204"}], "citation": "LongBench v2, ACL 2025."},
-  {"id": "memory-ev-l-eval", "page": "memory", "title": "L-Eval: Instituting Standardized Evaluation for Long Context Language Models", "shortTitle": "L-Eval", "category": "memory-eval", "maturity": "mature", "score": 0.84, "year": 2023, "venue": "ACL 2024", "authors": "Chenxin An et al.", "methodFamily": "标准化长上下文评测", "tags": ["标准化评测", "开放/封闭任务", "人工标注", "评价指标"], "scores": {"clarity": 0.86, "evidence": 0.84, "reproducibility": 0.88, "adoption": 0.85, "selfEvolution": 0.15}, "summary": "为长上下文语言模型建立标准化、高质量评测套件，涵盖多样任务与评价方法。", "methodCore": "L-Eval旨在为长上下文语言模型(LCLMs)建立更标准化的评测，从数据集构建与评价指标两方面弥补开源模型评测的不足。数据集侧，它构建含20个子任务、508篇长文档、2000余条人工标注查询-回复对的评测套件，涵盖多样的问题风格、领域与3k至200k token的输入长度。指标侧，它系统考察适用于LCLMs的评价方式，发现常用的n-gram匹配指标普遍与人工判断相关性不佳，因而强烈主张采用长度指令增强(length-instruction-enhanced,LIE)评价并引入LLM判分。任务分为侧重推理理解的封闭式任务与侧重信息聚合的开放式任务两类，力求给出更可靠、更有原则的长文本评价范式，为LCLMs研究奠定基础。", "evaluation": "基准综合评测了4个流行商用LLM与12个开源模型。其中GPT-4、Claude等专有模型能在扩展上下文中较好保持推理能力，而开源模型仍处于早期发展阶段、差距明显；实证还发现常用n-gram匹配指标与人工判断相关性有限，故基准倡导采用LIE评价与LLM判分以提升评价的可靠性与一致性。", "mainFinding": "长文本评价的常用n-gram指标不可靠、需LLM判分与长度指令增强，且开源LCLMs在扩展上下文推理上仍明显落后于专有模型。", "limitations": "规模相对较小、长度上限200k，为静态文档评测，不涉及跨会话记忆、知识更新与经验演化等交互能力。评价改进主要围绕指标可靠性而非记忆动态。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2307.11088"}], "citation": "L-Eval, ACL 2024."},
-  {"id": "memory-ev-memoryagentbench", "page": "memory", "title": "Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions (MemoryAgentBench)", "shortTitle": "MemoryAgentBench", "category": "memory-eval", "maturity": "growing", "score": 0.85, "year": 2025, "venue": "ICLR 2026", "authors": "Yuanzhe Hu et al.", "methodFamily": "记忆智能体基准", "tags": ["记忆智能体", "增量多轮", "测试时学习", "选择性遗忘"], "scores": {"clarity": 0.86, "evidence": 0.84, "reproducibility": 0.85, "adoption": 0.72, "selfEvolution": 0.6}, "summary": "面向记忆智能体、按增量多轮交互设计的基准，测评准确检索、测试时学习、长程理解与冲突解决/选择性遗忘四种核心能力。", "methodCore": "MemoryAgentBench针对现有智能体基准偏重推理、规划与执行而记忆机制评测不足的问题，基于记忆科学与认知科学的经典理论，提炼出记忆智能体的四项核心能力：准确检索(accurate retrieval)、测试时学习(test-time learning)、长程理解(long-range understanding)与选择性遗忘(selective forgetting)。它指出既有基准或受限于短上下文、或面向书籍QA等静态长上下文设置，既不反映记忆智能体多轮增量累积信息的交互本质，也无一能覆盖全部四项能力。为此，基准把既有长上下文数据集改造并纳入新构造的数据集，统一转为多轮增量格式，以分块方式逐段喂入信息，模拟真实的多轮多会话信息累积过程，要求智能体在交互中持续读写记忆，并以四能力对应任务的准确率进行系统评估。", "evaluation": "基准评测了从简单上下文型、检索增强生成(RAG)型，到带外部记忆模块与工具集成的多类记忆智能体，以四项核心能力对应任务的准确率统一衡量。实证结果表明，当前方法尚无法同时掌握四项能力，尤其在测试时学习与选择性遗忘/冲突解决上短板明显，凸显对更全面记忆机制研究的迫切需求与方向。简单长上下文方案在部分能力上仍颇具竞争力。", "mainFinding": "没有现有记忆智能体能同时掌握准确检索、测试时学习、长程理解与选择性遗忘四项能力，揭示综合记忆机制的明显缺口。这为设计覆盖全部四项能力的综合记忆机制指明方向。", "limitations": "任务部分改编自既有长上下文数据集，基准较新、广泛采用度尚待积累，且遗忘等能力评测仍受构造方式约束。多轮增量格式由既有静态数据集转换而来。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2507.05257"}], "citation": "MemoryAgentBench, ICLR 2026."},
-  {"id": "memory-ev-nolima", "page": "memory", "title": "NoLiMa: Long-Context Evaluation Beyond Literal Matching", "shortTitle": "NoLiMa", "category": "memory-eval", "maturity": "growing", "score": 0.85, "year": 2025, "venue": "ICML 2025", "authors": "Ali Modarressi et al.", "methodFamily": "无字面匹配大海捞针", "tags": ["大海捞针", "潜在关联", "低词面重叠", "128K"], "scores": {"clarity": 0.88, "evidence": 0.86, "reproducibility": 0.85, "adoption": 0.75, "selfEvolution": 0.15}, "summary": "扩展大海捞针、令问题与针几乎无词面重叠的基准，要求模型靠潜在语义关联而非字面匹配定位信息。", "methodCore": "NoLiMa针对NIAH及其变体中问题与针存在字面匹配、模型可借表面模式取巧的缺陷，扩展大海捞针范式并精心设计针集，使问题与针之间只有极小的词汇重叠。由此模型无法依赖字面匹配，而必须推断潜在语义关联(latent associations)才能在充满干扰的长上下文中定位正确的针并作答。基准针对声称支持至少128K token的模型，在从短到最长128K的不同长度区间生成受控样本，以定位与作答准确率为指标，并系统对比同一模型在短、长上下文下的表现落差。分析进一步归因于注意力机制在缺乏字面匹配时于长上下文中检索相关信息的难度上升，专门刻画长上下文中的深层语义关联能力，堵住表面匹配的取巧路径。", "evaluation": "基准评测了13个声称支持至少128K上下文的流行LLM。它们在短上下文(<1K)表现良好，但随长度增加性能急剧下降：在32K时11个模型跌破其强短上下文基线的50%；即便表现最佳的GPT-4o也从近满分99.3%降至69.7%，连具备推理能力或CoT提示的模型也难以维持长上下文表现。", "mainFinding": "当针与问题无字面重叠时，长上下文性能急剧崩塌，说明模型此前的长上下文表现很大程度依赖字面匹配而非真正的语义整合。这说明真正的长上下文语义理解仍是未解难题。", "limitations": "仍属合成检索式任务、聚焦单针语义定位，不评测记忆更新、跨会话交互与经验的持续累积和演化。评测形式仍为受控合成而非真实长文档场景。", "related": ["memory-ev-ruler"], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2502.05167"}], "citation": "NoLiMa, ICML 2025."},
-  {"id": "memory-ev-babilong", "page": "memory", "title": "BABILong: Testing the Limits of LLMs with Long Context Reasoning-in-a-Haystack", "shortTitle": "BABILong", "category": "memory-eval", "maturity": "growing", "score": 0.84, "year": 2024, "venue": "NeurIPS 2024", "authors": "Yuri Kuratov et al.", "methodFamily": "长上下文推理基准", "tags": ["多跳推理", "极长上下文", "可扩展", "记忆增强"], "scores": {"clarity": 0.86, "evidence": 0.85, "reproducibility": 0.9, "adoption": 0.8, "selfEvolution": 0.25}, "summary": "面向在极长文档中跨分散事实进行推理的可扩展基准，可扩展至数千万token。", "methodCore": "BABILong针对现有评测未能全面衡量模型处理长上下文效率的问题，构建面向在极长文档中跨分散事实进行推理的可扩展基准。它包含20类多样推理任务，如事实链(fact chaining)、简单归纳、演绎、计数以及列表/集合处理等；这些任务本身就有难度，而当所需事实分散嵌入长篇自然文本中时更为艰巨，从而把推理与检索紧密耦合。基准以bAbI式句子作为支撑事实(针)、以自然长文本作为背景噪声(干草堆)，将少量关键事实分散嵌入超长上下文，以指定长度下的作答准确率为指标。其长度可扩展至任意规模以支撑对未来更强模型的评估，论文提供了最长至1000万token的评测切分，可持续追踪能力边界。", "evaluation": "基准评测显示，流行LLM实际仅有效利用上下文的10-20%，且随推理复杂度提升性能急剧下降。在上下文内推理的替代方案中，RAG方法在单事实问答上取得约60%准确率且与上下文长度无关；上下文扩展方法里，经微调的循环记忆Transformer(recurrent memory transformers)表现最佳，可处理长达5000万token。", "mainFinding": "主流LLM仅有效利用上下文的10-20%且随推理复杂度骤降，揭示长上下文利用率极低；而循环记忆架构可将处理长度推至千万级。", "limitations": "针基于合成bAbI事实、背景为无关自然文本，与真实长文档的分布存在差异，且不评测跨会话记忆的更新与遗忘。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2406.10149"}], "citation": "BABILong, NeurIPS 2024."},
-  {"id": "memory-ev-zeroscrolls", "page": "memory", "title": "ZeroSCROLLS: A Zero-Shot Benchmark for Long Text Understanding", "shortTitle": "ZeroSCROLLS", "category": "memory-eval", "maturity": "mature", "score": 0.8, "year": 2023, "venue": "EMNLP 2023 Findings", "authors": "Uri Shaham et al.", "methodFamily": "零样本长文本基准", "tags": ["零样本", "长文本理解", "信息聚合", "排行榜"], "scores": {"clarity": 0.85, "evidence": 0.82, "reproducibility": 0.88, "adoption": 0.82, "selfEvolution": 0.1}, "summary": "面向长文本自然语言理解的零样本基准，仅含测试与小验证集，含信息融合等新任务。", "methodCore": "ZeroSCROLLS是面向长文本自然语言理解的零样本基准，仅包含测试集与小规模验证集、不提供训练数据，以强调零样本(zero-shot)评测设置。它在SCROLLS基础上改编6项已有任务，并新增4个数据集，其中包括两项新颖的信息融合(information fusing)任务，如聚合正面评论的百分比。全基准共10项任务，涵盖基于查询的摘要、多跳问答、章节摘要排序以及情感聚合、跨文档信息融合等，考察模型在无任务微调条件下对长文本的理解与聚合能力。基准采用统一的自动指标计算综合分数，并维护公开的实时排行榜，邀请研究者在动态更新的榜单上评测新方法，以应对不断变化的技术前沿与模型迭代。", "evaluation": "基准综合评测了开源与闭源大模型。结果发现Claude优于ChatGPT，而GPT-4取得最高平均分；在问答类任务上零样本LLM可媲美微调模型，但在情感聚合、跨文档信息融合等聚合类任务上，多数模型仍难以超越朴素基线，存在明显困难，说明聚合类能力尚未随规模自然涌现。这为长文本聚合能力的欠缺提供了明确的实证信号。", "mainFinding": "零样本LLM在长文本问答上已具竞争力，但在跨文档聚合与信息融合类任务上普遍受挫，揭示信息聚合仍是尚未攻克的开放难题。这为长文本信息聚合能力的研究指明了改进方向。", "limitations": "上下文长度相对较短，聚合任务仍是未解挑战，且为静态文本理解而非交互式跨会话记忆的评测。实时排行榜使不同时期结果的可比性受到影响。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2305.14196"}], "citation": "ZeroSCROLLS, EMNLP 2023 Findings."},
-  {"id": "memory-ev-perltqa", "page": "memory", "title": "PerLTQA: A Personal Long-Term Memory Dataset for Memory Classification, Retrieval, and Synthesis in Question Answering", "shortTitle": "PerLTQA", "category": "memory-eval", "maturity": "growing", "score": 0.78, "year": 2024, "venue": "SIGHAN @ ACL 2024", "authors": "Yiming Du et al.", "methodFamily": "个人长期记忆问答基准", "tags": ["语义/情景记忆", "记忆分类", "记忆检索", "记忆合成"], "scores": {"clarity": 0.82, "evidence": 0.78, "reproducibility": 0.8, "adoption": 0.68, "selfEvolution": 0.3}, "summary": "融合语义与情景记忆的个人长期记忆问答数据集，含世界知识、画像、社会关系、事件与对话。", "methodCore": "PerLTQA是融合语义记忆(semantic memory)与情景记忆(episodic memory)的个人长期记忆问答数据集，用以研究个性化记忆在QA任务中的运用，聚焦社交互动与事件。它为30个虚构角色构造两类记忆：语义记忆含世界知识、个人画像与社会关系，情景记忆含个人事件与对话记录；并围绕这些内容构建含8593道问题的综合基准。基于该数据集，论文提出记忆整合与生成框架，由记忆分类(Memory Classification)、记忆检索(Memory Retrieval)与记忆合成(Memory Synthesis)三大组件构成：先判定问题所需调用的记忆类型，再从个人记忆库检索相关条目，最后综合多条记忆合成答案，以分类准确率、检索表现与合成答案质量共同衡量系统对个性化长期记忆的组织与调用能力。", "evaluation": "基准用五个LLM与三个检索器评测该记忆整合框架。实验表明，在记忆分类任务上基于BERT的分类模型显著优于ChatGLM3、ChatGPT等LLM；研究还凸显了有效记忆整合对QA任务表现的重要性，验证了记忆分类、检索、合成三段式框架在个性化问答中的价值与可行性。这为个性化记忆问答系统的设计提供了实证参照。", "mainFinding": "个性化记忆的组织与调用仍有专门优化空间：小型BERT分类器在记忆分类上胜过大型LLM，且有效记忆整合对QA至关重要。这为个性化记忆系统的专门优化指明了方向。", "limitations": "数据为LLM合成、仅30个虚构角色、规模有限，主要评测记忆分类/检索/合成而非长期演化、更新与遗忘。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2402.16288"}], "citation": "PerLTQA, SIGHAN @ ACL 2024."},
-  {"id": "memory-ev-helmet", "page": "memory", "title": "HELMET: How to Evaluate Long-Context Language Models Effectively and Thoroughly", "shortTitle": "HELMET", "category": "memory-eval", "maturity": "growing", "score": 0.86, "year": 2024, "venue": "ICLR 2025", "authors": "Howard Yen et al.", "methodFamily": "综合长上下文评测", "tags": ["应用导向", "七类任务", "可靠排名", "全上下文推理"], "scores": {"clarity": 0.88, "evidence": 0.87, "reproducibility": 0.88, "adoption": 0.8, "selfEvolution": 0.2}, "summary": "涵盖七类应用导向任务的综合长上下文基准，针对合成任务覆盖不足、长度不够、指标不可靠等问题给出更可靠排名。", "methodCore": "HELMET针对开发者常依赖NIAH等合成任务或任意任务子集、导致评测信号噪声大且模型难以比较的问题，构建涵盖七类多样、应用导向任务的综合长上下文基准。它系统解决既有基准应用覆盖不足、上下文长度不够、指标不可靠及与基座模型不兼容等缺陷：加入最长128K的可控长度、引入基于模型的评价以获得可靠指标，并采用少样本提示以稳健评测基座模型。七大类别包括检索、检索增强生成(RAG)、段落重排、ALCE式带引用生成、长文档QA、摘要与多样上下文学习。基准在多长度区间统一评测，力求给出与下游应用相关性更高、更稳定的前沿模型排名，而非仅靠大海捞针类合成任务区分模型，并建议用其RAG任务快速迭代模型开发。", "evaluation": "基准对59个长上下文模型进行综合研究，发现：NIAH等合成任务不能可靠预测下游性能；HELMET各应用类别趋势各异、彼此相关性低；尽管多数模型NIAH近满分，但在需全上下文推理或遵循复杂指令时开源模型显著落后于闭源模型，且差距随长度扩大，作者建议用其RAG任务快速迭代模型。这为长上下文模型的快速迭代提供了更可靠信号。", "mainFinding": "合成NIAH并非下游性能的可靠预测器；需跨多样应用导向任务的整体评测，开源模型在全上下文推理上随长度扩大而愈发落后。这为长上下文模型的可靠评测树立了新范式。", "limitations": "评测成本较高、部分依赖模型判分，偏文档类任务，不覆盖跨会话交互记忆与经验的持续演化和更新。评价高度依赖模型判分带来一定的稳定性风险。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2410.02694"}], "citation": "HELMET, ICLR 2025."},
-  {"id": "memory-ev-memora", "page": "memory", "title": "From Recall to Forgetting: Benchmarking Long-Term Memory for Personalized Agents", "shortTitle": "Memora", "category": "memory-eval", "maturity": "exploring", "score": 0.83, "year": 2026, "venue": "arXiv 2026", "authors": "Md Nayem Uddin et al.", "methodFamily": "个性化长期记忆基准", "tags": ["长期记忆", "遗忘感知", "个性化智能体"], "scores": {"clarity": 0.85, "evidence": 0.82, "reproducibility": 0.78, "adoption": 0.6, "selfEvolution": 0.78}, "summary": "面向个性化智能体的长期记忆基准，覆盖数周至数月的用户对话，围绕记忆巩固与随情况变化的更新能力测评记住、推理、推荐三类以记忆为基础的任务。", "methodCore": "Memora针对现有基准把长期记忆评测简化为从过往对话检索事实、难以反映记忆随时间巩固(consolidate)与频繁知识更新的问题，构建跨越数周至数月长期用户对话的长期记忆基准。它围绕记忆巩固与知识更新设置三类以记忆为基础的任务：记住(remembering)、推理(reasoning)与推荐(recommending)，要求个性化智能体在跨会话中维持持久记忆并随情况变化更新。为保证数据质量，基准采用自动化的记忆锚定检查(memory-grounding checks)与人工评估。它进一步提出遗忘感知记忆准确率(Forgetting-Aware Memory Accuracy,FAMA)指标，在评分时惩罚对已过时或已失效记忆的依赖，从而把是否复用陈旧记忆纳入衡量，更真实地检验长期记忆的巩固与更新能力。", "evaluation": "基准评测了四款LLM与六种记忆智能体，以remembering、reasoning、recommending三类任务的表现及遗忘感知准确率FAMA为指标。结果揭示模型频繁复用已失效记忆、难以协调不断演变的记忆，而记忆智能体仅带来边际提升，暴露个性化长期记忆在巩固与更新环节上的明显短板。", "mainFinding": "长期记忆的关键不在检索而在更新与遗忘：模型频繁复用失效记忆、记忆智能体仅边际改善，凸显记忆巩固与更新能力的缺失。这为个性化长期记忆的巩固与更新指明了研究方向。", "limitations": "数周至数月的长跨度对话依赖自动构造与人工校验，任务集与所评记忆系统覆盖仍较有限、基准较新。跨数周至数月的对话主要由自动流程构造生成。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2604.20006"}], "citation": "Memora, arXiv 2026.", "figures": [{"src": "figures/memory-ev-memora.png", "caption": "Memora 基准的三类任务:Remembering(回忆检索)、Updating(更新覆盖)与 Forgetting(遗忘失效),系统评测个性化长期记忆。"}]},
-  {"id": "memory-ev-structmemeval", "page": "memory", "title": "Evaluating Memory Structure in LLM Agents", "shortTitle": "StructMemEval", "category": "memory-eval", "maturity": "exploring", "score": 0.8, "year": 2026, "venue": "arXiv 2026", "authors": "Alina Shutova et al.", "methodFamily": "记忆结构组织基准", "tags": ["记忆结构", "知识组织", "记忆架构"], "scores": {"clarity": 0.83, "evidence": 0.78, "reproducibility": 0.75, "adoption": 0.58, "selfEvolution": 0.72}, "summary": "测评智能体主动组织长期记忆结构、而非仅做事实回忆的基准，任务需以交易账本、待办清单、树状层级等特定结构组织知识才能可靠解决。", "methodCore": "StructMemEval针对多数长期记忆基准仅考察简单事实保持、多跳回忆与基于时间的变化、而这些能力用简单检索增强LLM即可完成、无法检验复杂记忆层级的问题，提出评测智能体主动组织记忆结构的基准。它收集一批人类需依靠特定知识结构才能求解的任务，如交易账本(transaction ledgers)、待办清单(to-do lists)、树状层级(trees)等，要求智能体主动把长期记忆组织成相应结构，而不仅是被动检索事实。基准通过对比简单检索增强LLM与显式记忆智能体在这些任务上的表现，考察模型能否识别并维护恰当的记忆结构，并特别检验模型在有无组织提示下自主识别所需结构的能力，以指明未来记忆框架与LLM训练的改进方向。", "evaluation": "初步实验显示，简单检索增强LLM难以完成这些需结构化组织的任务；而记忆智能体在被提示如何组织记忆时能可靠求解。然而研究也发现，现代LLM在未被提示时往往无法自行识别所需的记忆结构，揭示自主结构组织能力的明显不足与未来的改进方向。这为记忆结构自主组织能力的研究提供了初步的实证证据。", "mainFinding": "复杂记忆需主动的结构化组织而非扁平检索：模型在被提示结构时能解题，却常无法自主识别应当采用何种记忆结构。这为记忆框架与LLM训练指明了结构化组织方向。", "limitations": "为初步实验、任务与模型覆盖有限，结构组织能力尚依赖显式提示触发、缺乏对自主性的系统评估。任务多需人类式结构化知识、构造成本较高。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2602.11243"}], "citation": "StructMemEval, arXiv 2026."},
-  {"id": "memory-ev-mem2actbench", "page": "memory", "title": "Mem2ActBench: A Benchmark for Evaluating Long-Term Memory Utilization in Task-Oriented Autonomous Agents", "shortTitle": "Mem2ActBench", "category": "memory-eval", "maturity": "exploring", "score": 0.81, "year": 2026, "venue": "arXiv 2026", "authors": "Yiting Shen et al.", "methodFamily": "任务型记忆应用基准", "tags": ["记忆应用", "工具调用", "参数锚定"], "scores": {"clarity": 0.82, "evidence": 0.8, "reproducibility": 0.76, "adoption": 0.58, "selfEvolution": 0.75}, "summary": "评测任务型自主智能体能否主动利用长期记忆执行工具动作的基准，考察智能体的工具选择与参数锚定，而非仅被动回应显式问题的孤立事实检索。", "methodCore": "Mem2ActBench针对既有基准只测智能体被动检索孤立事实、忽视主动运用记忆执行任务这一更关键能力的问题，构建评测任务型自主智能体能否主动利用长期记忆执行工具动作的基准。它模拟持久助手场景：用户在长而间断的交互中反复提及同一主题，期望此前建立的偏好与任务状态被隐式沿用；智能体须主动调用长期记忆来选择合适工具(tool selection)并锚定其调用参数(parameter grounding)。数据由自动化管线合并ToolACE、BFCL、Oasst1等异构来源，通过一致性建模消解冲突，合成2029个会话、平均每会话12轮用户-助手-工具交互；再由逆向生成(reverse-generation)方法从这些记忆链产出400个工具使用任务，经人工评估确认其中91.3%强依赖记忆。", "evaluation": "基准在400个经人工确认强依赖记忆的工具使用任务上评测了七种代表性记忆框架，以工具选择的正确性与其调用参数锚定的准确率为指标。实验表明，当前记忆系统在主动利用记忆进行参数锚定上仍明显不足，凸显亟需更有效的方法来评估并改进任务执行环节中的记忆应用能力。这为面向任务执行的记忆系统评估提供了新的抓手。", "mainFinding": "记忆的价值在于驱动动作而非被动检索：当前记忆系统在主动调用记忆选择工具、锚定调用参数上普遍不足，揭示任务执行中的记忆应用缺口。", "limitations": "数据由异构来源自动合成，任务领域偏工具调用、覆盖范围仍较有限，记忆依赖性由逆向生成与人工校验保证。任务由记忆链逆向生成、真实交互分布仍需验证。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2601.19935"}], "citation": "Mem2ActBench, arXiv 2026."},
-  {"id": "memory-ev-esmemeval", "page": "memory", "title": "ES-MemEval: Benchmarking Conversational Agents on Personalized Long-Term Emotional Support", "shortTitle": "ES-MemEval", "category": "memory-eval", "maturity": "exploring", "score": 0.78, "year": 2026, "venue": "arXiv 2026", "authors": "Tiantian Chen et al.", "methodFamily": "长期情感支持记忆基准", "tags": ["情感支持", "长期对话", "用户建模"], "scores": {"clarity": 0.81, "evidence": 0.78, "reproducibility": 0.74, "adoption": 0.56, "selfEvolution": 0.68}, "summary": "面向个性化长期情感支持场景的对话记忆基准，系统评测信息抽取、时序推理、冲突检测、拒答与用户建模五种核心记忆能力，覆盖问答、摘要与对话生成任务。", "methodCore": "ES-MemEval针对现有长期对话基准主要聚焦静态、显式的事实检索、难以评测用户信息分散、隐式且持续演变场景的问题，面向在线情感支持这类复杂长期Web服务构建综合记忆基准。它系统评测五种核心记忆能力：信息抽取(information extraction)、时序推理(temporal reasoning)、冲突检测(conflict detection)、拒答(abstention)与用户建模(user modeling)，并覆盖问答、摘要与对话生成三类任务。为支撑基准，论文配套提出多会话数据集EvoEmo，专门刻画碎片化、隐式的用户自我披露(user disclosures)与不断变化的用户状态，从而在贴近真实的长期个性化对话中检验记忆与检索的结合效果，凸显既有基准无法覆盖的隐式演变场景与用户建模难点。", "evaluation": "基准在问答、摘要、对话生成任务上评测了开源长上下文、商用及检索增强(RAG)型LLM。大量实验表明，显式长期记忆对减少幻觉、实现有效个性化至关重要；RAG能提升事实一致性，却难以应对时序动态与不断演变的用户状态，揭示当前记忆与检索范式的潜力与明显局限。这为长期个性化对话中记忆与检索的融合指明方向。", "mainFinding": "显式长期记忆对减少幻觉与个性化不可或缺，而RAG虽提升事实一致性却难处理时序动态与演变的用户状态，需二者更稳健融合。这为长期个性化情感支持系统指明了记忆改进方向。", "limitations": "领域集中于情感支持对话，EvoEmo数据为构造生成，基准较新、实际采用度与外部验证仍有待积累。五种能力的评价部分依赖模型判分与人工标注。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2602.01885"}], "citation": "ES-MemEval, arXiv 2026."},
-  {"id": "memory-ev-evomembench", "page": "memory", "title": "EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective", "shortTitle": "EvoMemBench", "category": "memory-eval", "maturity": "exploring", "score": 0.84, "year": 2026, "venue": "arXiv 2026", "authors": "Yuyao Wang et al.", "methodFamily": "自演化记忆基准", "tags": ["自演化", "跨情节记忆", "长上下文对比"], "scores": {"clarity": 0.85, "evidence": 0.83, "reproducibility": 0.8, "adoption": 0.6, "selfEvolution": 0.85}, "summary": "从自演化视角评测智能体记忆的统一基准，沿记忆范围与记忆内容两个维度组织任务，在标准化协议下比较15种记忆方法与强长上下文基线。", "methodCore": "EvoMemBench针对现有LLM智能体基准主要评估推理、规划与执行、而记忆的存储、更新与检索能力因缺乏系统评测手段而被忽视的问题，从自演化(self-evolving)视角构建统一记忆基准。它沿两条正交轴组织任务：记忆范围(memory scope,分情节内in-episode与跨情节cross-episode)与记忆内容(memory content,分知识导向knowledge-oriented与执行导向execution-oriented)，把存储、更新、检索能力落到统一评测协议中。在该标准化协议下，基准比较15种代表性记忆方法与强长上下文基线，考察不同记忆形式在四类设置下随任务演进的存储与复用效果，并开源代码，以推动更有效的智能体记忆系统研究与公平对比。", "evaluation": "基准在标准化协议下对比了15种代表性记忆方法与强长上下文基线。结果显示当前记忆系统远非通用解：长上下文基线仍很有竞争力，记忆在当前上下文不足或任务困难时增益最大；检索类方法在知识密集设置中表现强，而过程性与长期记忆方法在存储经验匹配任务结构时更适合执行导向任务。这为不同场景下的记忆形式选型提供了实证依据。", "mainFinding": "没有单一记忆形式全场景最优：长上下文基线仍强，记忆增益取决于上下文是否不足，检索适合知识密集、过程记忆适合执行导向任务。", "limitations": "记忆方法与任务设置虽多但仍有限，自演化能力多为回顾式评估而非在线部署中的持续演化评测。两轴四类设置虽系统但仍难穷尽真实任务分布。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2605.18421"}], "citation": "EvoMemBench, arXiv 2026."},
-  {"id": "memory-ev-evomemory", "page": "memory", "title": "Evo-Memory: Benchmarking LLM Agent Test-time Learning with Self-Evolving Memory", "shortTitle": "Evo-Memory", "category": "memory-eval", "maturity": "exploring", "score": 0.85, "year": 2025, "venue": "arXiv 2025", "authors": "Tianxin Wei et al.", "methodFamily": "自演化记忆流式基准", "tags": ["测试时学习", "自演化记忆", "经验复用"], "scores": {"clarity": 0.86, "evidence": 0.84, "reproducibility": 0.82, "adoption": 0.62, "selfEvolution": 0.88}, "summary": "评测LLM智能体测试时学习与自演化记忆的综合流式基准与框架，要求模型在演进的任务流中每次交互后持续检索、整合并更新记忆。", "methodCore": "Evo-Memory针对现有评测多局限于静态对话、把记忆当作被动检索、忽视跨演进任务流累积并复用经验能力的问题，提出评测自演化记忆的综合流式基准与框架。它强调有状态性(statefulness)对LLM智能体长期规划的重要，把数据集组织成顺序任务流(sequential task streams)，要求LLM在每次交互后搜索、适配并演化记忆，从而检验部署期的测试时演化(test-time evolution)。基准统一实现十余种代表性记忆模块，在10个多轮目标导向与单轮推理/问答数据集上评测；并提供检索复用先前经验的基线方法ExpRAG，进一步提出把推理、任务动作与记忆更新紧耦合的action-think-memory精炼流水线ReMem，以实现持续改进，弥补现有评测在经验累积与复用上的缺口。", "evaluation": "基准在10个多轮目标导向与单轮推理/问答数据集上，以顺序任务流形式评测了十余种代表性记忆模块及ExpRAG、ReMem基线。结果显示现有模型常无法从累积交互中学习、丢失宝贵的上下文洞见；而紧耦合推理-动作-记忆更新的ReMem能带来持续改进，验证测试时演化的必要性与有效性。这为部署期测试时记忆演化的研究提供了实证支撑。", "mainFinding": "记忆应在任务流中持续演化而非被动检索：现有模型难从累积交互学习，而推理-动作-记忆紧耦合的ReMem实现持续改进。这为测试时记忆演化与经验复用指明了研究方向。", "limitations": "记忆模块与流式任务实现复杂，任务多需可自动判分、领域覆盖有限，自演化以可自动评测的任务流为前提。顺序任务流的构建与自动判分带来额外工程负担。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2511.20857"}], "citation": "Evo-Memory, arXiv 2025."},
-  {"id": "memory-ev-stale", "page": "memory", "title": "STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?", "shortTitle": "STALE", "category": "memory-eval", "maturity": "exploring", "score": 0.82, "year": 2026, "venue": "arXiv 2026", "authors": "Hanxiang Chao et al.", "methodFamily": "记忆失效检测基准", "tags": ["隐式冲突", "记忆修订", "状态感知"], "scores": {"clarity": 0.84, "evidence": 0.82, "reproducibility": 0.78, "adoption": 0.58, "selfEvolution": 0.8}, "summary": "评测LLM智能体能否察觉自身记忆已失效的基准，聚焦隐式冲突：后续观察在无显式否定的情况下即令早先记忆作废，需靠上下文推断与常识识别。", "methodCore": "STALE针对当前基准主要衡量静态事实检索、忽视依据新证据修订既有信念能力的问题，识别出一种关键且被忽视的失效模式——隐式冲突(Implicit Conflict)：后续观察在没有显式否定的情况下使早先记忆作废，需靠上下文推断与常识推理才能察觉。为严格评测这一能力，基准构建400个专家校验的冲突场景、共1200条评测查询，覆盖100多个日常主题、上下文最长达150K token。它提出三维探测框架，分别测状态解析(State Resolution,发现旧信念已过时)、前提抵抗(Premise Resistance,拒绝错误预设旧状态的查询)与隐式策略适应(Implicit Policy Adaptation,在下游行为中主动应用更新状态)；并给出原型CUPMem，通过结构化状态整合与传播感知搜索强化写入时的记忆修订。", "evaluation": "基准系统评测了前沿LLM与专用记忆框架的状态感知能力。结果揭示在检索到更新证据与据此行动之间存在普遍鸿沟，即便最佳模型总体准确率也仅55.2%；模型常接受用户查询中嵌入的过时预设，并难以意识到用户某方面状态的变化应使相关记忆一并失效。这为状态感知记忆的评测提供了系统而细致的探测框架。", "mainFinding": "检索到更新证据与据此行动之间存在普遍鸿沟：模型能读到新证据却常沿用过时假设，显式状态裁决是稳健记忆的关键方向。这说明显式状态裁决是通向稳健智能体记忆的方向。", "limitations": "冲突场景为人工构造、需专家校验，隐式冲突覆盖的主题与形式仍有限，CUPMem仅为初始基线原型。隐式冲突场景的构造与校验高度依赖专家投入。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2605.06527"}], "citation": "STALE, arXiv 2026."},
-  {"id": "memory-ev-memoryarena", "page": "memory", "title": "MemoryArena: Benchmarking Agent Memory in Interdependent Multi-Session Agentic Tasks", "shortTitle": "MemoryArena", "category": "memory-eval", "maturity": "exploring", "score": 0.83, "year": 2026, "venue": "arXiv 2026", "authors": "Zexue He et al.", "methodFamily": "多会话智能体记忆基准", "tags": ["记忆-动作耦合", "多会话", "经验蒸馏"], "scores": {"clarity": 0.84, "evidence": 0.82, "reproducibility": 0.78, "adoption": 0.6, "selfEvolution": 0.82}, "summary": "统一评测多会话记忆-智能体-环境循环中智能体记忆的评测场，任务含相互依赖的子任务，需把早期经验蒸馏为记忆再指导后续动作。", "methodCore": "MemoryArena针对既有评测将记忆与动作割裂的问题：一类基准只测对过往对话或文本的回忆、却不看记忆如何指导未来决策，另一类只测单会话行动、无需长期记忆。它指出真实场景中记忆与动作紧密耦合——智能体在与环境交互中获取记忆，又依赖该记忆求解后续任务。为此，基准构建统一评测场，把记忆与动作耦合进多会话的记忆-智能体-环境循环(Memory-Agent-Environment loops)：由人工设计含显式相互依赖(interdependent)子任务的智能体任务，智能体须在早期交互中从动作与反馈里蒸馏经验、写入记忆，并在后续会话调用该记忆完成整体任务。基准支持网页导航、偏好约束规划、渐进信息搜索与顺序形式推理等场景，以整体任务成功率衡量。", "evaluation": "基准在网页导航、偏好约束规划、渐进信息搜索、顺序形式推理等含相互依赖子任务的多会话场景上评测带记忆的智能体，并与LoCoMo等既有长上下文记忆基准直接对照。结果显示，在LoCoMo等基准上近乎饱和的智能体，在本智能体设置中表现很差，暴露当前带记忆智能体评测的明显缺口。这为记忆与行动耦合的智能体评测确立了新的基准。", "mainFinding": "记忆必须在行动闭环中检验：在LoCoMo等回忆型基准近饱和的智能体，一旦需靠记忆指导多会话决策便大幅失败。这暴露了当前带记忆智能体评测的关键缺口。", "limitations": "任务由人工设计、规模有限，多会话记忆-智能体-环境循环的实现复杂度与评测成本均较高。多会话环境循环的搭建与运行开销均较为可观。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2602.16313"}], "citation": "MemoryArena, arXiv 2026.", "figures": [{"src": "figures/memory-ev-memoryarena.png", "caption": "MemoryArena 评测框架:在 Memory-Agent-Environment 循环中,以多会话、相互依赖的任务考察智能体的记忆组织与更新能力。"}]},
-  {"id": "memory-ev-memoryrewardbench", "page": "memory", "title": "MemoryRewardBench: Benchmarking Reward Models for Long-Term Memory Management in Large Language Models", "shortTitle": "MemoryRewardBench", "category": "memory-eval", "maturity": "exploring", "score": 0.79, "year": 2026, "venue": "arXiv 2026", "authors": "Zecheng Tang et al.", "methodFamily": "记忆管理奖励模型基准", "tags": ["奖励模型", "记忆管理", "长文生成"], "scores": {"clarity": 0.82, "evidence": 0.8, "reproducibility": 0.76, "adoption": 0.56, "selfEvolution": 0.68}, "summary": "首个系统研究奖励模型评估长期记忆管理过程能力的基准，覆盖长上下文理解与长文生成任务、10种不同记忆管理模式，上下文8K至128K。", "methodCore": "MemoryRewardBench针对越来越多工作以分段(segment)方式处理长上下文、亟需可靠自动评估记忆质量的需求，提出首个系统研究奖励模型(reward models,RMs)评估长期记忆管理过程能力的基准。它指出有效的记忆管理是让LLM在整段序列上传播信息的关键能力，因而用RM自动可靠地评估记忆质量至关重要。基准同时覆盖长上下文理解与长文生成(long-form generation)两类任务，设计10种具有不同记忆管理模式(memory management patterns)的设置，上下文长度从8K跨越至128K token。通过让RM对不同记忆管理过程的质量打分并与参考判断比对，考察其能否可靠区分优劣记忆管理，从而为自动评价记忆机制提供工具，并揭示当前RM的能力边界。", "evaluation": "基准评测了13个前沿奖励模型对长上下文理解与长文生成中记忆管理质量的判别能力。结果显示开源与专有模型之间的性能差距在缩小，且更新一代模型无论参数量多少都持续优于前代；同时基准也暴露了当前RM在跨多样设置评价记忆管理时的能力上限与根本局限。这为自动可靠评估记忆管理质量提供了工具与依据。", "mainFinding": "用奖励模型自动评判记忆管理质量可行但受限：新一代RM持续超越前代、开源追平专有，但跨设置评价记忆仍有根本局限。这为用奖励模型自动评估记忆质量指明了边界。", "limitations": "聚焦奖励模型的打分能力而非端到端记忆系统评测，记忆管理模式仅10种、场景覆盖较为有限。评测对象为奖励模型的判别力而非记忆系统本身。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2601.11969"}], "citation": "MemoryRewardBench, arXiv 2026."},
-  {"id": "memory-ev-memorybench", "page": "memory", "title": "MemoryBench: A Benchmark for Memory and Continual Learning in LLM Systems", "shortTitle": "MemoryBench", "category": "memory-eval", "maturity": "exploring", "score": 0.82, "year": 2025, "venue": "arXiv 2025", "authors": "Qingyao Ai et al.", "methodFamily": "记忆与持续学习基准", "tags": ["持续学习", "用户反馈", "服务期学习"], "scores": {"clarity": 0.84, "evidence": 0.81, "reproducibility": 0.82, "adoption": 0.62, "selfEvolution": 0.85}, "summary": "评测LLM系统记忆与持续学习能力的综合基准，通过用户反馈模拟框架考察系统在服务期从累积反馈中学习的能力，覆盖多领域多语言任务。", "methodCore": "MemoryBench针对数据、参数与测试时算力扩展逼近上限，以及现有LLM记忆基准多聚焦同质的长输入阅读理解、不检验系统在服务期从累积用户反馈中学习的问题，提出评测LLM系统记忆与持续学习(continual learning)能力的综合基准。作者受人类与传统AI从实践中学习、构建记忆与持续学习框架的启发，设计了一个用户反馈模拟框架(user feedback simulation framework)，据此构建覆盖多个领域、多种语言与多类任务类型的综合基准。系统需在与模拟用户的交互中不断吸收反馈、更新记忆并改进后续表现，基准据此评估其持续学习能力，并考察记忆构建与优化算法的有效性与效率，配套开源代码、数据集与网站以支持复现与后续研究。", "evaluation": "基准借助用户反馈模拟框架，在覆盖多领域、多语言与多任务类型的设置上评测了最先进基线的持续学习能力。实验表明这些基线在效果与效率两方面都远不能令人满意，说明LLM系统在服务期从累积反馈中持续学习、构建记忆的能力仍有巨大提升空间与研究价值。这为服务期持续学习与记忆构建的研究提供了平台。", "mainFinding": "服务期从用户反馈中持续学习是记忆的新维度：现有最先进基线在此上效果与效率均远不满意，揭示巨大的改进空间。这为LLM系统的持续学习与记忆优化指明了方向。", "limitations": "反馈由模拟框架生成、与真实用户交互仍有差距，任务与领域覆盖范围仍然较为有限。任务与领域覆盖有限、评测规模仍有待进一步扩展。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2510.17281"}], "citation": "MemoryBench, arXiv 2025."},
-  {"id": "memory-ev-personamem2", "page": "memory", "title": "PersonaMem-v2: Towards Personalized Intelligence via Learning Implicit User Personas and Agentic Memory", "shortTitle": "PersonaMem-v2", "category": "memory-eval", "maturity": "exploring", "score": 0.83, "year": 2025, "venue": "arXiv 2025", "authors": "Bowen Jiang et al.", "methodFamily": "隐式个性化记忆基准", "tags": ["隐式个性化", "智能体记忆", "强化微调"], "scores": {"clarity": 0.85, "evidence": 0.82, "reproducibility": 0.78, "adoption": 0.6, "selfEvolution": 0.8}, "summary": "面向隐式个性化的LLM数据集与智能体记忆框架，模拟千场用户-聊天机器人交互、覆盖300+场景与2万+隐式偏好、128k上下文。", "methodCore": "PersonaMem-v2面向个性化智能这一AI能力与对齐的里程碑，提出当前最先进的LLM个性化数据集：模拟1000场真实的用户-聊天机器人交互，覆盖300余个场景、20000余条用户偏好与128k token上下文窗口，且多数用户偏好以隐式(implicitly)方式披露以贴近真实交互。基于该数据，论文研究强化微调(reinforcement fine-tuning)如何提升模型面向用户理解与个性化的长上下文推理能力；并开发一个训练智能体记忆系统的框架，为每位用户维护单一、人类可读、随时间增长的记忆，用约2k token的记忆替代完整32k对话历史。评测以隐式个性化任务的准确率与输入token开销为核心指标，考察模型对隐式偏好的推理与个性化能力。", "evaluation": "实验显示前沿LLM在隐式个性化上仅达37-48%准确率，尽管支持长上下文，推理仍是瓶颈；通过强化微调，Qwen3-4B被训练至53%准确率、超过GPT-5；智能体记忆框架仅用2k token记忆替代完整32k历史，以16倍更少的输入token达到55%的SOTA准确率。这共同验证了数据集与智能体记忆框架的有效性。", "mainFinding": "隐式个性化的瓶颈在推理而非上下文长度：强化微调让小模型超越GPT-5，紧凑的智能体记忆以16倍更省token达到SOTA。", "limitations": "1000场交互与2万余条偏好均为模拟合成生成，隐式个性化任务的场景与领域覆盖仍相对有限。隐式偏好由合成流程生成、真实用户分布仍待检验。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2512.06688"}], "citation": "PersonaMem-v2, arXiv 2025."},
-  {"id": "memory-ev-needlechain", "page": "memory", "title": "NeedleChain: Measuring Intact Context Comprehension Capability of Large Language Models", "shortTitle": "NeedleChain", "category": "memory-eval", "maturity": "exploring", "score": 0.79, "year": 2025, "venue": "arXiv 2025", "authors": "Hyeonseok Moon et al.", "methodFamily": "全上下文整合基准", "tags": ["全相关上下文", "信息整合", "上下文理解"], "scores": {"clarity": 0.82, "evidence": 0.79, "reproducibility": 0.8, "adoption": 0.56, "selfEvolution": 0.58}, "summary": "衡量LLM完整整合全部相关证据能力的基准，其上下文全部与查询相关，避免评测退化为检索相关片段，从而更严格考察全上下文理解。", "methodCore": "NeedleChain针对许多上下文理解基准嵌入大量与查询无关内容、使评测退化为检索相关片段而非整合全部信息、从而高估模型真实理解能力的问题，构建衡量LLM能否忠实纳入全部所给证据的基准。其核心设计是让上下文完全由与查询相关(query-relevant)的文本构成，迫使模型整合所有信息；论文并展示当上下文全部相关时，即便GPT-4o这类先进模型也无法可靠整合短至200 token的输入。基准包含三种在所需理解顺序(order of comprehension)上不同的变体，以及一个基于大海捞针(NIAH)范式的平行基准，通过对比这些变体实现对上下文理解更全面的评估；作者还提出无需训练的ROPE contraction策略，鼓励模型反映全部可用信息，凸显全上下文整合的重要性。", "evaluation": "基准在三种理解顺序不同的变体与一个平行NIAH基准上评测LLM，对比检索式与全整合式任务的表现差异。结果表明当上下文全部与查询相关时，即便GPT-4o也无法可靠整合短至200 token的输入，说明现有基准会高估真实上下文理解能力；无需训练的ROPE contraction策略被验证有助于模型忠实纳入全部证据。", "mainFinding": "当上下文全部相关时，连GPT-4o也无法可靠整合200 token输入，揭示既有基准把检索片段当作理解、严重高估全上下文能力。", "limitations": "任务为构造式、聚焦全相关证据的完整整合，不评测跨会话记忆、知识更新与经验的持续演化。任务聚焦全相关证据整合、与真实长文档分布有别。", "related": [], "links": [{"label": "arXiv", "href": "https://arxiv.org/abs/2507.22411"}], "citation": "NeedleChain, arXiv 2025."},
+  {
+    "id": "memory-wr-memory-survey-zhang",
+    "page": "memory",
+    "title": "A Survey on the Memory Mechanism of Large Language Model based Agents",
+    "shortTitle": "Memory Survey (Zhang)",
+    "category": "memory-write",
+    "maturity": "mature",
+    "score": 0.9,
+    "year": 2024,
+    "venue": "arXiv 2024",
+    "authors": "Zeyu Zhang et al.",
+    "methodFamily": "记忆机制综述",
+    "tags": [
+      "综述",
+      "记忆机制",
+      "分析框架",
+      "评测归纳"
+    ],
+    "scores": {
+      "clarity": 0.94,
+      "evidence": 0.86,
+      "reproducibility": 0.8,
+      "adoption": 0.92,
+      "selfEvolution": 0.55
+    },
+    "summary": "系统梳理 LLM 智能体记忆机制的设计、评测与应用，提出「为什么需要、是什么、如何实现」的三段式分析框架。",
+    "methodCore": "本文面对 LLM 智能体记忆机制散落于各篇论文、缺乏系统性梳理的现状,提供一篇从整体视角出发的全景式综述,试图把「记忆」这一支撑智能体长期交互的核心组件抽象为一套可供后续研究复用的分析语言。\n\n## 研究背景与问题定位\n作者首先指出,相较于原始的 LLM,基于 LLM 的智能体最鲜明的特征在于自我进化(self-evolving)能力,而这种能力正是解决那些需要长期且复杂的智能体-环境交互的现实问题的基础。abstract 强调,支撑智能体与环境持续交互的关键组件正是智能体的记忆;然而以往研究虽然提出了许多颇具前景的记忆机制,却分散在不同论文之中,既缺乏一个从整体视角进行总结与比较的系统性综述,也难以从中抽象出通用而有效的设计模式来启发后续工作。正是这一空白,构成了本文选择以专项综述形式切入的直接动机。\n\n## 三段式分析框架\n综述的组织主线是一个「是什么、为什么、怎么做」的三段式结构。它先讨论记忆「是什么」以及「为什么需要」记忆,把记忆界定为智能体维系长期交互与自我进化的必要条件;在澄清概念之后,再系统回顾以往工作在如何设计记忆模块与如何评测记忆模块两条路径上的思路。这样的安排使读者能够先建立起对记忆价值的整体判断,再逐层深入到具体的设计与评价细节,避免一开始就陷入零散的方法罗列。\n\n## 记忆的设计与评测归纳\n在设计维度上,综述试图从大量分散的方案中抽象出通用而有效的设计模式,以启发未来研究,这也是全文最具方法论价值的部分;它把不同工作在记忆的表示、写入、组织与更新等环节上的共性提炼出来,形成可迁移的设计经验。在评测维度上,综述系统回顾了衡量记忆模块效果的既有思路,让读者能够快速理解不同方案在评价口径上的差异,从而判断各方案的适用条件。设计与评测两条线索相互印证,共同构成理解记忆机制的完整图景。\n\n## 应用场景与开放方向\n除梳理机制本身外,综述还展示了记忆模块发挥重要作用的多种智能体应用场景,说明记忆并非孤立的技术模块,而是在各类真实任务中直接影响智能体表现的关键因素。文末,作者分析了现有工作的局限并指出若干重要的未来方向,并维护一个持续更新的开源文献仓库以跟进该领域的最新进展,为读者提供一个统一的入口。通过这种「概念澄清—设计归纳—评测梳理—应用与展望」的递进安排,本文为后续记忆系统研究奠定了统一的分析视角与文献参照。\n\n从记忆写入与组织的角度看,本文的价值不在于提出某一具体机制,而在于把「记忆应当以何种结构被表示、如何被写入与更新、又该如何在后续被复用」这一系列问题,统一收拢到一个可对照的分析框架之内;它让读者得以跳出单篇论文的视角,判断不同方案在组织形态上的取舍及其对长期交互的影响,从而为设计新的记忆写入机制提供参照坐标。",
+    "evaluation": "本文以系统性文献综述的形式展开,从整体视角汇总并比较大量分散的记忆机制工作,围绕记忆模块的设计与评测两条主线归纳其中通用而有效的设计模式,并列举记忆发挥重要作用的多种智能体应用场景;同时借助持续更新的开源仓库跟进该领域进展,便于读者形成全局认识、快速定位不同方案在设计与评测上的差异并判断其适用条件。",
+    "mainFinding": "这是该领域代表性的记忆机制专项综述,系统总结了记忆的设计与评测思路并抽象出通用设计模式,为后续记忆系统研究提供了统一的分析视角与文献参照。",
+    "limitations": "作为发表时的阶段性快照,它难以覆盖后续涌现的新范式;内容以分类与设计模式的描述性梳理为主,缺乏统一的定量横向对比实验。",
+    "related": [
+      "memory-wr-ai-meets-brain",
+      "memory-wr-autonomous-agents-survey",
+      "memory-wr-memory-in-ai-agents"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2404.13501"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2404.13501"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/nuster1128/LLM_Agent_Memory_Survey"
+      }
+    ],
+    "citation": "Memory Survey (Zhang), arXiv 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-memory-survey-zhang.png",
+        "caption": "Memory Survey(Zhang):系统梳理 LLM 智能体记忆机制,凸显记忆模块的重要性,提出为何需要、是什么、如何实现的三段式框架。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-coala",
+    "page": "memory",
+    "title": "Cognitive Architectures for Language Agents",
+    "shortTitle": "CoALA",
+    "category": "memory-write",
+    "maturity": "mature",
+    "score": 0.89,
+    "year": 2023,
+    "venue": "TMLR 2024",
+    "authors": "Theodore R. Sumers et al.",
+    "methodFamily": "认知架构框架",
+    "tags": [
+      "认知架构",
+      "记忆分类",
+      "决策循环",
+      "理论框架"
+    ],
+    "scores": {
+      "clarity": 0.95,
+      "evidence": 0.82,
+      "reproducibility": 0.78,
+      "adoption": 0.9,
+      "selfEvolution": 0.62
+    },
+    "summary": "借鉴认知架构提出语言智能体的概念框架,把记忆划分为工作/情景/语义/程序性记忆并组织统一的决策循环。",
+    "methodCore": "本文借鉴认知科学与符号人工智能的悠久传统,提出「语言智能体的认知架构」(Cognitive Architectures for Language Agents, CoALA)这一系统性概念框架,用以组织已有智能体并规划未来发展方向。\n\n## 研究背景与贡献\nabstract 指出,近来大量工作用外部资源(如互联网)或内部控制流(如提示串联, prompt chaining)增强 LLM,催生出一类新的语言智能体,它们在需要接地(grounding)或推理的任务上取得了可观的经验性成功;然而学界缺乏一个系统性框架来组织现有智能体并规划未来。CoALA 正是为填补这一空白而提出:它从认知科学与符号 AI 的丰富历史中汲取养分,把当今语言智能体置于人工智能更宏观的历史脉络之中,并勾勒出一条通往基于语言的通用智能的路径。\n\n## 框架的三大支柱\nCoALA 把一个语言智能体刻画为三部分的组合:模块化的记忆组件、用于与内部记忆及外部环境交互的结构化动作空间,以及在候选动作中做出选择的通用决策过程。这三者相互配合,记忆负责存储智能体所需的各类信息,动作空间界定智能体能够施加的操作,决策过程则把二者串联为可持续运转的行为循环。这种拆分使得原本形态各异的智能体系统,都能被投射到同一组抽象概念之上加以比较。\n\n## 记忆的模块化分类\n在记忆维度上,CoALA 引入认知科学的经典分类,把记忆区分为不同的模块化组件——工作记忆(working memory)、情景记忆(episodic memory)、语义记忆(semantic memory)与程序性记忆(procedural memory)。工作记忆承载当前决策所需的即时信息,情景记忆保存具体的交互经历,语义记忆沉淀抽象的事实与知识,程序性记忆则编码技能与行为规则。相应地,动作被区分为面向内部记忆的操作(读写、检索、更新)与面向外部环境的接地交互,决策过程则被刻画为在动作空间上不断选择动作的循环。这套分类为「记忆如何写入与组织」提供了清晰的概念坐标。\n\n## 组织能力与前瞻方向\n作者用该框架回顾并组织了大量近期语言智能体工作,把它们映射到框架的模块化记忆组件与结构化动作类型之上,借此展示框架的解释力与覆盖广度;同时前瞻性地指出通往更强能力智能体的可行方向。整体而言,CoALA 不提供可运行系统,而是提供一套统一的组织语言与设计视角,把认知科学的记忆分类正式引入语言智能体研究,成为被广泛引用的基石性框架。\n\n值得强调的是,CoALA 对记忆的四分法并非纯粹的理论装饰,而是直接影响记忆的写入与组织实践:情景记忆决定了交互经历以何种粒度被留存,语义记忆决定了事实知识如何被抽象与沉淀,程序性记忆决定了技能规则如何被固化,工作记忆则约束了当下可被立即读写的信息范围;这套区分为后续大量记忆系统提供了「该把某类信息写到哪一层」的基本判断依据。",
+    "evaluation": "本文以概念框架论文的形式,用 CoALA 视角回顾性地梳理并组织大量近期语言智能体工作,通过把它们映射到框架的模块化记忆组件与结构化动作类型上,展示该框架对现有智能体的解释力与覆盖广度;并据此前瞻性地识别通往更强能力智能体的可行方向,把当今语言智能体置于 AI 更宏观的历史脉络中作定性对照与组织,从而检验框架的普适性。",
+    "mainFinding": "本文提出由模块化记忆、结构化动作空间与通用决策循环构成的认知架构框架,把认知科学的记忆分类引入语言智能体,是被广泛引用的基石性组织框架。",
+    "limitations": "该工作偏重概念框架,未提供可运行系统或统一基准评测;不同记忆模块之间的边界在具体工程实现中常常模糊,难以清晰界定。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2309.02427"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2309.02427"
+      }
+    ],
+    "citation": "CoALA, TMLR 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-coala.png",
+        "caption": "CoALA:借鉴认知架构提出语言智能体框架,把记忆划分为工作、情景、语义与程序性记忆,组织统一的决策循环。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-rise-of-llm-agents",
+    "page": "memory",
+    "title": "The Rise and Potential of Large Language Model Based Agents: A Survey",
+    "shortTitle": "Rise of LLM Agents",
+    "category": "memory-write",
+    "maturity": "mature",
+    "score": 0.85,
+    "year": 2023,
+    "venue": "Science China Information Sciences 2025",
+    "authors": "Zhiheng Xi et al.",
+    "methodFamily": "智能体总体综述",
+    "tags": [
+      "综述",
+      "智能体构建",
+      "多智能体",
+      "记忆组件"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.8,
+      "reproducibility": 0.72,
+      "adoption": 0.88,
+      "selfEvolution": 0.5
+    },
+    "summary": "全面综述 LLM 智能体的构建(含记忆模块)、多智能体协作与社会应用,把记忆作为核心组件系统论述。",
+    "methodCore": "本文对基于 LLM 的智能体进行全面综述,把记忆等认知功能明确置于智能体整体架构的核心位置,为理解记忆在智能体系统中的定位提供了一个高影响力的全局视角。\n\n## 研究背景与动机\nabstract 回顾了人类长期以来追求达到或超越人类水平的人工智能的历程,并把 AI 智能体——能够感知环境、做出决策并采取行动的人工实体——视为实现这一目标的有希望载体。作者指出,以往关于智能体的努力多聚焦于算法或训练策略的改进以增强特定能力或特定任务上的表现,而社区真正缺乏的是一个通用而强大、可作为设计各类智能体起点的基础模型;由于 LLM 展现出多才多艺的能力,它被视为通用人工智能(AGI)的潜在火花,为构建通用 AI 智能体带来希望。本文正是在此背景下,把智能体概念从哲学起源追溯到其在人工智能领域的发展,并解释为何 LLM 适合作为智能体的基础。\n\n## 大脑-感知-行动通用框架\n在此之上,综述提出一个由「大脑、感知、行动」三大组件构成的通用智能体框架,可针对不同应用进行裁剪。感知组件负责接收环境输入,行动组件负责对外施加操作,而大脑组件则承担记忆、知识、推理与规划等核心认知功能。这一划分把记忆与知识明确地安放在大脑组件之内,使记忆不再是可有可无的附件,而是智能体认知能力的组成基石;正因如此,读者能够清楚看到记忆在整体架构中所处的层次与它与推理、规划等能力的耦合关系。\n\n## 应用与智能体社会\n综述随后从单智能体、多智能体以及人机协作三个方面探讨智能体的广泛应用,展示不同协作形态下记忆等认知组件如何被调用与共享。作者进一步深入研究「智能体社会」,探讨智能体的行为与人格、由智能体社会涌现出的社会现象及其对人类社会的启示;在多智能体交互中,记忆不仅服务于单体的连续性,也成为群体协作与经验积累的载体。\n\n## 开放议题与文献维护\n文末,作者讨论了若干关键议题与开放问题,勾勒出该领域尚待突破的难点,并维护一个相关论文仓库以持续跟踪进展。整体而言,本文覆盖面广、组织清晰,把记忆放入「大脑」这一认知中枢加以论述,便于读者把握记忆与感知、行动之间的整体协同关系,而非停留在单点技术的堆叠。\n\n把记忆置于「大脑」这一认知中枢来讨论,其意义在于强调记忆与知识、推理、规划之间并非彼此割裂,而是在同一认知核心内相互支撑:记忆为推理与规划提供依据,推理与规划的产物又反过来被写回记忆;这种整体视角提醒记忆写入的设计者,记忆并不是一个孤立的存储层,而必须服务于智能体大脑中其他认知功能的协同运转。换言之,任何对记忆写入机制的改进,最终都应放到大脑组件与感知、行动的闭环中检验其对整体行为的贡献,而不能脱离智能体的完整回路孤立评价。",
+    "evaluation": "本文以大规模文献综述的形式,横向归纳智能体的构建方法及其在单智能体、多智能体、人机协作三类场景下的广泛应用,并对智能体社会中的行为、人格与由交互涌现出的社会现象作定性分析,同时维护论文仓库持续跟踪进展,提供理解记忆等认知组件在整体架构中定位的全局视角,而非以单点定量实验作对照。",
+    "mainFinding": "本文提出大脑-感知-行动通用智能体框架,并把记忆等认知功能明确置于大脑组件的核心,是理解记忆在整体智能体架构中定位的高影响力全局综述。",
+    "limitations": "综述覆盖面广,但对记忆这一单一模块的专项深度有限;作为综述其内容的时效性受发表时间约束,难以纳入后续新范式。",
+    "related": [
+      "memory-wr-ai-meets-brain",
+      "memory-wr-autonomous-agents-survey",
+      "memory-wr-memory-in-ai-agents"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2309.07864"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2309.07864"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/WooooDyy/LLM-Agent-Paper-List"
+      }
+    ],
+    "citation": "Rise of LLM Agents, Science China Information Sciences 2025."
+  },
+  {
+    "id": "memory-wr-autonomous-agents-survey",
+    "page": "memory",
+    "title": "A Survey on Large Language Model based Autonomous Agents",
+    "shortTitle": "Autonomous Agents Survey",
+    "category": "memory-write",
+    "maturity": "mature",
+    "score": 0.84,
+    "year": 2023,
+    "venue": "Frontiers of Computer Science 2024",
+    "authors": "Lei Wang et al.",
+    "methodFamily": "自主智能体综述",
+    "tags": [
+      "综述",
+      "记忆结构",
+      "记忆格式",
+      "读写操作"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.8,
+      "reproducibility": 0.72,
+      "adoption": 0.86,
+      "selfEvolution": 0.48
+    },
+    "summary": "从构建-应用-评估三维度综述自主智能体,最早系统归纳记忆结构、记忆格式与记忆读写操作维度之一。",
+    "methodCore": "本文从整体视角对基于 LLM 的自主智能体进行系统综述,是较早系统归纳记忆结构、记忆格式与记忆读写操作等维度的权威工作之一,为理解记忆的写入与组织提供了细粒度的分析框架。\n\n## 研究背景与动机\nabstract 指出,自主智能体长期以来是学术界与工业界的重要研究焦点,但以往研究多在孤立环境中用有限知识训练智能体,这与人类的学习过程相去甚远,导致智能体难以做出类人的决策。近来,LLM 通过获取海量网络知识,展现出实现类人智能的潜力,从而激发了对基于 LLM 自主智能体的研究热潮。本文正是在这一背景下,力图从整体视角对该领域进行系统而全面的回顾。\n\n## 构建-应用-评估三条主线\n综述以构建、应用与评估三条主线组织全文。在构建维度,作者提出一个能涵盖大多数以往工作的统一框架,把分散的智能体设计纳入同一坐标系进行对照;在应用维度,全面概述这些智能体在社会科学、自然科学与工程等领域的多样化应用;在评估维度,深入探讨该领域常用的主观与客观评估策略。这三条主线相互衔接,使读者既能理解智能体如何被搭建,也能把握它们被用在何处、又该如何衡量其表现。\n\n## 记忆的结构、格式与读写操作\n在构建框架中,记忆是被重点拆解的核心模块之一。综述把记忆按结构、格式与读写操作等维度加以归纳:记忆结构关注记忆以何种组织形态存在,记忆格式关注记忆以何种表示形式(如自然语言、嵌入向量或结构化条目)被保存,而读写操作则关注记忆如何被写入、更新与读取。这种对记忆的分维度刻画,让不同方案在「怎样组织、怎样写入」上的设计差异得以清晰对照,也为后续记忆专项研究提供了可复用的术语体系。\n\n## 评测归纳与开放方向\n在评估部分,综述系统梳理了主观与客观两类评估策略,给出可复用的评测归纳,帮助读者理解不同工作在评价口径上的取舍。基于对以往研究的整体审视,作者还提出若干挑战与未来方向,并维护一个持续更新的参考文献仓库以跟踪该领域进展。整体而言,本文以统一框架把握全局、以三条主线组织内容,尤其在记忆的结构与读写维度上的归纳,为记忆写入研究提供了重要的分析参照。\n\n本文对记忆结构、格式与读写操作的三维拆解,恰好覆盖了记忆写入与组织的三个核心问题:结构回答记忆以何种组织形态存在,格式回答记忆以何种表示被落盘,读写操作回答记忆如何被增删改查;这一术语体系被后续大量记忆专项工作沿用,成为对照不同写入方案时的通用语言,也让读者能够迅速判断某一方案究竟是在改进组织形态、表示形式还是更新机制。正因如此,该综述在梳理构建方法时对记忆模块的细分,为后来者提供了一套稳定而通用的对照坐标,使得五花八门的写入与组织方案都能被清晰地归位与比较。",
+    "evaluation": "本文以整体视角的综述形式,把大量基于 LLM 的自主智能体工作按构建、应用与评估三个维度进行归类与对照,并系统梳理该领域常用的主观与客观评估策略,给出可复用的评测归纳;同时借助持续维护的参考文献仓库跟踪进展,便于读者比较不同方案在统一框架各模块上的设计差异。",
+    "mainFinding": "本文提出一个可涵盖大多数以往工作的统一自主智能体构建框架,并系统梳理其在多领域的应用与常用评估策略,是权威的自主智能体综述之一。",
+    "limitations": "作为综述其内容的时效性受发表时间约束,难以纳入后续新范式;对记忆等单一模块缺乏深入的定量分析与横向对比。",
+    "related": [
+      "memory-wr-ai-meets-brain",
+      "memory-wr-memory-in-ai-agents",
+      "memory-wr-memory-survey-zhang"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2308.11432"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2308.11432"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/Paitesanshi/LLM-Agent-Survey"
+      }
+    ],
+    "citation": "Autonomous Agents Survey, Frontiers of Computer Science 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-autonomous-agents-survey.png",
+        "caption": "Autonomous Agents Survey:从构建、应用、评估三维度综述 LLM 自主智能体,系统归纳记忆结构、记忆格式与读写操作。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-memory-in-ai-agents",
+    "page": "memory",
+    "title": "Memory in the Age of AI Agents",
+    "shortTitle": "Memory in AI Agents",
+    "category": "memory-write",
+    "maturity": "growing",
+    "score": 0.8,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Yaxiong Wu et al.",
+    "methodFamily": "自进化记忆综述",
+    "tags": [
+      "综述",
+      "自进化智能体",
+      "记忆生命周期",
+      "最新进展"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.76,
+      "reproducibility": 0.7,
+      "adoption": 0.72,
+      "selfEvolution": 0.7
+    },
+    "summary": "面向自进化智能体重新审视记忆,梳理记忆形态、生命周期与前沿方法的最新进展。",
+    "methodCore": "本文面向快速扩张却日益碎片化的智能体记忆研究,提供一份最新的领域全景,并主张把记忆视为智能体设计中的一等原语(first-class primitive),从而为「记忆是什么、如何组织」这一根本问题重新建立概念秩序。\n\n## 研究背景与问题\nabstract 指出,记忆已经并将持续作为基础模型智能体的核心能力,但随着相关研究急剧扩张,该领域也变得日益碎片化:不同工作在动机、实现与评测协议上差异巨大,而宽泛且定义松散的记忆术语泛滥进一步模糊了概念清晰度。作者认为,长短期记忆(long/short-term memory)这类传统分类已不足以刻画当代记忆系统的多样性,因此有必要先厘清边界、再重建分类。本文首先清晰界定智能体记忆的范畴,并把它与 LLM 记忆、检索增强生成(RAG)、上下文工程(context engineering)等相关概念区分开来。\n\n## 形式、功能、动态三视角\n在澄清边界之后,综述从形式(forms)、功能(functions)与动态(dynamics)三个统一视角审视智能体记忆,这是全文最核心的分类贡献。在形式视角上,作者识别出三种主导实现:token 级记忆、参数级(parametric)记忆与潜在(latent)记忆,分别对应把记忆保存在显式文本、模型权重或隐空间表示之中。这一形式划分直接回答了记忆「以何种载体被写入与存储」的问题,比单纯的时间尺度分类更贴合当代系统的实际形态。\n\n## 功能分类与记忆动态\n在功能视角上,综述提出更细粒度的分类,区分事实性记忆(factual)、经验性记忆(experiential)与工作记忆(working),分别服务于知识存储、经验积累与即时处理。在动态视角上,作者分析记忆如何随时间被形成、演化与检索,把记忆的写入与更新刻画为一个贯穿生命周期的持续过程,而非一次性的静态存储。形式回答「是什么载体」、功能回答「服务什么目的」、动态回答「如何随时间变化」,三者共同构成审视记忆的完整坐标。\n\n## 工程汇编与前沿展望\n为支持实际开发,作者汇编了记忆基准与开源框架的综合总结,便于研究者按维度定位方法差异并选用合适的工具。综述最后展望若干前沿方向,包括记忆自动化、强化学习整合、多模态记忆、多智能体记忆与可信性(trustworthiness)等问题,并明确主张应把记忆当作未来智能体设计中的一等原语来重新思考。整体而言,本文兼具时效性与前瞻性,为记忆研究提供了可复用的概念与工程参考。\n\n本文的分类之所以重要,是因为它把记忆的写入与组织从「时间尺度」这一单一维度中解放出来:形式视角迫使设计者先想清楚记忆究竟落在 token、参数还是潜在空间,功能视角要求区分所写内容是事实、经验还是临时工作状态,动态视角则强调写入本身是形成、演化与检索交织的持续过程;三者叠加,为判断一个记忆系统「把什么写到哪里、又如何随时间维护」提供了远比长短期二分更精细的分析工具。",
+    "evaluation": "本文以最新综述的形式,从形式、功能与动态三个统一视角横向组织并比较代表性记忆工作,厘清其与 LLM 记忆、RAG、上下文工程等相关概念的边界,并系统汇编记忆基准与开源框架清单;便于读者按维度定位方法差异、把握记忆自动化与可信性等前沿空白,为记忆研究与实际开发提供可复用的概念与工程参考。",
+    "mainFinding": "本文提出从形式、功能、动态三个视角统一审视智能体记忆的新分类体系,并主张把记忆视为智能体设计中的一等原语,兼具时效性与前瞻性。",
+    "limitations": "该领域仍在快速演化、术语尚未统一,部分方法尚未定型;综述以概念梳理与汇编为主,缺乏统一的定量对比实验。",
+    "related": [
+      "memory-wr-ai-meets-brain",
+      "memory-wr-autonomous-agents-survey",
+      "memory-wr-memory-survey-zhang"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2512.13564"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2512.13564"
+      }
+    ],
+    "citation": "Memory in AI Agents, arXiv 2025."
+  },
+  {
+    "id": "memory-wr-ai-meets-brain",
+    "page": "memory",
+    "title": "AI Meets Brain: A Unified Survey on Memory Systems from Cognitive Neuroscience to Autonomous Agents",
+    "shortTitle": "AI Meets Brain",
+    "category": "memory-write",
+    "maturity": "growing",
+    "score": 0.79,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Multi-author",
+    "methodFamily": "跨学科记忆综述",
+    "tags": [
+      "综述",
+      "认知神经科学",
+      "统一框架",
+      "安全评测"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.74,
+      "reproducibility": 0.68,
+      "adoption": 0.68,
+      "selfEvolution": 0.6
+    },
+    "summary": "跨认知神经科学与 LLM 智能体统一梳理记忆定义、分类、存储、管理生命周期及安全与评测基准。",
+    "methodCore": "本文旨在打通认知神经科学与 LLM 驱动智能体之间的学科壁垒,系统综合关于记忆的跨学科知识,以吸收人类记忆机制的精髓并将其映射到人工记忆的设计之上。\n\n## 研究背景与动机\nabstract 把记忆刻画为连接过去与未来的关键枢纽,为人类与 AI 系统提供了应对复杂任务所需的概念与经验。作者观察到,近来关于自主智能体的研究越来越多地借鉴认知神经科学来设计高效的记忆工作流,但受制于学科壁垒,现有工作难以真正吸收人类记忆机制的精髓。为弥合这一鸿沟,本文系统地综合关于记忆的跨学科知识,把认知神经科学的洞见与 LLM 驱动的智能体连接起来,形成一条从脑到智能体的贯通脉络。\n\n## 从认知神经科学到智能体的递进\n综述首先沿着从认知神经科学、经 LLM 到智能体的递进轨迹,阐明记忆的定义与功能。这一递进安排具有方法论意义:它先在生物记忆层面建立对记忆本质的理解,再逐步过渡到 LLM 内部的记忆表现,最终落到智能体层面的记忆工作流,使得人类记忆的原理能够层层传导到人工系统的设计当中,而不是简单地生硬类比。\n\n## 分类、存储与生命周期的双视角比较\n在此基础上,综述从生物与人工两个视角,对记忆的分类、存储机制以及从获取到管理的完整生命周期进行比较分析。它把生物记忆在分类(如不同记忆类型的划分)与管理(如巩固、遗忘、提取)上的经验,系统地对照到人工记忆的表示、写入、组织与更新之上。这种双向对照凸显了人类记忆机制对人工记忆设计的启发,也让读者能够在两套体系之间查漏补缺,发现人工记忆尚未借鉴到的生物机制。\n\n## 评测基准与记忆安全\n除机制梳理外,综述回顾了评估智能体记忆的主流基准,为衡量记忆系统的效果提供参照;并进一步从攻击与防御的双重视角单列探讨记忆安全问题,把记忆可能被污染、篡改或泄露的风险纳入统一讨论。记忆安全在多数记忆综述中往往被忽视,本文对其攻防两端的并置讨论,凸显了这一既关键又易被低估的方向。\n\n## 未来方向\n作者最后展望多模态记忆系统与技能获取(skill acquisition)等未来研究方向,为跨领域研究者提供参照。整体而言,本文以独特的跨学科视角,把生物记忆的分类、存储与管理机制系统映射到人工记忆设计之上,并把记忆安全与技能获取纳入视野,构成连接脑科学与智能体记忆的统一框架。\n\n从记忆写入与组织的角度看,本文最具启发性的地方在于把生物记忆的巩固、遗忘与提取机制,类比性地映射到人工记忆的写入、淘汰与检索之上:人脑并不无差别地保留一切,而是通过巩固把重要经历转为长期记忆、通过遗忘清理冗余;这一视角提示人工记忆的写入设计同样应当具备选择性与生命周期管理,而非一味累积,从而为记忆组织提供了来自生物系统的原则性参照。",
+    "evaluation": "本文以跨学科综述的形式,从生物与人工双重视角对记忆分类、存储机制与从获取到管理的完整生命周期作比较分析,回顾评估智能体记忆的主流基准,并单列记忆安全的攻击与防御两条议题;通过脑侧与智能体侧文献的双向对照,便于读者跨领域参照、查漏补缺,并把握记忆安全与技能获取等关键方向。",
+    "mainFinding": "本文提供连接认知神经科学与智能体记忆的统一跨学科框架,把生物记忆的分类、存储与管理机制系统映射到人工记忆设计之上,研究视角独特。",
+    "limitations": "跨学科映射存在类比松散之处;综述侧重概念综合与双向对照,工程可操作性弱于系统类工作,提出的框架难以直接落地实现。",
+    "related": [
+      "memory-wr-autonomous-agents-survey",
+      "memory-wr-memory-in-ai-agents",
+      "memory-wr-memory-survey-zhang"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2512.23343"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2512.23343"
+      }
+    ],
+    "citation": "AI Meets Brain, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-ai-meets-brain.png",
+        "caption": "AI Meets Brain:跨认知神经科学与 LLM 智能体统一梳理记忆,展示记忆如何缓解上下文限制、支持长期个性化与经验积累。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-a-mem",
+    "page": "memory",
+    "title": "A-MEM: Agentic Memory for LLM Agents",
+    "shortTitle": "A-MEM",
+    "category": "memory-write",
+    "maturity": "growing",
+    "score": 0.82,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Wujiang Xu et al.",
+    "methodFamily": "笔记网络记忆",
+    "tags": [
+      "Zettelkasten",
+      "结构化笔记",
+      "记忆链接",
+      "动态演化"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.8,
+      "reproducibility": 0.8,
+      "adoption": 0.72,
+      "selfEvolution": 0.7
+    },
+    "summary": "受 Zettelkasten 启发,自动为每条记忆生成结构化笔记并动态建立/更新记忆间链接与演化。",
+    "methodCore": "A-MEM 针对现有记忆系统仅支持基础存储检索、缺乏精巧记忆组织,且固定操作与结构难以适配多样任务的问题,提出一种能以智能体方式动态组织记忆的系统,把记忆的写入过程本身升级为一次结构化的组织行为。\n\n## 研究背景与动机\nabstract 指出,LLM 智能体虽然能有效使用外部工具完成复杂的现实任务,但要利用历史经验就需要记忆系统;而当前的记忆系统只能实现基础的存储与检索,缺乏精巧的记忆组织,即使近来有工作尝试引入图数据库也仍不足。更关键的是,这些系统固定的操作与结构限制了它们在多样任务间的适应性。A-MEM 正是为解决这一局限而提出:让记忆能够以智能体驱动的方式被动态地组织起来。\n\n## Zettelkasten 启发的笔记网络\nA-MEM 遵循 Zettelkasten(卡片盒笔记法)的基本原则,通过动态索引与链接构建互联的知识网络。Zettelkasten 的核心理念是每条笔记既自成一体又通过链接彼此关联,从而随着积累逐渐涌现出结构。A-MEM 借用这一思想,把每一条历史交互都当作一张可被索引、可被链接的笔记来处理,使记忆库从松散的条目集合演变为一张相互连接的网络,而不是简单地把新记录追加到列表末尾。\n\n## 记忆的写入与结构化笔记生成\n当加入一条新记忆时,系统会为其生成一份包含多种结构化属性的完整笔记,其中包括上下文描述、关键词与标签等。这一步把原始的、非结构化的交互内容转化为带丰富语义属性的结构化条目,为后续的关联与检索打下基础。随后,系统分析历史记忆以识别相关联系,在存在有意义相似性之处建立链接,从而把新笔记接入既有网络。写入不再是被动的落盘,而是「生成属性、寻找关联、建立链接」的主动组织过程。\n\n## 记忆演化机制\nA-MEM 的另一关键设计是记忆演化(memory evolution):随着新记忆被整合,它们可以触发对已有历史记忆的上下文表示与属性的更新,使整张记忆网络不断精炼其理解。换言之,新信息不仅自身被组织进网络,还会反过来重塑旧记忆的表示,让网络随时间持续自演化。这一机制把 Zettelkasten 的结构化组织原则与智能体驱动决策的灵活性结合起来,实现更具适应性与上下文感知能力的记忆管理。作者在六个基础模型上开展实验,与现有 SOTA 基线系统对比,结果显示 A-MEM 带来显著提升,并开源了评估代码与记忆系统实现。\n\n从写入与组织的视角看,A-MEM 最具代表性的一点是把「写入」与「组织」合二为一:传统系统先写入、再另行组织,而 A-MEM 在写入每条记忆的同时就完成属性生成、关联识别与链接建立,并允许新记忆反向触发旧记忆的更新;这种写入即组织、且能自演化的机制,使记忆网络的结构随交互自然生长,而非依赖预先固定的模式,也因此在需要跨条目关联的任务上表现突出。",
+    "evaluation": "作者在六个基础模型上开展实证实验,与现有最先进(SOTA)基线进行系统对比,结果显示 A-MEM 带来显著提升;并同时开源了用于性能评估的代码与智能体记忆系统的实现,便于复现其互联笔记网络在需要跨条目关联的记忆任务上的优势,验证了动态索引与链接式组织在多个基础模型上的一致有效性。",
+    "mainFinding": "本文提出写入即组织的智能体式记忆机制,把每一条新交互动态抽取为可自演化的互联笔记网络,在六个基础模型上均优于现有最先进基线。",
+    "limitations": "笔记生成、链接建立与记忆演化均依赖 LLM 的抽取质量;随着记忆规模增大,链接维护与更新的成本会相应上升。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2502.12110"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2502.12110"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/WujiangXu/A-mem"
+      }
+    ],
+    "citation": "A-MEM, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-a-mem.png",
+        "caption": "A-MEM:受 Zettelkasten 启发,自动为每条交互生成结构化笔记并动态建立与更新记忆间链接,摆脱预设访问模式的僵化。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-zep",
+    "page": "memory",
+    "title": "Zep: A Temporal Knowledge Graph Architecture for Agent Memory",
+    "shortTitle": "Zep",
+    "category": "memory-write",
+    "maturity": "growing",
+    "score": 0.8,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Preston Rasmussen et al.",
+    "methodFamily": "时序知识图谱记忆",
+    "tags": [
+      "时序知识图谱",
+      "Graphiti",
+      "工业级",
+      "动态更新"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.78,
+      "reproducibility": 0.75,
+      "adoption": 0.74,
+      "selfEvolution": 0.55
+    },
+    "summary": "基于 Graphiti 引擎把对话与业务数据写入带时间戳的动态知识图谱记忆。",
+    "methodCore": "Zep 提出一种面向 AI 智能体的新型记忆层服务,以应对现有 RAG 框架仅限静态文档检索、难以满足企业级动态知识整合需求的局限,把记忆从静态检索扩展为可随时间演化的时序知识图谱。\n\n## 研究背景与动机\nabstract 指出,现有面向 LLM 智能体的 RAG 框架大多局限于静态文档检索,而企业级应用需要从多种来源(包括持续进行的对话与业务数据)动态地整合知识。静态检索的问题在于它假设知识是固定不变的,一旦事实随时间发生变化,简单的检索便无法反映最新状态。Zep 通过其核心组件 Graphiti 从根本上解决这一局限,把记忆层设计为一个能够持续吸纳新信息并维护历史关系演变的服务。\n\n## Graphiti 时序知识图谱引擎\nZep 的核心是 Graphiti——一个具备时间感知能力的知识图谱引擎。它能够动态地把非结构化的对话数据与结构化的业务数据一并综合进同一张图谱,同时维护历史关系随时间的演变。通过为知识赋予时间维度,Graphiti 在写入新信息时并不简单覆盖旧值,而是记录关系在不同时间点的状态,使得图谱既保留当前事实,也保留事实的变化轨迹。这种时序建模是 Zep 区别于普通知识图谱记忆的关键。\n\n## 记忆的写入与动态综合\n在写入层面,Zep 把来自持续对话与不断变化的业务数据的信息,综合进带时间戳的动态图谱之中,支持跨会话的信息综合与长期上下文的维护。当同一实体或关系在多次交互中被反复提及时,系统能够把这些分散的信息串联并整合,而不是让它们相互冲突或彼此孤立。由此,记忆的组织既反映了知识的当前状态,也支撑了对历史演变的追溯,天然适配真实企业场景中知识不断更新的特点。\n\n## 生产可用性与评测\nZep 在设计上兼顾复杂的时序推理能力与响应效率,力求达到生产可用的水平。abstract 报告,在 MemGPT 团队设立的 Deep Memory Retrieval(DMR)基准上,Zep 取得 94.8% 对 93.4% 的更优表现;而在更贴近企业用例、含复杂时序推理任务的 LongMemEval 基准上,其准确率最高提升 18.5%,同时把响应延迟降低 90%,在跨会话信息综合与长期上下文维护等企业关键任务上尤为明显。这些结果表明,时序知识图谱式的记忆组织不仅提升了检索质量,也在效率上满足了实际部署的要求。\n\n从记忆写入与组织的角度看,Zep 的关键突破在于用时间维度重塑了写入语义:传统检索式记忆在信息更新时倾向于覆盖旧值,而 Zep 通过为每条关系记录其有效的时间区间,把「更新」变成了「追加带时间戳的新状态」;这既保留了知识演变的完整轨迹,也使得系统能够回答涉及时序的复杂问题,是其区别于静态文档检索的组织哲学。",
+    "evaluation": "在 MemGPT 团队设立的 Deep Memory Retrieval 基准上,Zep 取得 94.8% 对 93.4% 的更优表现;并在更贴近企业用例、含复杂时序推理任务的 LongMemEval 基准上,准确率最高提升 18.5%、同时把响应延迟降低 90%,在跨会话信息综合与长期上下文维护等企业关键任务上尤为明显。",
+    "mainFinding": "本文提出时间感知知识图谱引擎 Graphiti 来组织记忆,在 DMR 与 LongMemEval 上超越 MemGPT,兼顾检索准确率与生产可用的低延迟。",
+    "limitations": "该方法依赖图谱抽取与综合管线的质量,并需持续维护随时间演化的历史关系,图规模不断增大会带来相应的存储与维护开销。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2501.13956"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2501.13956"
+      }
+    ],
+    "citation": "Zep, arXiv 2025."
+  },
+  {
+    "id": "memory-wr-memos",
+    "page": "memory",
+    "title": "MemOS: A Memory OS for AI System",
+    "shortTitle": "MemOS",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.78,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Zhiyu Li et al.",
+    "methodFamily": "记忆操作系统",
+    "tags": [
+      "记忆OS",
+      "MemCube",
+      "参数/激活/明文记忆",
+      "调度"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.72,
+      "reproducibility": 0.66,
+      "adoption": 0.66,
+      "selfEvolution": 0.72
+    },
+    "summary": "提出统一记忆操作系统,把参数记忆、激活记忆与明文记忆统一为可调度的 MemCube。",
+    "methodCore": "MemOS 提出一种把记忆当作可管理系统资源的记忆操作系统(memory operating system),以弥补 LLM 缺乏良好定义的记忆管理系统、难以支撑长上下文推理、持续个性化与知识一致性的不足。\n\n## 研究背景与动机\nabstract 指出,LLM 已成为通用人工智能的重要基础设施,但它们缺乏良好定义的记忆管理系统,阻碍了长上下文推理、持续个性化与知识一致性的发展。现有模型主要依赖静态参数与短暂的上下文状态,难以在较长时间跨度内跟踪用户偏好或更新知识;而 RAG 虽然以明文引入外部知识,却仍是一种无状态的权宜之计,缺乏生命周期控制,也没有与持久表示相整合。作者据此主张,需要一个专门的系统层来统一治理各种形态的记忆。\n\n## 记忆层次视角与设计出发点\nMemOS 借鉴了从记忆层次(memory hierarchy)视角对 LLM 训练与推理成本的建模:在参数记忆与外部检索之间引入一个显式的记忆层,把特定知识外置出来,可以显著降低训练与推理成本。除计算效率外,LLM 还面临信息在时间与上下文上分布不均的更广泛挑战,需要能够管理跨越不同时间尺度与来源的异质知识的系统。这两点共同构成 MemOS 把记忆提升为一等系统资源来治理的设计出发点。\n\n## 三种记忆形态的统一治理\nMemOS 的核心贡献是统一了三种记忆形态的表示、调度与演化:明文记忆(plaintext)、基于激活的记忆(activation-based)与参数级记忆(parameter-level)。明文记忆对应可读的外部知识,激活记忆对应推理过程中的中间状态,参数记忆对应固化在权重中的知识。通过把三者纳入同一治理框架,MemOS 得以在它们之间灵活转换,并把检索与基于参数的学习桥接起来,实现低成本的存储与检索。\n\n## MemCube 基本单元与系统能力\nMemOS 的基本单元是 MemCube,它同时封装记忆内容与来源(provenance)、版本(versioning)等元数据。多个 MemCube 可以随时间被组合、迁移与融合,从而在不同记忆类型之间灵活转换。这种以 MemCube 为原子单位的设计,使记忆的写入、调度与演化都能被显式追踪与管理。作者由此建立起一个以记忆为中心的系统框架,为 LLM 带来可控性(controllability)、可塑性(plasticity)与可演化性(evolvability),并为持续学习与个性化建模奠定系统级基础。\n\n从记忆写入与组织的角度看,MemOS 的核心洞见是把记忆当作可被显式治理的系统资源,而非模型的隐含副产品:通过 MemCube 这一携带来源与版本元数据的原子单元,记忆的每一次写入、迁移与融合都变得可追踪、可调度;更重要的是,它打通了明文、激活与参数三种形态之间的转换通道,使得同一条知识可以在检索型记忆与参数型记忆之间流动,从而把「写到哪种形态」也纳入了可管理的范畴。",
+    "evaluation": "作者从记忆层次的视角论证:在参数记忆与外部检索之间引入显式记忆层可显著降低训练与推理成本,并以 MemCube 为单元统一调度明文、激活与参数级记忆,支撑长上下文推理、持续个性化与知识一致性等能力,展示统一治理多形态记忆相较依赖静态参数与无状态 RAG 的方案在成本与可控性上的价值。",
+    "mainFinding": "本文提出以 MemCube 为基本单元统一治理明文、激活与参数级记忆的记忆操作系统抽象,为持续学习与个性化建模奠定系统级框架基础。",
+    "limitations": "系统较新且工程栈复杂,跨形态记忆转换的开销与一致性保证仍待大规模验证,离成熟稳定的落地部署尚有距离。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2507.03724"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2507.03724"
+      }
+    ],
+    "citation": "MemOS, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-memos.png",
+        "caption": "MemOS:统一记忆操作系统,把参数记忆、激活记忆与明文记忆整合为可调度的 MemCube,在多项基准上取得领先表现。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-memoryos",
+    "page": "memory",
+    "title": "Memory OS of AI Agent",
+    "shortTitle": "MemoryOS",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.76,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Jiazheng Kang et al.",
+    "methodFamily": "分层换页记忆",
+    "tags": [
+      "OS内存管理",
+      "分段页式",
+      "热度换页",
+      "短中长期"
+    ],
+    "scores": {
+      "clarity": 0.8,
+      "evidence": 0.72,
+      "reproducibility": 0.68,
+      "adoption": 0.62,
+      "selfEvolution": 0.66
+    },
+    "summary": "借鉴操作系统内存管理,用分段页式存储与热度换页组织短/中/长期对话记忆。",
+    "methodCore": "MemoryOS 针对固定上下文窗口与记忆管理不足导致的长期记忆能力欠缺、个性化交互受限的问题,提出一个面向 AI 智能体的记忆操作系统,把操作系统的内存管理经验迁移到对话长期记忆的治理之中。\n\n## 研究背景与动机\nabstract 指出,LLM 面临固定上下文窗口与记忆管理不充分这一关键挑战,由此导致长期记忆能力严重欠缺,与 AI 智能体交互时的个性化体验也十分有限。要在长对话中维持连贯性与个性化,单靠扩大上下文窗口并不经济,也难以持久;必须引入一套系统化的记忆管理机制。MemoryOS 正是从操作系统的内存管理原则中获得灵感,把记忆的存储、更新与调度当作可被系统统一治理的对象。\n\n## 分层存储架构\nMemoryOS 设计了一个分层存储架构,由记忆存储、更新、检索与生成四个关键模块组成。其存储单元包含三级:短期记忆(short-term memory)、中期记忆(mid-term memory)与长期个人记忆(long-term personal memory)。短期记忆承载最近的即时对话,中期记忆保存经过初步整合的会话内容,长期个人记忆则沉淀关于用户的稳定画像与偏好。这种三级划分模仿了操作系统中不同层次存储介质的分工,让不同时效与重要性的记忆各得其所。\n\n## 动态更新机制\nMemoryOS 的关键操作是各存储单元之间的动态更新。短期到中期的更新遵循基于对话链的先进先出(FIFO)原则:当短期记忆积累到一定程度,较早的对话内容按对话链顺序被迁移到中期记忆,类似操作系统中的队列淘汰。中期到长期的更新则采用分段的页式组织策略(segmented page organization):把中期记忆按内容组织成「页」,并依据访问热度等信号决定哪些内容应被巩固进长期个人记忆。这套借鉴分页与换页思想的更新机制,是记忆写入与组织的核心所在,使记忆能够在有限预算下有条不紊地流转与沉淀。\n\n## 分层整合与实验结果\n通过这种分层整合与动态更新,MemoryOS 能够在有限的上下文预算下维持长对话中的上下文连贯性与个性化记忆保持。abstract 报告,在 LoCoMo 基准上的大量实验显示,基于 GPT-4o-mini,MemoryOS 相较基线在 F1 指标上平均提升 49.11%、在 BLEU-1 指标上平均提升 46.18%,展现出良好的上下文连贯性与个性化记忆保持能力,验证了分层存储与 FIFO、分段页式更新机制的有效性,实现代码也已开源。\n\n从记忆写入与组织的角度看,MemoryOS 的巧妙之处在于把操作系统治理有限内存的成熟经验直接迁移到对话记忆:FIFO 决定了短期记忆按对话链顺序被淘汰进中期,分段页式组织则决定了中期内容如何被打包并依热度巩固进长期个人记忆;这套借鉴分页与换页思想的写入流转机制,使记忆能够在固定的上下文预算下有序沉淀,让真正重要且高频的信息最终留存为稳定的用户画像。",
+    "evaluation": "在 LoCoMo 基准上的大量实验显示,基于 GPT-4o-mini,MemoryOS 相较基线在 F1 指标上平均提升 49.11%、在 BLEU-1 指标上平均提升 46.18%,展现出长对话中良好的上下文连贯性与个性化记忆保持能力,验证了分层存储架构与 FIFO、分段页式动态更新机制的有效性,并已开源实现代码以便复现。",
+    "mainFinding": "本文借鉴操作系统内存管理,以短、中、长三级分层存储与 FIFO、分段页式更新组织对话记忆,在 LoCoMo 上显著提升长对话表现。",
+    "limitations": "存储单元间的更新遵循启发式规则,应用领域主要集中于对话;短、中、长三级层级边界的最优划分缺乏理论保证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2506.06326"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2506.06326"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/BAI-LAB/MemoryOS"
+      }
+    ],
+    "citation": "MemoryOS, arXiv 2025."
+  },
+  {
+    "id": "memory-wr-cognee",
+    "page": "memory",
+    "title": "Cognee: Memory for AI Agents in 5 Lines of Code",
+    "shortTitle": "Cognee",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.74,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Vasilije Marković et al.",
+    "methodFamily": "图谱记忆管线",
+    "tags": [
+      "ECL管线",
+      "知识图谱",
+      "工程落地",
+      "模块化"
+    ],
+    "scores": {
+      "clarity": 0.8,
+      "evidence": 0.7,
+      "reproducibility": 0.76,
+      "adoption": 0.66,
+      "selfEvolution": 0.5
+    },
+    "summary": "提供模块化 ECL(抽取-认知-加载)管线,把异构数据写入可组合的知识图谱记忆。",
+    "methodCore": "本文在 Cognee 这一模块化、端到端知识图谱构建与检索框架的背景下,研究把 LLM 与知识图谱集成所形成的复杂系统中被普遍忽视的系统性超参数优化问题,把「记忆如何被抽取、构建与组织」上升为一个可被系统调优的工程问题。\n\n## 研究背景与动机\nabstract 指出,把 LLM 与知识图谱(KG)集成会形成含众多超参数的复杂系统,而这些超参数直接影响性能。尽管此类系统在检索增强生成中日益常见,系统性超参数优化的作用却仍未被充分探究。作者以 Cognee——一个用于端到端知识图谱构建与检索的模块化框架——为研究载体,把注意力从「架构创新」转向「优化与评估框架」,考察在这类复杂模块化系统中,有针对性的调优究竟能带来多大的性能改善。\n\n## ECL 式模块化记忆管线\nCognee 提供一条模块化的记忆构建管线,把异构数据经由抽取、认知加工与加载写入可组合的知识图谱记忆之中。整条管线覆盖若干可配置环节:分块(chunking)决定原始文本如何被切分为记忆单元,图谱构建(graph construction)决定实体与关系如何被抽取并组织成图,检索(retrieval)决定如何从图中召回相关内容,提示(prompting)则决定如何把召回结果组织进 LLM 的输入。每个环节都带有直接影响最终效果的参数,共同决定了记忆的组织形态与检索质量。\n\n## 系统性超参数优化\n本文的核心方法是对上述环节的相关参数进行系统性优化,并把每一种配置都用既有指标加以打分,包括精确匹配(exact match)、F1 以及 DeepEval 基于 LLM 的正确性指标。通过在多跳问答基准上系统地遍历与调优这些参数,作者得以量化不同配置对性能的影响,并从中识别出真正有价值的调优方向。这把原本靠经验拍板的管线配置,转化为一个可度量、可复现的优化过程。\n\n## 主要发现与主张\n实验在 HotPotQA、TwoWikiMultiHop 与 MuSiQue 三个多跳问答基准上进行。结果表明,有针对性的调优能够带来有意义的性能提升;但提升虽一致却并不均匀,在不同数据集与指标之间存在差异。作者据此指出:这种不均匀性既体现了调优的价值,也暴露了标准评估度量的局限。基于这一观察,本文主张未来进展不仅依赖架构创新,也同样依赖为复杂模块化系统建立更清晰的优化与评估框架。\n\n从记忆写入与组织的角度看,本文的贡献在于揭示:图式记忆的最终效果并不仅由架构决定,分块粒度、图谱构建方式、检索策略与提示模板等写入与组织环节的参数配置,同样会显著左右性能;因此,建立清晰的优化与评估框架,与提出新架构同等重要,这一主张为图谱型记忆系统的工程落地提供了不同于「唯架构论」的务实视角。",
+    "evaluation": "在 HotPotQA、TwoWikiMultiHop 与 MuSiQue 三个多跳问答基准上,作者用精确匹配、F1 以及 DeepEval 基于 LLM 的正确性指标对每种配置打分,针对分块、图谱构建、检索与提示的参数系统调优,结果显示提升一致但在不同数据集与指标之间并不均匀,既体现调优价值也暴露标准评估度量的局限。",
+    "mainFinding": "本文提供模块化的端到端知识图谱构建与检索框架,并系统证明针对分块、图谱构建、检索与提示的针对性调优能在多跳问答上带来一致但并不均匀的性能提升。",
+    "limitations": "性能提升在不同数据集与指标间并不均匀,凸显标准评估度量的局限;系统含众多超参数,配置对性能较为敏感。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2505.24478"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2505.24478"
+      }
+    ],
+    "citation": "Cognee, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-cognee.png",
+        "caption": "Cognee:模块化 ECL(抽取-认知-加载)管线,把异构数据写入可组合的知识图谱记忆,几行代码即可为智能体接入长期记忆。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-graphrag",
+    "page": "memory",
+    "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+    "shortTitle": "GraphRAG",
+    "category": "memory-write",
+    "maturity": "growing",
+    "score": 0.85,
+    "year": 2024,
+    "venue": "arXiv 2024",
+    "authors": "Darren Edge et al.",
+    "methodFamily": "图谱+社区摘要",
+    "tags": [
+      "实体图谱",
+      "社区摘要",
+      "全局查询",
+      "层级组织"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.84,
+      "reproducibility": 0.82,
+      "adoption": 0.86,
+      "selfEvolution": 0.4
+    },
+    "summary": "从语料构建实体知识图谱并预先生成社区摘要,支持全局性(query-focused)聚焦总结。",
+    "methodCore": "GraphRAG 针对朴素 RAG 在面向整个语料的全局性问题上失效的矛盾,提出一种基于图的问答方法,可同时随用户问题的普遍性与源文本的规模而扩展,把全局意义建构转化为在层级社区摘要上的先分后合式聚合。\n\n## 研究背景与问题\nabstract 指出,RAG 通过从外部知识源检索相关信息,让 LLM 能够回答关于私有或此前未见文档集合的问题;但当问题面向整个语料时——例如「数据集的主要主题是什么」——朴素 RAG 会失效,因为这本质上是一个查询聚焦摘要(query-focused summarization, QFS)任务,而非显式的检索任务。与此同时,以往的 QFS 方法又难以扩展到典型 RAG 系统所索引的大规模文本。GraphRAG 的目标正是结合这两类对立方法的长处,在问题的普遍性与源文本的规模两个维度上同时具备扩展性。\n\n## 两阶段图索引构建\nGraphRAG 用 LLM 分两个阶段构建图索引。第一阶段从源文档中推导出实体知识图谱(entity knowledge graph),把散落在文本中的实体及其关系抽取并组织成图结构;第二阶段则为所有紧密相关实体的分组预先生成社区摘要(community summaries)。这里的关键在于,系统会先对图进行社区划分,把彼此关联紧密的实体聚成社区,再为每个社区生成一段概括其内容的摘要。这套「先建图、再按社区预生成摘要」的记忆组织,把语料的宏观结构以层级摘要的形式固化下来,是回答全局性问题的基础。\n\n## 先分后合的全局问答\n给定一个问题时,GraphRAG 并不直接检索片段,而是让每个社区摘要各自生成一个部分回答(partial response),随后把所有部分回答再次汇总为给用户的最终回答。这一「先分后合」(map-reduce 式)的聚合流程,使得系统能够综合来自整个语料不同区域的信息,从而回答朴素检索无法触及的宏观性问题。层级社区摘要在这里既是记忆的组织形态,也是全局意义建构的中间产物。\n\n## 评测与效果\nabstract 报告,针对百万 token 量级数据集上的一类全局意义建构(global sensemaking)问题,作者以生成答案的全面性(comprehensiveness)与多样性(diversity)为标准,把 GraphRAG 与传统 RAG 基线进行对比。结果显示,实体图谱加社区摘要的方法在这两项指标上均相较传统 RAG 带来显著提升,验证了图式层级组织在应对宏观性问题上的价值,该方法也常被用作智能体记忆的后端。\n\n从记忆写入与组织的角度看,GraphRAG 展示了一种「预先组织」的写入范式:它在数据入库阶段就投入算力构建实体图谱并按社区预生成摘要,把语料的宏观结构固化为可直接调用的层级记忆;这种前置的组织成本换来了回答全局性问题的能力,与朴素 RAG 那种「只索引、不组织」的写入方式形成鲜明对照,也说明记忆的组织深度直接决定了它能支撑何种层次的问题。",
+    "evaluation": "针对百万 token 量级数据集上的一类全局意义建构问题,作者以生成答案的全面性(comprehensiveness)与多样性(diversity)为标准,将 GraphRAG 与传统 RAG 基线进行对比评测,结果显示实体图谱加社区摘要的方法在这两项指标上均相较传统 RAG 带来显著提升。",
+    "mainFinding": "本文提出实体知识图谱加层级社区摘要的两阶段图索引组织,显著提升面向整个语料的全局意义建构问题回答的全面性与多样性,常被用作记忆后端。",
+    "limitations": "实体图谱与社区摘要的预生成成本较高;方法主要面向全局意义建构问题,对局部事实型检索查询的优势相对有限。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2404.16130"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2404.16130"
+      }
+    ],
+    "citation": "GraphRAG, arXiv 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-graphrag.png",
+        "caption": "GraphRAG:从语料构建实体知识图谱并用 Leiden 算法划分社区,预先生成社区摘要,支持面向查询的全局聚焦总结。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-memwalker",
+    "page": "memory",
+    "title": "Walking Down the Memory Maze: Beyond Context Limit through Interactive Reading",
+    "shortTitle": "MemWalker",
+    "category": "memory-write",
+    "maturity": "growing",
+    "score": 0.78,
+    "year": 2023,
+    "venue": "arXiv 2023",
+    "authors": "Howard Chen et al.",
+    "methodFamily": "树状摘要记忆",
+    "tags": [
+      "递归摘要",
+      "树状结构",
+      "交互式导航",
+      "长文本"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.78,
+      "reproducibility": 0.76,
+      "adoption": 0.68,
+      "selfEvolution": 0.42
+    },
+    "summary": "把长文本递归摘要成树状记忆结构,让模型交互式导航节点进行阅读。",
+    "methodCore": "MemWalker 针对自注意力一次处理并比较所有 token、导致预设上下文窗口必然受限的问题,提出把 LLM 当作交互式智能体、允许其通过迭代提示自行决定如何阅读文本的替代方案,把长文本理解转化为在树状记忆上的可控搜索。\n\n## 研究背景与动机\nabstract 指出,LLM 之所以取得长足进步,很大程度上得益于自注意力机制能够一次性处理并比较所有 token;但这一机制带来一个根本问题——预设的上下文窗口注定是有限的。尽管学界尝试过外推位置编码、使用循环机制或选择性检索长序列关键部分等方法来扩展上下文窗口,长文本理解依然是一个挑战。MemWalker 转而采用一种不同的思路:不试图把全部文本塞进受限窗口,而是让模型像一个交互式智能体那样,通过迭代提示自己决定如何阅读。\n\n## 树状摘要记忆的构建\nMemWalker 的第一步是把长上下文处理成一棵摘要节点树(tree of summary nodes)。它先把文本分段并为每一段生成摘要,再自底向上递归地把这些摘要归并为更高层的摘要节点,层层向上直至根节点。由此,原始长文本被组织成一棵层级化的记忆树:底层节点贴近原文细节,高层节点则给出越来越概括的全局视图。这种递归摘要式的组织,把海量文本压缩为一个便于导航的结构化记忆,是整个方法的基础。\n\n## 交互式导航阅读\n在收到查询后,模型并不直接在全部文本上作答,而是在这棵摘要树上进行导航以搜索相关信息。它从根节点出发,根据当前节点的摘要判断应当深入哪个子节点,如此逐层向下,直到收集到足够的信息才作答。这一过程把长文本理解转化为一次由模型自主决策的可控搜索:模型每一步都在决定「往哪里读、读到什么程度」,从而避免了一次性处理超长文本的窗口限制。\n\n## 可解释性与评测\n除有效阅读之外,MemWalker 还通过高亮交互式阅读过程中的推理步骤、指出与查询相关的文本片段来增强可解释性,使模型的阅读与定位过程透明可追溯,便于人工核查。abstract 报告,在长文本问答任务上,作者将 MemWalker 与使用长上下文窗口、循环机制以及检索的多种基线方法进行对比,结果显示其表现全面更优,表明树状摘要记忆加交互式导航在应对超长上下文时兼具效果与可解释性。\n\n从记忆写入与组织的角度看,MemWalker 提供了一种以层级摘要为核心的写入范式:长文本被一次性递归归并为一棵自底向上的摘要树,底层贴近原文、高层高度概括,从而把海量内容压缩为可导航的结构化记忆;而推理时的交互式导航则说明,良好的记忆组织不仅关乎存储,更关乎让模型能够按需、可解释地逐层访问,这一点对后续树状与层级记忆设计影响深远。",
+    "evaluation": "在长文本问答任务上,作者将 MemWalker 与使用长上下文窗口、循环机制以及检索的多种基线方法进行对比,结果显示其表现全面更优;同时展示该方法能高亮交互式阅读过程中的推理步骤、精准定位与查询相关的文本片段,在有效阅读之外进一步增强了推理过程的可解释性与可追溯性。",
+    "mainFinding": "本文把长文本递归摘要成节点树并让模型交互式导航阅读,在长文本问答上超越长上下文、循环与检索基线,同时提升了阅读过程的可解释性。",
+    "limitations": "导航依赖模型的逐步决策,决策错误可能沿导航路径不断累积;摘要树为一次性构建,难以随新增文本内容做增量更新。",
+    "related": [
+      "memory-wr-recursive-summary"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2310.05029"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2310.05029"
+      }
+    ],
+    "citation": "MemWalker, arXiv 2023."
+  },
+  {
+    "id": "memory-wr-recursive-summary",
+    "page": "memory",
+    "title": "Recursively Summarizing Enables Long-Term Dialogue Memory in Large Language Models",
+    "shortTitle": "Recursive Summary",
+    "category": "memory-write",
+    "maturity": "mature",
+    "score": 0.78,
+    "year": 2023,
+    "venue": "arXiv 2023",
+    "authors": "Qingyue Wang et al.",
+    "methodFamily": "递归摘要记忆",
+    "tags": [
+      "递归摘要",
+      "对话压缩",
+      "长期记忆",
+      "增量更新"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.78,
+      "reproducibility": 0.8,
+      "adoption": 0.72,
+      "selfEvolution": 0.45
+    },
+    "summary": "通过递归摘要持续压缩历史对话,形成不断更新的长期记忆表征。",
+    "methodCore": "本文针对聊天机器人在长对话中无法回忆过往信息、容易产生前后不一致回复的问题,提出用 LLM 递归生成摘要/记忆来增强长期记忆能力,把长期记忆的写入建模为一个以近似恒定长度滚动更新的压缩过程。\n\n## 研究背景与动机\nabstract 指出,GPT-4 等 LLM 具备出色的对话能力,能够就广泛话题进行动态且贴合上下文的交流;但一旦对话变得很长,这些聊天机器人便无法回忆过往信息,倾向于产生前后不一致的回复。问题的根源在于,受限的上下文窗口无法容纳不断增长的完整对话历史。本文提出的解决思路是:不去保留全部原始对话,而是递归地生成摘要/记忆,把历史压缩为一个可控长度的表征,持续为回复生成提供依据。\n\n## 递归摘要的写入机制\n方法的核心是一个滚动更新的递归过程。系统首先激励 LLM 记住较小的对话上下文,形成初始记忆;随后,在每一步利用先前的记忆与随后的新上下文,递归地产生新的记忆。如此不断迭代,记忆始终作为对历史的压缩表征被增量刷新,并维持在可控的长度之内,而不会随对话增长而无限膨胀。这一「旧记忆 + 新上下文 → 新记忆」的滚动写入,是长期记忆得以持续存在的关键机制。\n\n## 一致性回复生成\n借助最新的记忆,聊天机器人能够轻松生成与长上下文高度一致的回复。因为记忆始终概括了此前发生过的关键内容,模型在作答时便有据可依,不至于遗忘早前的约定或反复自相矛盾。由于记忆维持在近似恒定的长度,这种一致性得以在很多轮对话中以近似恒定的成本被保持,而不像直接拼接历史那样成本随对话线性增长。\n\n## 互补性与评测\nabstract 强调,该策略能够很好地补充长上下文(如 8K、16K)与检索增强的 LLM:递归摘要负责维持全局的连贯记忆,长上下文与检索则负责补充局部细节,二者结合可进一步提升长期对话表现。作者在开源与闭源 LLM 上评估该方法,并在广泛使用的公开数据集上开展实验,结果表明递归摘要能在长上下文对话中生成更一致的回复;代码与脚本均已公开。正因它以近似恒定的成本维持跨多轮的一致性,该方法被视为让 LLM 建模极长上下文的一种潜在解决方案。\n\n从记忆写入与组织的角度看,递归摘要代表了一种以「滚动压缩」为核心的写入范式:记忆不随对话线性膨胀,而是被持续折叠进一个近似恒定长度的表征之中,每一轮都用旧记忆与新上下文重写出新记忆;这种以近似恒定成本维持全局连贯的组织方式,与检索式记忆的按需召回形成互补,也成为后续众多长期对话记忆方案的基础思路之一。这一思路也提示后续研究,长期记忆的写入未必要保留全部原文,关键在于以可控的成本持续维护一份足以支撑一致回复的压缩表征,并在必要时与检索式记忆协同以弥补细节损失。",
+    "evaluation": "作者在开源与闭源 LLM 上评估该方法,并在广泛使用的公开数据集上开展实验,结果表明递归摘要能在长上下文对话中生成更一致的回复;同时展示该策略可与 8K、16K 长上下文以及检索增强的 LLM 互补,进一步提升长期对话表现,代码与脚本均已公开发布。",
+    "mainFinding": "本文提出递归摘要式的长期记忆写入,以近似恒定长度的滚动记忆维持长期对话一致性,并能与长上下文窗口和检索增强方法形成有效互补。",
+    "limitations": "递归摘要会不断累积信息损失,细节容易在压缩中被丢弃;难以精确回溯早期的原始事实与被压缩掉的具体细节。",
+    "related": [
+      "memory-wr-lightrag",
+      "memory-wr-memwalker"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2308.15022"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2308.15022"
+      }
+    ],
+    "citation": "Recursive Summary, arXiv 2023.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-recursive-summary.png",
+        "caption": "Recursive Summary:通过递归摘要持续压缩历史对话,形成不断更新的长期记忆,支持模型回溯并延续先前话题。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-secom",
+    "page": "memory",
+    "title": "On Memory Construction and Retrieval for Personalized Conversational Agents",
+    "shortTitle": "SeCom",
+    "category": "memory-write",
+    "maturity": "growing",
+    "score": 0.8,
+    "year": 2025,
+    "venue": "ICLR 2025",
+    "authors": "Zhuoshi Pan et al.",
+    "methodFamily": "记忆粒度构建",
+    "tags": [
+      "话题分段",
+      "记忆粒度",
+      "压缩去噪",
+      "个性化对话"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.82,
+      "reproducibility": 0.8,
+      "adoption": 0.7,
+      "selfEvolution": 0.45
+    },
+    "summary": "提出以话题分段(segment)粒度构建记忆并做压缩去噪,系统研究记忆写入粒度的影响。",
+    "methodCore": "SeCom 面向长期对话中连贯且个性化的响应生成,系统研究记忆构建与检索问题,提出以话题段(segment)为粒度构建记忆并配合压缩去噪,把「记忆写入的粒度」确立为一个值得专门研究的设计变量。\n\n## 研究背景与问题\nabstract 指出,为在长期对话中提供连贯且个性化的体验,现有方法通常通过从对话历史构建记忆库来做检索增强的响应生成,而这些记忆库或建在轮级(turn-level)、或建在会话级(session-level)、或依赖摘要技术。SeCom 观察到不同粒度各有其代价:轮级记忆过于细碎、上下文不足,会话级记忆过于粗放、信噪比低,摘要式记忆则可能损失细节。粒度选择直接决定了记忆检索的准确率与检索内容的语义质量,却在以往工作中缺乏系统研究。\n\n## 两点关键发现\n本文提出两点关键发现,构成方法设计的依据。其一,记忆单元的粒度很重要:轮级、会话级与基于摘要的方法在记忆检索准确率和检索内容的语义质量上各有局限,没有哪一种粒度天然最优。其二,提示压缩方法(如 LLMLingua-2)可以有效地充当去噪机制,在不同粒度下都能提升记忆检索的准确率。第二点尤为重要,因为它把「压缩」从单纯的省 token 手段,重新诠释为提升检索质量的去噪工具。\n\n## 段级记忆构建与压缩去噪\n基于这两点洞见,SeCom 在段(segment)级构建记忆库。它引入一个对话分段模型(conversation segmentation model),把长期对话划分为主题连贯的段,使每个记忆单元既保留足够的上下文,又不至于把不相关的内容混为一体;同时对记忆单元施加基于压缩的去噪,降低噪声干扰以增强检索。以段为记忆单元,SeCom 在召回的完整性(段内保留足够上下文)与内容的信噪比(压缩去噪降低干扰)之间取得平衡,为个性化对话智能体提供更有效的记忆写入与检索单元。\n\n## 评测与效果\nabstract 报告,SeCom 在长期对话基准 LOCOMO 与 Long-MT-Bench+ 上相较基线具有显著的性能优势;其所提出的对话分段方法在 DialSeg711、TIAGE 与 SuperDialSeg 等对话分段数据集上也表现出色。这些结果表明,段级构建配合压缩去噪不仅在长期对话任务上有效,其核心的分段能力本身也具备独立的竞争力。\n\n从记忆写入与组织的角度看,SeCom 的核心贡献是把「记忆单元的粒度」确立为一个独立的设计变量,并证明它对检索质量有决定性影响:段级单元在保留足够上下文与控制信噪比之间取得平衡,而压缩去噪则在写入时就清理掉干扰内容;这提示后续工作,记忆写入不只是决定「记什么」,同样要审慎决定「以多大的块记」以及「记之前是否先净化」。",
+    "evaluation": "实验结果表明,SeCom 在长期对话基准 LOCOMO 与 Long-MT-Bench+ 上相较基线具有显著的性能优势;其所提出的对话分段方法在 DialSeg711、TIAGE 与 SuperDialSeg 等对话分段数据集上也表现出色,验证了段级构建配合基于压缩的去噪在记忆检索上的有效性。",
+    "mainFinding": "本文系统研究记忆构建的粒度问题并提出以话题段为单位构建加压缩去噪,在长期对话基准上显著优于轮级、会话级与摘要式记忆构建基线。",
+    "limitations": "段级记忆的效果依赖对话分段模型的分段质量;结论主要基于长期对话场景,向其他类型记忆任务的泛化能力仍有待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2502.05589"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2502.05589"
+      }
+    ],
+    "citation": "SeCom, ICLR 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-secom.png",
+        "caption": "SeCom:对比不同记忆粒度的检索增强生成,轮次级过碎、会话级过粗,提出以话题分段粒度构建记忆并压缩去噪。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-lightrag",
+    "page": "memory",
+    "title": "LightRAG: Simple and Fast Retrieval-Augmented Generation",
+    "shortTitle": "LightRAG",
+    "category": "memory-write",
+    "maturity": "growing",
+    "score": 0.82,
+    "year": 2024,
+    "venue": "EMNLP 2025 Findings",
+    "authors": "Zirui Guo et al.",
+    "methodFamily": "双层图索引",
+    "tags": [
+      "双层图索引",
+      "增量更新",
+      "实体+关系",
+      "图谱记忆"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.82,
+      "reproducibility": 0.84,
+      "adoption": 0.8,
+      "selfEvolution": 0.42
+    },
+    "summary": "构建双层(局部实体+全局关系)图索引并支持增量更新的图谱式知识组织。",
+    "methodCore": "LightRAG 针对现有 RAG 系统依赖扁平数据表示、上下文感知不足从而产生割裂答案的问题,把图结构引入文本索引与检索过程,并配合增量更新,把图式记忆的全局能力与低成本更新有机结合。\n\n## 研究背景与问题\nabstract 指出,RAG 系统通过整合外部知识源增强 LLM,使其能够给出更准确、更贴合上下文的回答;但现有 RAG 系统存在明显局限:它们依赖扁平的数据表示,且上下文感知不足,从而可能产生割裂的答案——无法刻画信息之间复杂的相互依赖关系。当知识以彼此孤立的片段形式被检索时,系统难以把分散但相关的信息串联起来,导致回答缺乏整体性。LightRAG 的出发点正是用图结构来弥补扁平表示的这一缺陷。\n\n## 双层图索引\nLightRAG 把图结构引入文本的索引与检索过程,并采用一个双层检索系统(dual-level retrieval),从低层与高层两种知识发现层面增强全面的信息检索。低层检索面向具体实体及其邻居,支持细粒度的、针对具体对象的查询;高层检索则对关系与主题做聚合,支持更概括、更宏观的查询。这种「局部实体 + 全局关系」的双层组织,使得同一套图式记忆既能回答具体事实型问题,也能回答需要综合把握的概括型问题,是本方法在记忆组织上的核心设计。\n\n## 图与向量结合的高效检索\n在检索实现上,LightRAG 把图结构与向量表示结合起来,以便高效地检索相关实体及其关系。图结构提供了实体间的显式关联路径,向量表示则提供了基于语义相似度的快速定位能力,二者互补使得系统在提升响应速度的同时保持上下文相关性。这种结合让记忆检索既快又准,不必在效率与关联性之间做单方面的牺牲。\n\n## 增量更新与效果\nLightRAG 还引入一个增量更新算法,确保新数据能够被及时整合,使系统在快速变化的数据环境中持续有效、及时响应,而无需对整张图谱与索引进行全量重建。这一点对记忆的持续写入尤为关键:记忆可以随新信息的到来而增量扩展,而不必付出重建整图的高昂代价。abstract 报告,大量实验验证表明,LightRAG 相较现有方法在检索准确率与效率上均取得可观提升,项目也已开源,展示了在保持图谱全局能力的同时降低检索与更新开销的实际价值。\n\n从记忆写入与组织的角度看,LightRAG 兼顾了两个常常相互冲突的目标:一方面用双层图索引把知识组织成既能局部又能全局访问的结构,另一方面用增量更新算法让新数据能被就地并入而无需重建整图;这种「结构化组织 + 低成本写入」的结合,直接回应了图式记忆在动态环境中最棘手的更新难题,是其相较静态图谱记忆的关键优势。",
+    "evaluation": "大量实验验证表明,LightRAG 相较现有方法在检索准确率与效率上均取得可观提升,图结构与向量表示的结合带来更快的响应速度并保持上下文相关性,增量更新算法则保证新数据的及时整合;项目已开源以便复现其双层检索与增量更新能力。",
+    "mainFinding": "本文提出双层图索引配合增量更新的记忆组织,在保持图谱全局知识发现能力的同时提升检索准确率与效率,并大幅降低了记忆的更新成本。",
+    "limitations": "图谱质量仍依赖实体与关系抽取的准确性;双层检索键的最优配置需按具体领域数据的特点进行相应的调参与适配。",
+    "related": [
+      "memory-wr-recursive-summary"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2410.05779"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2410.05779"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/HKUDS/LightRAG"
+      }
+    ],
+    "citation": "LightRAG, EMNLP 2025 Findings.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-lightrag.png",
+        "caption": "LightRAG:整体框架构建局部实体与全局关系的双层图索引,支持增量更新,实现简单快速的图谱式检索增强生成。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-cam",
+    "page": "memory",
+    "title": "CAM: A Constructivist View of Agentic Memory for LLM-Based Reading Comprehension",
+    "shortTitle": "CAM",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.74,
+    "year": 2025,
+    "venue": "NeurIPS 2025",
+    "authors": "Rui et al.",
+    "methodFamily": "建构主义记忆",
+    "tags": [
+      "建构主义",
+      "图式同化顺应",
+      "层级图谱",
+      "阅读理解"
+    ],
+    "scores": {
+      "clarity": 0.8,
+      "evidence": 0.74,
+      "reproducibility": 0.7,
+      "adoption": 0.58,
+      "selfEvolution": 0.58
+    },
+    "summary": "借建构主义理论(结构化图式/同化/顺应)动态构建可自适应探索的层级图谱记忆。",
+    "methodCore": "CAM 针对 LLM 在理解长篇文档时面临信息量过载、而现有启发式方法缺乏系统性记忆模块设计原则的问题,从皮亚杰的建构主义理论中汲取灵感,提出一套兼具结构性、灵活性与动态性的智能体记忆设计范式。\n\n## 研究背景与动机\nabstract 指出,当前 LLM 在理解长篇文档时会面临信息量过载的困境,这凸显出一个内聚的记忆模块的必要性——它能把普通 LLM 提升为能够自主阅读的智能体。尽管已经出现了一些启发式方法,但一个系统性的设计原则仍然缺失。为填补这一空白,作者从让·皮亚杰(Jean Piaget)的建构主义理论(Constructivist Theory)中获得启发,提炼出智能体记忆应具备的三个特质:结构化图式(structured schemata)、灵活的同化(flexible assimilation)与动态的顺应(dynamic accommodation),据此绘制出通往更稳健、更高效记忆系统的清晰路径。\n\n## 建构主义的三个特质\n这三个特质分别对应记忆的不同层面。结构化图式意味着记忆不是零散堆放的条目,而是以有组织的图式形态存在;灵活的同化指当新信息与现有图式相容时,能够被顺畅地并入既有结构;动态的顺应则指当新信息与现有图式发生冲突时,记忆结构本身会被调整与重构以适应新知。同化与顺应这一对来自认知科学的机制,恰好刻画了记忆在面对新输入时「纳入」与「重塑」两种互补的更新方式,为记忆写入提供了原则性的指导。\n\n## 增量式重叠聚类构建记忆\nCAM 是这一蓝图的原型实现,其核心是一种增量式重叠聚类(incremental overlapping clustering)算法,用于结构化记忆的构建。该算法既支持连贯的层级摘要,把内容组织成有层次的图式结构;也支持在线的批量整合,使新到来的信息能够被持续吸纳。具体而言,当新信息与现有图式相容时,通过同化被并入相应簇;当新信息与图式冲突时,则通过顺应调整并重构结构。由此,记忆的写入与组织被落实为一个可操作的、随输入不断演化的聚类过程。\n\n## 推理时的自适应探索与效果\n在推理阶段,CAM 自适应地探索记忆结构,以激活与查询相关的信息用于上下文响应,这一过程类似人类的联想。abstract 报告,相比现有方法,CAM 在多样的长文本阅读理解任务——包括问答、基于查询的摘要与主张验证(claim verification)——上同时展现出性能与效率的双重优势,验证了以增量重叠聚类构建的层级记忆与推理时自适应探索在建构主义机制驱动下的实际贡献。\n\n从记忆写入与组织的角度看,CAM 把认知科学中的同化与顺应机制转化为具体的写入操作:同化对应把相容的新信息并入既有簇的低成本写入,顺应对应因冲突而重构结构的高成本写入,而增量式重叠聚类则让这两种写入方式能够在线交替进行;这为「记忆遇到新信息时该如何组织」提供了一套有理论依据、又可工程实现的更新准则。",
+    "evaluation": "相比现有方法,CAM 在多样的长文本阅读理解任务——包括问答、基于查询的摘要与主张验证——上同时展现出性能与效率的双重优势,验证了以增量式重叠聚类构建的层级记忆以及推理时自适应的记忆结构探索,在建构主义同化与顺应机制驱动下对多种阅读理解任务质量与运行效率的贡献。",
+    "mainFinding": "本文以建构主义的结构化图式、灵活同化与动态顺应为原则,并借增量重叠聚类构建层级记忆,在多样长文本阅读理解上兼顾性能与运行效率。",
+    "limitations": "理论驱动的同化与顺应机制在工程上实现较复杂;评测集中于阅读理解类任务,向更通用记忆场景的适用性仍待检验。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2510.05520"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2510.05520"
+      }
+    ],
+    "citation": "CAM, NeurIPS 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-cam.png",
+        "caption": "CAM:以建构主义视角刻画记忆发展过程,借结构化图式、同化与顺应机制动态构建可自适应探索的层级图谱记忆。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-meminsight",
+    "page": "memory",
+    "title": "MemInsight: Autonomous Memory Augmentation for LLM Agents",
+    "shortTitle": "MemInsight",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.74,
+    "year": 2025,
+    "venue": "EMNLP 2025",
+    "authors": "Rana Salama et al.",
+    "methodFamily": "自主属性标注记忆",
+    "tags": [
+      "自主标注",
+      "属性挖掘",
+      "语义增强",
+      "结构化组织"
+    ],
+    "scores": {
+      "clarity": 0.8,
+      "evidence": 0.74,
+      "reproducibility": 0.72,
+      "adoption": 0.6,
+      "selfEvolution": 0.6
+    },
+    "summary": "让智能体自主挖掘关键属性对交互进行标注,增强记忆的语义表示与结构化组织。",
+    "methodCore": "MemInsight 针对 LLM 智能体因整合长期记忆而带来的记忆规模增长与语义结构化需求所引发的挑战,提出一种自主的记忆增强方法,让智能体自行为历史交互挖掘并标注关键属性,从而在写入阶段就完成语义层面的组织。\n\n## 研究背景与动机\nabstract 指出,LLM 智能体已经进化到能够智能地处理信息、做出决策并与用户或工具交互,而其中一项关键能力是整合长期记忆——使智能体能够借助历史交互与知识。然而,随着记忆规模不断增长,以及对语义结构化的需求日益迫切,如何有效表示与检索记忆成为显著挑战。若记忆仅以原始、非结构化的形式堆积,检索时便只能依赖表层的相似度匹配,难以准确定位真正相关的内容。MemInsight 正是为应对这一挑战而提出。\n\n## 自主属性挖掘与标注\nMemInsight 的核心是对历史交互施加自主增强(autonomous augmentation):它自动挖掘并标注关键属性,把原始的、非结构化的记忆增强为带结构化属性的语义表示。这里的关键在于「自主」二字——系统无需人工预先设计固定的标签体系,而是由智能体依据交互内容自适应地生成合适的属性维度。由此,每一条被写入的记忆都携带了描述其语义的结构化标注,记忆库从松散的文本集合转变为带语义索引的结构化知识。\n\n## 面向检索的语义组织\n这种在写入阶段完成的语义增强,直接改善了检索环节。在检索时,系统可以基于这些自主生成的属性进行更精准的过滤、匹配与聚合,而不必仅仅依赖表层的向量相似度。当查询到来时,属性标注为「哪些记忆真正相关」提供了更明确的判据,从而召回更贴合上下文的内容。借助这种对历史交互的自主增强,LLM 智能体被证明能够给出更准确、更贴合上下文的响应。整体来看,MemInsight 把记忆的组织重心前移到写入阶段,以属性标注作为连接原始交互与高质量检索的桥梁。\n\n## 多任务评测与效果\nabstract 报告,作者在三个任务场景上实证验证该方法:对话推荐、问答与事件摘要。在 LLM-REDIAL 数据集上,MemInsight 将推荐的说服力(persuasiveness)最高提升 14%;在 LoCoMo 检索任务上,其召回率相较 RAG 基线高出 34%。这些结果展现出该方法跨多任务提升 LLM 智能体上下文性能的潜力,表明自主属性标注式的写入增强在不同类型任务上都能带来切实的收益。\n\n从记忆写入与组织的角度看,MemInsight 的核心思想是把语义组织的时机前移到写入阶段:与其在检索时才临时理解杂乱的原始记忆,不如在写入时就由智能体自主为每条记忆挖掘并附加结构化属性;这种自主标注既省去了人工设计标签体系的负担,又让记忆库天然带有可供过滤、匹配与聚合的语义索引,从而把检索质量的改善建立在更好的写入组织之上。",
+    "evaluation": "作者在对话推荐、问答与事件摘要三个任务场景上实证验证该方法:在 LLM-REDIAL 数据集上,MemInsight 将推荐的说服力最高提升 14%;在 LoCoMo 检索任务上,其召回率相较 RAG 基线高出 34%,实证结果展现出该方法跨多任务提升 LLM 智能体上下文性能的潜力。",
+    "mainFinding": "本文提出自主属性标注式的记忆写入增强,由智能体自适应地为记忆附加结构化语义属性,在推荐说服力与检索召回率上均优于无属性标注的记忆基线。",
+    "limitations": "属性挖掘依赖 LLM 输出的稳定性,额外的自主标注会带来写入开销;属性体系仍需随不同任务场景进行适配。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2503.21760"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2503.21760"
+      }
+    ],
+    "citation": "MemInsight, EMNLP 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-meminsight.png",
+        "caption": "MemInsight:自主记忆增强框架,由属性挖掘、标注与记忆检索三大模块组成,让智能体自动标注交互以强化语义组织。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-magma",
+    "page": "memory",
+    "title": "MAGMA: A Multi-Graph based Agentic Memory Architecture for AI Agents",
+    "shortTitle": "MAGMA",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.83,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Dongming Jiang et al.",
+    "methodFamily": "多图记忆架构",
+    "tags": [
+      "多图记忆",
+      "策略引导遍历",
+      "长程推理"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.8,
+      "reproducibility": 0.7,
+      "adoption": 0.62,
+      "selfEvolution": 0.8
+    },
+    "summary": "针对现有记忆把时间、因果、实体信息纠缠在单一存储的问题,MAGMA 用语义、时间、因果、实体四张正交图分别表示每条记忆,并以策略引导遍历实现查询自适应的结构化检索。",
+    "methodCore": "MAGMA 针对记忆增强生成大多在单一整体记忆库上做语义相似度检索、把时间因果与实体信息纠缠在一起的问题,提出一种多图智能体记忆架构,用四张正交的关系图分别表示每条记忆,并以策略引导的遍历实现查询自适应的结构化检索。\n\n## 研究背景与问题\nabstract 指出,记忆增强生成(Memory-Augmented Generation, MAG)通过为 LLM 扩展外部记忆来支撑长上下文推理,但现有方法大多依赖在单一整体记忆库(monolithic memory store)上做语义相似度检索,从而把时间、因果与实体信息纠缠在一起。这种纠缠带来两方面的负面后果:一是限制了可解释性,难以说清检索到的证据究竟因何被选中;二是削弱了查询意图与检索证据之间的对齐,导致推理准确率欠佳。MAGMA 的核心主张是,应当把不同类型的关联从单一记忆库中解耦出来。\n\n## 四张正交图的记忆表示\nMAGMA 把每个记忆项跨语义(semantic)、时间(temporal)、因果(causal)与实体(entity)四张正交的图分别表示,使不同类型的关联被解耦到相互独立的关系视图之中。语义图刻画内容上的相似与主题关联,时间图刻画事件发生的先后与时序关系,因果图刻画事件之间的因果依赖,实体图刻画围绕具体实体展开的关系。同一条记忆在四张图中各有其位置,不同维度的信息不再彼此干扰,而是各自形成清晰的关系结构。这种「一条记忆、四种关系视图」的组织,是 MAGMA 在记忆写入与结构化上的核心创新。\n\n## 策略引导的遍历检索\n在检索层面,MAGMA 把检索形式化为在这些关系视图上由策略引导的遍历(policy-guided traversal)。面对一个查询,系统并非一次性在全部记忆上做相似度匹配,而是根据查询意图自适应地选择应当在哪张图、沿哪些关系进行遍历,进而构建结构化的上下文。通过把记忆表示与检索逻辑相互解耦,MAGMA 得以提供透明的推理路径,并对检索过程实现细粒度的控制——每一步遍历都对应可解释的关系跳转,而非黑箱式的相似度打分。\n\n## 评测与效果\nabstract 报告,在 LoCoMo 与 LongMemEval 两个长期记忆基准上的实验表明,MAGMA 在长程推理任务上持续超越当前最先进的智能体记忆系统。这验证了把记忆跨语义、时间、因果与实体四张正交图解耦表示、并以策略引导遍历执行查询自适应结构化检索这一设计,在长程推理准确率与可解释性上的有效性与优越性。\n\n从记忆写入与组织的角度看,MAGMA 的核心主张是「解耦」:它反对把语义、时间、因果与实体信息混杂在单一记忆库中,转而在写入时就把每条记忆分别投射到四张正交的关系图上;这种多视图的组织不仅让检索能够按查询意图选择最合适的关系视图,也让每一步检索都对应可追溯的关系跳转,从而把可解释性内建到记忆的组织结构之中。",
+    "evaluation": "在 LoCoMo 与 LongMemEval 两个长期记忆基准上的实验表明,MAGMA 在长程推理任务上持续超越当前最先进的智能体记忆系统,验证了把记忆跨语义、时间、因果与实体四张正交图解耦表示、并以策略引导遍历执行查询自适应结构化检索这一设计,在长程推理准确率与可解释性上的有效性。",
+    "mainFinding": "本文把记忆按语义、时间、因果、实体解耦为四张正交图并以策略引导遍历检索,在长程推理任务上同时提升了检索准确率与推理可解释性。",
+    "limitations": "需同时维护语义、时间、因果、实体四张正交图并执行策略引导遍历,增加了记忆构建与检索的系统复杂度和整体计算开销。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2601.03236"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2601.03236"
+      }
+    ],
+    "citation": "MAGMA, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-magma.png",
+        "caption": "MAGMA 总体架构:Agent(LLM)与动态演化的 Agentic Memory 双向交互——检索并构造新提示,再将输出结果回写更新记忆。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-adamemdistill",
+    "page": "memory",
+    "title": "What Deserves Memory: Adaptive Memory Distillation for LLM Agents",
+    "shortTitle": "NEMORI",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Wenquan Ma et al.",
+    "methodFamily": "自适应记忆蒸馏",
+    "tags": [
+      "记忆蒸馏",
+      "可预测性",
+      "情景+语义记忆"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.78,
+      "reproducibility": 0.72,
+      "adoption": 0.6,
+      "selfEvolution": 0.82
+    },
+    "summary": "针对「什么信息值得记住」这一问题,NEMORI 不用预设的重要性分数或情感标签,而是把经验的未来效用建模为可预测性,从数据本身自适应地蒸馏值得保留的记忆。",
+    "methodCore": "NEMORI 针对 LLM 智能体记忆系统难以判断「何种信息值得保留」的问题,提出一种自适应记忆蒸馏框架,把对经验未来效用的评估转化为可预测性问题,从数据本身自适应地决定该记住什么。\n\n## 研究背景与问题\nabstract 指出,LLM 智能体的记忆系统在决定「什么信息值得保留」这件事上举步维艰。现有方法通常依赖预设的启发式规则,例如重要性分数、情感标签或事实模板;然而这些规则本质上编码的是设计者的直觉,而非从数据本身学习而来。设计者直觉难免带有偏差,也难以覆盖多样任务的真实需求。NEMORI 受认知理念启发,主张换一个角度:与其人为规定重要性,不如从交互序列自身的内在属性出发,判断哪些经验在未来更可能有用。\n\n## 可预测性视角\nNEMORI 的核心思想是把「评估经验的未来效用」转化为一个可预测性(predictability)问题。其判据是:能够被现有知识轻易预测的内容,价值较低,因为它并未带来新信息;而那些预测误差较大的内容,才更可能构成真正的新知识,值得被保留。通过这一转换,「该记什么」不再依赖外部强加的启发式标签,而是由数据与模型当前状态之间的落差自然决定,从而实现数据驱动的自适应蒸馏。\n\n## 两级级联模块\nNEMORI 由两个级联的模块组成。第一个模块是情景记忆整合(Episodic Memory Integration),它把原始的交互转化为连贯的叙事(coherent narratives),为后续处理提供结构完整、语义连贯的经验单元。第二个模块是语义知识蒸馏(Semantic Knowledge Distillation),它通过预测误差(prediction error)来抽取洞见:对每段整合后的经验,评估其在现有知识下的可预测程度,把预测误差大的部分作为新知识蒸馏并保留下来。两级串联,先整合、后蒸馏,共同构成从原始交互到可保留记忆的写入流程。\n\n## 无关性设计与效果\n该框架以蒸馏为核心,对下游的记忆管理方式保持无关(agnostic)——它只负责决定「什么值得记」,而不绑定具体的存储、检索或组织方案,因此可以与多种记忆后端配合。abstract 报告,大量实验证实 NEMORI 取得了强劲的整体性能、效率与存储压缩表现,即在减少存储占用的同时保持任务效果。作者据此主张,观察交互序列的内在属性,为基于启发式的记忆设计提供了一种可行且有效的数据驱动替代方案,相关代码已开源。\n\n从记忆写入与组织的角度看,NEMORI 回答的是记忆写入中最根本却最少被正面处理的问题——「到底该记什么」:它拒绝用重要性分数或情感标签这类人为启发式来筛选,而是让数据自身通过预测误差说话,把无法被现有知识预测的内容判定为真正值得写入的新知;这种数据驱动的写入准则,使记忆库能够在压缩存储的同时保留最具信息量的经验。",
+    "evaluation": "大量实验证实,NEMORI 取得了强劲的整体性能、效率与存储压缩表现,通过基于预测误差的语义知识蒸馏在减少存储占用的同时保持任务效果;结果表明观察交互序列自身的内在属性,为基于预设启发式的记忆设计提供了一种可行且有效的数据驱动替代方案,相关代码已开源。",
+    "mainFinding": "本文用可预测性与预测误差从交互数据自身的内在属性中自适应地决定该记住什么,为记忆写入提供了摆脱人工预设启发式规则的数据驱动准则。",
+    "limitations": "预测误差的估计依赖底层模型的质量;情景记忆整合与语义知识蒸馏两阶段级联流程会带来额外的记忆写入开销与延迟。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2508.03341"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2508.03341"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/nemori-ai/nemori"
+      }
+    ],
+    "citation": "NEMORI, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-adamemdistill.png",
+        "caption": "NEMORI:自适应记忆蒸馏框架,由情景记忆整合与后续模块级联并受三种先验引导,把经验的未来效用建模为可预测性从数据自适应蒸馏。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-licomemory",
+    "page": "memory",
+    "title": "LiCoMemory: Lightweight and Cognitive Agentic Memory for Efficient Long-Term Reasoning",
+    "shortTitle": "LiCoMemory",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Zhengjun Huang et al.",
+    "methodFamily": "轻量认知图记忆",
+    "tags": [
+      "CogniGraph",
+      "层级图",
+      "实时更新"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.8,
+      "reproducibility": 0.74,
+      "adoption": 0.62,
+      "selfEvolution": 0.78
+    },
+    "summary": "针对现有图记忆多为扁平、语义与拓扑纠缠导致冗余与低效的问题,LiCoMemory 用轻量层级图 CogniGraph 把实体和关系作为语义索引层,支持实时更新与检索。",
+    "methodCore": "LiCoMemory 针对现有图记忆多为扁平且语义与拓扑纠缠、造成冗余与低效的问题,提出一个面向实时更新与检索的端到端智能体记忆框架,用轻量层级图把实体与关系作为语义索引层加以组织。\n\n## 研究背景与问题\nabstract 指出,LLM 智能体展现出出色的对话与推理能力,但仍受制于有限的上下文窗口与缺乏持久记忆。近来的工作通过外部记忆架构来缓解这些限制,并常采用基于图的表示;然而其中大多数采用扁平、纠缠的结构,把语义与拓扑混在一起,由此导致表示冗余、检索无序,以及效率与准确率的下降。换言之,图虽然被引入,却因组织方式不当而未能充分发挥其结构优势。LiCoMemory 的出发点正是重新设计图记忆的组织,使其既轻量又层次清晰。\n\n## CogniGraph 轻量层级图\nLiCoMemory 引入 CogniGraph——一张轻量的层级图(lightweight hierarchical graph),把实体与关系用作语义索引层(semantic indexing layers)来组织记忆。与扁平图把所有节点平铺、语义与拓扑相互缠绕不同,CogniGraph 以层级方式把实体与关系组织成清晰的索引结构:实体与关系构成语义索引,引导检索快速定位相关区域,而层级则区分了不同抽象程度的知识。这种「以实体关系作语义索引 + 层级组织」的设计,旨在消除冗余表示、让检索更有序,从而在源头上提升效率与准确率。\n\n## 时序层级搜索与重排序\n在检索层面,LiCoMemory 采用兼顾时间与层级(temporal and hierarchy-aware)的搜索,并配合集成的重排序(reranking),以实现自适应且连贯的知识检索。时序感知使系统能够正确处理事件的先后与时效,层级感知使系统能够在恰当的抽象层级上召回内容,重排序则进一步对候选结果做精细排序,确保最终提供给模型的上下文既相关又连贯。这套检索机制与 CogniGraph 的组织形态紧密配合,共同支撑长期对话中的时序推理与多会话一致性。\n\n## 实时性与效果\n整体设计强调轻量与低延迟,使记忆能够在持续交互中被实时构建与更新,而非离线批量重建。abstract 报告,在长期对话基准 LoCoMo 与 LongMemEval 上的实验显示,LiCoMemory 不仅在时序推理、多会话一致性与检索效率上超越既有基线,还显著降低了更新延迟,验证了轻量层级图配合时序层级搜索与重排序在实时记忆构建与检索上的有效性,官方代码与数据已开源。\n\n从记忆写入与组织的角度看,LiCoMemory 的核心取舍是在图式记忆的表达力与运行开销之间寻求平衡:它以实体与关系作为轻量的语义索引层、以层级区分抽象程度,刻意避免扁平图中语义与拓扑纠缠所带来的冗余;这种「轻量层级」的组织使得记忆能够在持续交互中被实时构建与更新,而不必付出离线重建整图的高昂代价,从而把低更新延迟作为一等设计目标。",
+    "evaluation": "在长期对话基准 LoCoMo 与 LongMemEval 上的实验显示,LiCoMemory 不仅在时序推理、多会话一致性与检索效率上超越既有基线,还显著降低了更新延迟,验证了轻量层级图 CogniGraph 配合时序层级搜索与重排序在实时记忆构建与检索上的有效性,官方代码与数据已开源。",
+    "mainFinding": "本文以轻量层级认知图 CogniGraph 组织记忆并配合时序层级搜索与重排序,兼顾时序推理准确率、多会话一致性与低更新延迟。",
+    "limitations": "层级图构建与重排序依赖实体、关系抽取的质量;在复杂多跳关联情形下,其轻量层级结构的表达力仍有待进一步检验。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2511.01448"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2511.01448"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/EverM0re/LiCoMemory"
+      }
+    ],
+    "citation": "LiCoMemory, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-licomemory.png",
+        "caption": "LiCoMemory:针对图记忆扁平冗余、语义与拓扑纠缠的问题,用轻量层级图 CogniGraph 作语义索引层,支持实时更新与检索。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-sgmem",
+    "page": "memory",
+    "title": "SGMem: Sentence Graph Memory for Long-Term Conversational Agents",
+    "shortTitle": "SGMem",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.79,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Yaxiong Wu et al.",
+    "methodFamily": "句子图记忆",
+    "tags": [
+      "句子图",
+      "多粒度",
+      "长期对话"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.78,
+      "reproducibility": 0.74,
+      "adoption": 0.6,
+      "selfEvolution": 0.75
+    },
+    "summary": "针对事实抽取或摘要难以跨粒度组织与检索的问题,SGMem 把对话表示为分块单元内的句子级图,并把检索到的原始对话与生成的摘要、事实、洞见结合起来供 LLM 生成回复。",
+    "methodCore": "SGMem 针对长期对话智能体需处理超出上下文窗口的历史、而事实抽取或摘要方法难以跨粒度组织与检索的问题,提出句子图记忆,把对话表示为分块单元内的句子级图,并把原始对话与生成的记忆结合起来供生成使用。\n\n## 研究背景与问题\nabstract 指出,长期对话智能体需要有效的记忆管理来处理超出 LLM 上下文窗口的对话历史。现有基于事实抽取或摘要的方法虽然能减少冗余,却难以在不同粒度的对话与生成记忆之间组织并检索相关信息。事实抽取往往把对话压成孤立的事实点,丢失了语境;摘要则可能过度概括,遗漏细节。更根本的问题是,对话中的相关信息分布在不同层级——同一轮内、同一回合内、乃至跨会话之间——单一粒度的记忆难以同时覆盖这些关联。\n\n## 句子级图的记忆组织\nSGMem(Sentence Graph Memory)的核心是把对话表示为分块单元(chunked units)内的句子级图。它以句子为节点,在句子之间建立关联,从而在细粒度上刻画对话内容之间的联系。关键在于,这张图能够捕捉跨轮(turn)、跨回合(round)与跨会话(session)三种粒度上下文之间的关联:同一话题的相关句子无论出现在哪个层级,都能通过图的连接被串联起来。由此,SGMem 克服了单纯事实抽取或摘要在不同粒度之间难以组织与检索的局限,把记忆组织成一张多粒度贯通的句子关系网络。\n\n## 原文与生成记忆的融合\n在生成回复时,SGMem 并不只依赖某一种记忆形态,而是把检索到的原始对话与系统生成的记忆(如摘要、事实与洞见)结合起来,为 LLM 提供连贯且相关的上下文。原始对话保留了具体的语境与细节,生成的摘要、事实与洞见则提供了经过提炼的高层知识;二者互补,既避免了只用原文时的冗余,也避免了只用摘要时的信息损失。这种「原文 + 生成记忆」的融合,是 SGMem 在写入组织之外、于使用阶段的关键设计。\n\n## 评测与效果\nabstract 报告,在 LongMemEval 与 LoCoMo 上的实验表明,SGMem 持续提升长期对话问答的准确率,并优于多个强基线。这验证了以句子级图跨轮、跨回合、跨会话多粒度组织记忆、并把检索到的原始对话与系统生成的摘要、事实、洞见相结合的策略,在长期对话问答任务上所带来的连贯性与相关性优势。\n\n从记忆写入与组织的角度看,SGMem 的关键在于用句子级图打通了不同粒度之间的组织壁垒:轮、回合与会话三个层级的相关句子被统一编织进同一张关系网络,既避免了事实抽取丢失语境,也避免了摘要过度概括;而生成时把原始对话与提炼出的摘要、事实、洞见一并提供,则说明良好的记忆组织应当同时保留原文细节与高层知识两类信息源。",
+    "evaluation": "在 LongMemEval 与 LoCoMo 上的实验表明,SGMem 持续提升长期对话问答的准确率,并优于多个强基线,验证了以句子级图跨轮、跨回合、跨会话多粒度组织记忆、并把检索到的原始对话与系统生成的摘要、事实、洞见相结合的策略,在长期对话问答任务上所带来的连贯性与相关性优势。",
+    "mainFinding": "本文以句子级图跨轮、回合、会话多粒度组织记忆并融合原文与生成的摘要事实洞见,在长期对话问答上持续提升准确率并优于多个强基线。",
+    "limitations": "句子级图的节点数量众多,随记忆规模不断增大,图的构建与检索开销以及噪声控制会成为需要认真应对的挑战。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2509.21212"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2509.21212"
+      }
+    ],
+    "citation": "SGMem, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-sgmem.png",
+        "caption": "SGMem:把长期对话表示为分块单元内的句子级图,将检索到的原始对话与生成的摘要、事实、洞见结合供 LLM 生成回复。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-evermemos",
+    "page": "memory",
+    "title": "EverMemOS: A Self-Organizing Memory Operating System for Structured Long-Horizon Reasoning",
+    "shortTitle": "EverMemOS",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.83,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Chuanrui Hu et al.",
+    "methodFamily": "自组织记忆操作系统",
+    "tags": [
+      "记忆OS",
+      "engram生命周期",
+      "语义巩固"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.82,
+      "reproducibility": 0.72,
+      "adoption": 0.62,
+      "selfEvolution": 0.85
+    },
+    "summary": "针对现有记忆存储孤立记录、难以巩固演化的用户状态并解决冲突的问题,EverMemOS 提出受记忆痕迹(engram)启发的生命周期,把对话流转为 MemCell 并巩固为主题化的 MemScene。",
+    "methodCore": "EverMemOS 针对现有记忆系统常存储孤立记录、仅检索片段、难以巩固演化中的用户状态并解决冲突的问题,提出一个自组织的记忆操作系统,实现一套受记忆痕迹(engram)启发的计算记忆生命周期。\n\n## 研究背景与问题\nabstract 指出,LLM 正越来越多地被部署为长期交互的智能体,但其有限的上下文窗口使得在长时间交互中维持连贯行为变得困难。现有记忆系统往往存储孤立的记录、只检索零散的片段,难以把不断演化的用户状态巩固起来,也难以解决其中的冲突。当用户的信息在多次交互中发生变化甚至相互矛盾时,只保留孤立记录的系统无法形成一致而稳定的用户理解。EverMemOS 的目标正是让记忆能够自组织地被巩固与演化。\n\n## 情景痕迹形成\nEverMemOS 的生命周期第一阶段是情景痕迹形成(Episodic Trace Formation)。它把对话流转化为 MemCell——记忆的基本单元,每个 MemCell 捕捉三类信息:情景痕迹(episodic traces)、原子事实(atomic facts)与有时限的 Foresight(前瞻)信号(time-bounded Foresight signals)。情景痕迹保留了交互发生时的情境,原子事实提炼出可核查的事实点,而 Foresight 信号则记录了带有时效性的、对未来可能有用的前瞻性线索。这一阶段把连续的对话流切分并结构化为可管理的记忆单元。\n\n## 语义巩固与重构式回忆\n第二阶段是语义巩固(Semantic Consolidation):它把众多 MemCell 组织为主题化的 MemScene,从中蒸馏出稳定的语义结构,并据此更新用户画像(user profiles)。这一步正是解决孤立记录难题的关键——分散的记忆单元被按主题聚合、去冲突并沉淀为稳定知识,使演化中的用户状态得以被持续巩固。第三阶段是重构式回忆(Reconstructive Recollection):它以 MemScene 为引导执行智能体式检索,为下游推理组装「必要且充分」(necessary and sufficient)的上下文,既不遗漏关键信息,也不引入冗余噪声。三阶段串联,构成一个从形成、巩固到回忆的完整记忆生命周期。\n\n## 评测与效果\nabstract 报告,在 LoCoMo 与 LongMemEval 上的实验表明,EverMemOS 在记忆增强推理任务上取得最新最优(state-of-the-art)表现;作者还在 PersonaMem v2 上报告了用户画像研究,并以定性案例展示了用户画像与 Foresight 前瞻等面向对话的能力,代码已开源。这些结果验证了以 engram 式三阶段生命周期把对话流巩固为主题化语义结构的有效性。\n\n从记忆写入与组织的角度看,EverMemOS 用一套受记忆痕迹启发的生命周期,系统回答了「对话流如何被逐层组织为稳定知识」这一问题:形成阶段把连续对话切分为携带情景、事实与前瞻信号的 MemCell,巩固阶段再把它们按主题聚合、去冲突并沉淀为稳定的语义结构与用户画像;这种自组织的分层巩固,正是为了克服只保留孤立记录、无法整合演化用户状态的痼疾。",
+    "evaluation": "在 LoCoMo 与 LongMemEval 上的实验表明,EverMemOS 在记忆增强推理任务上取得最新最优(state-of-the-art)表现;作者还在 PersonaMem v2 上报告了用户画像研究,并以定性案例展示用户画像与 Foresight 前瞻等面向对话的能力,代码已开源以便复现。",
+    "mainFinding": "本文以 engram 式三阶段生命周期把对话流巩固为主题化语义结构,在 LoCoMo 与 LongMemEval 记忆增强推理上取得最先进表现。",
+    "limitations": "三阶段生命周期与主题巩固流程较为复杂,巩固与语义结构蒸馏的质量高度依赖抽取与组织环节的稳定性,系统构建门槛较高。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2601.02163"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2601.02163"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/EverMind-AI/EverMemOS"
+      }
+    ],
+    "citation": "EverMemOS, arXiv 2026."
+  },
+  {
+    "id": "memory-wr-himem",
+    "page": "memory",
+    "title": "HiMem: Hierarchical Long-Term Memory for LLM Long-Horizon Agents",
+    "shortTitle": "HiMem",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Ningning Zhang et al.",
+    "methodFamily": "层级长期记忆",
+    "tags": [
+      "层级记忆",
+      "冲突感知重巩固",
+      "记忆自进化"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.8,
+      "reproducibility": 0.72,
+      "adoption": 0.6,
+      "selfEvolution": 0.86
+    },
+    "summary": "针对长期记忆在适应性、可扩展性与自进化上的不足，HiMem 用主题感知的事件-意外双通道分段构建情景记忆、用多阶段抽取构建笔记记忆，并以冲突感知的记忆重巩固支持持续自进化。",
+    "methodCore": "HiMem 针对长期记忆系统在持续交互设定下于适应性、可扩展性与自进化上仍有明显局限的问题,受认知理论启发,提出一个面向长程对话的层级长期记忆框架,支持记忆的构建、检索与动态更新。\n\n## 研究背景与问题\nabstract 指出,尽管长期记忆系统近年来取得了长足进展,但在持续交互(continuous interaction)设定下,它们在适应性(adaptability)、可扩展性(scalability)与自进化(self-evolution)三方面仍存在明显局限。持续交互意味着记忆必须不断吸纳新信息、随规模增长而保持高效,并在知识发生变化时自我修订;而现有系统往往在其中一个或多个方面力有不逮。HiMem 从认知理论中汲取灵感,力图为长程对话提供一个能同时兼顾这三方面的记忆设计范式。\n\n## 情景记忆与笔记记忆的双通道构建\nHiMem 用「主题感知的事件-意外双通道分段」(Topic-Aware Event–Surprise Dual-Channel Segmentation)策略构建认知一致的情景记忆(Episode Memory)。该策略同时从主题事件与「意外」(surprise,即出乎预期的内容)两个通道来切分交互流,使得划分出的情景既主题连贯,又能捕捉到显著的转折点,从而形成认知上一致的记忆单元。与此并行,HiMem 通过一条多阶段的信息抽取管线构建笔记记忆(Note Memory),用以捕捉稳定的知识。情景记忆偏重具体交互事件,笔记记忆偏重抽象稳定知识,二者分工明确。\n\n## 层级链接与检索策略\n这两类记忆在语义上相互链接,形成一个连接具体交互事件与抽象知识的层级结构,从而在不牺牲信息保真度的前提下实现高效检索——具体事件与抽象知识彼此可达,检索既能定位细节也能调用概括。为在准确率与效率之间取得平衡,HiMem 支持混合(hybrid)与尽力而为(best-effort)两种检索策略:前者更注重召回的准确与完整,后者更注重响应的效率,可依需求灵活取舍。\n\n## 冲突感知的记忆重巩固与效果\nHiMem 的另一关键设计是冲突感知的记忆重巩固(conflict-aware Memory Reconsolidation):它依据检索反馈来修订与补充已存知识,当新信息与旧知识冲突时主动更新记忆,从而实现长期使用中的记忆持续自进化。abstract 报告,在长程对话基准上的实验表明,HiMem 在准确率、一致性与长期推理上持续优于代表性基线,同时保持较好的运行效率,并已开源代码,为构建自适应、可自进化的对话智能体提供了有原则且可扩展的设计范式。\n\n从记忆写入与组织的角度看,HiMem 通过情景记忆与笔记记忆的双通道分工,把「具体交互事件」与「抽象稳定知识」分层组织并相互链接,使记忆既保真又便于检索;而冲突感知的重巩固则赋予写入过程自我修订的能力,当检索反馈揭示新旧知识矛盾时主动更新,从而让记忆组织在长期使用中持续自进化,而非一次写定后便僵化不变。",
+    "evaluation": "在长程对话基准上的实验结果表明,HiMem 在准确率、一致性与长期推理上持续优于代表性基线,同时保持较好的运行效率,验证了层级式情景记忆与笔记记忆结构、主题感知的事件-意外双通道分段,以及冲突感知的记忆重巩固机制在长程对话记忆管理上的整体有效性与可扩展性,相关代码已开源。",
+    "mainFinding": "本文以情景记忆加笔记记忆的层级结构与冲突感知的记忆重巩固,为长程对话智能体提供了可持续自进化、有原则且可扩展的记忆设计范式。",
+    "limitations": "主题感知双通道分段与多阶段抽取管线较为复杂;记忆重巩固的效果依赖冲突检测的准确性与检索反馈信号的质量。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2601.06377"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2601.06377"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/jojopdq/HiMem"
+      }
+    ],
+    "citation": "HiMem, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-himem.png",
+        "caption": "HiMem 总览:(A) 分层记忆组织——Episode Memory 与 Note Memory 语义连接,桥接具体交互事件与抽象知识,支持冲突感知的再巩固。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-promem",
+    "page": "memory",
+    "title": "Beyond Static Summarization: Proactive Memory Extraction for LLM Agents",
+    "shortTitle": "ProMem",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.8,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Chengyuan Yang et al.",
+    "methodFamily": "主动式记忆抽取",
+    "tags": [
+      "主动抽取",
+      "自我提问",
+      "反馈回路"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.78,
+      "reproducibility": 0.72,
+      "adoption": 0.6,
+      "selfEvolution": 0.8
+    },
+    "summary": "针对多数工作只关注记忆组织与使用、忽视初始抽取阶段的问题，ProMem 把摘要式抽取从「一次性前馈」改造为带自我提问反馈回路的迭代式认知过程，以恢复遗漏信息并纠错。",
+    "methodCore": "ProMem 针对多数工作只关注记忆的组织与使用、却忽视初始抽取阶段的问题,基于循环加工理论把摘要式抽取从「一次性前馈」改造为带自我提问反馈回路的迭代式认知过程,以恢复遗漏信息并纠错。\n\n## 研究背景与问题\nabstract 指出,记忆管理对 LLM 智能体处理长期交互与个性化至关重要,但多数研究聚焦于如何组织与使用记忆摘要,却往往忽视了最初的记忆抽取阶段。抽取是记忆写入的源头,如果这一步就丢失了关键信息,后续再精巧的组织与检索也无法弥补。ProMem 把研究焦点前移到这一被低估的环节,重新审视摘要式抽取本身的缺陷。\n\n## 循环加工理论视角下的两大缺陷\n基于循环加工理论(recurrent processing theory),作者指出现有摘要式方法有两大缺陷。其一,摘要是「提前的」(ahead-of-time),充当一种盲目的前馈(feed-forward)过程:因为在抽取时并不知道未来会遇到什么任务,它必然会遗漏一些当时看来不重要、日后却关键的细节。其二,抽取通常是「一次性」(one-off)完成的,缺乏一个用于验证事实的反馈回路,这使得信息损失不断累积而无从纠正。这两点共同导致所抽取的记忆在完整性上先天不足。\n\n## 主动式迭代抽取\n为解决这些问题,ProMem 提出主动式记忆抽取(proactive memory extraction),把抽取当作一个迭代式的认知过程,而非静态的一次性摘要。它引入一个循环反馈回路(recurrent feedback loop),让智能体通过自我提问(self-questioning)主动探查对话历史:智能体不断向自己提出问题,借此发现此前遗漏的信息并纠正已有的错误。通过这种「提问—回查—补全—纠错」的循环,所抽取记忆的完整性被显著提升,写入源头因而更加可靠。这把记忆抽取从被动的信息压缩,转变为主动的信息挖掘。\n\n## 评测与效果\nabstract 报告,ProMem 显著提升了所抽取记忆的完整性与下游的问答准确率,并在抽取质量与 token 成本之间取得了明显优于静态摘要方法的更好权衡。这充分验证了以循环反馈回路与自我提问驱动的迭代式主动抽取,相较盲目的一次性前馈摘要,在所抽取记忆的完整性与最终问答准确率两方面的实质优势,为下游的记忆组织与使用提供了更完整可靠的写入源头。\n\n从记忆写入与组织的角度看,ProMem 把研究焦点罕见地投向了最上游的抽取环节,并指出静态摘要作为盲目的一次性前馈,本质上是一种质量不受控的写入;它用自我提问的循环反馈把抽取变成可迭代、可纠错的过程,从而在源头上提升所写入记忆的完整性——这提醒后续工作,再精巧的组织与检索也无法弥补写入阶段就已丢失的信息。",
+    "evaluation": "实验显示,ProMem 显著提升了所抽取记忆的完整性与下游的问答准确率,并在抽取质量与 token 成本之间取得了明显优于静态摘要方法的更好权衡,充分验证了以循环反馈回路与自我提问驱动的迭代式主动抽取,相较盲目的一次性前馈摘要,在所抽取记忆完整性与最终问答准确率上的实质优势。",
+    "mainFinding": "本文把记忆的初始抽取从盲目的一次性前馈改为自我提问式的迭代反馈过程,显著提升了所抽取记忆的完整性与下游问答任务的最终准确率。",
+    "limitations": "迭代式自我提问增加了推理调用次数与 token 开销;随反馈轮次增加,其所带来收益的边际递减需要在实践中权衡取舍。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2601.04463"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2601.04463"
+      }
+    ],
+    "citation": "ProMem, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-promem.png",
+        "caption": "ProMem:针对摘要式记忆的一次性抽取缺陷,把记忆抽取改造为带自我提问反馈回路的迭代认知过程,恢复遗漏并纠错。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-traingraphmem",
+    "page": "memory",
+    "title": "From Experience to Strategy: Empowering LLM Agents with Trainable Graph Memory",
+    "shortTitle": "Trainable Graph Memory",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Siyu Xia et al.",
+    "methodFamily": "可训练图记忆",
+    "tags": [
+      "可训练图记忆",
+      "元认知",
+      "强化学习"
+    ],
+    "scores": {
+      "clarity": 0.8,
+      "evidence": 0.8,
+      "reproducibility": 0.7,
+      "adoption": 0.58,
+      "selfEvolution": 0.85
+    },
+    "summary": "针对隐式记忆(训练)易灾难遗忘、显式记忆(提示)缺乏适应性的两难，本文提出以智能体为中心的可训练多层图记忆，把轨迹抽象为状态机决策路径并蒸馏为可解释的策略元认知，用强化学习优化其权重。",
+    "methodCore": "本文针对 LLM 智能体利用先验经验的两难——训练获得的隐式记忆存在灾难遗忘与可解释性差,提示获得的显式记忆又缺乏适应性——提出一种以智能体为中心、可训练的多层图记忆框架,把从经验到策略的转化建模为可学习、可优化的过程。\n\n## 研究背景与问题\nabstract 指出,基于 LLM 的智能体在复杂开放环境中展现出自主解决任务的巨大潜力,而提升其推理能力的一条有前景的路径,是更好地利用先验经验来指导当前决策。然而,LLM 获取经验的两种方式各有明显缺陷:通过训练获得的隐式记忆(implicit memory)会遭遇灾难遗忘(catastrophic forgetting)且可解释性有限;通过提示获得的显式记忆(explicit memory)则缺乏适应性,无法随反馈自我调整。本文正是要在这两者之间寻求折中,兼顾适应性与可解释性。\n\n## 可训练的多层图记忆\n作者提出一种以智能体为中心(agent-centric)、可训练(trainable)的多层图记忆框架,并借此评估上下文记忆如何增强 LLM 利用参数化信息的能力。该图把原始的智能体轨迹抽象为状态机(state machine)中的结构化决策路径:智能体在环境中的每一次行动被组织成状态与转移,从而把杂乱的交互序列转化为有结构的决策图。在此基础上,框架进一步把这些决策路径蒸馏为高层的、可被人理解的策略性元认知(strategic meta-cognition)——即从具体轨迹中提炼出的、关于「在何种情境下应采取何种策略」的抽象经验。这种分层组织既保留了可解释性,又为可训练化提供了载体。\n\n## 基于强化的权重优化\n为使记忆具备适应性,作者提出一套基于强化(reinforcement-based)的权重优化流程:依据下游任务的奖励反馈,估计每条元认知的经验效用(empirical utility),即衡量某条策略性经验在实际任务中究竟有多大帮助。效用高的元认知被赋予更大权重,效用低的则被抑制。由此,记忆不再是一成不变的静态提示,而是能够随任务反馈自我校准的可优化对象,这正是本方法区别于纯提示式显式记忆的关键。\n\n## 元认知提示与效果\n这些经过优化的策略随后通过元认知提示(meta-cognitive prompting)被动态整合进 LLM 智能体的训练循环,使记忆既可解释又能随反馈持续自我优化。abstract 报告,实证结果表明,这种可学习的图记忆具备稳健的泛化能力,提升了 LLM 智能体的策略推理表现,并在强化学习(RL)训练过程中带来持续、一致的收益,验证了把轨迹抽象为状态机决策路径、蒸馏为策略元认知并以奖励优化其效用这一整体设计的有效性。\n\n从记忆写入与组织的角度看,本文的独到之处在于让记忆本身可训练:原始轨迹经状态机抽象与元认知蒸馏后被组织成分层的图式经验,而每条经验的权重又能依据奖励反馈被强化学习优化;这既保留了显式记忆的可解释性,又赋予其隐式记忆才有的适应性,从而把「从经验中学到策略」这一过程转化为记忆组织可以持续自我校准的写入闭环。",
+    "evaluation": "实证结果表明,该可学习的图记忆具备稳健的泛化能力,提升了 LLM 智能体的策略推理表现,并在强化学习(RL)训练过程中带来持续、一致的收益,验证了把智能体轨迹抽象为状态机决策路径、蒸馏为策略元认知、并用基于奖励的权重优化提升其经验效用这一整体设计在策略推理与训练稳定性上的有效性。",
+    "mainFinding": "本文把智能体的原始交互轨迹蒸馏为可训练、可解释的图式策略元认知,并用强化学习优化其经验效用,为记忆架起了从经验到策略的桥梁。",
+    "limitations": "方法依赖下游任务的奖励反馈与 RL 训练过程;轨迹到状态机决策路径的抽象质量会影响策略元认知的蒸馏效果。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2511.07800"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2511.07800"
+      }
+    ],
+    "citation": "Trainable Graph Memory, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-traingraphmem.png",
+        "caption": "Trainable Graph Memory:对比 ExpeL 式显式记忆,把轨迹抽象为状态机决策路径并蒸馏为可训练多层图记忆,用强化学习优化。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-deltamem",
+    "page": "memory",
+    "title": "DeltaMem: Towards Agentic Memory Management via Reinforcement Learning",
+    "shortTitle": "DeltaMem",
+    "category": "memory-write",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Qi Zhang et al.",
+    "methodFamily": "强化学习记忆管理",
+    "tags": [
+      "单智能体记忆管理",
+      "强化学习",
+      "编辑距离奖励"
+    ],
+    "scores": {
+      "clarity": 0.8,
+      "evidence": 0.82,
+      "reproducibility": 0.7,
+      "adoption": 0.6,
+      "selfEvolution": 0.85
+    },
+    "summary": "针对多智能体持久化记忆框架易信息丢失、跨场景脆弱的问题，DeltaMem 把以人物画像为中心的记忆管理形式化为单智能体端到端任务，并用新的记忆编辑距离奖励与强化学习强化其更新能力。",
+    "methodCore": "DeltaMem 针对以人物画像为中心的记忆多依赖复杂多智能体系统、常出现信息丢失且跨场景脆弱的问题,把这类记忆管理形式化为单智能体端到端任务,并用新的记忆编辑距离奖励与定制强化学习框架强化其更新能力。\n\n## 研究背景与问题\nabstract 指出,近来在以人物画像(persona)为中心的记忆方面的进展,揭示了多智能体系统在管理人物画像记忆——尤其是在对话场景下——的强大能力。然而,这些复杂的多智能体框架往往存在信息丢失,并且在不同场景之间十分脆弱,导致性能欠佳。多个智能体协作管理记忆,固然带来分工,却也增加了协调开销与出错环节,一旦某一环丢失信息,整体记忆便随之受损。DeltaMem 的核心主张是简化这一架构。\n\n## 单智能体端到端形式化\nDeltaMem 提出一种智能体式记忆管理系统,把以人物画像为中心的记忆管理形式化为单智能体设置(single-agent setting)下的端到端任务。它不再依赖多个智能体的分工协作,而是由单一的记忆管理器统一负责所有的更新决策:何时新增、何时修改、何时删除记忆,都交由这一个管理器端到端地完成。这种单智能体形式化降低了系统的脆弱性与协调复杂度,使记忆更新的责任集中且可控,也为后续的可训练优化提供了清晰的优化对象。\n\n## 合成数据与编辑距离奖励\n为进一步提升记忆管理器的表现,作者借鉴人类记忆的演化,合成了一份用户-助手对话数据集及其对应的操作级(operation-level)记忆更新标签——即针对每一步应当执行何种记忆操作的监督信号。在此基础上,作者提出一种新颖的「基于记忆的 Levenshtein 距离」(Memory-based Levenshtein Distance)来形式化记忆更新奖励:它以编辑距离来衡量当前记忆状态与理想记忆状态之间的差距,把记忆更新的质量转化为可量化、可优化的奖励信号。这一奖励设计使得记忆更新决策能够被强化学习直接优化。\n\n## 定制 RL 框架与效果\n作者进一步设计了一套定制的强化学习框架,以增强 DeltaMem 的管理能力,同时提供免训练与经 RL 训练两种版本以适配不同需求。abstract 报告,大量实验表明,免训练与经强化学习训练的 DeltaMem 两种版本均在包括 LoCoMo、HaluMem 与 PersonaMem 在内的多样长期记忆基准上超越所有产品级(product-level)基线。这验证了把人物画像记忆管理形式化为单智能体端到端任务、并以基于记忆的编辑距离奖励与定制 RL 框架优化更新决策这一路线的有效性。\n\n从记忆写入与组织的角度看,DeltaMem 把记忆更新这一写入行为本身变成了可学习、可优化的对象:它用基于编辑距离的奖励精确刻画「当前记忆状态与理想状态的差距」,再借强化学习让单一管理器学会何时新增、修改或删除记忆;这种以单智能体端到端方式统一治理更新决策的思路,既降低了多智能体协作的脆弱性,也为记忆写入的自动优化提供了清晰的目标信号。",
+    "evaluation": "大量实验表明,免训练与经强化学习训练的 DeltaMem 两种版本均在包括 LoCoMo、HaluMem 与 PersonaMem 在内的多样长期记忆基准上超越所有产品级基线,验证了把人物画像记忆管理形式化为单智能体端到端任务、并以基于记忆的编辑距离奖励与定制 RL 框架优化更新决策的有效性。",
+    "mainFinding": "本文把人物画像记忆管理形式化为单智能体端到端任务,并用编辑距离奖励与定制 RL 训练,在多个长期记忆基准上超越所有产品级基线。",
+    "limitations": "方法依赖合成的操作级记忆更新标签与 RL 训练过程;奖励设计对记忆更新的粒度较为敏感,需要谨慎设计与调校才能稳定发挥。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2604.01560"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2604.01560"
+      }
+    ],
+    "citation": "DeltaMem, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-deltamem.png",
+        "caption": "DeltaMem:摄入新会话时,记忆管理器与当前记忆状态交互并生成一组更新操作,以记忆编辑距离奖励和强化学习强化画像中心的记忆管理。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-rag",
+    "page": "memory",
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "shortTitle": "RAG",
+    "category": "memory-retrieve",
+    "maturity": "mature",
+    "score": 0.92,
+    "year": 2020,
+    "venue": "NeurIPS 2020",
+    "authors": "Patrick Lewis et al.",
+    "methodFamily": "检索增强生成",
+    "tags": [
+      "RAG",
+      "非参数记忆",
+      "开放域QA"
+    ],
+    "scores": {
+      "clarity": 0.95,
+      "evidence": 0.9,
+      "reproducibility": 0.9,
+      "adoption": 0.98,
+      "selfEvolution": 0.6
+    },
+    "summary": "提出将预训练 seq2seq 的参数化记忆与 Wikipedia 密集向量索引的非参数化记忆结合的通用微调范式,用检索到的文档增强生成。",
+    "methodCore": "RAG 试图回答一个核心矛盾:大型预训练语言模型虽然在参数中隐式存储了大量事实知识,但在需要精确访问与操纵知识的任务上表现受限,而且既难以为其决策提供来源溯源(provenance),也难以在世界知识变化时更新。RAG 给出的答案,是把参数化记忆与显式的非参数化记忆结合成一个统一且可微的架构。\n\n## 方法总览\n在 RAG 中,参数化记忆是一个预训练的 seq2seq 生成器,负责语言的组织与流畅表达;非参数化记忆则是一份 Wikipedia 的密集向量索引,由预训练的神经检索器负责访问。给定一个输入,系统先用密集检索器(基于 DPR 的双编码器思路)从索引中取回 Top-K 相关文档,再把这些文档作为条件交给生成器合成最终输出。整个流程把「先检索、后生成」串成一条可以端到端优化的链路。\n\n## 检索与召回机制\n检索这一步被设计为可微的:检索得分来自查询向量与文档向量的内积,生成的似然对检索概率求导,梯度得以回传到查询编码器,使检索器与生成器能够联合微调,朝着提升最终生成质量的方向共同调整。由于知识存放在可插拔的外部索引而非模型权重中,更新世界知识只需替换或重建索引,而无需重新训练整个模型;同时被检索到的文档天然为生成结果提供了可追溯的证据来源。\n\n## 关键设计:两种边缘化形式\n论文比较了两种把 K 篇文档「边缘化」进生成的方式。RAG-Sequence 让整段生成序列都条件于同一批检索文档,即先对每篇文档独立生成再按检索概率加权,适合答案高度依赖单一证据的情形;RAG-Token 则允许在生成每个 token 时都重新在 K 篇文档上做边缘化,从而在逐 token 的粒度上融合来自多篇文档的证据,更适合答案需要综合多处信息的场景。两者在不同粒度上平衡了证据聚合能力与计算开销。\n\n## 实验要点\n论文把 RAG 当作一套通用微调配方,在广泛的知识密集型任务上统一应用:既包括开放域问答这类需要精确检索事实的抽取式风格任务,也包括 Jeopardy 问题生成、事实核查等更偏生成的任务。在这些任务上,RAG 都用同一套「检索器+生成器联合微调」的流程训练,而无需为每个任务单独设计架构。这种通用性本身就是一个重要结论:它说明「检索增强的记忆」并非某类任务的专用技巧,而是一种可以横跨多种知识密集型场景的普适机制。\n\n## 研究背景与贡献\n在 RAG 之前,带可微非参数记忆访问机制的预训练模型主要被用于抽取式(extractive)的下游任务,而 RAG 首次给出了一套面向语言生成的通用微调范式,把「检索到的文档」正式确立为可编辑、可替换的长期记忆载体。它奠定了「参数化记忆负责语言能力、非参数化记忆负责事实知识」这一经典分工,成为后续几乎所有 RAG 变体的共同起点,也让「通过换索引来更新知识」成为一种被广泛采纳的工程实践,深刻影响了后续检索器训练、多跳检索、检索内容筛选等一系列研究方向的展开。",
+    "evaluation": "论文在广泛的知识密集型 NLP 任务上微调并评测,在三项开放域问答任务上刷新 SOTA,既超越纯参数化的 seq2seq 模型,也胜过专门的检索-抽取式架构。在语言生成类任务上,相较仅参数化的强 seq2seq 基线,RAG 生成的文本被发现更具体、更多样、也更符合事实,展示了非参数记忆对生成质量与事实性的正向贡献。",
+    "mainFinding": "确立了「参数化+非参数化记忆」的经典范式,证明可通过替换外部索引来更新模型知识而无需重新训练,是把检索当作可编辑长期记忆的奠基性工作。",
+    "limitations": "检索质量成为性能上限,单次检索难以应对多跳与复杂信息需求;检索器查询编码器与生成器的端到端联合微调成本较高。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2005.11401"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2005.11401"
+      }
+    ],
+    "citation": "RAG, NeurIPS 2020.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-rag.png",
+        "caption": "RAG 方法总览:预训练检索器(Query/Doc Encoder + MIPS)从非参数索引中取回 Top-K 文档,再由 seq2seq 生成器以文档为条件边缘化生成答案。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-realm",
+    "page": "memory",
+    "title": "REALM: Retrieval-Augmented Language Model Pre-Training",
+    "shortTitle": "REALM",
+    "category": "memory-retrieve",
+    "maturity": "mature",
+    "score": 0.85,
+    "year": 2020,
+    "venue": "ICML 2020",
+    "authors": "Kelvin Guu et al.",
+    "methodFamily": "检索增强预训练",
+    "tags": [
+      "潜变量检索",
+      "MLM预训练",
+      "端到端"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.85,
+      "reproducibility": 0.75,
+      "adoption": 0.8,
+      "selfEvolution": 0.65
+    },
+    "summary": "在语言模型预训练阶段引入可微的潜在知识检索器,让模型从 Wikipedia 语料检索并注意相关文档,以更模块化、可解释的方式获取知识。",
+    "methodCore": "语言模型预训练能够捕获惊人数量的世界知识,但这些知识以隐式方式存储在网络参数里,想覆盖更多事实就得不断把网络做大。REALM 的出发点,是以更模块化、更可解释的方式来捕获知识:与其把知识塞进越来越庞大的权重,不如让模型在预训练阶段就学会主动去外部语料中检索。\n\n## 方法总览\nREALM 在语言模型预训练中引入一个潜在知识检索器(latent knowledge retriever),使模型能够从 Wikipedia 这类大规模语料中检索并注意相关文档,而且这个检索机制贯穿预训练、微调、推理三个阶段全程使用。整体可以理解为一个隐变量模型:先根据输入检索出一篇文档作为潜变量,再在该文档的条件下完成预测,把「去哪里找知识」和「如何使用知识」统一到同一个概率框架下。\n\n## 检索与召回机制\n检索通过在海量候选文档上的最大内积搜索(MIPS)实现:输入与文档各自被编码为向量,取内积最高的若干篇作为候选。由于候选规模高达数百万,直接精确检索代价极大,REALM 采用异步机制,周期性地重新计算并刷新全部文档的向量表示、重建索引,以在训练推进、编码器参数变化时保持索引的有效性,避免检索目标与当前模型脱节。\n\n## 关键设计:用 MLM 无监督预训练检索器\nREALM 的核心贡献,是首次展示如何以完全无监督的方式预训练这样一个知识检索器。它以掩码语言建模(MLM)作为唯一的学习信号:先检索一篇文档、再在其条件下预测被掩码的词,并对涉及数百万候选文档的检索步骤做反向传播。其直觉是,如果检索到的文档确实有助于降低 MLM 损失,检索器就会收到正向梯度而更倾向于检索这类文档;反之则被抑制。由此,「什么样的文档对预测有帮助」这一信号,直接塑造了检索器的行为。\n\n## 研究背景与贡献\n相比把知识隐式压进大网络参数的主流做法,REALM 让外部语料成为模型可主动查询的显式记忆,既带来了可解释性(能看到模型依据哪篇文档作答),也带来了模块化(可独立更新语料而不动模型)。更深一层看,REALM 的意义在于它把「检索」正式纳入预训练目标——检索器不再是事后拼接在语言模型外部的独立模块,而是在预训练阶段就与语言理解一同被塑造,因而检索到的文档天然服务于模型的预测目标。它为后续 RAG 系统奠定了检索器训练的方法论基础,证明了「可微检索器 + 生成/预测目标」这一端到端范式的可行性,也为「如何让模型学会自己去找知识」这一问题提供了首个可行答案,深刻影响了此后一系列检索增强模型对检索器训练方式的设计选择,可以说是把语言模型从「记忆机」推向「会查资料的读者」的关键一跃。",
+    "evaluation": "论文在具挑战性的开放域问答任务上微调评测,并在三个流行的 Open-QA 基准上与显式、隐式知识存储的 SOTA 模型系统对比。结果显示 REALM 以 4-16% 的绝对准确率显著超越所有此前方法,同时还带来检索文档所提供的可解释性与模块化等定性优势,表明显式检索式记忆兼具性能与透明度。",
+    "mainFinding": "首次证明可用 MLM 无监督信号端到端预训练一个可微检索器,把外部语料变成模型可主动查询的知识记忆,为后续 RAG 系统奠定了检索器训练方法论。",
+    "limitations": "对涉及数百万文档的检索步骤反向传播、并需异步周期性刷新文档索引,工程实现复杂;检索器与大规模语料的联合优化成本较高。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2002.08909"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2002.08909"
+      }
+    ],
+    "citation": "REALM, ICML 2020."
+  },
+  {
+    "id": "memory-rt-in-context-ralm",
+    "page": "memory",
+    "title": "In-Context Retrieval-Augmented Language Models",
+    "shortTitle": "In-Context RALM",
+    "category": "memory-retrieve",
+    "maturity": "mature",
+    "score": 0.82,
+    "year": 2023,
+    "venue": "TACL 2023",
+    "authors": "Ori Ram et al.",
+    "methodFamily": "上下文检索增强",
+    "tags": [
+      "黑盒LM",
+      "重排序",
+      "免训练"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.85,
+      "reproducibility": 0.85,
+      "adoption": 0.78,
+      "selfEvolution": 0.5
+    },
+    "summary": "提出无需改动语言模型、直接把检索文档拼进上下文的 In-Context RALM 框架,并研究检索频率与重排序对语言建模的影响。",
+    "methodCore": "检索增强语言建模(RALM)通过在生成时用 grounding 语料的相关文档为语言模型提供条件,已被证明能显著改善语言建模性能,并能缓解事实错误、提供来源归属。但既有 RALM 大多需要修改语言模型架构以便融入外部信息,这让部署变得复杂。In-Context RALM 提出一个截然更简单的替代路线。\n\n## 方法总览\nIn-Context RALM 的做法是保持语言模型架构完全不变、也不对其做任何进一步训练,只把从 grounding 语料检索到的文档直接前置拼接(prepend)到输入,再让现成的语言模型续写。这一「即插即用」的设计极大简化了部署,甚至适用于只能通过 API 访问、无法触碰权重的黑盒模型。论文表明,即便建立在现成通用检索器之上,这种朴素方案也能带来出人意料的大幅增益。\n\n## 检索与召回机制\n在检索时机上,论文研究了检索频率的问题:与只在输入时检索一次不同,可以每隔固定数量的 token 就用最近生成的内容重新触发一次检索,使注入的 grounding 文档随生成的推进持续保持相关。这种周期性重检索让模型在长文本生成中不断刷新其可用证据,而非一直依赖最初的查询。\n\n## 关键设计:面向 RALM 的重排序\n论文进一步表明,文档的检索与排序机制可以针对 RALM 这一特定设定专门定制以提升性能。一方面,可以利用语言模型自身的信号做零样本重排序,即用模型对候选文档下续写的困惑度来判断哪篇最有助益;另一方面,可以训练一个专门的重排序器,从检索候选中挑出最能降低后续生成困惑度的段落再注入上下文。这两种方式都把「检索到什么」从粗糙的语义相似度,细化为「对当前生成最有用」的标准。\n\n## 研究背景与贡献\nIn-Context RALM 的意义在于把检索增强变成一种廉价、免训练、即插即用的外部记忆机制,证明其在跨模型规模与多样语料上一致有效。它凸显了在必须原样使用预训练模型、甚至只能 API 调用的场景下,免训练 grounding 的巨大潜力,并把检索频率与文档重排序确立为该范式中两个关键的设计维度,推动了免训练 RAG 的普及。\n\n## 与既有方法的对比\n与那些通过修改注意力、引入额外融合模块来接入外部信息的 RALM 方法相比,In-Context RALM 走的是一条完全相反、极简主义的路线:它不改一行模型代码、不动一个权重,只在输入端做文章。这一对比揭示了一个此前被低估的事实——很多性能增益并不必然依赖架构改造,只要把「检索什么」和「何时检索」这两件事做好,即便是最朴素的上下文拼接也能释放出可观的收益。正因如此,它把检索增强的门槛降到极低,让任何只能通过 API 使用的强模型都能立刻享受到 grounding 带来的事实性与准确率提升。",
+    "evaluation": "论文在多种模型规模与多样语料上评测语言建模性能,结果显示建立在现成通用检索器之上的 In-Context RALM 就能带来出人意料的大幅增益,且跨模型规模与语料一致有效;进一步将检索与排序机制针对 RALM 专门化后,性能再获提升,且全程无需再训练语言模型。",
+    "mainFinding": "表明检索增强可作为一种廉价、即插即用的外部记忆机制显著提升现有语言模型,而检索频率与文档重排序是其中关键的设计维度,推动了免训练 RAG 的普及。",
+    "limitations": "拼接上下文受语言模型窗口长度限制;每隔若干 token 频繁重检索会增加推理开销,而重排序质量又依赖模型自身打分信号的可靠性。",
+    "related": [
+      "memory-rt-rewrite-retrieve-read"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2302.00083"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2302.00083"
+      }
+    ],
+    "citation": "In-Context RALM, TACL 2023."
+  },
+  {
+    "id": "memory-rt-when-not-to-trust-popqa",
+    "page": "memory",
+    "title": "When Not to Trust Language Models: Investigating Effectiveness of Parametric and Non-Parametric Memories",
+    "shortTitle": "When Not to Trust (PopQA)",
+    "category": "memory-retrieve",
+    "maturity": "mature",
+    "score": 0.8,
+    "year": 2023,
+    "venue": "ACL 2023",
+    "authors": "Alex Mallen et al.",
+    "methodFamily": "何时检索门控",
+    "tags": [
+      "长尾知识",
+      "自适应检索",
+      "PopQA"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.88,
+      "reproducibility": 0.85,
+      "adoption": 0.72,
+      "selfEvolution": 0.55
+    },
+    "summary": "通过大规模知识探测揭示 LM 在长尾事实上的弱点,并据此提出仅在必要时才调用非参数记忆的自适应检索方法。",
+    "methodCore": "尽管大型语言模型在多样任务上表现出色,它们在需要丰富世界知识的任务上仍会挣扎,这说明单靠参数编码全部世界知识存在局限。这项工作的目标,是系统理解语言模型记忆事实知识的强项与边界,并据此回答一个实用问题:到底什么时候应该信任模型的参数,什么时候应该转而检索外部记忆。\n\n## 方法总览\n为做这一分析,论文构建了一个含 14k 问题的开放域问答新数据集 PopQA,其特点是能够按实体流行度(popularity)对问题分层。基于 PopQA,作者对 10 个模型与 4 种增强方法开展大规模知识探测实验,系统考察不同流行度区间上参数化记忆与非参数化(检索)记忆各自的表现。\n\n## 检索与召回机制:何时该检索\n分析揭示了几条清晰规律:语言模型在冷门(long tail)事实上表现挣扎,而单纯扩大模型规模并不能明显改善对长尾事实的记忆;检索增强的模型能大幅超越数量级更大的纯参数化模型,但对高流行度实体的问题,无检索的模型仍然具有竞争力。换言之,检索的收益高度集中在长尾,而在头部实体上检索带来的边际增益有限,甚至可能引入噪声。\n\n## 关键设计:自适应门控检索\n基于上述发现,论文设计了一个简单而有效的方法:仅在必要时才检索非参数化记忆。对模型大概率已在参数中记住的高流行度问题直接作答,只对低流行度问题触发检索。由此「何时检索」被转化为一个由问题特性(以实体流行度为代理指标)驱动的自适应门控决策,在几乎不损失甚至提升准确率的同时,显著削减了不必要的检索,从而降低推理成本。\n\n## 研究背景与贡献\n这项工作在实证层面量化了「扩大规模无法记住长尾知识、而检索能显著弥补」这一关键事实,并首次给出了「何时该检索」的经验判据。它把检索从一个默认永远开启的步骤,转变为一个可按需触发的门控决策,成为记忆检索门控(when-to-retrieve)方向的奠基性实证研究,深刻影响了后续自适应检索方法的设计。\n\n## 更深层的启示\nPopQA 这项工作还带来一个更普遍的启示:参数化记忆与非参数化记忆并非简单的替代关系,而是互补的——头部高频知识适合交给参数直接作答,长尾低频知识则更适合交给检索兜底。这为「混合记忆」系统的设计提供了明确的分工原则:与其不加区分地对每个问题都检索、徒增成本与噪声,不如让系统学会判断当前问题落在知识分布的哪个区间,再据此决定是否动用外部记忆。这种「按知识分布分工」的观点,后来被许多自适应检索与检索门控方法所继承和发展,也提醒后来的研究者:评测 RAG 时若只看整体平均,可能会掩盖模型在长尾与头部两个区间上截然不同的表现,唯有按流行度分层考察,才能真正看清参数化记忆的能力边界。",
+    "evaluation": "论文在自建的 PopQA 数据集及相关探测设定上评测 10 个模型与 4 种增强方法,检索增强的模型准确率大幅超越数量级更大的纯参数化模型,冷门长尾子集提升尤为显著,而无检索模型仅在高流行度实体问题上仍具竞争力。「仅在必要时检索」的自适应方法在显著提升整体性能的同时降低了推理成本。",
+    "mainFinding": "量化证明扩大模型规模无法记住长尾知识、而检索能显著弥补,并给出「何时该检索」的经验判据,是记忆检索门控方向的关键实证工作。",
+    "limitations": "门控信号依赖实体流行度这一代理指标,难以推广到没有明确实体、或需要多跳推理的复杂查询场景,通用性有限。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2212.10511"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2212.10511"
+      }
+    ],
+    "citation": "When Not to Trust (PopQA), ACL 2023.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-when-not-to-trust-popqa.png",
+        "caption": "When Not to Trust:揭示主体流行度越低 LLM 开放域问答越差,提出仅在必要时调用检索的自适应策略以兼顾准确与效率。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-rewrite-retrieve-read",
+    "page": "memory",
+    "title": "Query Rewriting for Retrieval-Augmented Large Language Models",
+    "shortTitle": "Rewrite-Retrieve-Read",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.78,
+    "year": 2023,
+    "venue": "EMNLP 2023",
+    "authors": "Xinbei Ma et al.",
+    "methodFamily": "查询改写",
+    "tags": [
+      "查询改写",
+      "强化学习",
+      "黑盒LM"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.8,
+      "reproducibility": 0.78,
+      "adoption": 0.75,
+      "selfEvolution": 0.6
+    },
+    "summary": "提出 Rewrite-Retrieve-Read 范式,在检索前先改写查询以弥合输入文本与所需知识之间的语义鸿沟。",
+    "methodCore": "在 retrieve-then-read 流水线中,大型语言模型充当强大的黑盒阅读器,在知识密集型任务上取得了显著进展。然而这一范式长期只关注适配检索器或适配阅读器,却忽视了一个根本问题:用户输入的原始文本与检索真正需要的知识之间,存在天然的语义鸿沟。这项工作从查询改写(query rewriting)的视角切入来弥合这一鸿沟。\n\n## 方法总览\n论文提出 Rewrite-Retrieve-Read 新框架,把标准的「检索-阅读」两步扩展为「改写-检索-阅读」三步。流程是:先提示一个语言模型依据原始问题生成一个更利于检索的查询,再用网络搜索引擎按改写后的查询检索上下文,最后把检索到的内容交给冻结的黑盒语言模型阅读并作答。其核心主张是,应当适配查询本身,而不是只去适配固定的检索器或阅读器。\n\n## 检索与召回机制\n在这一框架中,检索由外部网络搜索引擎完成,面向的是开放、动态的网络知识。查询改写的价值正体现在检索环节:原始问题往往包含冗余表述、指代不清或与索引词面不匹配的措辞,直接拿去检索容易召回偏题的结果;而经过改写、更贴近检索需求的查询能够召回更相关的上下文,从而为下游阅读提供更好的证据基础。\n\n## 关键设计:强化学习训练可训练改写器\n为了让查询能更好地对齐固定的检索器与阅读器,论文进一步提出一个可训练方案:采用一个小型语言模型作为可训练的改写器,用黑盒阅读器给出的最终答案反馈作为奖励,通过强化学习来训练改写策略,使其朝着提升最终答案质量的方向优化。这一设计的巧妙之处在于,它无需触碰检索器与阅读器的任何参数,只用一个轻量、可训练的前置模块就把整条黑盒流水线「调优」了。\n\n## 研究背景与贡献\nRewrite-Retrieve-Read 明确指出查询与所需记忆之间存在语义鸿沟,并给出了一个新的、行之有效且可扩展的检索增强范式:通过可学习的查询改写,把当前任务上下文映射为更好的检索查询。它是查询侧检索优化的代表性工作,拓展了此前只关注检索器或阅读器的思路。\n\n## 三个模块的分工视角\n从更宏观的视角看,一条检索增强流水线本质上包含三个可优化的环节:改写(query)、检索(retriever)、阅读(reader)。此前的研究几乎都把注意力集中在后两者——要么训练更好的检索器,要么调教更强的阅读器,却默认原始输入就是合适的查询。Rewrite-Retrieve-Read 的贡献,正是补上了被长期忽视的第一个环节,并用一个轻量、可训练、且不依赖阅读器与检索器内部参数的改写器来占据这个位置。这种「只优化最前端、其余保持黑盒」的思路,在大量核心模型只能 API 访问、无法微调的现实约束下,显得尤其实用。",
+    "evaluation": "论文在下游的开放域问答与多选问答任务上评测,查询改写相较标准 retrieve-then-read 带来一致的性能提升;进一步引入基于强化学习的小型可训练改写器后,效果再获改善,验证了对查询侧做适配的有效性与可扩展性,表明该框架为检索增强模型提供了一个新的、行之有效的范式。",
+    "mainFinding": "指出查询与所需记忆之间存在天然语义鸿沟,通过可学习的查询改写把当前任务上下文映射为更好的检索查询,是查询侧检索优化的代表性工作。",
+    "limitations": "依赖外部网络搜索引擎与强化学习训练成本;改写器质量受阅读器最终答案反馈这一相对稀疏奖励信号的影响,收敛不易。",
+    "related": [
+      "memory-rt-in-context-ralm"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.14283"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.14283"
+      }
+    ],
+    "citation": "Rewrite-Retrieve-Read, EMNLP 2023."
+  },
+  {
+    "id": "memory-rt-self-rag",
+    "page": "memory",
+    "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+    "shortTitle": "Self-RAG",
+    "category": "memory-retrieve",
+    "maturity": "mature",
+    "score": 0.9,
+    "year": 2023,
+    "venue": "ICLR 2024",
+    "authors": "Akari Asai et al.",
+    "methodFamily": "自反思检索",
+    "tags": [
+      "自反思",
+      "反思token",
+      "按需检索"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.9,
+      "reproducibility": 0.85,
+      "adoption": 0.9,
+      "selfEvolution": 0.75
+    },
+    "summary": "训练模型通过生成反思 token 自主决定何时检索,并对检索内容与自身生成进行细粒度自我批判。",
+    "methodCore": "尽管能力出众,大型语言模型常因只依赖参数化知识而产生事实错误。RAG 通过检索相关知识缓解了这一问题,但它往往不加判别地检索并拼接固定数量的段落——无论检索是否必要、段落是否相关——这既削弱了模型的通用性,也可能引入无用甚至有害的内容。Self-RAG 试图让模型学会「按需检索」并对整个过程进行自我批判。\n\n## 方法总览\nSelf-RAG(Self-Reflective Retrieval-Augmented Generation)训练单一的语言模型,使其通过按需检索与自我反思来提升生成质量与事实性。其关键机制是,模型在生成过程中会产出一类特殊的反思 token(reflection tokens):一类决定当前是否需要触发检索(可以完全跳过,也可以在生成中多次触发),另几类则对检索到的段落是否相关、生成内容是否被段落所支持、以及整体输出是否有用等维度做细粒度的自我批判。\n\n## 检索与召回机制\n与固定检索若干段落再一次性拼接不同,Self-RAG 的检索是自适应且贯穿生成的:模型先判断「此处是否需要外部知识」,只有在需要时才检索。解码阶段可以并行处理多个候选段落,用反思 token 对基于不同段落的续写打分,再择优选出最相关、最被证据支持的输出。这样检索不再是一个固定的前置流程,而成为一个由模型自身判断驱动、可多次发生的过程。\n\n## 关键设计:可控的反思 token\n由于反思 token 是被显式生成出来的,模型在推理阶段变得高度可控。使用者可以通过设定阈值,针对不同任务需求灵活调节检索与批判的行为——例如在强调事实性的任务上提高「是否被证据支持」的门槛,在强调创造性的任务上放宽检索,从而在事实性与多样性之间自由权衡,而不必以牺牲通用性为代价。这种把控制旋钮暴露在推理时的设计,是 Self-RAG 区别于常规 RAG 的重要特征。\n\n## 训练与数据构造\n为让模型学会生成这些反思 token,Self-RAG 需要相应的训练数据与训练流程。论文的思路是,用一个能力更强的教师模型来标注:何处应当检索、检索到的段落是否相关、生成是否被段落支持、整体是否有用,再把这些反思标签与原始生成一起构成训练序列,让单一目标模型通过学习同时掌握「生成内容」与「生成对内容的反思」。这样训练出来的模型在推理时既能续写答案,也能顺带吐出对自己行为的评判,而无需外挂独立的检索决策器或事实核查器,整个自适应检索与自我批判的能力被压进同一个模型里。\n\n## 研究背景与贡献\nSelf-RAG 把「是否需要检索、检索是否有用、生成是否被证据支持」这些原本外置的判断,内化为模型自身可预测的反思信号,使检索从固定流程转变为自适应、可批判的过程。它是自反思检索方向的标杆性工作,为后续「让模型自己决定和评估检索」的研究提供了范式,也在长文本生成中把「带引用的、可核查的生成」推进了一大步。",
+    "evaluation": "论文用 7B 与 13B 参数的 Self-RAG 在多样任务上评测,显著超越 SOTA 模型与检索增强模型;在开放域问答、推理与事实核查任务上优于 ChatGPT 与检索增强的 Llama2-chat,在长文本生成上相较这些模型在事实性与引用准确率上取得明显提升,且可在推理时通过阈值灵活调节其检索与反思行为。",
+    "mainFinding": "把「是否检索/检索是否有用/是否被证据支持」内化为模型自身可预测的反思信号,使检索从固定流程变为自适应、可批判的过程,是自反思检索的标杆。",
+    "limitations": "需构造反思 token 训练数据并对模型微调;反思判定本身可能出错,并将错误传播到最终生成的答案上。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2310.11511"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2310.11511"
+      }
+    ],
+    "citation": "Self-RAG, ICLR 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-self-rag.png",
+        "caption": "Self-RAG:训练模型生成反思 token 自主决定何时检索,并对检索内容与自身生成做细粒度批判,提升事实性与可验证性。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-flare",
+    "page": "memory",
+    "title": "Active Retrieval Augmented Generation",
+    "shortTitle": "FLARE",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.85,
+    "year": 2023,
+    "venue": "EMNLP 2023",
+    "authors": "Zhengbao Jiang et al.",
+    "methodFamily": "迭代主动检索",
+    "tags": [
+      "主动检索",
+      "前瞻预测",
+      "长文本生成"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.85,
+      "reproducibility": 0.78,
+      "adoption": 0.82,
+      "selfEvolution": 0.65
+    },
+    "summary": "提出前瞻式主动检索(FLARE),在长文本生成中根据即将生成句子的置信度动态决定何时、以何内容检索。",
+    "methodCore": "语言模型虽然擅长理解与生成语言,却倾向于产生幻觉与事实错误,而从外部知识源检索信息是缓解这一问题的有力手段。但多数检索增强模型采用「检索一次、然后生成」的设定,只在输入时基于原始问题检索一次。这在生成长文本时明显不足——长文本生成往往需要在全过程中持续获取新信息。FLARE 为此提出一种主动检索的通用视角。\n\n## 方法总览\nFLARE(Forward-Looking Active REtrieval augmented generation)给出了主动检索增强生成的一般化框架,其核心是让模型在生成的全过程中主动决定何时检索、检索什么,而不是把检索固定在开头。它把「何时检索」和「检索什么」这两个维度统一在一个由生成过程自身驱动的迭代循环里。\n\n## 检索与召回机制:前瞻预测\nFLARE 的关键机制是前瞻(forward-looking):在每一步生成时,先临时生成即将输出的下一句,作为对未来内容的预测。随后检查这句预测中是否包含低置信(低概率)的 token——若存在,则表明模型在此处缺乏可靠知识,于是用这句预测(或其改写)作为检索查询去取回相关文档,再据检索结果重新生成该句;若所有 token 的置信度都足够高,则认为模型此处已有把握,无需检索,直接采纳该句。\n\n## 关键设计:用未来生成作查询\n这一设计的巧妙之处,在于把模型自身生成的「未来内容」当作检索查询,而不是仅依赖最初的输入。相比用当前已生成文本或原始问题检索,前瞻预测更能反映「接下来真正要写什么」,因而能召回更贴合下文需求的证据。如此迭代地把检索贯穿整个生成过程,使查询随着生成推进不断更新,自然应对长文本中不断变化的信息需求。\n\n## 研究背景与贡献\nFLARE 明确指出长文本生成需要在生成过程中持续动态检索,并创新性地用低置信度作为触发信号、用模型预测的未来内容作为查询,把检索与生成紧密耦合。它是迭代/主动检索(active retrieval)方向的代表方法,论文还开源了代码与数据集以便复现与后续研究。\n\n## 与被动检索的对比\nFLARE 提供的「主动检索」一般化视角,与传统被动检索形成鲜明对照:被动检索在流程一开始就固定了检索时机与查询内容,之后无论生成走向何方都不再补充信息;而主动检索则把「是否需要更多知识」的判断权交给生成过程本身,由模型在每一步用自身的置信度自我诊断。这种设计的深层价值在于,它承认长文本的信息需求是随生成动态展开、无法预先枚举的——不同段落可能需要截然不同的证据,唯有边写边判断、边判断边检索,才能让 grounding 始终跟上正在展开的内容,从而在整篇长文本上持续压制幻觉。",
+    "evaluation": "论文在 4 个长文本、知识密集型生成任务/数据集上,将 FLARE 与不检索、单次检索以及固定间隔检索等多种基线做全面对比。结果显示 FLARE 在所有任务上均取得更优或相当的表现,验证了按预测置信度触发前瞻式主动检索的有效性;论文还开源了代码与数据集。",
+    "mainFinding": "指出长文本生成需要在生成过程中持续动态检索,并创新性地用模型自身生成的未来内容作为检索查询,是迭代/主动检索方向的代表方法。",
+    "limitations": "多轮检索与重生成带来显著的推理延迟;低置信阈值需人工设定,对不同任务与领域较为敏感,不易做到通用调优。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.06983"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.06983"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/jzbjyb/FLARE"
+      }
+    ],
+    "citation": "FLARE, EMNLP 2023."
+  },
+  {
+    "id": "memory-rt-iter-retgen",
+    "page": "memory",
+    "title": "Enhancing Retrieval-Augmented Large Language Models with Iterative Retrieval-Generation Synergy",
+    "shortTitle": "Iter-RetGen",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.77,
+    "year": 2023,
+    "venue": "EMNLP 2023 (Findings)",
+    "authors": "Zhihong Shao et al.",
+    "methodFamily": "迭代检索生成",
+    "tags": [
+      "迭代检索",
+      "多跳推理",
+      "生成即查询"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.82,
+      "reproducibility": 0.78,
+      "adoption": 0.68,
+      "selfEvolution": 0.6
+    },
+    "summary": "提出 Iter-RetGen,以上一轮模型生成作为新的检索上下文,迭代地协同检索与生成以获取更相关的知识。",
+    "methodCore": "检索增强的大型语言模型广受关注,因为它能把模型生成建立在外部知识之上,缓解知识过时与幻觉。但检索器在面对复杂信息需求的查询时,常常难以准确捕获相关性——原始查询往往无法充分表达完成任务所需的全部知识线索。Iter-RetGen 提出让检索与生成以迭代方式相互增强,来突破这一瓶颈。\n\n## 方法总览\nIter-RetGen 的核心思想是检索与生成的协同(synergy):每一轮,把上一轮语言模型的完整输出与原始问题一起作为新的检索上下文。其直觉是,模型的输出揭示了「为完成任务还需要什么」,因而比原始查询包含更丰富的线索;用它去检索能召回更相关的知识,而这些知识又帮助模型在下一轮生成更好的输出,如此往复形成一个不断收敛的闭环。\n\n## 检索与召回机制:生成即查询\n在检索与召回上,Iter-RetGen 把「生成」本身当作查询扩展的手段:模型上一轮写出的内容,充当了对信息需求的显式表达。相比只用原始问题检索,这种「生成即查询」能覆盖多跳推理中逐步暴露出来的中间知识需求,让检索逐轮逼近真正需要的证据。论文还指出,可通过生成增强的检索适配(generation-augmented retrieval adaptation)进一步提升检索器与这一范式的契合度。\n\n## 关键设计:整体处理与保留生成灵活性\n与那些在产出单条输出时把检索与生成逐句交错的近期工作不同,Iter-RetGen 把每一轮检索到的知识作为一个整体一次性处理,不对生成过程施加逐句的结构约束。这一设计大幅保留了生成的灵活性,也让它能灵活地同时调用参数化知识与非参数化(检索)知识;更重要的是,整体处理相比逐句交错检索,能显著减少检索与生成的调用次数,带来效率上的优势。\n\n## 研究背景与贡献\nIter-RetGen 证明,模型自身的整段生成是弥合查询-知识语义鸿沟的高质量检索线索,「生成即查询」的迭代协同是一种高效且低开销的多跳记忆检索范式。它在保持生成灵活性的同时兼顾了效果与效率,是迭代检索生成方向的代表性工作。\n\n## 与逐句交错方法的对比\n把 Iter-RetGen 与 FLARE 这类逐句交错检索的方法并置,能看清它在设计取舍上的独特位置:逐句交错在生成单条输出的过程中频繁打断生成去检索,粒度细但调用次数多、还会对生成施加结构约束;Iter-RetGen 则以「一整轮完整生成」为单位来触发下一轮检索,把每轮检索到的知识作为整体一次性喂给模型,不打断也不约束单轮内的生成。这种整体化、按轮迭代的方式,既让「生成」得以充分展开成信息量最大的检索线索,又显著减少了检索与生成的总调用次数,因而在多跳问答等任务上能以更低开销取得与逐句交错相当甚至更好的效果。",
+    "evaluation": "论文在多跳问答、事实核查与常识推理三类任务上评测,Iter-RetGen 优于或媲美包括交错式检索-生成在内的 SOTA 检索增强基线,同时相较逐句交错的方法造成更少的检索与生成开销;并表明可进一步通过生成增强的检索适配提升性能,体现迭代协同框架的灵活性与可扩展性。",
+    "mainFinding": "证明模型自身的整段生成是弥合查询-知识语义鸿沟的高质量检索线索,「生成即查询」的迭代协同是一种高效且低开销的多跳记忆检索范式。",
+    "limitations": "迭代轮数需在效果与开销间权衡;早期的错误生成可能误导后续轮次的检索,进而造成累积偏差与错误逐步放大。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.15294"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.15294"
+      }
+    ],
+    "citation": "Iter-RetGen, EMNLP 2023 (Findings)."
+  },
+  {
+    "id": "memory-rt-recomp",
+    "page": "memory",
+    "title": "RECOMP: Improving Retrieval-Augmented LMs with Compression and Selective Augmentation",
+    "shortTitle": "RECOMP",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.76,
+    "year": 2023,
+    "venue": "ICLR 2024",
+    "authors": "Fangyuan Xu et al.",
+    "methodFamily": "检索压缩与筛选",
+    "tags": [
+      "上下文压缩",
+      "选择性增强",
+      "抽取+摘要"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.82,
+      "reproducibility": 0.78,
+      "adoption": 0.65,
+      "selfEvolution": 0.5
+    },
+    "summary": "在把检索文档送入上下文前先压缩成简短摘要,并在文档无用时返回空串实现选择性增强。",
+    "methodCore": "在推理时检索文档并前置拼进上下文,能在广泛任务上提升语言模型表现,但这些文档常达数百词,让推理成本大幅上升,也加重了模型从长文中辨认相关信息的负担。RECOMP 的思路,是在把检索文档整合进上下文之前,先将其压缩成简短的文本摘要。\n\n## 方法总览\nRECOMP 在检索与阅读之间插入一个压缩环节,把原本冗长的检索结果转化为紧凑的摘要再送入语言模型。这既显著降低了推理的计算成本,也减轻了模型在长文档中定位相关内容的负担。论文为此设计了两类互补的压缩器,分别对应不同的压缩策略与场景需求。\n\n## 检索与召回机制:两类压缩器\n第一类是抽取式压缩器,它从检索到的文档中挑选出真正有用的句子,保留原文表述、事实风险低;第二类是抽象式压缩器,它综合多篇文档合成一段新的摘要,能跨文档整合信息、压缩率更高。两者都以同一个目标训练:把生成的摘要前置后,应当能提升语言模型在终端任务上的表现,同时约束摘要保持简洁,从而在「信息保留」与「长度精简」之间取得平衡。\n\n## 关键设计:选择性增强\nRECOMP 的一个关键设计是选择性增强(selective augmentation):当检索到的文档与输入无关、或不能提供任何增量信息时,压缩器可以直接返回空字符串。这等于让压缩器额外承担了一个「是否注入记忆」的门控职责——有条件地决定要不要向上下文添加这段外部知识,既避免了无关内容带来的噪声干扰,又进一步节省了算力。\n\n## 研究背景与贡献\nRECOMP 揭示了检索粒度与噪声是 RAG 的重要瓶颈,并通过面向查询的压缩同时解决成本与噪声两个问题。它证明压缩器可以在极高压缩率下几乎不损失性能,还展现出良好的可迁移性——为某个语言模型训练的压缩器可迁移到其他模型使用,且在语言建模上生成的摘要对检索文档基本忠实。它是检索内容筛选方向的代表性工作。\n\n## 更深层的意义\nRECOMP 之所以重要,是因为它把「检索到什么」和「向模型注入什么」明确区分开来:检索器可以为了召回率而多取文档,但真正进入上下文的应当是经过面向查询压缩、去噪之后的精华。这种「检索-压缩-阅读」的三段式结构,承认了检索结果天然带有冗余与噪声,并主张在进入昂贵的语言模型之前先做一次面向任务的信息浓缩。它把 RAG 的优化重心从「找得更全」适度转向「喂得更准」,既在算力上更经济,也让模型在更短、更相关的上下文中更容易定位关键证据,对长文档检索场景尤其有价值,也为后续大量「检索后再筛选、再压缩」的工作提供了范式性的参照,把「上下文里放什么」正式确立为 RAG 中一个独立且值得优化的环节,而不再把检索到的原始文档当作理所当然、直接照单全收的输入。",
+    "evaluation": "论文在语言建模与开放域问答两类任务上评测,RECOMP 可将检索文本压缩到低至约 6% 的长度而性能损失极小,在两项任务上均显著优于现成的摘要模型;并展示出良好的迁移性——为某个模型训练的压缩器可迁移到其他模型使用,且在语言建模上生成的摘要对检索文档基本忠实。",
+    "mainFinding": "揭示检索粒度与噪声是 RAG 的瓶颈,通过面向查询的压缩既降低算力又减轻模型从长文档中辨认相关信息的负担,是检索内容筛选方向的代表工作。",
+    "limitations": "压缩可能丢失细粒度证据;抽象式摘要存在事实性风险,且压缩器需针对具体的下游任务分别训练才能达到最佳效果。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2310.04408"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2310.04408"
+      }
+    ],
+    "citation": "RECOMP, ICLR 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-recomp.png",
+        "caption": "RECOMP:在送入上下文前将检索文档压缩为简短摘要,文档无用时返回空串,以选择性增强引导黑盒语言模型生成。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-raptor",
+    "page": "memory",
+    "title": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+    "shortTitle": "RAPTOR",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.82,
+    "year": 2024,
+    "venue": "ICLR 2024",
+    "authors": "Parth Sarthi et al.",
+    "methodFamily": "层次化记忆检索",
+    "tags": [
+      "树状摘要",
+      "多层抽象",
+      "长文档"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.85,
+      "reproducibility": 0.8,
+      "adoption": 0.78,
+      "selfEvolution": 0.6
+    },
+    "summary": "递归地对文本块嵌入、聚类、摘要,自底向上构建多层抽象的摘要树,推理时跨层检索以整合长文档信息。",
+    "methodCore": "检索增强的语言模型能更好地适应世界状态变化并纳入长尾知识,但多数检索方法只从语料中取回短的连续文本块,这限制了模型对整体文档上下文的把握。RAPTOR 针对这一局限,提出一种递归地构建多层抽象摘要树的检索方法,让检索能在不同抽象层次上整合信息。\n\n## 方法总览\nRAPTOR(Recursive Abstractive Processing for Tree-Organized Retrieval)的核心是自底向上构建一棵具有不同摘要层级的树。它先对原始文本块做嵌入,再按语义相近做聚类;对每个簇用语言模型生成一段摘要,把这些摘要作为更高一层的节点,再次进行嵌入-聚类-摘要,如此递归直到根部。最终得到的树结构中,叶子是原始细粒度片段,越往上的节点覆盖越广、抽象层次越高。\n\n## 记忆索引结构\n这棵树本质上是一种层次化的记忆索引:同一份长文档被同时组织成多个抽象粒度。底层节点保留局部细节,中层节点整合若干相邻或相关片段,高层节点则概括跨越大段落乃至整篇文档的全局语义。这样的多层组织,弥补了传统检索只能取回相邻短块、缺乏全局理解的缺陷。\n\n## 检索与召回机制:跨层检索\n推理时,RAPTOR 从这棵树中检索,既能取回叶层的细粒度片段,也能取回中高层的跨段落全局摘要。对于只需局部事实的问题,细粒度叶节点足以应对;而对于需要整体理解、多步推理的问题,高层摘要节点能一次性提供贯穿长文档的综合信息。这种跨层检索让模型在同一框架下兼顾局部细节与整体语义。\n\n## 研究背景与贡献\n受控实验将带递归摘要的检索与传统检索增强模型对比,表明 RAPTOR 能同时兼顾局部与全局,在需要复杂多步推理的任务上取得显著优势。它证明了层次化、多粒度的记忆组织能显著提升模型跨长文档的信息整合与检索能力,是分层/树状记忆检索方向一项具代表性的奠基方法。\n\n## 与平铺分块检索的对比\n传统 RAG 通常把文档切成固定大小的块、平铺进一个向量库,检索时只能取回若干彼此孤立的短块;这对「答案分散在文档多处、需要综合全局」的问题几乎无能为力,因为任何单个短块都不足以承载整体语义。RAPTOR 的树状组织正是对这一局限的回应:它在建库阶段就通过递归摘要把「局部片段」逐层聚合成「全局概括」,于是同一份文档在索引里以多个抽象层次并存。检索时既可下探到叶层拿细节,又可上溯到高层拿全局综述,让模型按问题的复杂度自适应地选择合适粒度的证据,从而把「多粒度记忆组织」这一思想落到了可检索的实处,也为处理整本书、长报告这类超长文档的问答提供了一条切实可行的组织路线,启发了后续一系列以树、图等结构来组织长文档记忆的检索方法。",
+    "evaluation": "论文通过受控实验将带递归摘要的检索与传统检索增强模型对比,显示 RAPTOR 在多个任务上均有显著提升,并在涉及复杂多步推理的问答任务上取得 SOTA;例如把 RAPTOR 检索与 GPT-4 结合,能将 QuALITY 基准的最佳成绩提升 20% 的绝对准确率。",
+    "mainFinding": "证明层次化、多粒度的记忆组织能显著提升模型跨长文档的信息整合与检索能力,是分层/树状记忆检索方向一项具代表性的奠基方法。",
+    "limitations": "构建摘要树需要大量语言模型摘要调用,索引构建成本高;当语料动态更新时,树结构的维护与重建代价较大。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2401.18059"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2401.18059"
+      }
+    ],
+    "citation": "RAPTOR, ICLR 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-raptor.png",
+        "caption": "RAPTOR:递归地对文本块嵌入、聚类并生成摘要,自底向上构建多层抽象的摘要树,推理时跨层检索以整合长文档信息。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-hipporag",
+    "page": "memory",
+    "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+    "shortTitle": "HippoRAG",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.84,
+    "year": 2024,
+    "venue": "NeurIPS 2024",
+    "authors": "Bernal Jiménez Gutiérrez et al.",
+    "methodFamily": "图结构记忆检索",
+    "tags": [
+      "知识图谱",
+      "PersonalizedPageRank",
+      "多跳检索"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.86,
+      "reproducibility": 0.82,
+      "adoption": 0.78,
+      "selfEvolution": 0.78
+    },
+    "summary": "受海马索引理论启发,协同 LLM、知识图谱与 Personalized PageRank,构建可持续整合新知识的长期记忆检索框架。",
+    "methodCore": "哺乳动物大脑能够存储大量世界知识,并在持续整合新信息的同时避免灾难性遗忘。相比之下,大型语言模型即便配上 RAG,在预训练后也仍难以高效、有效地整合大量新经验。HippoRAG 从人类长期记忆的海马索引理论(hippocampal indexing theory)中汲取灵感,提出一个更接近人类联想记忆的检索框架。\n\n## 方法总览\nHippoRAG 协同编排三个组件:大型语言模型、知识图谱与 Personalized PageRank 算法,以模拟新皮层与海马体在记忆中的不同角色。离线阶段,它用语言模型(充当负责语义处理的新皮层)从文档中抽取知识,构建出一张知识图谱,作为模拟海马索引的关联结构;这张图把散落在不同文档中的实体与关系连结起来,形成一个可供联想遍历的记忆网络。\n\n## 记忆索引结构\n知识图谱在这里扮演了「海马索引」的角色:它不像向量库那样把每篇段落孤立地编码为一个向量,而是显式记录实体之间的关联边,使得跨文档、跨多跳的知识以图的拓扑结构被组织起来。这种结构化的索引,让「从一个概念联想到相关概念」变成图上的路径遍历,而非单纯的向量相似度比较。\n\n## 检索与召回机制:图上关联传播\n查询时,HippoRAG 先把问题中的实体链接到图中对应的节点作为种子,再在知识图谱上运行 Personalized PageRank:概率从种子节点出发沿边扩散,聚合起多跳关联的段落并据此排序返回。这种单步的图上关联检索能够一次性整合跨文档、跨多跳的知识,而无需像迭代式方法那样反复检索、也无需重训模型,从而以更接近人脑联想的方式完成召回。\n\n## 研究背景与贡献\nHippoRAG 把检索从「向量相似度匹配」升级为「知识图谱上的关联传播」,更贴近人类的联想记忆。它缓解了语言模型即便有 RAG 仍难以在预训练后高效整合大量新经验、避免灾难性遗忘的问题,是把 RAG 推向长期记忆与跨任务知识整合的重要一步,代码与数据已开源。\n\n## 效率与多跳能力\nHippoRAG 一个尤为值得强调的特点,是它用「单步」的图上关联检索达到了此前需要「多步迭代」才能取得的多跳效果。传统的多跳方法(如 IRCoT)往往需要多轮「检索-推理-再检索」的循环,每一轮都要调用一次昂贵的语言模型,累积开销巨大;而 HippoRAG 把跨文档的多跳关联提前编码进了知识图谱的拓扑结构,查询时只需一次 Personalized PageRank 传播就能把多跳相关的段落一并召回。正因如此,它在达到甚至超越迭代式检索效果的同时,还能便宜 10-30 倍、快 6-13 倍;而若把它接入 IRCoT,两者还能叠加出进一步的实质增益。",
+    "evaluation": "论文在多跳问答上与现有 RAG 方法对比,HippoRAG 显著超越 SOTA,最高提升约 20%;其单步检索即达到甚至优于 IRCoT 等迭代式多步检索的效果,同时便宜 10-30 倍、快 6-13 倍;把 HippoRAG 接入 IRCoT 还能带来进一步的实质增益,并能处理现有方法难以触及的新类型场景。",
+    "mainFinding": "把检索从向量相似度匹配升级为知识图谱上的关联传播,更接近人类联想记忆,是把 RAG 推向长期记忆与跨任务知识整合的重要一步。",
+    "limitations": "依赖语言模型抽取三元组的质量,构建的知识图谱存在噪声;对超大规模语料的可扩展性与存储开销仍有待进一步验证。",
+    "related": [
+      "memory-rt-hipporag-2"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2405.14831"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2405.14831"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/OSU-NLP-Group/HippoRAG"
+      }
+    ],
+    "citation": "HippoRAG, NeurIPS 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-hipporag.png",
+        "caption": "HippoRAG:受海马索引理论启发,协同 LLM、知识图谱与 Personalized PageRank,支持跨文档知识整合的长期记忆检索。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-hipporag-2",
+    "page": "memory",
+    "title": "From RAG to Memory: Non-Parametric Continual Learning for Large Language Models",
+    "shortTitle": "HippoRAG 2",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.83,
+    "year": 2025,
+    "venue": "ICML 2025",
+    "authors": "Bernal Jiménez Gutiérrez et al.",
+    "methodFamily": "图结构记忆检索",
+    "tags": [
+      "持续学习",
+      "关联记忆",
+      "sense-making"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.86,
+      "reproducibility": 0.8,
+      "adoption": 0.7,
+      "selfEvolution": 0.82
+    },
+    "summary": "在 HippoRAG 基础上加深段落整合与在线 LLM 使用,构建在事实、意义构建与关联记忆任务上全面超越标准 RAG 的记忆框架。",
+    "methodCore": "持续获取、组织与利用知识是人类智能的关键特征,而 AI 系统要释放全部潜力就必须逼近这一能力。由于用大型语言模型做持续学习困难重重,RAG 成为引入新信息的主流方式;但它对向量检索的依赖,妨碍了它模拟人类长期记忆那种动态、互联的特性。HippoRAG 2 在前作基础上,系统解决了这一矛盾。\n\n## 方法总览\n此前一些方法用知识图谱等结构来增强向量嵌入,改善了意义构建(sense-making)与关联性(associativity),但代价是在更基础的事实记忆任务上表现明显退化。HippoRAG 2 的目标,正是修复这种非预期的退化,提出一个在事实、意义构建与关联三类记忆任务上全面超越标准 RAG 的框架,让结构化记忆的收益不再以牺牲基础事实检索为代价。\n\n## 检索与召回机制\nHippoRAG 2 沿用 HippoRAG 中在知识图谱上运行 Personalized PageRank 的关联检索:从查询相关的种子节点出发,让概率沿图的关联边扩散,从而召回跨文档、跨多跳的相关内容。这一图上传播机制保留了前作在关联与意义构建任务上的优势,是整个框架进行联想式召回的骨架。\n\n## 关键设计:更深的段落整合与在线 LLM 使用\n在此之上,HippoRAG 2 做了两处关键增强。其一是更深的段落整合(deeper passage integration):把稠密的段落表示纳入原本以实体三元组为主的图中,使图既保留结构化的关联信息、又不丢失段落级的事实细节,从而修复了纯结构化方法在事实任务上的退化。其二是更有效的在线使用语言模型:在检索时用语言模型做更上下文化的实体链接,并进行类似人脑「识别记忆」(recognition memory)的过滤,剔除不相关的联想扩散结果。二者结合,把这套 RAG 系统推向更接近人类长期记忆的效果。\n\n## 研究背景与贡献\nHippoRAG 2 展示了以非参数化外部记忆实现语言模型持续学习的路径:新知识可被识别、关联并用于未来检索,而无需修改模型权重。它在关联记忆任务上较 SOTA 嵌入模型取得 7% 的提升,同时保持了更强的事实与意义构建记忆能力,是记忆检索走向自演化、非参数化持续学习的代表性工作。它标题「From RAG to Memory」所暗示的转变也颇具意味——检索增强不再只是一次性拼接外部文档的技巧,而正在演化为一套能持续吸纳、组织并复用经验的长期记忆系统,这也正是它把三类记忆任务(事实、意义构建、关联)统一起来考察、并追求在三者上同时不退化的深意所在,标志着检索增强正从「问答工具」向「类人长期记忆」这一更宏大目标靠拢,也让非参数化持续学习成为一条无需反复重训模型、即可让系统不断成长的现实路径。",
+    "evaluation": "论文在事实、意义构建与关联三类记忆任务上评测,HippoRAG 2 全面优于标准 RAG,修复了此前结构增强方法在基础事实任务上的退化;其在关联记忆任务上较 SOTA 嵌入模型取得 7% 的提升,同时展现出更强的事实知识与意义构建记忆能力,整体更接近人类长期记忆的效果。",
+    "mainFinding": "展示了以非参数化外部记忆实现语言模型持续学习的路径,让新知识可被识别、关联并用于未来检索,是记忆检索走向自演化的代表性工作。",
+    "limitations": "知识图谱构建与在线 LLM 调用带来额外成本;类人脑「识别记忆」过滤机制的可靠性,归根到底依赖底层语言模型的判断质量。",
+    "related": [
+      "memory-rt-hipporag"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2502.14802"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2502.14802"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/OSU-NLP-Group/HippoRAG"
+      }
+    ],
+    "citation": "HippoRAG 2, ICML 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-hipporag-2.png",
+        "caption": "HippoRAG 2:在事实记忆、意义构建与关联记忆三维度评测持续学习能力,深化段落整合与在线 LLM 使用,全面超越标准 RAG。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-memgpt",
+    "page": "memory",
+    "title": "MemGPT: Towards LLMs as Operating Systems",
+    "shortTitle": "MemGPT",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.8,
+    "year": 2023,
+    "venue": "arXiv 2023",
+    "authors": "Charles Packer et al.",
+    "methodFamily": "分层记忆分页检索",
+    "tags": [
+      "虚拟上下文",
+      "分页",
+      "多轮对话记忆"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.75,
+      "reproducibility": 0.75,
+      "adoption": 0.85,
+      "selfEvolution": 0.8
+    },
+    "summary": "借鉴操作系统分层内存与分页机制,让 LLM 自主在主上下文与外部存储间调页,以突破固定上下文窗口。",
+    "methodCore": "大型语言模型受限于固定大小的上下文窗口,这在长对话与文档分析等任务中严重掣肘其效用。MemGPT 借鉴传统操作系统管理内存的方式,提出虚拟上下文管理(virtual context management),让模型自主地在有限窗口与外部存储之间调度信息,从而营造出「拥有大容量记忆」的假象。\n\n## 方法总览\nMemGPT(Memory-GPT)把操作系统分层内存系统的思想搬到语言模型上:传统 OS 通过在快、慢两级存储间搬运数据来提供远超物理内存的可用空间,MemGPT 则把有限的上下文窗口类比为主存、把外部存储类比为磁盘,智能地管理这两个记忆层级,以在受限窗口内有效提供扩展上下文。\n\n## 记忆索引结构\n在这一类比下,系统维护分层的记忆:主上下文(相当于主存)保存当前正在处理、必须立即可见的信息;外部存储(相当于磁盘)保存海量但暂时不活跃的历史。二者之间的边界是动态的——当主上下文将满时,不常用的内容会被写出到外部存储,而当前所需的历史则被调入,如同操作系统的分页(paging)。\n\n## 检索与召回机制:自主分页调度\nMemGPT 让语言模型通过函数调用自主地在记忆层级间换入换出信息:模型可以主动决定「把哪段历史检索调入上下文」「把哪段不常用内容写出」,并利用中断(interrupts)来管理自身与用户之间的控制流。由此,检索不再是外部固定流程,而成为 agent 主动发起的、OS 式的记忆调度动作。当上下文将满时,agent 能主动调入重要历史,在远超窗口的交互中维持连贯记忆,并能记住、反思并动态演化对用户的认识。\n\n## 研究背景与贡献\nMemGPT 把检索建模为 agent 主动的、操作系统式的记忆分页调度,让语言模型自主决定何时把哪部分记忆调入上下文,从而突破固定窗口的约束。它是自演化 agent 记忆管理与检索的代表性框架,作者开源了代码与数据。\n\n## 记忆与检索的视角转变\nMemGPT 带来的一个关键视角转变,是把「检索」从一个由外部框架被动触发的动作,变成由 agent 自身主动发起、自主管理的行为。在传统 RAG 中,是外层系统决定何时检索、检索什么,语言模型只是被动地接受拼进来的上下文;而在 MemGPT 里,语言模型自己通过函数调用来决定要把哪段历史从「磁盘」调入「主存」、要把哪段不活跃内容写出,俨然扮演了记忆管理者的角色。这种「LLM as OS」的类比,不仅解决了固定窗口的工程问题,更把记忆管理提升为 agent 的一项核心能力——它能在超长交互中记住、反思并动态演化对用户的认识,为后续可自我演化的 agent 记忆系统提供了极具影响力的框架蓝本。",
+    "evaluation": "论文在两个现代语言模型有限窗口严重掣肘性能的领域评测:文档分析中,MemGPT 能分析远超底层模型上下文窗口的大型文档;多会话聊天中,它能构建可跨会话记忆、反思并随长期交互动态演化的对话 agent。两类场景均表明它能有效突破固定窗口约束、维持长期连贯记忆。",
+    "mainFinding": "将检索建模为 agent 主动的、OS 式的记忆分页调度,让语言模型自主决定何时把哪部分记忆调入上下文,是自演化 agent 记忆管理与检索的代表性框架。",
+    "limitations": "严重依赖底层语言模型的函数调用与决策可靠性;缺乏大规模量化基准,且记忆调度一旦出错容易级联放大影响后续交互。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2310.08560"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2310.08560"
+      },
+      {
+        "label": "项目主页",
+        "href": "https://memgpt.ai"
+      }
+    ],
+    "citation": "MemGPT, arXiv 2023."
+  },
+  {
+    "id": "memory-rt-memorizing-transformers",
+    "page": "memory",
+    "title": "Memorizing Transformers",
+    "shortTitle": "Memorizing Transformers",
+    "category": "memory-retrieve",
+    "maturity": "mature",
+    "score": 0.83,
+    "year": 2022,
+    "venue": "ICLR 2022",
+    "authors": "Yuhuai Wu et al.",
+    "methodFamily": "记忆增强注意力",
+    "tags": [
+      "kNN注意力",
+      "外部记忆",
+      "长上下文"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.88,
+      "reproducibility": 0.75,
+      "adoption": 0.78,
+      "selfEvolution": 0.55
+    },
+    "summary": "为 Transformer 增加一个非可微的近期(键,值)记忆库,通过近似 kNN 查找扩展注意力上下文,提升语言建模。",
+    "methodCore": "语言模型通常需要训练或微调才能获得新知识,这意味着要更新权重。Memorizing Transformers 设想一种截然不同的可能:让语言模型在推理时就能直接读入并记住新数据,从而立即获得新知识,而无需改动任何权重。为此它扩展了 Transformer,使其具备记忆过去输入内部表示的能力。\n\n## 方法总览\n其核心做法,是把处理过的(key, value)对存入一个不参与梯度更新的非可微记忆库。当模型处理当前序列时,除了做常规的局部注意力,当前 query 还会到这个记忆库中查找最相关的历史键值,把检索到的记忆信息融合进注意力计算。由于记忆是非可微的,它可以被扩展到很大规模而不引入任何需要训练的参数。\n\n## 记忆索引结构\n记忆库以(key, value)对的形式保存过去输入的内部表示,规模可以很大——论文将其扩展到最高 262K 个 token。这个外部键值存储独立于模型权重之外,既可以放在 GPU 也可以放在 CPU 内存,充当模型可随时查询的长期记忆,使可访问的上下文远超普通注意力窗口的限制。\n\n## 检索与召回机制:kNN 注意力\n检索通过近似 k 近邻(kNN)查找实现:当前 query 在记忆库中找到最相关的若干个历史键,取回对应的值,再把这部分「记忆注意力」与常规的局部注意力融合起来,共同决定当前的表示。论文表明,这样一个简单的 kNN 键值检索机制,就足以有效地把外部记忆接入注意力,在多种任务上稳步改善语言建模,而且性能随记忆规模增大而持续提升。\n\n## 局部注意力与记忆注意力的融合\nMemorizing Transformers 的一个精巧之处,在于它并不用记忆注意力去替换原有的局部注意力,而是让两者共存、再做融合。模型在大部分层仍保留标准的、可微的局部自注意力来处理当前上下文窗口内的依赖;只在特定层引入 kNN 记忆注意力,让当前 query 额外去外部记忆库里检索历史键值。两路注意力的输出通过一个可学习的门控加权组合,使模型能够自行权衡「当前上下文里的信息」与「来自遥远历史的记忆」孰轻孰重。这种设计既保住了 Transformer 原有的建模能力,又以最小的改动把外部长期记忆接了进来。\n\n## 研究背景与贡献\nMemorizing Transformers 证明,用简单的 kNN 键值检索即可把外部记忆接入注意力,让模型在测试时利用新定义的函数、定理等信息。它是把「检索」作为记忆机制融入模型内部注意力的奠基性工作,启发了后续大量记忆增强注意力方法,也为「无需更新权重、仅靠读入即可获得新知识」这一诱人设想提供了首个切实可行的实现路径,对长上下文建模与记忆增强 Transformer 的研究影响深远。",
+    "evaluation": "论文在通用网页文本(C4)、数学论文(arXiv)、书籍(PG-19)、代码(GitHub)与形式化定理(Isabelle)等多种基准上评测,均改善了语言建模表现;性能随记忆规模增大而稳步提升,最高扩展至 262K token;在代码与数学等基准上,模型被发现能在测试时利用新定义的函数与定理。",
+    "mainFinding": "证明用简单的 kNN 键值检索即可把外部记忆接入注意力,是把检索作为记忆机制融入模型内部的奠基性工作,启发了后续大量记忆增强注意力方法。",
+    "limitations": "近似 kNN 查找带来工程实现与检索精度的权衡,且早期编码的键值可能随训练而陈旧;评测主要集中于语言建模而非交互式任务。",
+    "related": [
+      "memory-rt-longmem"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2203.08913"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2203.08913"
+      }
+    ],
+    "citation": "Memorizing Transformers, ICLR 2022."
+  },
+  {
+    "id": "memory-rt-longmem",
+    "page": "memory",
+    "title": "Augmenting Language Models with Long-Term Memory",
+    "shortTitle": "LongMem",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.8,
+    "year": 2023,
+    "venue": "NeurIPS 2023",
+    "authors": "Weizhi Wang et al.",
+    "methodFamily": "记忆增强注意力",
+    "tags": [
+      "解耦记忆",
+      "SideNet",
+      "长历史缓存"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.83,
+      "reproducibility": 0.72,
+      "adoption": 0.68,
+      "selfEvolution": 0.6
+    },
+    "summary": "提出 LongMem 框架,用解耦的记忆模块让冻结的 LLM 缓存并检索超长历史上下文,缓解记忆陈旧问题。",
+    "methodCore": "现有大型语言模型受输入长度上限约束,只能接受固定大小的输入,无法利用过去输入中丰富的长上下文信息。LongMem(Language Models Augmented with Long-Term Memory)提出一个框架,让语言模型能够记忆长历史,并特别针对记忆增强中常见的「记忆陈旧」问题给出优雅的解决方案。\n\n## 方法总览\nLongMem 的核心是一种解耦式(decoupled)网络设计:把原始骨干语言模型冻结,仅用作记忆编码器,负责把过去的上下文编码成(key, value)对存入记忆库;另设一个自适应的残差侧网络(residual side-network),专门充当记忆的检索器与读取器。生成路径与记忆读写路径由此被拆分到两个网络中,各司其职。\n\n## 关键设计:解耦以避免陈旧\n这一解耦设计的关键收益,是解决了记忆陈旧(staleness)问题。在许多记忆增强方案里,记忆库中的历史表示是用不断被更新的模型编码的,随着训练推进,旧表示与当前模型脱节而失效。LongMem 把骨干冻结后,记忆库中的历史表示始终由同一个固定编码器产生,因而可以放心地缓存与更新长期历史而不必担心陈旧;可训练的负担全部转移到轻量的侧网络上。\n\n## 检索与召回机制\n配合记忆增强的适配训练,LongMem 能够记住并利用长历史进行语言建模。其记忆检索模块可处理记忆库中不限长度的上下文,按块检索出与当前相关的历史键值供侧网络读取。典型情况下,LongMem 可把长程记忆扩展到 65k token,这一容量足以缓存大量(many-shot)的额外示例,把它们当作长程记忆用于上下文学习,从而突破普通上下文窗口对示例数量的限制。\n\n## 研究背景与贡献\nLongMem 用「解耦冻结骨干 + 可训练侧网络」的设计,优雅地解决了记忆增强中的陈旧问题,并展示了把海量历史或示例作为可检索长期记忆用于上下文学习的可行性。它在长上下文建模与记忆增强的上下文学习上均取得显著改进,代码已开源。\n\n## 面向上下文学习的长程记忆\nLongMem 一个颇具想象力的用法,是把长程记忆当作「示例仓库」来做上下文学习。普通上下文学习受窗口限制,只能塞进有限的几个示例;而 LongMem 可以把成百上千个 in-context 示例编码进 65k token 规模的记忆库中,推理时按当前输入检索出最相关的若干示例来使用。这等于把「多示例学习」从窗口内的硬约束里解放出来,让模型能够以「按需检索相关示例」的方式,享受远超窗口容量的示范信息。这一视角把记忆检索与上下文学习两条线索连了起来,揭示出长期记忆不仅能存事实,也能存「怎么做某类任务」的示范经验。",
+    "evaluation": "论文在具挑战性的长上下文建模基准 ChapterBreak 上评测,LongMem 优于多个强长上下文模型;在把大量 in-context 示例缓存为长程记忆的记忆增强上下文学习设定下,相较普通语言模型取得显著的准确率提升,表明该方法能有效帮助模型记忆并利用长内容,代码已开源。",
+    "mainFinding": "用解耦冻结骨干加可训练侧网络的设计,优雅地解决了记忆增强中的陈旧问题,展示了把海量历史/示例作为可检索长期记忆用于上下文学习的可行性。",
+    "limitations": "需训练额外的残差侧网络并维护大型记忆库;记忆按块检索,对细粒度、跨片段关联信息的建模能力仍然比较有限。",
+    "related": [
+      "memory-rt-memorizing-transformers",
+      "memory-rt-unlimiformer"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2306.07174"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2306.07174"
+      },
+      {
+        "label": "项目主页",
+        "href": "https://aka.ms/LongMem"
+      }
+    ],
+    "citation": "LongMem, NeurIPS 2023.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-longmem.png",
+        "caption": "LongMem:将超长文本切分为定长片段送入冻结 LLM 缓存,用解耦记忆模块检索历史键值,缓解记忆陈旧的长期记忆流程。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-unlimiformer",
+    "page": "memory",
+    "title": "Unlimiformer: Long-Range Transformers with Unlimited Length Input",
+    "shortTitle": "Unlimiformer",
+    "category": "memory-retrieve",
+    "maturity": "growing",
+    "score": 0.79,
+    "year": 2023,
+    "venue": "NeurIPS 2023",
+    "authors": "Amanda Bertsch et al.",
+    "methodFamily": "记忆增强注意力",
+    "tags": [
+      "kNN交叉注意力",
+      "无限输入",
+      "长文档摘要"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.84,
+      "reproducibility": 0.8,
+      "adoption": 0.68,
+      "selfEvolution": 0.45
+    },
+    "summary": "把交叉注意力计算卸载到单个 kNN 索引,使任意预训练编码器-解码器模型无需改权重即可处理近乎无限长的输入。",
+    "methodCore": "自 Transformer 提出以来,这类模型一直受限于有界的输入长度,因为它们需要注意输入中的每一个 token。Unlimiformer 提出一种可包装任意现成预训练编码器-解码器 Transformer 的通用方法,把交叉注意力的计算卸载到外部索引,从而让模型无需改动权重即可处理近乎无限长的输入。\n\n## 方法总览\nUnlimiformer 的核心做法,是把交叉注意力计算卸载到单个 k 近邻(kNN)索引,并巧妙地令返回的 kNN 距离直接充当注意力的点积分数。具体地,它把全部输入 token 的编码器隐状态存入这一索引,索引可放在 GPU 或 CPU 内存,并能在亚线性时间内查询;由此可以对几乎无限长的输入序列建立索引,而无需一次性把所有 token 都放进注意力计算。\n\n## 记忆索引结构\n所有输入 token 的编码器隐状态构成一个外部记忆索引,规模不再受注意力窗口限制。这个索引在所有解码层、所有注意力头之间共享——也就是说,整份超长输入只需建一次索引,便供全模型复用。索引可放在 CPU 内存意味着即便输入长达数十万 token,也不必全部占用宝贵的 GPU 显存。\n\n## 检索与召回机制:kNN 交叉注意力\n解码时,每个解码层的每个注意力头不再对全部键做注意力,而只从共享索引中检索并注意其 Top-k 键。由于返回的 kNN 距离直接被当作注意力分数,这一步无需引入任何额外学习到的权重,也无需修改原模型代码。这等于把「对所有键的全量交叉注意力」近似为「对少数最相关键的检索式注意力」,从而以零训练的方式把 BART、Longformer 等模型扩展到无限长输入。\n\n## 研究背景与贡献\nUnlimiformer 把长上下文的注意力重构为对外部记忆的 kNN 检索,是「检索即注意力」思想在编码器-解码器架构上的通用化。它证明可以零训练地扩展输入长度,在测试时处理长达 500k token 的输入而无需截断,作者公开了代码与模型以支持复现和推广。\n\n## 通用性与零训练特性\nUnlimiformer 最具吸引力的性质,是它的「通用包装器」定位:它不针对某个特定模型,而是可以把任意现成的预训练编码器-解码器 Transformer(如 BART、Longformer)包起来,不改代码、不加权重,就让它们获得处理无限长输入的能力。这背后的关键洞察在于——既然交叉注意力本质上就是「query 去所有键里找最相关的」,那么完全可以把这个「找」的过程外包给一个高效的 kNN 索引,只取回并注意 Top-k 个键,而把「注意所有键」这一昂贵操作近似掉。由于这个近似不引入任何需要训练的参数,现有模型无需重新微调即可即插即用,极大降低了让老模型适应超长输入的成本。",
+    "evaluation": "论文在多个长文档与书籍摘要基准上评测,Unlimiformer 可在测试时处理 BookSum 数据集中长达 500k token 的输入而无需任何截断;并在不引入额外学习权重、也不修改代码的前提下,提升 BART、Longformer 等预训练模型的摘要表现,将它们扩展到无限长输入,代码与模型已公开。",
+    "mainFinding": "把长上下文注意力重构为对外部记忆的 kNN 检索,是「检索即注意力」思想在编码器-解码器架构上的通用化,证明可零训练地扩展输入长度。",
+    "limitations": "主要面向编码器-解码器的摘要类任务;每个头、每一层的 kNN 检索都会带来索引构建与查询开销,从而增加生成延迟。",
+    "related": [
+      "memory-rt-memorizing-transformers",
+      "memory-rt-longmem"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.01625"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.01625"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/abertsch72/unlimiformer"
+      }
+    ],
+    "citation": "Unlimiformer, NeurIPS 2023."
+  },
+  {
+    "id": "memory-rt-former",
+    "page": "memory",
+    "title": "∞-former: Infinite Memory Transformer",
+    "shortTitle": "∞-former",
+    "category": "memory-retrieve",
+    "maturity": "exploring",
+    "score": 0.72,
+    "year": 2022,
+    "venue": "ACL 2022",
+    "authors": "Pedro Henrique Martins et al.",
+    "methodFamily": "连续空间记忆",
+    "tags": [
+      "连续注意力",
+      "无界记忆",
+      "长期记忆"
+    ],
+    "scores": {
+      "clarity": 0.78,
+      "evidence": 0.76,
+      "reproducibility": 0.6,
+      "adoption": 0.55,
+      "selfEvolution": 0.5
+    },
+    "summary": "用连续空间注意力把过去表示为连续信号,为 Transformer 引入不受长度限制、计算与上下文长度解耦的无界长期记忆。",
+    "methodCore": "Transformer 难以有效建模长期记忆,因为它所需的计算量随上下文长度增长;而各类高效 Transformer 变体虽然缓解了计算问题,却都只有有限的记忆容量,被迫丢弃旧信息。∞-former(Infinite Memory Transformer)为普通 Transformer 扩展了一个无界(unbounded)的长期记忆,试图从根本上摆脱容量与序列长度的绑定。\n\n## 方法总览\n∞-former 的核心,是用连续空间注意力(continuous-space attention)机制来注意长期记忆:它不再把过去表示为一串离散 token,而是把它们拟合成一个连续信号,并对这个连续信号做注意力。这一转换带来了关键性质——注意力的复杂度不再依赖于上下文长度,而是以「记忆长度换精度」的方式,把无论多长的历史都压缩到固定规模的连续表示中。\n\n## 记忆索引结构:连续信号\n在 ∞-former 中,长期记忆被表示为一个连续函数,而非离散的键值序列。无论历史有多长,记忆表示与注意力开销都保持恒定,因此可以近似表示无界的过去。代价是分辨率有限——把越来越长的历史塞进固定容量的连续信号,必然带来一定的信息近似损失,精度会随历史增长而摊薄。\n\n## 检索与召回机制:sticky memories\n为了在有限的表示预算下把精度用在刀刃上,∞-former 维护一个 sticky memories 机制:那些被频繁关注的关键片段,会以更高的分辨率被长期保留下来,而不重要的部分则以更粗的分辨率存储。这相当于按注意力得分对记忆做不均匀的精度分配,使模型在固定计算预算下,既能建模任意长的上下文,又能对真正重要的历史保持较高的检索精度。\n\n## 研究背景与贡献\n∞-former 提出了以连续信号表示无界记忆的独特思路,让记忆容量彻底摆脱离散序列长度的限制,并用 sticky memories 在固定预算下保留关键长期信息。它在排序、语言建模与基于文档的对话生成等设定上验证了从长序列保留信息的能力,是记忆表示与检索机制方向上的探索性代表工作。\n\n## 与离散记忆的对比\n把 ∞-former 与那些用离散键值库(如 Memorizing Transformers)存储历史的方法对照,能看出它在记忆表示上的根本不同:离散方法把每个历史 token 当作一个独立条目存下来,记忆条目数随历史线性增长,注意力开销也随之上升;而 ∞-former 把整段历史拟合成一个连续函数,记忆表示的规模与注意力开销都固定不变,代价是分辨率有限、越长的历史被压缩得越粗。这是一种典型的「以精度换容量」的取舍。sticky memories 机制则试图缓和这一取舍——它按注意力得分把有限的高分辨率预算优先分配给真正重要的片段,使模型在固定计算预算下既能覆盖任意长的历史,又不至于把关键信息一并模糊掉。",
+    "evaluation": "论文在合成的排序任务、语言建模以及基于文档的对话生成三类设定上评测,展示了 ∞-former 在有界计算预算下从长序列中保留信息的能力,能建模远超普通 Transformer 的长期上下文并保持有竞争力的表现;同时验证 sticky memories 机制在按注意力得分保留关键长期信息方面的作用。",
+    "mainFinding": "提出以连续信号表示无界记忆的独特思路,让记忆容量彻底摆脱离散序列长度的限制,是记忆表示与检索机制方向上的探索性代表工作。",
+    "limitations": "连续空间注意力实现复杂、复现门槛较高;信号近似与有限分辨率保留会引入信息损失,故大规模工程落地采用有限。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2109.00301"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2109.00301"
+      }
+    ],
+    "citation": "∞-former, ACL 2022."
+  },
+  {
+    "id": "memory-rt-xmemory",
+    "page": "memory",
+    "title": "Beyond RAG for Agent Memory: Retrieval by Decoupling and Aggregation",
+    "shortTitle": "xMemory",
+    "category": "memory-retrieve",
+    "maturity": "exploring",
+    "score": 0.79,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Zhanghao Hu et al.",
+    "methodFamily": "解耦聚合层次记忆",
+    "tags": [
+      "agent记忆",
+      "层次检索",
+      "去冗余"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.8,
+      "reproducibility": 0.68,
+      "adoption": 0.6,
+      "selfEvolution": 0.78
+    },
+    "summary": "指出标准 RAG 不适配 agent 记忆流,提出'先解耦再聚合'的 xMemory,构建可修订层次结构并自顶向下检索,提升答案质量与 token 效率。",
+    "methodCore": "标准 RAG 与 agent 记忆并不匹配。不同于庞大而异构的语料,agent 记忆是一段有界且连贯的交互流,其中许多片段高度相关甚至近乎重复。这导致扁平的 top-k 相似检索常常返回冗余的上下文,而以摘要为中心的层次结构又会模糊那些用来区分候选之间细微差异的细节。xMemory 针对这一错配,提出一条全新的组织与检索原则。\n\n## 方法总览\nxMemory 主张 agent 记忆应遵循「先解耦再聚合(decoupling before aggregation)」的原则:系统应当先从相似的历史中隔离出可复用的事实、更新与区分性细节,然后才把它们组织起来以便高效检索。这一原则的价值在于,先做解耦能保住那些容易被摘要抹平的关键差异,再做聚合又能压缩掉真正的冗余,从而同时对抗「冗余」与「细节丢失」两种失败模式。\n\n## 记忆索引结构:可修订层次\n据此,xMemory 构建了一个从原始消息到片段(segments)、记忆组件(memory components)、组(groups)的可修订层次结构。它先把交互史切分为局部事件形成片段,再把每个片段解耦为若干记忆组件,随后用一个稀疏性—语义忠实度(sparsity–semantic faithfulness)目标把相关组件聚合成更高层的组;整个结构随记忆的演化而增量维护,而非一次性静态构建,从而适应 agent 交互流的持续增长。\n\n## 检索与召回机制:自顶向下按需展开\n推理时,xMemory 采用自顶向下的检索:先选出一批互补的组与组件,构成一条紧凑的主干(backbone);只有当补充证据确实能降低阅读器的不确定性时,才进一步向下展开到片段乃至原始消息。这种按需展开的策略,让系统默认只用高层紧凑表示作答,仅在必要时才付出读取细节的 token 代价,从而在准确性与推理 token 效率之间取得平衡。\n\n## 研究背景与贡献\nxMemory 证明 agent 记忆应遵循「先解耦再聚合」而非直接套用 RAG,其自顶向下、按需展开的层次检索能同时提升答案准确性与推理 token 效率。论文还辅以对检索上下文冗余度、证据密度与覆盖度的分析,进一步佐证这一原则带来的收益来源。它的核心洞察在于,agent 记忆有别于开放语料的两个特性——有界、连贯、且高度冗余——恰恰要求一套不同于通用 RAG 的组织方式:既要压掉近乎重复的内容,又要保住区分候选的细微差异,而「先解耦再聚合、检索时再按需展开」正是同时满足这两点的一条可行路径,也为「agent 记忆是否该照搬通用 RAG」这一问题给出了否定性的、且有实证支撑的回答,提示后来的 agent 记忆系统应当针对交互流的独特结构来重新设计索引与检索,而非直接沿用为开放语料打造的那套 RAG 流水线。",
+    "evaluation": "论文在 LoCoMo 与 PerLTQA 两个记忆基准上,跨多种开源与闭源语言模型做实验,结果显示 xMemory 在答案质量与推理 token 效率两方面均取得一致提升;论文还辅以对检索上下文冗余度、证据密度与覆盖度的分析,进一步佐证「先解耦再聚合」带来的收益来源。",
+    "mainFinding": "证明 agent 记忆应遵循「先解耦再聚合」而非直接套用 RAG,自顶向下、按需展开的层次检索能同时提升答案准确性与推理 token 效率。",
+    "limitations": "层次结构的构建与增量维护较复杂;解耦与聚合质量依赖底层语言模型,且评测仅覆盖 LoCoMo 与 PerLTQA 两个记忆基准。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2602.02007"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2602.02007"
+      }
+    ],
+    "citation": "xMemory, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-xmemory.png",
+        "caption": "xMemory:针对标准 top-k 相似检索不适配高度关联的智能体记忆流,提出先解耦再聚合,构建可修订层次结构并自顶向下证据检索。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-gmemory",
+    "page": "memory",
+    "title": "G-Memory: Tracing Hierarchical Memory for Multi-Agent Systems",
+    "shortTitle": "G-Memory",
+    "category": "memory-retrieve",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Guibin Zhang et al.",
+    "methodFamily": "多智能体图层次记忆",
+    "tags": [
+      "多智能体",
+      "三层图",
+      "双向检索"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.84,
+      "reproducibility": 0.72,
+      "adoption": 0.62,
+      "selfEvolution": 0.82
+    },
+    "summary": "面向多智能体系统提出受组织记忆理论启发的层次化记忆 G-Memory,用洞见、查询、交互三层图管理协作轨迹,双向遍历检索并随任务演化。",
+    "methodCore": "由大型语言模型驱动的多智能体系统(MAS)展现出远超单一智能体的认知与执行能力,但其自演化能力仍受制于不成熟的记忆架构。细究之下会发现,现有 MAS 记忆机制过于简单,完全忽视了智能体之间细腻的协作轨迹,而且缺乏跨试验与智能体特定的定制。G-Memory 受组织记忆理论(organizational memory theory)启发,为 MAS 引入一套层次化的记忆系统。\n\n## 方法总览\nG-Memory 用一个三层图层次结构来管理冗长的 MAS 交互:洞见图(insight graph)存放高层、可泛化的经验;查询图(query graph)组织历史查询;交互图(interaction graph)保存细粒度的协作轨迹。这三层由抽象到具体依次排列,分别对应「可复用的团队经验」「相似问题的组织」与「具体协作过程」,共同刻画一个多智能体团队随时间积累下来的记忆。\n\n## 记忆索引结构:三层图\n三层图的设计对应了组织记忆理论中不同层级的知识:高层洞见是从多次试验中提炼的可迁移经验,中层查询把历史问题结构化以便匹配,底层交互则以经压缩的形式紧凑编码每一次协作的细节轨迹。这种自上而下的分层,使得系统既能复用抽象经验,又能在需要时回溯到具体的协作过程。\n\n## 检索与召回机制:双向遍历\n收到新查询时,G-Memory 执行双向记忆遍历(bi-directional memory traversal):一方面向上取回高层、可泛化的洞见,让系统复用跨试验的知识;另一方面向下取回细粒度、经压缩的交互轨迹,紧凑地编码既往的协作经验。任务执行完成后,整个层次通过吸收新的协作轨迹进行自我演化,持续培育智能体团队的能力,而这一切都无需对原有 MAS 框架做任何修改。\n\n## 研究背景与贡献\nG-Memory 证明,为多智能体系统引入分层图式的协作记忆、并让其随任务不断自我演化,可以在不改动原框架的前提下显著提升团队成功率与问答准确率。它是把成熟的单体 agent 记忆思想拓展到多智能体协作场景的代表性工作,代码已开源。\n\n## 面向协作轨迹的记忆\nG-Memory 特别强调的一点,是它要记住的不只是「问题与答案」,更是智能体之间细腻的协作轨迹——谁在什么时候提出了什么、如何被其他智能体采纳或反驳、最终如何汇聚成团队决策。此前的 MAS 记忆机制大多把这些协作过程一笔带过,仅保留粗糙的结果,导致团队无法从「上一次是怎么配合的」中学习。G-Memory 用交互图细粒度地保存这些轨迹,再用洞见图把反复出现的有效协作模式提炼为可泛化经验,于是团队能力得以在一次次任务中累积、而非每次从零开始。这种「以协作过程为记忆对象、并让记忆随任务自我演化」的思路,正是它推动多智能体系统走向自演化的关键。",
+    "evaluation": "论文在五个基准、三种语言模型骨干与三种流行 MAS 框架上开展广泛实验,G-Memory 在具身行动任务的成功率与知识问答任务的准确率上分别最高提升约 20.89% 与 10.12%,且这些增益是在不对原始 MAS 框架做任何修改的前提下取得的,展现良好的通用性与即插即用特性,代码已开源。",
+    "mainFinding": "证明为多智能体系统引入分层图式的协作记忆、并让其随任务不断自我演化,可在不改动原框架的前提下显著提升团队成功率与问答准确率。",
+    "limitations": "三层图的构建与双向遍历开销较大;收益依赖底层 MAS 框架与语言模型,且记忆随任务长期演化的稳定性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2506.07398"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2506.07398"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/bingreeky/GMemory"
+      }
+    ],
+    "citation": "G-Memory, arXiv 2025."
+  },
+  {
+    "id": "memory-rt-assomem",
+    "page": "memory",
+    "title": "AssoMem: Scalable Memory QA with Multi-Signal Associative Retrieval",
+    "shortTitle": "AssoMem",
+    "category": "memory-retrieve",
+    "maturity": "exploring",
+    "score": 0.78,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Kai Zhang et al.",
+    "methodFamily": "关联记忆多信号检索",
+    "tags": [
+      "关联记忆图",
+      "多信号融合",
+      "记忆QA"
+    ],
+    "scores": {
+      "clarity": 0.81,
+      "evidence": 0.82,
+      "reproducibility": 0.68,
+      "adoption": 0.58,
+      "selfEvolution": 0.72
+    },
+    "summary": "面向大规模记忆问答,提出受人类联想启发的 AssoMem,构建把对话话语锚定到自动抽取线索的关联记忆图,并用多信号自适应融合排序,提升相似密集场景下的召回。",
+    "methodCore": "在大规模记忆中准确召回,是记忆增强 AI 助手做问答的核心挑战,尤其是在相似度密集(similarity dense)的场景下——此时现有方法主要靠与查询的语义距离来检索,很容易失败,因为大量记忆片段彼此语义相近,单凭语义距离难以区分谁才是真正需要的那一条。AssoMem 受人类以联想方式关联信息的启发,提出一套多信号的关联检索框架。\n\n## 方法总览\nAssoMem 构建一张关联记忆图(associative memory graph),把对话中的话语(utterances)锚定到自动抽取出的线索(clues)上。这张图提供了关于会话上下文的一个丰富的组织视图,把原本孤立的话语通过共享线索连结起来,并借此支持基于重要性的排序,而不再把每条话语当作互不相关的独立向量看待。\n\n## 记忆索引结构:关联记忆图\n在这张图中,话语与线索构成两类节点,话语通过它所涉及的线索被关联到一起。这种结构让「相关信息互相关联」变得显式:围绕同一线索的话语自然聚在一起,既提供了组织视图,也为「哪条话语更重要」这样的排序判断提供了结构性依据。相比扁平的向量库,它更贴近人类联想式的记忆组织方式。\n\n## 检索与召回机制:多信号自适应融合\n检索时,AssoMem 整合多维检索信号:与查询的相关性(relevance)、话语自身的重要性(importance)以及时间对齐度(temporal alignment)。它采用一种基于自适应互信息(mutual information, MI)的融合策略,动态地为这几路信号加权,得到兼顾语义、重要性与时序的上下文感知召回结果。正是这种超越单一语义距离的多信号融合,使 AssoMem 在相似度密集的场景下仍能把真正相关、重要且时序契合的记忆挑出来。\n\n## 研究背景与贡献\nAssoMem 证明,在语义相似度之外融合重要性与时间对齐等多维信号、并借助关联记忆图来组织上下文,能显著改善大规模相似密集记忆的召回质量。论文还引入新的会议问答数据集 MeetingQA,为评测这类场景提供了额外测试平台。\n\n## 为何单靠语义距离会失败\nAssoMem 针对的痛点值得单独说明:在相似度密集的记忆场景里,大量话语在语义上都与查询高度接近——例如一场长会议中反复讨论同一话题的多轮发言——此时单凭「与查询的语义距离」排序,几乎无法把「真正回答问题的那一条」从一堆语义相近的干扰项中区分出来。AssoMem 的破解之道,是引入语义之外的另两路信号:话语自身的重要性,用来判断哪条发言更关键;以及时间对齐度,用来判断哪条发言在时序上更契合问题所指。再用自适应互信息融合动态调配三路信号的权重,系统便能在语义难以分辨时,借助重要性与时序把正确记忆顶上来,这正是它在相似密集场景下优于纯语义检索的根本原因。",
+    "evaluation": "论文在三个已有基准以及新提出的会议问答数据集 MeetingQA 上进行大量实验,结果显示 AssoMem 一致地优于 SOTA 基线,验证了其在上下文感知记忆召回、尤其是相似度密集场景下的优越性;新引入的 MeetingQA 也为评测大规模、相似密集的记忆问答提供了额外测试平台。",
+    "mainFinding": "证明在语义相似度之外融合重要性与时间对齐等多维信号、并借助关联记忆图组织上下文,能显著改善大规模相似密集记忆的召回质量。",
+    "limitations": "线索抽取与关联图构建依赖语言模型的质量;多信号互信息融合较为复杂,且新数据集 MeetingQA 的规模与泛化性有限。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2510.10397"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2510.10397"
+      }
+    ],
+    "citation": "AssoMem, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-assomem.png",
+        "caption": "AssoMem:针对纯相关性检索的局限,构建把对话话语锚定到自动抽取线索的关联记忆图,用多信号自适应融合排序提升召回。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-exprag",
+    "page": "memory",
+    "title": "Retrieval-Augmented LLM Agents: Learning to Learn from Experience",
+    "shortTitle": "ExpRAG",
+    "category": "memory-retrieve",
+    "maturity": "exploring",
+    "score": 0.77,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Thomas Palmeira Ferraz et al.",
+    "methodFamily": "经验检索微调结合",
+    "tags": [
+      "经验记忆",
+      "轨迹检索",
+      "泛化"
+    ],
+    "scores": {
+      "clarity": 0.8,
+      "evidence": 0.79,
+      "reproducibility": 0.66,
+      "adoption": 0.56,
+      "selfEvolution": 0.8
+    },
+    "summary": "系统研究如何训练检索增强的 LLM 智能体有效利用检索到的经验轨迹,把微调与经验检索结合,提出将经验检索融入微调的流程以显著提升对未见任务的泛化。",
+    "methodCore": "大型语言模型推动了通用智能体的发展,但要稳健地泛化到未见任务仍是重大挑战。当前主流路线各有短板:微调常常无法外推到新任务,而免训练的经验检索(检索过往轨迹在上下文中使用)又常常逊于有监督基线。ExpRAG 主张把这两条路线结合起来,系统研究如何训练检索增强的智能体来有效利用被检索的经验轨迹,真正做到「学会从经验中学习」。\n\n## 方法总览\n这项工作的贡献分三步展开,层层递进地把微调与经验检索融合。第一步是建立一套稳健的有监督微调(SFT)配方,基于 LoRA 实现,并被证明超越多个 SOTA 的智能体训练流程,为后续研究打下坚实的训练基线。第二步是详细分析经验检索的关键设计选择;第三步则提出一条把经验检索直接整合进微调过程的流水线。\n\n## 记忆索引结构:经验轨迹\n在 ExpRAG 中,被检索的记忆是过往完成任务的轨迹(trajectories)。论文对这类经验记忆的组织与使用做了细致的设计分析,给出了存储(storage,如何保存轨迹)、查询(querying,如何构造检索查询)与轨迹选择(trajectory selection,如何从候选中挑出最有用的轨迹)三方面的最优策略,把「什么样的经验值得存、该怎么找回来」这一问题系统化。\n\n## 检索与召回机制:训练时学会消费轨迹\nExpRAG 的关键创新,是把经验检索直接整合进微调过程,而不是仅在推理时外挂检索。这样一来,模型在训练阶段就学会如何在上下文中消费被检索的轨迹——即学会「利用经验」这一行为本身,而非仅仅学会完成任务。相比免训练检索(模型未必善于利用检索到的轨迹)与单纯微调(缺乏可查的外部经验),这种训练与检索联合的方式让二者的优势得以叠加。\n\n## 研究背景与贡献\n实验表明,把经验检索整合进微调的组合方法,相较单纯微调或单纯经验检索,显著提升了对未见任务的泛化能力。ExpRAG 由此提供了一个可扩展、有效地构建「学会从经验中学习」智能体的框架,并给出了关于经验存储、查询构造与轨迹选择的可复用设计经验。\n\n## 微调与检索为何要结合\nExpRAG 的核心论点,是微调与经验检索这两条路线各自都不够,但恰好互补。单纯微调把能力固化进权重,面对训练分布之外的新任务往往难以外推;单纯的免训练经验检索虽然能引入过往轨迹,却由于模型从未被专门训练过「如何利用这些轨迹」,常常用不好检索到的经验,反而不及有监督基线。把二者结合的关键,是让模型在训练阶段就反复见到「带着被检索轨迹去完成任务」的样例,从而把「消费经验」这一行为本身学进能力里。如此训练出的智能体在面对未见任务时,既有微调打底的基础能力,又懂得如何借助检索到的相似经验举一反三,泛化因此得到实质提升。",
+    "evaluation": "实验结果表明,把经验检索整合进微调的组合方法,相较单纯微调或单纯经验检索,显著提升了对未见任务的泛化能力;该工作由此提供了一个可扩展、有效地构建「学会从经验中学习」智能体的框架,并给出关于经验存储、查询构造与轨迹选择的最优设计经验。",
+    "mainFinding": "证明把可检索的经验记忆与微调联合训练,能让智能体在训练时就学会在上下文中利用过往轨迹,从而显著改善对未见任务的泛化能力。",
+    "limitations": "依赖 LoRA 微调与轨迹存储成本;经验检索设计需精细调参,且方法对未见任务的分布覆盖范围仍然受限。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2603.18272"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2603.18272"
+      }
+    ],
+    "citation": "ExpRAG, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-exprag.png",
+        "caption": "ExpRAG:研究如何训练检索增强的 LLM 智能体利用检索到的经验轨迹,把经验检索融入微调流程,显著提升对未见任务的泛化。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-gam",
+    "page": "memory",
+    "title": "General Agentic Memory Via Deep Research",
+    "shortTitle": "GAM",
+    "category": "memory-retrieve",
+    "maturity": "exploring",
+    "score": 0.8,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "B. Y. Yan et al.",
+    "methodFamily": "即时编译智能体记忆",
+    "tags": [
+      "JIT记忆",
+      "深度研究",
+      "运行时检索"
+    ],
+    "scores": {
+      "clarity": 0.81,
+      "evidence": 0.8,
+      "reproducibility": 0.66,
+      "adoption": 0.58,
+      "selfEvolution": 0.83
+    },
+    "summary": "针对静态记忆预先构建导致的信息损失,提出遵循'即时编译'原则的通用智能体记忆 GAM,离线仅保留简单有用记忆,运行时为客户端动态构造最优上下文。",
+    "methodCore": "记忆对 AI 智能体至关重要,但被广泛采用的静态记忆——试图提前把可直接取用的记忆备好——不可避免地会严重丢失信息,因为离线阶段无法预知未来查询究竟需要什么。GAM(General Agentic Memory)提出遵循「即时编译(just-in-time, JIT compilation)」原则的通用智能体记忆框架,把创建优化上下文的工作从离线推迟到运行时。\n\n## 方法总览\nGAM 的核心理念,是离线阶段只保留简单但有用的记忆,而把「为客户端创建最优上下文」这件事推迟到运行时按需完成。这一 JIT 路线的动机在于,静态记忆一旦离线固化,就等于提前替所有未来查询做了取舍,必然丢失信息;而把整合工作留到运行时,则可以针对当前具体请求动态地深度检索与组织,最大程度保留可用信息。\n\n## 记忆索引结构:轻量记忆 + 页存储\nGAM 采用双组件设计。Memorizer 负责记忆构建:它用一个轻量记忆突出关键的历史信息,同时把完整历史原样保存在一个通用的 page-store(页存储)中。这样既有一份便于快速导航的精简记忆,又保留了一份不丢信息的完整底档,二者分工明确——轻量记忆用于「指路」,页存储用于「兜底」。\n\n## 检索与召回机制:运行时深度研究\nResearcher 组件负责运行时的检索:当在线请求到来时,它以预先构建好的轻量记忆为向导,从 page-store 中检索并整合有用信息,即时地为客户端构造出优化上下文。这一「深度研究」式的运行时检索,充分利用了前沿语言模型的智能体能力与测试时可扩展性(test-time scalability),并且整个流程可以通过强化学习进行端到端的性能优化,把记忆构建从离线固化转为运行时按需的深度检索与即时整合。\n\n## 研究背景与贡献\nGAM 证明,与其离线固化那种容易丢信息的静态记忆,不如离线只留轻量记忆、运行时按需深度检索并即时构造优化上下文,这更契合前沿语言模型的能力与测试时扩展。它在多种以记忆为基础的任务完成场景中相较现有记忆系统取得实质性改进。\n\n## JIT 记忆背后的取舍观\nGAM 的名字借用了编译领域「即时编译」的概念,而这一类比精准点出了它与静态记忆在取舍上的根本分歧。静态记忆好比「提前编译」:在离线阶段就把记忆压缩、结构化成可直接取用的形态,读取快、但因为无法预知未来查询,必然在压缩时丢掉大量「当时看似无用、日后却关键」的信息。GAM 则反其道而行,把繁重的整合工作推迟到真正收到请求的那一刻,针对当前具体需求即时地从完整页存储里深度检索、组织出最优上下文。这样做以更高的在线开销为代价,换来了信息几乎不丢失的完整底档,而随着前沿模型的智能体能力与测试时可扩展性不断增强,这种「把智能留到运行时使用」的路线正变得越来越划算。",
+    "evaluation": "论文在多种以记忆为基础的任务完成场景中开展实验研究,结果显示 GAM 相较现有各类记忆系统均取得实质性的显著改进,验证了「离线只留轻量记忆、运行时按需深度检索并即时构造优化上下文」这一 JIT 路线的有效性,以及借助前沿语言模型智能体能力与测试时扩展性带来的可扩展优势。",
+    "mainFinding": "证明与其离线固化易丢信息的静态记忆,不如离线只留轻量记忆、运行时按需深度检索整合上下文,更契合前沿语言模型的能力与测试时扩展。",
+    "limitations": "运行时的深度检索会带来更高的在线推理开销;page-store 的存储成本以及强化学习端到端优化的稳定性仍有待考察。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2511.18423"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2511.18423"
+      }
+    ],
+    "citation": "GAM, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-gam.png",
+        "caption": "GAM 总览:Memorizer 离线构造轻量记忆并保留完整页面存储,Researcher 在线按 JIT 原则检索整合,组成最优上下文。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-reflexion",
+    "page": "memory",
+    "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+    "shortTitle": "Reflexion",
+    "category": "memory-reflect",
+    "maturity": "mature",
+    "score": 0.95,
+    "year": 2023,
+    "venue": "NeurIPS 2023",
+    "authors": "Noah Shinn et al.",
+    "methodFamily": "语言化反思记忆",
+    "tags": [
+      "反思",
+      "情景记忆",
+      "免训练"
+    ],
+    "scores": {
+      "clarity": 0.95,
+      "evidence": 0.9,
+      "reproducibility": 0.9,
+      "adoption": 0.97,
+      "selfEvolution": 0.92
+    },
+    "summary": "将环境反馈转化为语言化自我反思并存入情景记忆缓冲区,指导后续试错中的决策改进。",
+    "methodCore": "Reflexion 的出发点在于:传统强化学习要让智能体从试错中进步,往往需要海量样本与昂贵的权重微调,而语言智能体若沿用这条路会既慢又贵。它转而主张不更新模型权重、只用语言化反馈(linguistic feedback)来强化智能体,把每一次失败的经验教训以自然语言写下来,当作下一次行动的额外上下文。\n\n## 方法总览\n整体架构由三个协同模块构成。行动者(Actor)基于当前提示生成推理链与动作,与环境交互产出一条完整轨迹;评估器(Evaluator)对这条轨迹的成败给出评分,可以是环境返回的标量奖励,也可以是自定义的启发式判据;自我反思(Self-Reflection)模块则读取轨迹与评分,诊断这次为什么失败,并把根因与改进方向凝练成一段可读的反思文本。这段文本被写入一个情景记忆缓冲区(episodic memory buffer),在下一轮尝试时作为附加提示注入,引导行动者绕开上次的坑。整个过程构成「行动—评估—反思—再行动」的闭环,而模型参数始终保持冻结。\n\n## 反思与自我改进机制\nReflexion 的关键洞察是把稀疏、难以利用的奖励信号,翻译成语言层面的信用分配(credit assignment)。标量奖励只告诉智能体「这次不好」,却不说明「哪里不好、下次怎么改」;而语言化反思能明确指出失败发生在哪一步、误判了什么前提、应当采取何种替代策略,因此对基座模型来说是更可操作、更可解释的反馈。该机制在设计上足够灵活,既能接纳标量数值又能接纳自由文本两种反馈形式,既能来自外部环境又能来自内部的自我模拟,这让 Reflexion 可以适配序贯决策、编程、语言推理等形态迥异的任务。\n\n## 经验的积累与演化\n情景记忆缓冲区是这套方法的记忆载体,也是其自演化性质的核心所在。随着同一任务被反复尝试,缓冲区中的反思条目不断滚动更新与累积,后续尝试可以同时参考多条历史教训,使决策质量跨轮次逐步爬升。与需要梯度更新的方法相比,这种「以文本为记忆」的方式让经验本身变得透明、可审计,人类也能直接读懂智能体究竟学到了什么。可以说,反思文本既是反馈也是记忆,记忆的滚动更新就是智能体自我演化的直接体现。\n\n## 关键设计与意义\nReflexion 之所以有效,在于它把「反思」从一次性的提示技巧,提炼为一个贯穿多轮试错的结构化组件,并明确区分了行动、评估与反思三种职责。这一职责拆分让每个模块都能被单独替换或增强,例如把评估器换成更强的判据、把反思模块换成更擅长归纳的模型。它为后续大量「语言化经验记忆」工作奠定了范式,证明了在不触碰参数的前提下,语言智能体依然拥有可观的自我提升空间。\n\n## 在自演化谱系中的定位\n放到更大的图景里看,Reflexion 是「语言化经验记忆」这一支的奠基工作之一。它明确地把智能体的自我改进拆解为可以独立迭代的行动、评估与反思三种职责,使后续研究可以分别在评估器的可靠性、反思的抽象层次、记忆的组织与检索等方向上继续深入。它也点出了这类免训练自演化方法共同的价值主张:相较于昂贵的权重更新,以自然语言承载经验既省算力,又让智能体学到了什么变得透明、可读、可审计,人类得以直接介入纠偏。这一范式后来被工作流记忆、洞见抽象、推理策略蒸馏等大量方法继承并发扬。",
+    "evaluation": "论文在序贯决策(AlfWorld)、编程(HumanEval)与语言推理(HotPotQA)三类任务上评测,相较基线智能体均取得显著提升;abstract 明确 Reflexion 在 HumanEval 上达到 91% pass@1,超过此前 SOTA GPT-4 的 80%。作者还就不同反馈信号、反馈整合方式与智能体类型做了消融与分析,验证语言反思相较固定提示基线对性能提升的关键作用。",
+    "mainFinding": "无需任何微调,语言智能体即可凭借语言化反馈自我强化,反思文本作为可读记忆是自演化的核心载体,并提供比标量奖励更可解释的跨轮次信用分配。",
+    "limitations": "方法依赖任务成败信号的可获得性,反思质量受基座模型自评能力的限制;情景记忆缓冲区随尝试增多而增长,却缺乏冲突消解与去冗余机制。",
+    "related": [
+      "memory-rf-generative-agents",
+      "memory-rf-retroformer"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2303.11366"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2303.11366"
+      }
+    ],
+    "citation": "Reflexion, NeurIPS 2023.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-reflexion.png",
+        "caption": "Reflexion:将环境反馈转化为语言化自我反思并存入情景记忆,指导决策、编程与推理任务的后续试错改进。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-self-refine",
+    "page": "memory",
+    "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+    "shortTitle": "Self-Refine",
+    "category": "memory-reflect",
+    "maturity": "mature",
+    "score": 0.9,
+    "year": 2023,
+    "venue": "NeurIPS 2023",
+    "authors": "Aman Madaan et al.",
+    "methodFamily": "自反馈迭代精炼",
+    "tags": [
+      "自反馈",
+      "迭代精炼",
+      "免训练"
+    ],
+    "scores": {
+      "clarity": 0.95,
+      "evidence": 0.88,
+      "reproducibility": 0.92,
+      "adoption": 0.93,
+      "selfEvolution": 0.8
+    },
+    "summary": "同一 LLM 先生成输出、再对自身输出给出反馈并据此迭代精炼,无需训练即可提升质量。",
+    "methodCore": "Self-Refine 受人类反复打磨文稿的过程启发:人第一次写出的内容往往不是最好的,而是通过一轮轮自我审阅与修改逐步逼近满意结果。它把这一思路搬到大语言模型上,主张同一个模型既能生成、又能评价、还能改写自己的输出,从而在测试时不做任何训练就提升质量。\n\n## 方法总览\n整个流程只用一个 LLM,通过少样本提示让它分饰三种角色:生成器先产出初始输出;反馈器随后针对这份输出给出具体意见;精炼器再依据意见改写,得到新版本。新版本会再次送入反馈—精炼环节,如此迭代,直到反馈判定已经足够好或达到预设的迭代上限。整套方法不需要任何监督训练数据、额外训练或强化学习,是一个即插即用、可独立运行的范式,不依赖外部工具或第二个模型。\n\n## 反思与自我改进机制\nSelf-Refine 成败的关键在于反馈的形态。它刻意要求反馈是针对性的、可操作的,即指出「哪一句不通顺、哪一步逻辑有漏、应当补充什么」,而不是笼统地给一个分数。这种细粒度的意见连同上一版输出一并回传,使精炼器有明确的改写依据,而非漫无目的地重写。可以把这看作一种测试时的工作记忆更新:模型把对自身产物的批判暂存下来,再据此在下一轮修正,反思与改写在同一轮任务内部循环推进。\n\n## 经验的演化范围\n与那些把经验跨任务持久化的方法不同,Self-Refine 的反思是任务内的、短程的,循环结束后并不会把学到的教训沉淀到外部记忆里带到下一个任务。它的价值在于揭示了一个更基础的事实:即便是当时最强的模型,推理阶段依然存在未被榨干的自我提升空间,而挖掘这一空间的成本极低,仅需切换提示中的角色即可。这也为「反思式改写」作为一种通用的推理时增强手段提供了简洁而有力的示范。\n\n## 关键设计与边界\n方法的普适性来自其对模型的唯一依赖——模型自身给出可靠反馈的能力。当基座足够强时,自反馈能稳定发现真实缺陷并驱动改进;而当模型较弱时,反馈可能失真甚至误导,迭代反而可能让结果退化。因此 Self-Refine 更像是对强模型潜能的释放,而非对弱模型能力的凭空创造,这一边界也提示了纯自评式反思在可靠性上的固有风险。\n\n## 在自演化谱系中的定位\nSelf-Refine 的意义超出方法本身,它为「推理时自我改进」提供了一个极简却有力的存在性证明:无需任何训练、无需外部工具,仅靠角色切换的提示,就能让强模型在测试时进一步提升。这一结论既鼓舞了后续大量把反思、批判、修正组织成循环的工作,也暴露了纯自评式反思的固有软肋——它把改进的可靠性完全押在模型自身的判断力上。正因如此,后续研究常在其基础上引入外部工具反馈、可训练的评估器或跨任务的经验记忆,以弥补纯自评的失真风险,使反思式改进从任务内的一次性打磨,走向跨任务、可积累的自演化。",
+    "evaluation": "论文在从对话生成到数学推理等 7 类多样任务上,用 GPT-3.5、ChatGPT 与 GPT-4 三种当时最先进的模型评测。abstract 指出,所有任务上经 Self-Refine 的输出在人类偏好与自动指标上均优于同一模型的一步生成,任务表现平均绝对提升约 20%,凸显反馈质量与迭代改写的正向作用。",
+    "mainFinding": "即便是 GPT-4 这样的强模型,测试时通过简单的自反馈迭代仍可进一步提升;反思式精炼是一种即插即用、无需训练的工作记忆更新方式。",
+    "limitations": "它属于单轮任务内的短期精炼,反思不跨任务持久化;效果高度依赖模型自身反馈的可靠性,弱模型下收益有限甚至可能反向恶化。",
+    "related": [
+      "memory-rf-reflexion"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2303.17651"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2303.17651"
+      }
+    ],
+    "citation": "Self-Refine, NeurIPS 2023."
+  },
+  {
+    "id": "memory-rf-expel",
+    "page": "memory",
+    "title": "ExpeL: LLM Agents Are Experiential Learners",
+    "shortTitle": "ExpeL",
+    "category": "memory-reflect",
+    "maturity": "mature",
+    "score": 0.9,
+    "year": 2023,
+    "venue": "AAAI 2024",
+    "authors": "Andrew Zhao et al.",
+    "methodFamily": "跨任务经验抽象",
+    "tags": [
+      "经验学习",
+      "洞见抽取",
+      "跨任务迁移"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.88,
+      "reproducibility": 0.9,
+      "adoption": 0.85,
+      "selfEvolution": 0.95
+    },
+    "summary": "智能体自主采集训练任务经验并用自然语言抽取可复用洞见,推理时召回洞见与过往经验以提升决策。",
+    "methodCore": "ExpeL 面对的现实约束是:像 GPT-4、Claude 这类顶尖模型多数只能通过 API 调用,参数不对外开放;而针对具体决策任务做微调既昂贵,又可能损害模型原有的泛化能力。它由此提出一个问题——能否在完全不更新参数的前提下,让智能体像人一样从经验中学习?\n\n## 方法总览\nExpeL(Experiential Learning)把学习拆成训练与推理两个阶段。训练阶段,智能体在一批训练任务上自主与环境交互,收集包含成功与失败的轨迹,构建起一个经验池;随后它用自然语言从这些轨迹中提炼知识,做两类抽象:一是跨任务地比较成功与失败的案例,归纳出通用的、可迁移的自然语言洞见(insights);二是挑选并保留具有代表性的过往经验实例作为示范。推理阶段面对新任务时,智能体同时检索最相关的洞见与最相似的经验实例,一并注入提示,以此做出更明智的决策。\n\n## 反思与经验抽象机制\nExpeL 的核心贡献在于把「反思」从单条轨迹的自我批判,提升为跨任务的知识归纳。通过对比为什么某些任务成功、某些失败,它能抽取出超越单个任务细节的一般性规律,例如某类操作的先后顺序、某种情形下应避免的动作。这种自然语言形式的洞见既可读又可迁移,构成一个随经验增多而持续扩充的知识库。方法把示范学习、自我反思与经验迁移统一进同一个免训练框架,能力增长完全来自记忆内容的丰富,而非参数的改变。\n\n## 经验的积累与演化\n随着智能体在更多任务上积累经验,经验池与洞见库不断扩展,推理时可供检索的素材越来越丰富,决策质量也随之稳步提升。这种「越用越强」的性质使 ExpeL 成为纯自然语言记忆驱动的自演化范式的代表:它既规避了微调的资源开销,也保全了基座模型的通用能力,同时让学到的知识以人类可读的形式呈现,便于理解与调试。\n\n## 关键设计与边界\nExpeL 的效果高度取决于两点:训练任务的分布是否覆盖目标场景,以及洞见抽取提示的设计是否能引导出高质量归纳。此外,当经验池规模增大后,检索的准确性、去冗余的成本以及无关经验带来的噪声干扰都会成为需要权衡的问题,这也是这类免训练经验记忆在长期部署中共同面临的挑战。\n\n## 在自演化谱系中的定位\nExpeL 在自演化谱系中代表了「纯自然语言经验记忆」的成熟形态:它不碰参数,只靠自然语言的洞见与经验实例来承载学习成果,能力增长完全来自记忆内容的丰富。这一取向对只能 API 调用的黑盒模型尤为契合,也让智能体学到的东西保持人类可读,便于理解与调试。它把示范学习、自我反思与经验迁移统一进同一框架,为后续的工作流归纳、推理策略蒸馏、概念级抽象等更精细的经验记忆形态提供了直接的思想来源,也让「越用越强、且不损害泛化」成为这一支方法共同追求的目标。",
+    "evaluation": "abstract 报告 ExpeL 学习成效稳健,任务性能随经验的持续积累而稳定提升;作者进一步通过定性观察与额外实验探索了其涌现能力与迁移学习潜力,展示从源训练任务抽取的自然语言洞见可前向迁移到目标任务,全程不做任何梯度更新即获得增益。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "LLM 智能体能像人一样从经验中学习并抽象出可迁移知识,无需微调即可稳定增益;跨任务洞见抽象是免训练自演化记忆的关键范式。",
+    "limitations": "洞见质量依赖训练任务分布与抽取提示;经验池增大后检索与去冗余成本上升,并可能引入无关噪声干扰决策,长期部署下的稳健性仍待更充分验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2308.10144"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2308.10144"
+      }
+    ],
+    "citation": "ExpeL, AAAI 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-expel.png",
+        "caption": "ExpeL:智能体自主采集训练任务经验并用自然语言抽取可复用洞见,推理时召回洞见与过往经验以改进决策。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-generative-agents",
+    "page": "memory",
+    "title": "Generative Agents: Interactive Simulacra of Human Behavior",
+    "shortTitle": "Generative Agents",
+    "category": "memory-reflect",
+    "maturity": "mature",
+    "score": 0.93,
+    "year": 2023,
+    "venue": "UIST 2023",
+    "authors": "Joon Sung Park et al.",
+    "methodFamily": "记忆流与反思合成",
+    "tags": [
+      "记忆流",
+      "反思",
+      "行为模拟"
+    ],
+    "scores": {
+      "clarity": 0.92,
+      "evidence": 0.88,
+      "reproducibility": 0.85,
+      "adoption": 0.95,
+      "selfEvolution": 0.88
+    },
+    "summary": "用记忆流完整记录经验,并周期性把观察合成为更高层反思,动态检索以规划可信的人类行为。",
+    "methodCore": "Generative Agents 想解决的问题是:如何让计算智能体表现出可信的、连贯的人类行为——它们会起床、做早餐、去上班,会形成观点、注意到彼此、发起对话,也会回忆过去并据此规划明天。要做到这一点,单纯的对话式 LLM 远远不够,必须为其配备一套完整的记忆与认知架构。\n\n## 方法总览\n该工作在大语言模型之上扩展出三大组件:记忆流、检索,以及在其上的反思与规划。记忆流(memory stream)以自然语言、按时间顺序完整记录智能体感知到的全部经验,是最底层的经验载体;当智能体需要行动时,检索模型从这条长长的记忆流中挑出与当前情境最相关的片段送入提示。规划模块据此把长期意图分解为一天的日程与具体动作,并随环境反应动态重规划,形成「观察—规划—反思」的闭环。\n\n## 检索与记忆加权\n由于记忆流会随时间无限增长,如何从海量条目中召回真正有用的记忆成为关键。检索模型对每条记忆按三个维度打分并加权:新近度(recency)偏好最近发生的事,重要性(importance)突出对智能体意义重大的事件,相关性(relevance)衡量与当前情境的语义贴合程度。三者综合排序后,最相关的少量条目被注入提示,既保证上下文聚焦,又控制了提示长度,使智能体在庞大记忆中仍能做出情境恰当的反应。\n\n## 反思与经验合成\n反思(reflection)是这套架构的点睛之笔。当近期累积的重要观察超过某个阈值时,反思模块被周期性触发:它先让智能体自问「基于最近的经历,最值得思考的高层问题是什么」,再从记忆流中检索相关条目,归纳出更抽象的结论作为反思,并把这些反思回写进记忆流。于是记忆流中不仅有底层观察,还有层层抽象出的洞见,后续检索既能召回具体事实,也能召回高层判断,使智能体的行为更连贯、更有「性格」。这正是把经验抽象后回写记忆的经典设计。\n\n## 涌现行为与意义\n观察、规划、反思三者共同支撑出个体与群体层面的可信行为。作者在受《模拟人生》启发的沙盒小镇中实例化了 25 个智能体,验证了这套架构不仅能产生合理的个体日常,还能催生自发的社交协调。它为「记忆流加周期性反思」这一分层记忆范式确立了样板,成为后续大量智能体记忆工作的直接源头。\n\n## 在自演化谱系中的定位\nGenerative Agents 之于智能体记忆研究的地位,类似一个可反复借鉴的母题:它首次把「完整记录经验的记忆流 + 按新近度/重要性/相关性加权的检索 + 周期性把观察抽象为反思并回写」这套组合完整地呈现出来,并用消融证明每一环都不可或缺。此后大量关于长期记忆、反思合成、用户画像与经验抽象的工作,都能在其架构中找到雏形。它也提出了这一范式必须面对的两个长期难题——记忆流的无界增长带来的检索开销,以及反思结论的正确性与幻觉风险如何审计——这些问题至今仍是记忆系统设计的核心议题。",
+    "evaluation": "论文在含 25 个智能体的交互式沙盒小镇中实例化。abstract 描述:仅给定一个智能体想办情人节派对的初始意图,智能体们在两天内自发传播邀请、结识新友、相约赴会并协同准时到场,展现可信的个体与涌现社交行为。消融证明观察、规划、反思三组件对行为可信度均起关键作用,缺一即显著下降。",
+    "mainFinding": "记忆流加周期性反思的分层结构能产生可信的个体与群体涌现行为;反思即把观察抽象后回写记忆流,是自演化记忆架构的经典范式与后续大量工作的源头。",
+    "limitations": "记忆流随时间无界增长带来检索开销;反思的正确性与幻觉风险未被系统量化,难以直接审计其合成结论,长期部署下的稳健性仍待验证。",
+    "related": [
+      "memory-rf-reflexion",
+      "memory-rf-retroformer"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2304.03442"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2304.03442"
+      }
+    ],
+    "citation": "Generative Agents, UIST 2023."
+  },
+  {
+    "id": "memory-rf-awm",
+    "page": "memory",
+    "title": "Agent Workflow Memory",
+    "shortTitle": "AWM",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.88,
+    "year": 2024,
+    "venue": "ICML 2025",
+    "authors": "Zora Zhiruo Wang et al.",
+    "methodFamily": "工作流归纳记忆",
+    "tags": [
+      "工作流",
+      "网页智能体",
+      "经验复用"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.88,
+      "reproducibility": 0.88,
+      "adoption": 0.82,
+      "selfEvolution": 0.9
+    },
+    "summary": "从过往轨迹归纳出可复用的工作流并选择性注入记忆,指导后续网页任务的生成。",
+    "methodCore": "AWM 关注的痛点是:当前语言模型智能体在处理网页导航这类长程、动作序列复杂的任务时仍力不从心,常常在冗长的操作链中出错或走弯路。而人类面对同类任务时,会把过往反复用到的经验固化成可复用的例程,再灵活拼装应对新情形。AWM 正是要把这种能力赋予智能体。\n\n## 方法总览\nAgent Workflow Memory(AWM)的核心是从智能体的历史轨迹中归纳出常用工作流(workflow)——即带有自然语言描述与可复用步骤序列的子程序,并在处理后续任务时,选择性地把相关工作流提供给智能体以指导其生成。它灵活适用于两种场景:离线模式事先从带标注的训练样例中一次性归纳出工作流库;在线模式则在没有标注的情况下,直接从测试查询自身的轨迹里即时归纳并不断累积。推理时,系统按当前任务检索相关工作流注入提示,引导后续动作生成。\n\n## 经验的抽象粒度\nAWM 的一个关键设计判断,是把经验组织在一个恰到好处的中间粒度上。原始轨迹过于具体、难以直接复用,而高度抽象的自然语言洞见又可能太笼统、缺乏可执行性;工作流则介于两者之间——它把一连串碎片化的低层动作组织成一个有名字、有说明、有明确步骤的高层单元。这种结构化的例程既保留了可执行的操作细节,又具备跨任务复用的通用性,专门缓解长程复杂动作序列任务上的困难。\n\n## 经验的积累与演化\n在线模式让 AWM 具备持续演化的特性:智能体每完成一个任务,就有机会从中提炼新的工作流补充进记忆库,后续任务便能站在更丰富的例程之上求解。这种「边做边攒例程」的机制使智能体像人一样把过往经验固化为可随时调用的技能,能力随使用而复利式增长,并显著减少完成任务所需的操作步数。\n\n## 泛化与边界\nAWM 的另一价值在于其跨分布的稳健泛化能力:即便训练与测试任务在网站、领域上差异拉大,归纳出的工作流仍能带来稳定增益。不过,工作流的可复用性依赖轨迹质量,当网页结构动态变化时其适用性会下降;在线模式下,若错误的工作流被归纳并累积,也可能被反复复用而传播错误,这是这类经验归纳方法需要警惕的风险。\n\n## 在自演化谱系中的定位\nAWM 的贡献在于确立了「工作流」这一介于原始轨迹与抽象洞见之间的经验形态,并证明它在长程网页任务上格外有价值:既保留可执行的操作细节,又具备跨任务复用的通用性。它同时打通了离线与在线两种学习模式,使智能体既能从标注样例批量归纳例程,也能在无标注时边做边攒。这为后续把经验组织成结构化、可组合单元的工作提供了范本,也提示了在线归纳的风险——错误例程一旦被累积就可能被反复复用而传播错误,这一隐忧后来促成了对经验质量把关与守门机制的研究。",
+    "evaluation": "论文在 Mind2Web 与 WebArena 两大网页导航基准(合计 1000+ 任务、200+ 域,覆盖旅行、购物、社交等)上评测。abstract 报告相对成功率分别提升 24.6% 与 51.1%,同时减少成功解决 WebArena 任务所需步数;在线 AWM 在跨任务、跨网站、跨域评测中稳健泛化,随训练-测试分布差距拉大仍超基线 8.9 至 14.0 个绝对点。",
+    "mainFinding": "把经验抽象为结构化工作流并回写记忆,可大幅提升长程网页任务表现且降低步数;工作流是介于原始轨迹与洞见之间的高价值经验形态。",
+    "limitations": "工作流归纳依赖轨迹质量,网页结构动态变化时可复用性下降;在线模式下错误工作流可能被累积并传播,长期部署下的稳健性仍待更充分验证。",
+    "related": [
+      "memory-rf-skillweaver"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2409.07429"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2409.07429"
+      }
+    ],
+    "citation": "AWM, ICML 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-awm.png",
+        "caption": "AWM:从过往轨迹归纳可复用工作流并选择性注入记忆,持续诱导与应用工作流,相较停滞基线不断提升网页任务表现。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-reasoningbank",
+    "page": "memory",
+    "title": "ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory",
+    "shortTitle": "ReasoningBank",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.9,
+    "year": 2025,
+    "venue": "ICLR 2026",
+    "authors": "Siru Ouyang et al.",
+    "methodFamily": "推理策略记忆",
+    "tags": [
+      "推理记忆",
+      "自演化",
+      "测试时扩展"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.9,
+      "reproducibility": 0.8,
+      "adoption": 0.72,
+      "selfEvolution": 0.97
+    },
+    "summary": "从自判成败的经验中蒸馏可泛化推理策略存入记忆,并配合记忆感知的测试时扩展放大自演化。",
+    "methodCore": "ReasoningBank 针对的是持续部署场景下智能体的一个根本缺陷:当智能体在真实世界中承担长期角色、不断接收任务流时,它们往往不会从累积的交互历史中学习,于是白白丢弃有价值的洞见,反复在同样的地方犯错。ReasoningBank 要把这些经验沉淀下来,让智能体随时间越来越强。\n\n## 方法总览\nReasoningBank 是一个记忆框架,其核心是从智能体自我判定的成功与失败经验中双向蒸馏出可泛化的推理策略,并把这些策略组织为结构化的记忆条目。工作流程构成一个闭环:测试时,智能体先从 ReasoningBank 检索与当前任务相关的记忆来指导交互;交互结束后,再把这一轮新学到的策略整合回记忆库。如此循环,记忆库随任务流不断扩充,智能体的能力也随之复利式增长。\n\n## 双向经验蒸馏\n与只保存原始轨迹或只保存成功例程的既有记忆机制不同,ReasoningBank 强调从成功与失败两侧同时提炼。成功经验告诉智能体哪些策略行之有效,失败经验则揭示哪些陷阱应当规避,二者结合形成的对比信号比单向学习更丰富。蒸馏出的是「推理策略」而非具体动作,因此更具跨任务的可泛化性,能在形态相近但细节不同的新任务上迁移复用。\n\n## 记忆感知的测试时扩展\n在这一经验学习器之上,ReasoningBank 进一步提出记忆感知的测试时扩展(MaTTS)。其思路是为每个任务分配更多算力,通过并行采样或串行迭代生成大量多样化的经验,这些经验之间的差异恰好为合成更高质量的记忆提供了丰富的对比信号;而更好的记忆反过来又能指导更有效的扩展。于是记忆与测试时算力形成正反馈:算力越多、经验越丰富、记忆越优质、扩展越高效。作者据此把「记忆驱动的经验扩展」确立为一个新的扩展维度,并观察到自演化过程中自然涌现出新的行为。\n\n## 关键设计与边界\nReasoningBank 的自演化依赖智能体对自身成败的判定,而这一自判可能引入噪声标签,把偶然的成功误当作有效策略,或把可修复的失败草率归因;此外,记忆库持续增长带来的长期一致性维护与条目冲突消解,也是该方向仍需系统验证的开放问题。\n\n## 在自演化谱系中的定位\nReasoningBank 的独到之处,是把「记忆」与「测试时算力」这两个原本各自发展的维度耦合起来,提出记忆驱动的经验扩展作为一个新的扩展维度。它超越了只存原始轨迹或只存成功例程的做法,主张从成败两侧双向蒸馏可泛化的推理策略,并让更多算力产生的多样经验反哺出更高质量的记忆,记忆再指导更有效的扩展,形成正反馈。这一视角把智能体自演化从「攒更多经验」推进到「用算力换更优记忆、用更优记忆换更高效算力」的协同增长,为持续部署场景下的智能体如何越用越强,提供了一个可扩展的框架性答案。",
+    "evaluation": "论文在网页浏览与软件工程基准上评测,相较仅存原始轨迹或仅存成功例程的既有记忆机制,ReasoningBank 在有效性与效率上均持续更优;有效性最高提升约 34.2%、交互步数减少约 16.0%,MaTTS 在并行与串行两种扩展下进一步放大增益。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "从成败经验双向蒸馏推理策略比只学成功更有效;记忆质量与测试时算力形成正反馈,确立记忆驱动的经验扩展为一个新的自演化扩展维度。",
+    "limitations": "自判成败可能引入噪声标签;记忆持续增长的长期一致性与冲突消解仍待系统验证,普适性有待更充分检验。",
+    "related": [
+      "memory-rf-self"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2509.25140"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2509.25140"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/google-research/reasoning-bank"
+      }
+    ],
+    "citation": "ReasoningBank, ICLR 2026."
+  },
+  {
+    "id": "memory-rf-retroformer",
+    "page": "memory",
+    "title": "Retroformer: Retrospective Large Language Agents with Policy Gradient Optimization",
+    "shortTitle": "Retroformer",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.84,
+    "year": 2023,
+    "venue": "ICLR 2024",
+    "authors": "Weiran Yao et al.",
+    "methodFamily": "回顾模型策略梯度",
+    "tags": [
+      "反思",
+      "策略梯度",
+      "可训练回顾模型"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.85,
+      "reproducibility": 0.78,
+      "adoption": 0.72,
+      "selfEvolution": 0.9
+    },
+    "summary": "训练一个可优化的回顾模型,通过策略梯度从环境奖励自动微调智能体反思提示。",
+    "methodCore": "Retroformer 关注的是:多数语言智能体虽已能自主完成多步任务,却没有真正用环境奖励来优化自己。少数方法虽引入了语言化反馈做迭代改进,但这种反思与规划的方式和基于梯度的强化学习并不兼容,因此难以系统性、可持续地把奖励信号转化为能力提升。\n\n## 方法总览\nRetroformer 提出一个用策略梯度强化语言智能体的原则性框架,其核心是学习一个可优化的回顾模型(retrospective model)。它把智能体拆成两部分:一个冻结的大型行动者 LLM 负责生成推理与动作,一个较小的、可在本地训练的回顾模型负责在每轮失败后总结失败根因、提出改进的行动计划,并据此自动改写行动者下一轮的提示。行动者本身不被微调,真正被优化的是那个专司反思的小模型。\n\n## 反思机制的可学习化\n这项工作最关键的转变,是把「自我反思」从一种固定的启发式提示,升级为一个可被梯度学习的组件。此前的语言反馈方法中,反思的生成方式是写死的、不随经验改进的;而 Retroformer 让回顾模型的输出直接以能否提升行动者成功率为导向不断被优化。它把跨多个环境与任务累积的环境奖励作为训练信号,通过策略梯度微调回顾模型,使其产出的反思文本越来越切中要害、越来越能引导行动者走向成功。\n\n## 经验的积累与优化闭环\n在这套架构里,经验以两种方式发挥作用:短期上,失败轨迹经回顾模型总结后直接改写提示,指导即刻的重试;长期上,这些经验汇聚成奖励信号,通过策略梯度沉淀进回顾模型的参数,使反思能力本身随时间持续增强。因此智能体的进步不仅体现在单次任务的重试成功,更体现在其「如何反思」这一元能力的迭代提升,是一种更深层的自我改进。\n\n## 意义与边界\nRetroformer 是最早用策略梯度来优化语言智能体的工作之一,它证明了把智能体架构中的某个模块(此处是反思模块)作为可训练对象,能带来系统性的性能增益,并且这一思路可推广到优化架构中的其他模型。其代价是需要额外训练一个回顾模型,引入训练成本与稳定性问题;而当环境奖励稀疏时,策略梯度优化会变得困难且容易不稳定,这也是该方向共同面临的挑战。\n\n## 在自演化谱系中的定位\nRetroformer 在自演化谱系中标志着一个重要转折:它把「反思」从写死的启发式提示,变成一个用策略梯度可优化的组件。此前的语言反馈方法中,反思如何生成是固定的、不随经验改进;Retroformer 则让反思的产出方式本身随环境奖励持续被优化,从而使自我改进具备了系统性与可持续性。作为最早用策略梯度优化语言智能体的工作之一,它开辟了「把智能体架构中的某个模块作为可训练对象」的思路,后续把记忆管理、经验内化等环节交给强化学习优化的工作,都可视为这一思想的延续与拓展。",
+    "evaluation": "abstract 表示在多种任务上的实验显示语言智能体随时间持续改进,且该方法显著优于未恰当利用环境梯度的基线,证明用策略梯度优化语言智能体前景可观,并指出该思路可推广到优化智能体架构中的其他模型以持续增强整体表现。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "把反思提示的生成本身变成可学习对象,用策略梯度优化回顾模型,能系统性提升智能体的自我改进能力,使反思机制从启发式走向可训练。",
+    "limitations": "需训练额外的回顾模型,引入训练成本与稳定性问题;奖励信号稀疏时策略梯度优化困难且易不稳,普适性仍待更充分验证。",
+    "related": [
+      "memory-rf-generative-agents",
+      "memory-rf-reflexion"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2308.02151"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2308.02151"
+      }
+    ],
+    "citation": "Retroformer, ICLR 2024."
+  },
+  {
+    "id": "memory-rf-self-rewarding-lm",
+    "page": "memory",
+    "title": "Self-Rewarding Language Models",
+    "shortTitle": "Self-Rewarding LM",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.87,
+    "year": 2024,
+    "venue": "ICML 2024",
+    "authors": "Weizhe Yuan et al.",
+    "methodFamily": "自奖励迭代训练",
+    "tags": [
+      "自奖励",
+      "LLM-as-Judge",
+      "迭代DPO"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.86,
+      "reproducibility": 0.75,
+      "adoption": 0.8,
+      "selfEvolution": 0.92
+    },
+    "summary": "模型用 LLM-as-Judge 为自身生成奖励并迭代 DPO 训练,同时提升指令跟随与自评能力。",
+    "methodCore": "Self-Rewarding Language Models 从一个前瞻性判断出发:要迈向超人级智能体,未来模型需要超人级的反馈作为训练信号。但当前主流做法是从人类偏好训练奖励模型,这会被人类的能力水平所瓶颈;而且这种独立、冻结的奖励模型在 LLM 训练过程中无法一同改进,越训越可能拖后腿。\n\n## 方法总览\n论文的解法是让语言模型自己给自己提供奖励。具体做法是采用 LLM-as-a-Judge 提示,让同一个模型同时承担两种角色:既是需要被优化的指令跟随器,又是为回复打分的评判者。训练循环大致是:模型先自生成一批新的指令提示,并为每条提示生成多个候选回复;再以评判者身份为这些候选打分,由此构造出「更优—更劣」的偏好对;随后用这些自造的偏好数据,通过迭代式 DPO 更新模型,进入下一轮。\n\n## 生成与评判的协同上升\n这项工作最引人注目的发现是两种能力的协同增长。在迭代 DPO 训练中,不仅模型的指令跟随能力在提升,它作为评判者为自己提供高质量奖励的能力也同步增强。这意味着模型越训越会答,也越训越会评;而更准的自评又能造出更高质量的偏好数据,进一步驱动答的能力提升,形成一个正向的自我改进闭环。这正是打破人类偏好数据瓶颈的关键——奖励信号的天花板不再由人类标注水平决定,而是随模型自身一起抬升。\n\n## 参数层面的自演化\n与那些把经验存进外部记忆的方法不同,Self-Rewarding 把自我评判的能力内化进模型参数本身。每一轮迭代都在改变权重,使得「如何评价好坏」这一偏好被逐步写入模型内部。因此它代表了一条参数层面持续自演化的路径:模型不是在外部积累文本经验,而是在内部不断重塑自己的偏好与判断标准。\n\n## 边界与风险\n论文只迭代了三轮,长期是否能持续提升尚属未知。更值得警惕的是,自奖励可能放大模型自身固有的偏差:如果评判者本身带有某种系统性偏好,迭代训练会不断强化这一偏好,形成自我强化的偏好漂移,最终可能偏离真实的质量目标。这是自评式自演化范式需要长期监控的固有风险。\n\n## 在自演化谱系中的定位\nSelf-Rewarding LM 在自演化谱系中代表了「参数层面持续进化」的一条激进路径:它把奖励模型内化进 LLM 自身,让同一个模型既是被优化者又是评判者,从而摆脱人类偏好标注水平的天花板。其揭示的「生成与评判协同上升」现象尤为关键,因为它意味着自评能力可以随主能力一起成长,而非停滞成瓶颈。这为迈向超人级反馈信号提供了一种可能路径,同时也把自评式自演化的核心风险——偏好漂移、自我强化的偏差放大——摆到台面上,提醒后续工作在追求自主进化时,必须警惕缺乏外部锚定所带来的失真。",
+    "evaluation": "abstract 报告在 Llama 2 70B 上迭代三轮微调,所得模型在 AlpacaEval 2.0 排行榜上超越许多现有系统,包括 Claude 2、Gemini Pro 与 GPT-4 0613;同时展示模型作为评判者提供高质量奖励的能力也随迭代增强,验证两轴能力协同增长。",
+    "mainFinding": "把奖励模型内化进 LLM 自身可打破人类偏好数据瓶颈,指令跟随与自我评判两种能力协同增长,是参数层面持续自演化的代表路径。",
+    "limitations": "仅迭代三轮,长期能否持续提升未知;自奖励可能放大模型自身偏差,形成自我强化的偏好漂移,普适性仍待更充分验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2401.10020"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2401.10020"
+      }
+    ],
+    "citation": "Self-Rewarding LM, ICML 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-self-rewarding-lm.png",
+        "caption": "Self-Rewarding LM:模型自生成指令并用 LLM-as-Judge 为自身回答打分构造奖励,迭代 DPO 训练同步提升指令跟随与自评。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-rome",
+    "page": "memory",
+    "title": "Locating and Editing Factual Associations in GPT",
+    "shortTitle": "ROME",
+    "category": "memory-reflect",
+    "maturity": "mature",
+    "score": 0.92,
+    "year": 2022,
+    "venue": "NeurIPS 2022",
+    "authors": "Kevin Meng et al.",
+    "methodFamily": "参数化知识编辑",
+    "tags": [
+      "知识编辑",
+      "因果追踪",
+      "秩一编辑"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.92,
+      "reproducibility": 0.92,
+      "adoption": 0.9,
+      "selfEvolution": 0.72
+    },
+    "summary": "用因果追踪定位事实存储于中层 MLP,并以秩一模型编辑直接改写权重更新单条事实。",
+    "methodCore": "ROME 的研究动机是理解并直接操控一个基本问题:自回归 Transformer 究竟把「某某事实」存在哪里、又如何回忆它?如果这些事实关联对应于可定位、可编辑的局部计算,那么就有可能在不重训模型的前提下,精确地修改单条事实。\n\n## 方法总览\n论文分两步展开。第一步是分析:作者设计了一种因果干预方法——因果追踪(causal tracing),先破坏中间隐状态、再逐步恢复,观察哪些神经元激活对模型给出正确事实预测起决定性作用。这揭示出在处理主语 token 时,中层的前馈(MLP)模块承担着关键的中介存储角色,是事实回忆的枢纽。第二步是验证与编辑:为检验这些计算确实对应事实回忆,作者把该 MLP 层视为一个线性关联记忆,提出秩一模型编辑(Rank-One Model Editing, ROME)。\n\n## 因果追踪与事实定位\n因果追踪的价值在于把「知识存在哪」这个抽象问题变得可操作。通过系统地破坏与恢复不同位置、不同层的隐状态,并测量对正确输出概率的影响,作者定位出一组集中在中层前馈模块、且在主语 token 处最为关键的计算步骤。这一发现把模糊的「知识分布在整个网络」的直觉,收敛为「事实关联主要由中层 MLP 中介」的具体结论,为精准编辑提供了靶点。\n\n## 秩一编辑机制\nROME 把目标 MLP 层理解为存储「键→值」映射的关联记忆:主语相关的表示是键,属性是值。要更新一条事实,就是要把某个键映射到新的值,同时尽量不扰动其他键值对。作者在保持其余映射不变的约束下,求解一个秩一的权重更新,直接把「主语键→新属性值」的关联写入前馈权重。如此便在不重训、不外挂检索的前提下,改写了模型对单条事实的内部记忆,是一种直接操控计算机制的自修改记忆形式。\n\n## 评估设计与边界\n为敏感地衡量编辑质量,作者除了标准的 zsRE 任务外,还构造了 CounterFact 反事实断言数据集,专门检验编辑能否同时兼顾特异性(不误伤无关事实)与泛化性(换一种措辞问仍成立)。ROME 一次只能编辑单条关联,不适合批量更新;而且编辑可能破坏相关知识的一致性,副作用难以完全约束,这为后续的批量编辑与副作用控制工作留下了空间。\n\n## 在自演化谱系中的定位\nROME 在自演化与记忆研究中开辟了「参数化知识编辑」这一分支:它证明事实知识并非弥散在整个网络,而是对应可定位、可直接编辑的局部计算,中层前馈模块承担关键存储角色。这一发现让「把记忆当作可外科手术式修改的对象」成为可能,直接催生了批量编辑、知识遗忘、自更新记忆池等一系列后续工作。它同时用 CounterFact 数据集树立了评估编辑质量的更高标准——必须同时兼顾特异性与泛化性,这一评估取向也被后来的编辑方法广泛沿用,成为衡量参数化自修改记忆是否可靠的重要尺度。",
+    "evaluation": "abstract 指出 ROME 在标准零样本关系抽取(zsRE)编辑任务上有效,与既有方法相当;为做更敏感的评估,作者进一步构造 CounterFact 反事实断言数据集,ROME 在其上同时保持特异性与泛化性,而其它编辑方法往往只能兼顾其一。",
+    "mainFinding": "事实知识对应可定位、可直接编辑的局部计算,中层前馈模块承担关键存储角色;参数化编辑是一种直接操控计算机制的自修改记忆形式。",
+    "limitations": "一次仅编辑单条关联,批量更新不适用;编辑可能破坏相关知识的一致性,副作用难以完全约束,长期稳健性仍待验证。",
+    "related": [
+      "memory-rf-memit"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2202.05262"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2202.05262"
+      },
+      {
+        "label": "项目主页",
+        "href": "https://rome.baulab.info/"
+      }
+    ],
+    "citation": "ROME, NeurIPS 2022."
+  },
+  {
+    "id": "memory-rf-memit",
+    "page": "memory",
+    "title": "Mass-Editing Memory in a Transformer",
+    "shortTitle": "MEMIT",
+    "category": "memory-reflect",
+    "maturity": "mature",
+    "score": 0.9,
+    "year": 2022,
+    "venue": "ICLR 2023",
+    "authors": "Kevin Meng et al.",
+    "methodFamily": "参数化批量知识编辑",
+    "tags": [
+      "知识编辑",
+      "批量编辑",
+      "记忆更新"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.9,
+      "reproducibility": 0.9,
+      "adoption": 0.88,
+      "selfEvolution": 0.75
+    },
+    "summary": "在多个关键 MLP 层直接更新权重,一次性向 Transformer 写入上千条事实关联。",
+    "methodCore": "MEMIT 是 ROME 的规模化后继工作。此前的模型编辑研究几乎都局限于一次更新单条关联,ROME 也只在单个中层做秩一编辑,难以承载现实中动辄成百上千条的新知识。MEMIT 直面「如何直接向语言模型写入大量记忆」这一工程需求,让参数化编辑从「改一条」跨越到「改一批」。\n\n## 方法总览\nMEMIT 的核心思路是把因果追踪识别出的一系列关键前馈(MLP)层作为共同的存储介质,而不是像 ROME 那样只依赖单一层。它把大批待写入的(主语键,属性值)关联分摊到这些层上,通过求解闭式的权重更新,在满足所有新关联的同时约束对既有映射的扰动,从而把成千上万条事实一次性写入模型参数,而非逐条编辑。这使得大规模替换过时信息或批量增补专门知识成为可能。\n\n## 从单条到批量的跨越\n把编辑规模从少数关联扩展到工程可用的量级,并不是简单地把 ROME 重复运行多次。逐条编辑会让每次更新彼此干扰、误差累积,规模一大就难以维持质量。MEMIT 的关键在于用一个统一的、跨多层的闭式解同时容纳所有待写入关联,并显式地把「不破坏既有映射」写进约束,从而在批量写入时把副作用控制在可接受范围。这让参数化记忆的批量更新第一次达到可实用的规模。\n\n## 参数化记忆的可维护性\n从记忆演化的视角看,MEMIT 提供了一种直接、可控地维护模型内部知识的手段:当世界信息发生变化时,可以成批地把过时事实替换为新事实,而无需重新训练整个模型。这把「自修改参数记忆」从概念验证推向了可扩展实现,为持续维护一个部署中模型的知识库提供了现实路径,也让「模型即可编辑的知识载体」这一设想更具工程意义。\n\n## 边界与风险\n即便如此,极大批量的编辑仍可能累积副作用与遗忘,写入越多越难保证彼此不冲突;而编辑后知识在时序上的一致性、以及新旧知识之间的冲突管理,MEMIT 并未完全解决。这些都是可扩展参数编辑走向长期部署时仍需系统攻克的问题,也为自演化智能体的记忆设计提供了有价值的经验证据。\n\n## 在自演化谱系中的定位\nMEMIT 把参数化知识编辑从「改一条」推进到「一次改上千条」,是这一分支迈向工程可用的关键一步。它揭示了批量编辑不能靠简单重复单条编辑来实现,而需要一个跨多层、显式约束既有映射的统一闭式解,才能在规模化时把副作用控制住。这为「模型即可持续维护的知识载体」这一设想提供了现实路径:当世界信息变化时,可成批替换过时事实而无需重训。它也把参数化自修改记忆的长期难题——大批量编辑的副作用累积、知识时序一致性与冲突管理——清晰地提出来,为后续更稳健的编辑与遗忘方法指明了方向。批量编辑质量能否随规模保持稳定,直接决定了参数化记忆作为可维护知识载体的实用价值,这也是它推动整个编辑分支从概念验证走向工程落地的意义所在。",
+    "evaluation": "abstract 明确 MEMIT 可在 GPT-J(6B)与 GPT-NeoX(20B)上扩展到一次编辑上千条关联,规模超越此前工作若干数量级;实验验证了大批量直接更新的可行性,表明批量写入并未使编辑质量随规模明显崩塌。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "参数化记忆可被大规模、直接、可控地批量更新,为持续替换过时知识提供了工程化路径,是自修改记忆迈向可扩展实现的关键一步。",
+    "limitations": "极大批量编辑仍可能累积副作用与遗忘;编辑后知识的时序一致性与冲突管理未被完全解决,长期稳健性仍待验证。",
+    "related": [
+      "memory-rf-mem0",
+      "memory-rf-rome"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2210.07229"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2210.07229"
+      },
+      {
+        "label": "项目主页",
+        "href": "https://memit.baulab.info"
+      }
+    ],
+    "citation": "MEMIT, ICLR 2023."
+  },
+  {
+    "id": "memory-rf-memoryllm",
+    "page": "memory",
+    "title": "MemoryLLM: Towards Self-Updatable Large Language Models",
+    "shortTitle": "MemoryLLM",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.84,
+    "year": 2024,
+    "venue": "ICML 2024",
+    "authors": "Yu Wang et al.",
+    "methodFamily": "自更新参数化记忆池",
+    "tags": [
+      "自更新",
+      "记忆池",
+      "受控遗忘"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.85,
+      "reproducibility": 0.78,
+      "adoption": 0.7,
+      "selfEvolution": 0.9
+    },
+    "summary": "在 Transformer 潜空间内置固定大小记忆池,通过自更新机制吸收新知识并逐步淡出旧知识。",
+    "methodCore": "MemoryLLM 针对的是一个部署层面的顽疾:现有 LLM 一旦训练完成、上线部署,便基本保持静态,很难再把新知识注入进去。作者的目标是构建一个含有相当比例可自更新参数的模型,让它在部署后仍能高效吸收新知识,并长期记住此前注入的内容。\n\n## 方法总览\nMemoryLLM 由一个 Transformer 主干与一个嵌入其潜空间的固定大小记忆池组成。记忆不是外部文本,而是以隐向量形式存在的记忆 token。生成阶段,主干的隐状态会对记忆池中的记忆 token 做注意力,把已存的知识引入当前推理;自更新阶段,模型把新输入的隐状态与部分记忆拼接、经主干处理后产出新的记忆 token,再用这些新 token 替换池中的一部分旧记忆,从而把新知识逐层向下传播进模型。整套机制既不依赖外部检索,也不需要全量重训。\n\n## 自更新与知识注入\n这套设计把「记忆」内化为模型可自我改写的参数组件。当有新信息到来时,模型无需人工干预,便能通过自更新过程把它编码成记忆 token 存入池中;而在生成时,这些记忆又能被注意力机制自然调用,参与到推理与作答。相比外挂检索式记忆,这种潜空间内的记忆更紧密地与模型的计算融为一体;相比全量微调,它又只改动记忆池这一小部分参数,代价更低、更可控。\n\n## 受控遗忘机制\n由于每次自更新只替换记忆池中的一部分而非全部,早先注入的知识会随多次更新被渐进地稀释,形成一种受控遗忘:新知识不断进入,陈旧信息缓慢淡出,而池的容量保持固定。这种设计模拟了记忆的自然新陈代谢,既避免了记忆无限膨胀,又让模型倾向于保留近期与被反复强化的信息,在长期运行中维持稳定的知识吞吐。\n\n## 稳定性与边界\nMemoryLLM 的一个突出特性是抗退化:经历大量记忆更新后仍能保持性能不崩塌。不过其记忆池容量固定,这也意味着长期知识积累存在上限,难以无限扩容;而且自更新机制需要专门的预训练来习得,把它迁移到一个新的基座模型成本较高。这些约束是把记忆内化为可自修改参数时需要权衡的代价,也为自演化智能体的记忆设计提供了经验证据。\n\n## 在自演化谱系中的定位\nMemoryLLM 代表了「把记忆内化为可自更新参数」的一条独特路径:它既不像检索式记忆那样把经验外挂成数据库,也不像知识编辑那样做一次性的外科修改,而是在模型潜空间里内置一个固定大小、可持续自更新的记忆池。这让新知识的注入与旧知识的受控淡出成为模型自身的常规机能,而非外部干预。其展现的抗退化特性——经历大量更新仍不崩塌——为「部署后仍能持续学习的模型」提供了有力的可行性证据,也把记忆容量固定带来的积累上限、以及自更新机制迁移成本高等约束,作为这条路径需要权衡的代价留待后续攻克。",
+    "evaluation": "abstract 报告在模型编辑基准上验证其有效吸收新知识的能力;通过自定义评估与长上下文基准验证其长期信息保持能力;且模型在经历近乎百万次记忆更新后仍无任何性能退化迹象,展现自更新机制的稳定性与抗退化能力。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "让模型拥有大量可自更新参数(记忆池),可在部署后持续注入知识并受控淡出旧记忆,是把记忆内化为可自修改参数的代表性工作。",
+    "limitations": "记忆池容量固定,限制长期知识积累上限;需专门预训练自更新机制,迁移到新模型成本较高,普适性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2402.04624"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2402.04624"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/wangyu-ustc/MemoryLLM"
+      }
+    ],
+    "citation": "MemoryLLM, ICML 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-memoryllm.png",
+        "caption": "MemoryLLM:在 Transformer 潜空间内置固定大小记忆池,生成时读取记忆,通过自更新机制吸收新知并逐步淡出旧知识。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-self",
+    "page": "memory",
+    "title": "SELF: Self-Evolution with Language Feedback",
+    "shortTitle": "SELF",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.82,
+    "year": 2023,
+    "venue": "arXiv 2023 (ICLR'24 投稿)",
+    "authors": "Jianqiao Lu et al.",
+    "methodFamily": "元技能自演化训练",
+    "tags": [
+      "自演化",
+      "元技能",
+      "自训练"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.82,
+      "reproducibility": 0.72,
+      "adoption": 0.68,
+      "selfEvolution": 0.93
+    },
+    "summary": "先习得自反馈与自精炼元技能,再自生成并精炼数据用于迭代自训练,实现无人工干预的持续进化。",
+    "methodCore": "SELF(Self-Evolution with Language Feedback)想让 LLM 能像人类学习那样,通过自我反思持续自我改进,而不是被动地等待人工标注的数据来喂养。它把这一进化过程拆成两个阶段:先习得反思的元技能,再用这些元技能驱动自训练。\n\n## 方法总览\n第一阶段是元技能学习:作者用少量带有语言反馈与精炼示范的数据,赋予模型两项核心元技能——一是对自身回复给出语言反馈的自反馈能力,二是据反馈改写回复的自精炼能力。第二阶段进入迭代式自演化循环:面向大量无标注的指令,模型先自主生成初始回复,再经自反馈与自精炼两步把回复质量提升,随后用这些增强后的数据对自身做微调,逐轮渐进提升。\n\n## 反思能力的沉淀\nSELF 的独到之处在于,它不满足于让反思只停留在推理时的提示层面,而是把外显的反思能力沉淀进参数。通过元技能学习,模型内化了「如何评价自己、如何改进自己」的能力;再通过自训练,这种能力所产出的高质量数据反过来重塑模型权重。于是反思不再是一次性的即兴行为,而成为可迭代训练、可持续增强的元技能,模型也从被动接收信息的角色,转变为主动参与自身发展的角色。\n\n## 数据与能力的交替上升\n迭代自演化的核心动力,是数据质量与模型能力的交替爬升。每一轮里,更强的模型能自生成并精炼出更高质量的数据,而更高质量的数据又能微调出更强的模型,如此螺旋上升。此外,SELF 框架的自精炼能力在推理阶段也可单独启用,对当下的回复再做一轮打磨,进一步提高输出质量。这意味着习得的反思元技能既服务于训练时的自演化,也服务于推理时的即时增强。\n\n## 边界与风险\n这套自驱进化通路的主要风险在于自生成数据的质量控制:若某一轮生成的数据带有系统性错误,后续微调可能把错误固化并在迭代中累积放大。此外,迭代究竟能收敛到何处、模型能力的上限在哪里,目前缺乏充分的理论刻画。这些都是无人工干预的自演化范式需要进一步回答的问题,也为自演化智能体的记忆设计提供了经验参考。\n\n## 在自演化谱系中的定位\nSELF 在自演化谱系中的特色,是把「反思」从推理时的即兴行为,提炼为可迭代训练的元技能,并沉淀进参数。它先教会模型自反馈与自精炼两项元技能,再让这些元技能产出的高质量数据反过来重塑模型权重,从而实现无人工干预的螺旋式进化。这条「元技能学习 + 迭代自训练」的通路,把外显的反思能力内化为模型的内在能力,呼应了从被动接收者到主动自我发展参与者的转变。它也把自生成数据的质量控制、迭代收敛性与能力上限等根本问题摆了出来,这些正是所有自训练式自演化方法共同需要回答的挑战。",
+    "evaluation": "abstract 表示在数学与通用任务上的实验证明 SELF 能在无人类干预下增强 LLM 能力,自演化迭代持续提升内在表现,并显示推理阶段的自精炼可进一步改善输出质量,验证元技能学习加迭代自训练通路的可行性。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "自反馈与自精炼元技能加迭代自训练可构成自主模型进化通路,模拟人类自驱学习,把反思能力沉淀为可迭代训练的元技能。",
+    "limitations": "自生成数据质量控制困难,存在误差累积风险;迭代收敛性与能力上限缺乏充分的理论刻画,普适性仍待验证。",
+    "related": [
+      "memory-rf-reasoningbank"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2310.00533"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2310.00533"
+      }
+    ],
+    "citation": "SELF, arXiv 2023 (ICLR'24 投稿).",
+    "figures": [
+      {
+        "src": "figures/memory-rf-self.png",
+        "caption": "SELF:初始 LLM 经历逐轮自演化,先习得自反馈与自精炼元技能,再自生成并精炼数据迭代自训练,无需人工干预持续进化。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-voyager",
+    "page": "memory",
+    "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+    "shortTitle": "Voyager",
+    "category": "memory-reflect",
+    "maturity": "mature",
+    "score": 0.9,
+    "year": 2023,
+    "venue": "TMLR 2024",
+    "authors": "Guanzhi Wang et al.",
+    "methodFamily": "技能库终身学习",
+    "tags": [
+      "技能库",
+      "终身学习",
+      "自验证"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.88,
+      "reproducibility": 0.85,
+      "adoption": 0.9,
+      "selfEvolution": 0.92
+    },
+    "summary": "在 Minecraft 中通过自动课程、可增长的可执行代码技能库与迭代提示实现无监督终身学习。",
+    "methodCore": "Voyager 是首个由 LLM 驱动的开放式具身终身学习智能体,它在 Minecraft 中无人类干预地持续探索世界、习得多样技能并做出新发现。它要回答的问题是:如何让一个智能体在开放环境里像人一样越玩越强,而不是每次都从零开始。\n\n## 方法总览\nVoyager 由三个协同组件构成。自动课程(automatic curriculum)根据智能体当前状态提出难度递增的新任务,以最大化探索、驱动持续学习;不断增长的技能库(skill library)把每次学到的复杂行为写成可执行的代码程序并建立索引,供存储与检索;新的迭代提示机制(iterative prompting)综合环境反馈、执行错误与 LLM 自验证结果,循环修正生成的程序直至通过。Voyager 全程通过黑盒查询与 GPT-4 交互,绕过了对模型参数的任何微调。\n\n## 技能作为程序化记忆\nVoyager 最具代表性的设计,是把「技能」存为可执行、可检索、可组合的代码,而非自然语言描述或参数。每当智能体掌握一项新行为,就把它固化成一段带索引的代码程序存入技能库;面对新任务时,系统检索相关技能并组合复用,像搭积木一样拼装出更复杂的行为。由于技能是代码,它们天然具备可执行性与精确性,又因为可组合,简单技能能不断复合出更高阶的能力。\n\n## 终身学习与遗忘缓解\n这种程序化技能库带来两个重要性质。其一是复利式的能力增长:技能库随时间不断扩充,后学的技能可以站在先学技能的肩上,使能力增长呈加速态势。其二是缓解灾难性遗忘:已掌握的技能以代码形式稳定保存在库中,不会因学习新任务而被覆盖或遗忘,这正是纯参数学习难以保证的。技能在时间上可延展、在语义上可解释、在结构上可组合,共同支撑起真正的终身学习。\n\n## 迭代提示与边界\n迭代提示机制是保证技能正确性的关键:它把环境反馈、执行报错与自验证结果一并喂回,反复修正代码直至可用。不过 Voyager 依赖 GPT-4 且每个任务需多轮迭代,成本较高;技能的正确性依赖自验证,若验证不到位,错误的技能可能被存入库中并在后续被反复复用,污染整个技能库。这是程序化终身学习需要防范的风险。\n\n## 在自演化谱系中的定位\nVoyager 在自演化谱系中确立了「程序化技能记忆」这一形态的标杆:把技能存为可执行、可检索、可组合的代码,使经验既精确又能像积木一样复合出更高阶的能力,并以稳定保存的方式天然缓解灾难性遗忘。它把自动课程、技能库与迭代提示三者组织成一个开放式终身学习的闭环,展示了在完全不微调参数的前提下,智能体如何在开放环境里越玩越强、并把技能迁移到全新世界。这一范式深刻影响了后续对技能库、工作流与资产记忆的研究,也把「错误技能可能污染库并被复用」这一自验证可靠性问题留作长期课题。",
+    "evaluation": "abstract 报告 Voyager 在 Minecraft 中展现强上下文终身学习能力,相较此前 SOTA(如 ReAct、Reflexion、AutoGPT):获得独特物品数多 3.3 倍、行进距离长 2.3 倍、解锁关键科技树里程碑快达 15.3 倍;且能把已学技能库迁移到全新 Minecraft 世界从零解决新任务,而其它技术难以泛化。",
+    "mainFinding": "把技能存为可检索、可复用、可组合的代码是终身学习的有效记忆形态;不断增长的程序化技能库作为记忆持续复利式增强能力并缓解灾难性遗忘。",
+    "limitations": "依赖 GPT-4 且每任务多轮迭代成本高;技能正确性依赖自验证,错误技能可能污染库并被复用,长期稳健性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.16291"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.16291"
+      },
+      {
+        "label": "项目主页",
+        "href": "https://voyager.minedojo.org/"
+      }
+    ],
+    "citation": "Voyager, TMLR 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-voyager.png",
+        "caption": "Voyager:在 Minecraft 中以自动课程、可增长的可执行代码技能库与迭代提示驱动自主探索,持续解锁新物品与技能。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-tim",
+    "page": "memory",
+    "title": "Think-in-Memory: Recalling and Post-thinking Enable LLMs with Long-Term Memory",
+    "shortTitle": "TiM",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.8,
+    "year": 2023,
+    "venue": "arXiv 2023",
+    "authors": "Lei Liu et al.",
+    "methodFamily": "思维演化记忆",
+    "tags": [
+      "思维记忆",
+      "插入/遗忘/合并",
+      "长期对话"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.78,
+      "reproducibility": 0.72,
+      "adoption": 0.68,
+      "selfEvolution": 0.85
+    },
+    "summary": "存储历史思维而非原始历史,回复前召回、回复后再思考并以插入/遗忘/合并演化记忆。",
+    "methodCore": "TiM(Think-in-Memory)针对记忆增强 LLM 在长期交互中的一个隐性缺陷:它们通常靠反复对同一段历史做召回—推理来生成回复,而每次为不同问题重新推理同一历史,容易产生前后不一致的偏颇思维。人类却能把想清楚的结论存在脑中,以后直接取用而无需重复推理。TiM 正是要模拟这一能力。\n\n## 方法总览\nTiM 的核心主张是存储处理后的思维,而非原始历史。它沿对话流维护一份不断演化的记忆,整个框架分两个阶段:生成回复之前,LLM 智能体先从记忆中召回与当前问题相关的思维;生成回复之后进入 post-think 阶段,把历史思维与本轮新产生的思维整合起来,更新回记忆。由此,post-thinking 的思维被直接存为历史,下次遇到相关问题时可以直接复用,从根本上消除了重复推理带来的不一致偏差。\n\n## 思维记忆的组织与演化\nTiM 把记忆的组织形式化为三类可组合的基本操作:insert 插入新产生的思维,forget 遗忘过时或错误的思维,merge 合并重复或相关的思维。这套操作让记忆不再是只增不改的流水账,而是一个能动态更新、持续演化的思维集合。通过 insert 吸纳新知、通过 forget 剔除错误、通过 merge 归并冗余,记忆得以在长期对话中保持精炼与自洽,这也是它区别于简单历史堆叠的关键贡献。\n\n## 高效检索机制\n面向长期对话的规模,TiM 引入局部敏感哈希(Locality-Sensitive Hashing, LSH)来实现高效检索。随着对话越来越长、思维条目越来越多,若每次都做全量相似度比对,开销将难以承受;LSH 通过把相近的思维哈希到相近的桶中,使召回相关思维的代价大幅降低,从而支撑长期交互下的实时响应。这让「存思维、取思维」的机制在工程上具备可行性。\n\n## 意义与边界\nTiM 的价值在于把「反思后的结论」当作一等的记忆对象,并用一组明确的操作来管理其演化,避免了重复推理导致的不一致。其边界在于:思维的抽取质量依赖基座模型,若模型本身推理有误,存入的便是错误思维;而 forget 与 merge 的策略较为启发式,冲突消解不够系统,存在误删有效思维的风险,这些是思维记忆走向稳健长期部署仍需完善之处。\n\n## 在自演化谱系中的定位\nTiM 在长期记忆研究中提出了一个精炼的主张:与其反复对原始历史做召回—推理,不如把「想清楚的结论」直接存下来复用,从而根除重复推理带来的前后不一致。它把记忆的组织形式化为 insert、forget、merge 三类可组合操作,让记忆成为一个能动态更新、持续演化的思维集合,而非只增不改的流水账。这一「思维即记忆、并以显式操作管理其演化」的设计,与后来把记忆更新做成可学习动作、可强化学习优化的工作一脉相承,也让「遗忘与合并的策略如何做到不误删有效信息」成为记忆演化研究的持续课题。",
+    "evaluation": "abstract 报告在覆盖广泛话题的真实与模拟对话上做了定性与定量实验,结果表明为既有 LLM 装配 TiM 能显著增强其在长期交互中生成回复的表现;因直接复用已存思维而消除了重复召回—推理带来的不一致偏差,并验证了 LSH 检索在长期对话下的高效性。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "存储处理后的思维并显式支持插入、遗忘与合并操作,避免了重复推理导致的不一致;把记忆更新形式化为可组合操作是其重要贡献。",
+    "limitations": "思维抽取质量依赖基座模型;遗忘/合并策略较启发式,冲突消解不够系统,可能误删有效思维,普适性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2311.08719"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2311.08719"
+      }
+    ],
+    "citation": "TiM, arXiv 2023."
+  },
+  {
+    "id": "memory-rf-memorybank",
+    "page": "memory",
+    "title": "MemoryBank: Enhancing Large Language Models with Long-Term Memory",
+    "shortTitle": "MemoryBank",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.8,
+    "year": 2023,
+    "venue": "AAAI 2024",
+    "authors": "Wanjun Zhong et al.",
+    "methodFamily": "遗忘曲线记忆更新",
+    "tags": [
+      "长期记忆",
+      "艾宾浩斯遗忘",
+      "个性适应"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.78,
+      "reproducibility": 0.75,
+      "adoption": 0.75,
+      "selfEvolution": 0.8
+    },
+    "summary": "借艾宾浩斯遗忘曲线随时间与重要性遗忘或强化记忆,持续演化并适应用户个性。",
+    "methodCore": "MemoryBank 面向的场景是需要持续、长期交互的应用,如个人陪伴系统与心理咨询,而现有 LLM 恰恰缺乏长期记忆机制,难以在漫长的关系中记住用户、理解用户。它为 LLM 量身设计了一套长期记忆机制来弥补这一缺口。\n\n## 方法总览\nMemoryBank 为模型提供三种能力:按需召回与当前对话相关的过往记忆、通过持续的记忆更新让记忆不断演化、以及综合历史交互来理解并适应用户的性格与偏好。它兼容 ChatGPT 这类闭源模型与 ChatGLM 这类开源模型,通用性较强。基于这套机制,作者构建了一个长期 AI 伴侣聊天机器人 SiliconFriend,并用心理对话进一步微调以增强其共情能力。\n\n## 遗忘曲线驱动的记忆更新\nMemoryBank 最具特色的创新,是受心理学艾宾浩斯遗忘曲线(Ebbinghaus Forgetting Curve)启发的记忆更新机制。它让每条记忆随时间自然衰减,但当这条记忆被再次提及或访问时又得到强化。系统据记忆的存留时间与相对重要性,动态决定该遗忘还是该巩固,从而模拟出拟人化的、有选择的记忆行为——琐碎信息随时间淡出,而关键事件被反复强化后牢牢记住。这把「遗忘」从被动的信息丢失,变成一种主动的、有取舍的记忆演化机制。\n\n## 用户画像的持续刻画\n在遗忘曲线机制之上,MemoryBank 还会综合多次历史交互,逐步理解并适应用户的性格与偏好,持续刻画出一个动态的用户画像。随着交互增多,系统对用户是谁、喜欢什么、在意什么的理解越来越丰富,回复也随之越来越贴合个人,从而在长期陪伴中建立起连贯的关系感。这种个性适应能力,正是长期陪伴类应用区别于一次性问答的核心价值所在。\n\n## 意义与边界\nMemoryBank 的意义在于把心理学的记忆规律引入 AI 记忆设计,论证了「有选择地保留与淡出」在长期交互中的重要价值。其边界在于:遗忘曲线的参数较为启发式,缺乏对遗忘正确性的定量评估,难以保证被淡出的一定是真正无用的信息;而且方法主要在对话陪伴场景中验证,迁移到其他任务类型的泛化性还有待考察。\n\n## 在自演化谱系中的定位\nMemoryBank 把心理学的记忆规律引入 AI 记忆设计,以艾宾浩斯遗忘曲线驱动记忆的衰减与强化,论证了「有选择地保留与淡出」本身就是一种主动的记忆演化机制。它跳出了「记忆只增不减」的惯性,把遗忘从被动的信息丢失转化为受时间与重要性调节的主动取舍,并在此之上持续刻画动态的用户画像,支撑起长期陪伴所需的连贯关系感。这一思路对后续研究长期个性化记忆、记忆的时效衰减与巩固机制颇有启发,也把「遗忘参数如何设定、被淡出的是否真的无用」这一评估难题清晰地留给了后来者。",
+    "evaluation": "abstract 描述作者据此构建长期 AI 伴侣 SiliconFriend,并用心理对话微调以增强共情。评测含真实用户对话的定性分析与模拟对话的定量分析(由 ChatGPT 扮演多样性格用户生成长期对话),结果显示 SiliconFriend 具备强长期陪伴能力,能共情回复、召回相关记忆并理解用户个性。",
+    "mainFinding": "把心理学艾宾浩斯遗忘曲线引入记忆更新,使 AI 能有选择地保留与淡出记忆;遗忘作为主动的记忆演化机制在长期陪伴交互中具重要价值。",
+    "limitations": "遗忘曲线参数较启发式,缺乏对遗忘正确性的定量评估;主要在对话陪伴场景验证,泛化性待考,长期稳健性仍待更充分验证。",
+    "related": [
+      "memory-rf-mem0"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.10250"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.10250"
+      }
+    ],
+    "citation": "MemoryBank, AAAI 2024."
+  },
+  {
+    "id": "memory-rf-mem0",
+    "page": "memory",
+    "title": "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory",
+    "shortTitle": "Mem0",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.83,
+    "year": 2025,
+    "venue": "ECAI 2025",
+    "authors": "Prateek Chhikara et al.",
+    "methodFamily": "动态记忆抽取更新",
+    "tags": [
+      "长期记忆",
+      "记忆更新",
+      "图记忆"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.84,
+      "reproducibility": 0.8,
+      "adoption": 0.85,
+      "selfEvolution": 0.82
+    },
+    "summary": "动态抽取、整合与检索对话关键信息,并以图记忆变体建模元素间关系维持长期一致性。",
+    "methodCore": "Mem0 面向的是一个生产环境的现实约束:LLM 的上下文窗口是固定的,在跨越多轮、多会话的长时对话中,单靠把历史全部塞进上下文既昂贵又难以维持一致性。Mem0 提出一套以记忆为中心、可扩展的架构,专门应对长期对话的一致性问题。\n\n## 方法总览\nMem0 的核心理念是把记忆当作一个需要持续维护的动态资产,而非只追加的日志。它从进行中的对话里动态抽取显著信息,并做整合处理:把新抽取的信息与已有记忆比对后,进行更新、合并或删除,以消解冲突、去除冗余。这样就构成一个「抽取—整合—检索」的闭环,突破了固定上下文窗口的限制。在此基础上,作者进一步提出一个增强变体,利用基于图(graph-based)的记忆表示,来捕捉会话元素之间复杂的关系结构。\n\n## 动态抽取与整合\nMem0 区别于向量库式记忆堆叠的关键,在于它不只是把片段存起来,而是主动地维护记忆的一致性。每当新信息到来,系统会判断它与已有记忆是补充、是修正还是矛盾,据此执行更新、合并或删除。这种主动整合让记忆库始终保持精炼与自洽,避免了随对话增长而累积的冗余与冲突,是维持长期一致性的核心机制。\n\n## 图记忆变体\n图记忆变体进一步提升了记忆的表达力。对话中的实体、事件与它们之间的关系被建模为图结构,支持关系型的存储与检索。这使得跨会话的单跳、时序、多跳与开放域问答更容易保持一致——因为系统不仅记得孤立的事实,还记得事实之间如何关联,从而在需要串联多条信息时能给出连贯的答案。\n\n## 效率与边界\nMem0 强调在先进推理能力与实际部署约束之间取得平衡:通过只维护结构化的精炼记忆而非全量上下文,它在保证一致性的同时显著降低了延迟与 token 成本。其边界在于:抽取与更新都依赖 LLM 的判断,可能引入错误或制造新的冲突;而评测主要集中在对话一致性场景,任务的多样性相对有限,在更广泛任务上的稳健性仍有待检验。\n\n## 在自演化谱系中的定位\nMem0 代表了长期记忆研究从「学术原型」走向「生产可用」的一次务实推进:它把记忆当作需要持续维护的动态资产,用抽取—整合—检索的闭环主动消解冲突、去除冗余,而非被动堆叠向量片段。图记忆变体进一步把会话元素间的关系结构显式建模,使跨会话的多跳与时序问答更易保持一致。它在效率维度上的表现——大幅降低延迟与 token 成本——尤其体现了对实际部署约束的重视。这种「结构化、持久化、主动维护」的记忆理念,与把记忆更新交给学习式策略的方向相互呼应,共同推动长期一致性成为可工程化的目标。正是这种在一致性与效率之间取得的务实平衡,使它成为长期记忆从研究走向真实产品的一个有代表性的样本,也为后续可扩展记忆系统的设计提供了可借鉴的工程经验。",
+    "evaluation": "abstract 报告在 LOCOMO 基准上系统对比六类基线。以 LLM-as-a-Judge 衡量,Mem0 较 OpenAI 提升 26% 相对指标,图记忆变体再高约 2%;在单跳、时序、多跳与开放域四类问题上均超越现有记忆系统,同时 p95 延迟降低 91%、token 成本节省 90% 以上。",
+    "mainFinding": "生产级长期记忆需要动态抽取—整合—检索的闭环与结构化更新,才能在多轮多会话中兼顾一致性与效率;记忆更新是长期一致性的关键。",
+    "limitations": "抽取/更新依赖 LLM 判断,可能引入错误或冲突;评测主要集中于对话一致性场景,任务多样性有限,普适性仍待验证。",
+    "related": [
+      "memory-rf-memit",
+      "memory-rf-memorybank"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2504.19413"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2504.19413"
+      }
+    ],
+    "citation": "Mem0, ECAI 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-mem0.png",
+        "caption": "Mem0:动态抽取、整合与检索对话关键信息,以图记忆变体建模元素关系,跨会话维持用户偏好等长期一致性。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-knowledge-unlearning",
+    "page": "memory",
+    "title": "Knowledge Unlearning for Mitigating Privacy Risks in Language Models",
+    "shortTitle": "Knowledge Unlearning",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.8,
+    "year": 2022,
+    "venue": "ACL 2023",
+    "authors": "Joel Jang et al.",
+    "methodFamily": "参数化知识遗忘",
+    "tags": [
+      "知识遗忘",
+      "隐私",
+      "梯度上升"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.84,
+      "reproducibility": 0.82,
+      "adoption": 0.7,
+      "selfEvolution": 0.7
+    },
+    "summary": "通过对目标序列做梯度上升实现事后知识遗忘,高效地从模型参数中移除隐私信息。",
+    "methodCore": "Knowledge Unlearning 关注的是语言模型的隐私风险:预训练会让模型记住海量知识,其中可能包含侵犯个人隐私的信息。以往缓解隐私风险的方法多聚焦数据预处理与差分隐私,而这两者都需要重训底座模型,代价高昂。这项工作提出一种事后(post hoc)降低隐私风险的轻量替代方案。\n\n## 方法总览\n方法的核心操作出人意料地简单:对需要被遗忘的目标 token 序列执行梯度上升(gradient ascent),即最大化模型在这些序列上的语言建模损失,使模型对它们的记忆被主动擦除。这一操作直接作用于参数,无需访问全部训练数据、也无需从头重训。作者发现,对于较大的模型,这样的遗忘几乎不损害通用语言建模性能,少数迭代下有时甚至能略微提升。\n\n## 主动遗忘作为记忆操作\n从记忆演化的视角看,这项工作把「遗忘」确立为一种直接、可控的参数级记忆操作。以往我们更多关注如何向模型写入知识,而这里展示了如何从模型参数中精准移除特定知识。梯度上升相当于让模型「反向学习」那些应被抹去的序列,把它们从记忆中主动抹除。这为记忆的冲突消解与隐私合规提供了一条不必重训的工程路径,是自修改记忆的重要一环。\n\n## 遗忘策略的经验准则\n作者还系统研究了遗忘的执行策略,得出两条有价值的经验规律。其一,按序逐批地顺序遗忘,效果优于一次性遗忘全部数据——分批推进更利于稳定地擦除而不过度伤及模型;其二,遗忘的难易程度高度取决于被遗忘数据所属的领域,不同领域的数据被抹除的容易程度差异明显。这些准则为可控的参数化遗忘提供了实操指引。\n\n## 意义与边界\n论文用抽取攻击的成功可能性来量化隐私风险,证明在事先已知易受攻击数据的场景下,知识遗忘能提供比数据预处理与解码方法更强的经验隐私保证,且更高效、更鲁棒。其边界在于:梯度上升可能损伤相邻的能力,遗忘的彻底性与对模型整体性能的副作用之间需要权衡,难以精准限定影响范围,这为自演化智能体的记忆设计提供了经验证据。\n\n## 在自演化谱系中的定位\nKnowledge Unlearning 把「遗忘」确立为参数化记忆的一等操作,与知识写入、知识编辑并列。它用一个出人意料地简单的手段——对目标序列做梯度上升——就能事后、高效、鲁棒地从参数中抹除特定知识,而无需重训整个模型。这为记忆的冲突消解与隐私合规提供了一条轻量的工程路径,也补齐了自修改记忆版图中「主动移除」这一环。它给出的两条经验准则——顺序遗忘优于一次性遗忘、遗忘难易高度依赖数据领域——为可控遗忘的实践提供了指引,而「梯度上升可能损伤相邻能力、影响范围难以精准限定」的权衡,则是这一方向持续需要打磨的地方。",
+    "evaluation": "abstract 表示实验以抽取攻击成功可能性量化隐私风险,并与已知能缓解隐私风险的数据预处理方法及解码方法对比;结果显示在事先已知易受攻击数据的场景下,知识遗忘提供更强的经验隐私保证,同时比这些替代方案更高效、更鲁棒,少数迭代即可完成。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "无需重训即可高效、鲁棒地从参数记忆中移除特定知识;主动遗忘是自修改记忆的重要一环,支撑记忆冲突消解与隐私合规。",
+    "limitations": "梯度上升可能损伤相邻能力;遗忘的彻底性与对模型整体性能的副作用需权衡,难以精准限定影响范围,长期稳健性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2210.01504"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2210.01504"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/joeljang/knowledge-unlearning"
+      }
+    ],
+    "citation": "Knowledge Unlearning, ACL 2023."
+  },
+  {
+    "id": "memory-rf-critic",
+    "page": "memory",
+    "title": "CRITIC: Large Language Models Can Self-Correct with Tool-Interactive Critiquing",
+    "shortTitle": "CRITIC",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.82,
+    "year": 2023,
+    "venue": "ICLR 2024",
+    "authors": "Zhibin Gou et al.",
+    "methodFamily": "工具交互式自我批判",
+    "tags": [
+      "自我纠错",
+      "工具反馈",
+      "批判-修正"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.84,
+      "reproducibility": 0.82,
+      "adoption": 0.78,
+      "selfEvolution": 0.7
+    },
+    "summary": "LLM 借助外部工具验证自身输出生成批判,再据批判迭代修正,无需训练。",
+    "methodCore": "CRITIC 关注 LLM 的一类顽疾:它们有时会自信地输出错误——编造事实、生成有缺陷的代码、产出有害内容。人类面对同类不确定时会借助外部工具核对与修正,比如用搜索引擎查证、用代码解释器调试。CRITIC 正是让本质为黑盒的 LLM 模仿这一过程,实现工具交互式的自我校正。\n\n## 方法总览\nCRITIC 从模型的初始输出出发,调用与任务匹配的外部工具来评估输出的特定方面:用搜索引擎核实事实、用代码解释器调试程序、用计算器验算、用毒性 API 检测有害内容。工具返回的证据被组织成针对性的批判(critiques);模型随后基于这些验证反馈修正输出,再次验证,如此循环执行「verify→correct」直至满意。整个过程不需要任何训练或额外模型。\n\n## 外部锚定的反馈\nCRITIC 的核心主张,是用外部世界的客观信号来锚定自我改进,而非依赖不可靠的纯自评。纯粹让模型自己评判自己,容易陷入「自评空转」——模型可能对自己的错误视而不见,或以同样的错误逻辑来验证错误的输出。引入外部工具后,反馈不再来自模型的主观判断,而来自可验证的外部证据:搜索结果证实或推翻某个事实,代码是否报错是客观的,毒性检测给出量化信号。这些外部锚定的信号为批判与修正提供了可靠依据。\n\n## 批判—修正的循环\nCRITIC 把改进组织成一个可迭代的循环:每一轮都先用工具验证、生成批判,再据批判修正,然后重新验证。这种结构让模型能逐步逼近正确答案,而不是一次性地要么对要么错。批判是针对性的、指向具体缺陷的,因此修正也更有的放矢。工具的选择与任务对齐——事实类任务用搜索,程序类任务用解释器,使得每类问题都能获得最合适的外部检验。\n\n## 意义与边界\nCRITIC 的研究价值不仅在于提出方法,更在于它明确论证了外部反馈对 LLM 持续自我改进的关键作用:去掉外部工具、仅靠模型自我验证时,改进几乎消失甚至下降。这对自演化记忆的可信度是一个警示——反思若缺乏外部锚定信号,极易失真。其边界在于:方法依赖合适外部工具的可得性,对那些无法工具化验证的任务难以适用,且工具调用会带来额外的延迟与成本。\n\n## 在自演化谱系中的定位\nCRITIC 在自演化谱系中扮演了「清醒剂」的角色:它用工具交互式的自我校正,论证了外部反馈对 LLM 持续自我改进的不可替代性,并以消融证明去掉外部工具、仅靠自我验证时改进几乎消失。这一结论对整个反思与自演化方向具有警示意义——纯自评式反思极易陷入用错误逻辑验证错误输出的空转。它把「用可验证的外部证据锚定自我改进」树为一条重要原则,后续大量在反思循环中引入工具、检索、可训练评估器的工作,都可视为对这一原则的响应,共同提升了自演化记忆与反思机制的可信度。",
+    "evaluation": "abstract 报告在自由形式问答、数学程序合成与毒性降低三类任务上的综合评测显示 CRITIC 持续提升 LLM 表现;研究进一步强调外部反馈对推动持续自我改进至关重要,去掉外部工具、仅靠模型自我验证时改进几乎消失甚至下降,凸显外部锚定信号不可替代。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "外部工具反馈对 LLM 的自我改进至关重要,单纯自我验证不可靠;反思若无外部锚定信号则易失真,对自演化记忆的可信度有警示意义。",
+    "limitations": "依赖合适外部工具的可得性;对无法工具化验证的任务难以适用,且工具调用带来额外延迟与成本,普适性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.11738"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.11738"
+      }
+    ],
+    "citation": "CRITIC, ICLR 2024."
+  },
+  {
+    "id": "memory-rf-agent-r",
+    "page": "memory",
+    "title": "Agent-R: Training Language Model Agents to Reflect via Iterative Self-Training",
+    "shortTitle": "Agent-R",
+    "category": "memory-reflect",
+    "maturity": "growing",
+    "score": 0.83,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Siyu Yuan et al.",
+    "methodFamily": "反思轨迹自训练",
+    "tags": [
+      "自我反思",
+      "MCTS",
+      "迭代自训练"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.84,
+      "reproducibility": 0.76,
+      "adoption": 0.66,
+      "selfEvolution": 0.92
+    },
+    "summary": "用 MCTS 从错误轨迹恢复正确轨迹构造修正样本,迭代自训练让智能体在线及时反思纠错。",
+    "methodCore": "Agent-R 关注一个实际部署中的痛点:现有工作多靠从更强专家做行为克隆来提升智能体,但这类方法在真实应用中常因无法从错误中恢复而失效;而采集步级(step-level)的批判数据既昂贵又困难。Agent-R 提出自动、动态地构造自我批判数据,让语言智能体学会在推理过程中及时反思纠错。\n\n## 方法总览\nAgent-R 是一个迭代式自训练框架,让智能体能在 rollout 进行中就及时纠错,而非等一整条轨迹结束后再靠正确性奖惩来修正。方法分两个阶段:先是模型引导的批判轨迹构造,用蒙特卡洛树搜索(MCTS)探索,得到从错误轨迹恢复到正确路径的训练数据;随后把这些修正轨迹与优良轨迹混合,对模型做迭代自训练,并探索纠错能力与数据构造的可扩展迭代提升。\n\n## 修正轨迹的构造\n构造反思数据的关键挑战在于:反思必须及时,不能等整条轨迹跑完才补救。Agent-R 的巧妙之处在于引入模型引导的批判构造机制——由行动者模型自身识别失败轨迹中(在其当前能力范围内的)首个出错步,再从这一步出发,与 MCTS 树中共享同一父节点的相邻正确路径拼接,构造出一条体现「在此处发现错误并转向正确」的修正轨迹。由于错误步由模型按当前策略自行判定,学到的反思与模型当下的能力相匹配,学习效率因此更高。\n\n## 反思能力的内化\n与需要外部奖惩信号或推理时提示的方法不同,Agent-R 把及时反思的能力通过自训练蒸馏进模型参数。修正轨迹展示了「如何在中途察觉错误并改正」,模型在这些数据上迭代训练后,便把这种在线纠错能力内化为自身的参数能力,而不再依赖运行时的额外提示。这也让智能体能够避免陷入无意义的循环——一旦察觉走错,便及时转向,而非在错误路径上越走越远。\n\n## 可扩展性与边界\nAgent-R 进一步探索了自我改进范式的可扩展性:随着迭代推进,模型从错误中恢复的能力与数据构造的质量都能被持续提升。其边界在于:MCTS 轨迹构造的成本较高;而及时纠错能力受限于行动者识别首个错误步的准确度,若识别出现偏差,构造出的修正轨迹质量下降,进而削弱训练效果。这为自演化智能体把反思内化为参数能力提供了有价值的经验证据。\n\n## 在自演化谱系中的定位\nAgent-R 在自演化谱系中把「反思」从推理时的外部提示,推进为通过自训练内化进参数的在线纠错能力。它用 MCTS 自动、动态地构造从错误恢复到正确的修正轨迹,绕开了步级批判数据昂贵难采的瓶颈,并强调纠错必须及时——在察觉走错的当下就转向,而非等整条轨迹跑完。由行动者自身识别首个错误步、再与相邻正确路径拼接的巧思,使学到的反思与模型当前能力相匹配。这条「用搜索造数据、用自训练内化反思」的路线,与把经验蒸馏进参数的其他自演化工作相互补充,共同探索反思能力可持续增强的边界。",
+    "evaluation": "abstract 报告在三个交互式环境上评测,Agent-R 有效使智能体纠正错误动作并避免陷入循环,较基线方法取得更优表现(+5.59%);研究发现其持续提升模型从错误中恢复的能力,并使错误修正发生得更及时、更早,而非等到整个 rollout 结束。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "把反思能力通过 MCTS 构造的修正轨迹蒸馏进模型参数,可实现在线及时纠错,把反思从推理时提示内化为可训练的参数能力。",
+    "limitations": "MCTS 轨迹构造成本较高;及时纠错能力受 actor 识别首个错误步的准确度限制,识别偏差会削弱效果。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2501.11425"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2501.11425"
+      }
+    ],
+    "citation": "Agent-R, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-agent-r.png",
+        "caption": "Agent-R:针对智能体错误轨迹陷入循环难恢复,用 MCTS 从错误恢复正确轨迹构造修正样本,迭代自训练实现在线及时纠错。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-memoryr1",
+    "page": "memory",
+    "title": "Memory-R1: Enhancing Large Language Model Agents to Manage and Utilize Memories via Reinforcement Learning",
+    "shortTitle": "Memory-R1",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.83,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Sikuan Yan et al.",
+    "methodFamily": "强化学习记忆管理",
+    "tags": [
+      "强化学习",
+      "记忆操作",
+      "记忆管理"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.84,
+      "reproducibility": 0.76,
+      "adoption": 0.7,
+      "selfEvolution": 0.86
+    },
+    "summary": "针对现有外部记忆库多为静态、启发式驱动的问题,用强化学习训练记忆管理器与回答智能体,让 LLM 自主决策记忆的增删改与检索利用,仅需极少监督即可自适应管理记忆。",
+    "methodCore": "Memory-R1 针对的是外部记忆库的一个普遍短板:虽然给 LLM 外挂记忆库能缓解无状态、上下文窗口受限的问题,但现有管线多为静态、由启发式规则驱动,缺乏一个学习式的机制来决定该存什么、该改什么、该取什么。Memory-R1 主张用强化学习赋予 LLM 主动管理与利用外部记忆的能力。\n\n## 方法总览\nMemory-R1 框架含两个专职智能体。记忆管理器(Memory Manager)学习对记忆库执行结构化操作,包括 ADD(新增)、UPDATE(更新)、DELETE(删除)与 NOOP(不动),即决定何时存、何时改、何时删、何时保持不变;回答智能体(Answer Agent)则先从记忆中预筛出相关条目,再在其上推理作答。两个智能体都以结果驱动的强化学习微调,采用 PPO 与 GRPO,奖励信号仅来自最终问答是否正确。\n\n## 记忆决策的可学习化\nMemory-R1 的核心贡献,是把记忆管理从人工设计的启发式规则,升级为可学习的策略。以往系统里,「什么信息值得存、旧记忆何时该被新信息覆盖」往往由固定规则决定,难以适应多变的对话与任务;而 Memory-R1 让记忆管理器通过与任务结果的交互自己学会这些决策。ADD/UPDATE/DELETE/NOOP 这组结构化操作构成了记忆演化的动作空间,强化学习则据最终问答的成败,反向塑造出何时执行哪个操作的策略。\n\n## 结果驱动的最小监督\n一个值得强调的设计,是它只用最终问答正确与否作为奖励,而不需要对每一步记忆操作做人工标注。这种结果驱动的信号让训练摆脱了昂贵的过程标注,实现最小监督下的自适应记忆管理。回答智能体的预筛机制也在同一目标下被优化,使得「先挑相关记忆、再据以推理」这一读取环节与写入环节协同服务于问答准确率。两者配合,克服了 LLM 本身无状态、受限上下文窗口所带来的长程推理瓶颈。\n\n## 样本效率与边界\nMemory-R1 展现出突出的样本高效性:仅用极少的训练问答对便能超越强基线,并在多种问题类型、多个基准与多种模型规模上稳定泛化。其边界在于:奖励仅来自问答正确性,可能忽视记忆本身的质量(例如存了正确但冗余的内容);而记忆管理器与回答智能体两者协同训练的稳定性,也仍需进一步考察。\n\n## 在自演化谱系中的定位\nMemory-R1 在自演化谱系中把记忆管理从人工启发式规则,升级为可用强化学习学习的策略。它用记忆管理器与回答智能体两个专职角色,分别负责记忆的增删改与检索利用,并只用最终问答的成败作奖励,实现了最小监督下的自适应记忆管理。其突出的样本高效性——仅用极少训练样本便超越强基线,并跨问题类型、多基准与多种模型规模稳定泛化——表明「让智能体自己学会何时存、改、删、取」是一条数据高效的路径。这与把记忆构建、长短期记忆管理交给强化学习优化的一系列工作共同构成了「学习式记忆管理」这一新兴方向。",
+    "evaluation": "abstract 明确仅用 152 条训练 QA 对训练,Memory-R1 即超越多个强基线,并在多种问题类型、三个基准(LoCoMo、MSC、LongMemEval)以及 3B 到 14B 多种模型规模上稳定泛化,展示出突出的样本高效性与跨设置的鲁棒性。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "用结果驱动的 RL 让智能体自主学会何时增删改查记忆,仅 152 条训练样本即超越静态启发式管线,并跨问题类型、三基准与多种模型规模稳定泛化。",
+    "limitations": "奖励仅来自问答正确性,可能忽视记忆本身质量;记忆管理器与回答智能体协同的训练稳定性仍待考察。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2508.19828"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2508.19828"
+      }
+    ],
+    "citation": "Memory-R1, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-memoryr1.png",
+        "caption": "Memory-R1 与朴素 LLM 记忆系统对比:多会话场景下,RL 训练的记忆管理器能正确增删改记忆并召回关键事实,避免朴素方案的信息冲突与遗漏。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-memalpha",
+    "page": "memory",
+    "title": "Mem-α: Learning Memory Construction via Reinforcement Learning",
+    "shortTitle": "Mem-α",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Yu Wang et al.",
+    "methodFamily": "强化学习记忆构建",
+    "tags": [
+      "强化学习",
+      "记忆构建",
+      "长上下文泛化"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.83,
+      "reproducibility": 0.74,
+      "adoption": 0.66,
+      "selfEvolution": 0.87
+    },
+    "summary": "针对模型不知该存什么、如何组织、何时更新的问题,用强化学习训练智能体学会抽取、结构化与更新复杂记忆系统,以下游问答准确率作奖励端到端优化记忆构建。",
+    "methodCore": "Mem-α 指出现有记忆增强智能体的一个共性问题:它们大多依赖预设的指令与工具来做记忆更新,但当记忆系统变得复杂时,模型往往判断不出该存什么、如何组织、何时更新,导致记忆构建次优、信息丢失。Mem-α 提出用强化学习来教会智能体有效管理复杂记忆系统。\n\n## 方法总览\nMem-α 是一个强化学习框架,让智能体通过与信息流的交互和反馈,学会如何构建记忆。训练时,智能体顺序处理一个个信息块,学习从中抽取并存储相关内容,再据此更新记忆系统。奖励信号并不来自对单步操作的人工评判,而是直接来自对完整交互历史的下游问答准确率,从而端到端地优化整个记忆构建过程。作者还专门构建了一个覆盖多样多轮交互模式、并配套评估问题的训练集来支撑这一学习。\n\n## 记忆构建作为优化目标\nMem-α 的核心思路,是把「如何构建记忆」本身当作可优化的目标,而非交给固定规则或人工提示。既然最终目的是让智能体在后续问答中答得准,那就直接用问答准确率来奖励整个抽取—存储—更新的行为链。这样,智能体在训练中自己摸索出:哪些信息值得存、该以什么结构组织、何时需要更新已有条目。相比预设指令的做法,这种端到端的优化能适应复杂记忆系统下的判断需求,减少信息丢失。\n\n## 多组件记忆架构\n为验证框架,作者设计了一套包含核心(core)、情景(episodic)与语义(semantic)三类组件的记忆架构,并为其配备多种记忆操作工具。核心记忆保存最关键的持久信息,情景记忆记录具体事件,语义记忆沉淀一般性知识;强化学习则直接优化智能体在这套架构上的抽取与结构化行为,学会把不同性质的信息分门别类地安放到合适的组件中。\n\n## 长上下文泛化与边界\nMem-α 一个尤为突出的发现,是它展现出强大的长上下文外推能力:尽管训练实例的最大长度仅 30k token,训练出的智能体却能泛化到超过 400k token 的序列,达到训练长度的 13 倍以上,凸显该 RL 框架的鲁棒性。其边界在于:方法依赖专门构建的多轮交互训练集与核心/情景/语义多组件架构;而奖励仅由下游问答准确率驱动,信号相对单一,可能未能充分覆盖记忆质量的其他维度。\n\n## 在自演化谱系中的定位\nMem-α 在自演化谱系中把「记忆构建」本身确立为可端到端优化的强化学习目标,而非交给预设指令与固定工具。它直接以下游问答准确率奖励整个抽取—存储—更新的行为链,让智能体在复杂记忆系统下自己摸索出该存什么、如何组织、何时更新,从而减少信息丢失。其核心/情景/语义三组件记忆架构,呼应了认知科学对记忆分型的划分,也为强化学习提供了明确的优化对象。尤为可贵的是它展现出的强长上下文外推能力——在远超训练长度的序列上仍然稳健——为「学习式记忆构建」的鲁棒性提供了有力证据。",
+    "evaluation": "abstract 报告实证评测显示 Mem-α 相较现有记忆增强智能体基线取得显著提升;尤为突出的是,尽管训练实例最大长度仅 30k token,智能体却能泛化到超过 400k token 的序列,达训练长度的 13 倍以上。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "把记忆构建当作 RL 优化目标可让智能体学会更优的抽取与结构化;虽仅在 30k token 内训练,却能强泛化到超 400k token、达训练长度 13 倍以上的序列。",
+    "limitations": "依赖专门构建的多轮交互训练集与核心/情景/语义多组件记忆架构;奖励仅由下游问答准确率驱动,信号较单一。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2509.25911"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2509.25911"
+      }
+    ],
+    "citation": "Mem-α, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-memalpha.png",
+        "caption": "Mem-α 训练示意:用强化学习教会智能体在交互中自主选择记忆工具(写入/更新/检索),把记忆构造建模为可学习的策略。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-arcmemo",
+    "page": "memory",
+    "title": "ArcMemo: Abstract Reasoning Composition with Lifelong LLM Memory",
+    "shortTitle": "ArcMemo",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Matthew Ho et al.",
+    "methodFamily": "概念级终身记忆",
+    "tags": [
+      "概念记忆",
+      "抽象推理",
+      "测试时学习"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.82,
+      "reproducibility": 0.76,
+      "adoption": 0.64,
+      "selfEvolution": 0.85
+    },
+    "summary": "针对推理轨迹发现的模式在上下文重置后被丢弃的问题,把轨迹蒸馏为概念级可复用抽象存入终身记忆,新查询按需检索整合,实现免权重更新的测试时持续学习。",
+    "methodCore": "ArcMemo 针对推理时扩展下的一个浪费:模型在长推理轨迹中发现的模式与洞见,一旦上下文窗口为新查询重置,便被立即丢弃。外部记忆是持久化这些发现的自然手段,而 ArcMemo 想让这类记忆变得更可复用、更可扩展。\n\n## 方法总览\nArcMemo 的核心转变,是从实例级记忆走向概念级记忆。实例级记忆存的是精确的查询/回复对,或与原题上下文紧耦合的摘要,复用性受限;而 ArcMemo 从解题轨迹中蒸馏出可复用、模块化、以自然语言表达的抽象概念,存入终身记忆。面对新查询时,系统选择性地检索相关概念并整合进提示,从而在不更新权重的前提下,实现测试时的持续学习(test-time continual learning)。\n\n## 概念级抽象\n概念级记忆之所以更有价值,在于它把「怎么解这一道题」提升为「这类问题背后的一般规律」。ArcMemo 引入了从 rollout 中抽象要点的新策略,把解题过程中反复出现的推理构件提炼成模块化的概念,而非绑死在某道具体题目的上下文里。这些概念以自然语言表达,既可读又可组合;当新查询到来时,相关概念可以被灵活拾取、拼装进提示,支撑对新问题的求解。这使得零散的解题经验被沉淀为可复用的推理构件。\n\n## 检索与记忆演化\n除了抽象策略,ArcMemo 还设计了为新查询检索条目的机制,促进概念的复用,并让记忆随经验不断扩展。每解一批新题,系统就有机会把新发现的概念补充进记忆,使记忆库越用越丰富。更重要的是,作者发现测试时动态更新记忆优于固定不变的设置——这支持了一个假设:持续累积与抽象模式,本身就是一种自我改进的形式,让智能体在推理算力增加时能持续解出更多问题。\n\n## 评估与边界\nArcMemo 在强调组合泛化与抽象推理的 ARC-AGI 基准上评测,这一基准与概念记忆的设计目标高度契合。结果显示概念级抽象是最稳定的记忆设计,在所有测试算力档位上都超越无记忆基线,且性能随推理算力持续扩展。其边界在于:验证主要集中在 ARC-AGI 这一单一抽象推理基准上;而概念的抽取与检索质量依赖基座模型的能力,跨领域迁移性尚未得到充分检验。\n\n## 在自演化谱系中的定位\nArcMemo 在自演化谱系中推动了记忆抽象层次的一次跃升:从与具体题目紧耦合的实例级记忆,走向可复用、模块化、以自然语言表达的概念级记忆。它把推理轨迹中发现的模式蒸馏成可组合的推理构件,并通过选择性检索在测试时无权重更新地持续学习。它验证了一个重要假设——持续累积并抽象模式本身就是一种自我改进,且这种收益能随推理算力持续扩展。这一「概念级记忆 + 测试时持续学习」的取向,与工作流归纳、推理策略蒸馏等经验记忆形态相互呼应,共同回答了「什么样的记忆抽象最可复用」这一核心问题。",
+    "evaluation": "abstract 报告在强调组合泛化与抽象推理的 ARC-AGI 基准上评测,较强的无记忆基线取得 7.5% 相对提升,且性能随推理算力持续扩展;抽象概念是最稳定的记忆设计,在所有测试算力档位均超越基线;测试时动态更新记忆优于固定设置。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "概念级抽象记忆比实例级更可复用,在 ARC-AGI 上带来约 7.5% 相对提升;配合测试时动态更新可持续自我改进,并随推理算力持续扩展。",
+    "limitations": "主要在 ARC-AGI 单一抽象推理基准验证;概念抽取与检索质量依赖基座能力,跨域迁移性尚未充分检验。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2509.04439"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2509.04439"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/matt-seb-ho/arc_memo"
+      }
+    ],
+    "citation": "ArcMemo, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-arcmemo.png",
+        "caption": "实例级记忆 vs 抽象概念记忆:ArcMemo 将 ARC-AGI 任务中反复出现的推理模式抽象为可组合的终身概念,而非存储具体实例。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-memgen",
+    "page": "memory",
+    "title": "MemGen: Weaving Generative Latent Memory for Self-Evolving Agents",
+    "shortTitle": "MemGen",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Guibin Zhang et al.",
+    "methodFamily": "生成式潜在记忆",
+    "tags": [
+      "潜在记忆",
+      "自演化",
+      "推理交织"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.84,
+      "reproducibility": 0.72,
+      "adoption": 0.64,
+      "selfEvolution": 0.9
+    },
+    "summary": "认为参数记忆与检索记忆都未能捕捉推理与记忆的流动交织,以记忆触发器与记忆编织器动态生成潜在 token 记忆注入推理,把记忆与认知交织成类人的认知闭环。",
+    "methodCore": "MemGen 从对现有记忆范式的反思出发:参数记忆强行改动模型权重,检索式记忆把经验外化为结构化数据库,二者各有局限,都未能捕捉人类认知中推理与记忆流动交织的特性。为弥合这一缺口,MemGen 提出一个动态生成式记忆框架,赋予智能体类人的认知机能。\n\n## 方法总览\nMemGen 由两个部分组成。记忆触发器(memory trigger)持续监控智能体的推理状态,判定何时需要显式调用记忆;记忆编织器(memory weaver)则以智能体的当前状态为激励,构造一段潜在 token 序列作为机器原生记忆(machine-native memory),注入并丰富其推理。如此,记忆可以在推理的全过程中被随时回忆与增强,形成记忆与认知紧密交织的循环,而不是「先检索、再拼接」这种事前一次性的模式。\n\n## 推理与记忆的交织\nMemGen 最核心的理念,是让记忆与推理流动地交织在一起,而非彼此割裂。检索式记忆通常在推理开始前把相关经验一次性取出、拼进上下文,之后便不再介入;而 MemGen 让记忆触发器在推理的任意时刻判断「此刻是否需要记忆」,再由记忆编织器即时生成一段潜在记忆注入进去。这更接近人类思考时记忆随需浮现、随时增补的方式,推动更自然的机器认知形态。\n\n## 潜在 token 记忆\n与外化为可读文本或结构化数据库不同,MemGen 生成的是潜在 token 序列——一种机器原生的记忆表示。它不必先翻译成人类语言再拼接,而是直接以模型内部可用的向量形式参与推理,因而与认知过程的耦合更紧密。这种表示让「记忆」不再是外部检索来的静态片段,而是根据当前推理状态动态编织出来的、为当下所需量身生成的内容。\n\n## 涌现机能与边界\nMemGen 一个引人注目的发现是:在无显式监督的情况下,模型自发演化出规划记忆、程序记忆与工作记忆等类人的记忆机能,呈现出走向更自然机器认知的迹象。这暗示动态生成式记忆可能是一条通往类脑认知的路径。其边界在于:潜在 token 记忆的可解释性较弱,难以审计与调试——因为它不是人类可读的文本;而这些自发涌现机能的稳定性与可控性,也仍需进一步研究,这为自演化智能体的记忆设计提供了新的思路与经验证据。\n\n## 在自演化谱系中的定位\nMemGen 在自演化谱系中提出了一条介于参数记忆与检索记忆之间的新路径:动态生成潜在 token 作为机器原生记忆,并让它在推理全过程被随时回忆与增强,从而捕捉人类认知中推理与记忆流动交织的特性。它用记忆触发器判断何时调用记忆、用记忆编织器即时生成所需记忆,超越了「先检索再拼接」的静态模式。尤其引人深思的是,在无监督下它自发涌现出规划、程序、工作记忆等类人机能,暗示了通往更自然机器认知的可能。这为记忆表示的研究打开了新的想象空间,同时也把潜在记忆可解释性弱、涌现机能可控性存疑等挑战一并提出。",
+    "evaluation": "abstract 报告在八个基准上广泛实验,MemGen 相较 ExpeL、AWM 等领先外部记忆系统最高提升约 38.22%,超过 GRPO 最高约 13.44%,并展现强跨域泛化;更值得注意的是,在无显式监督下模型自发演化出规划记忆、程序记忆与工作记忆等类人记忆机能。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "把记忆生成为潜在 token 并与推理交织,能超越外部记忆系统,并在无监督下自发涌现出规划、程序、工作记忆等类人机能,趋向更自然的机器认知。",
+    "limitations": "潜在 token 记忆可解释性弱,难以审计与调试;涌现机能的稳定性与可控性仍待进一步研究,长期稳健性仍待验证。",
+    "related": [
+      "memory-rf-expel",
+      "memory-rf-awm"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2509.24704"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2509.24704"
+      }
+    ],
+    "citation": "MemGen, arXiv 2025."
+  },
+  {
+    "id": "memory-rf-agentevolver",
+    "page": "memory",
+    "title": "AgentEvolver: Towards Efficient Self-Evolving Agent System",
+    "shortTitle": "AgentEvolver",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.79,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Yunpeng Zhai et al.",
+    "methodFamily": "自演化智能体系统",
+    "tags": [
+      "自演化",
+      "自主探索",
+      "样本效率"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.78,
+      "reproducibility": 0.7,
+      "adoption": 0.62,
+      "selfEvolution": 0.9
+    },
+    "summary": "针对智能体开发依赖人工数据集与低效随机探索的问题,以自提问、自导航、自归因三机制驱动智能体自主学习,降低数据构建成本并提升探索效率与样本利用率。",
+    "methodCore": "AgentEvolver 针对当前智能体开发的高成本与低效率:主流做法既要人工构建任务数据集,又要跑含大量随机探索的强化学习管线,导致数据构建成本高、探索效率低、样本利用差。它提出一个借助 LLM 语义理解与推理能力来驱动自主学习的自演化系统,把这些环节交由 LLM 自驱完成。\n\n## 方法总览\nAgentEvolver 引入三个协同机制。自提问(self-questioning)让智能体在陌生环境中以好奇心驱动地生成任务,减少对手工数据集的依赖;自导航(self-navigating)通过经验复用与混合策略引导来提升探索效率;自归因(self-attributing)依据轨迹中各状态与动作的贡献,分配差异化的奖励,从而提高样本效率。三者被统一进一个框架,使智能体能够可扩展、低成本地持续提升能力。\n\n## 自提问:任务的自主生成\n自提问机制解决的是「数据从哪来」的问题。传统做法需要人工精心设计任务集,成本高且难以覆盖新环境;AgentEvolver 让智能体在陌生环境中被好奇心驱动地自己提出任务,像人类探索新环境时会主动给自己设定目标一样。这大幅降低了对手工数据集的依赖,也让智能体的学习范围能随环境自然扩展。\n\n## 自导航与自归因\n自导航针对探索效率:纯随机探索既慢又浪费,AgentEvolver 通过复用已有经验并结合混合策略引导,让探索更有的放矢,避免在无意义的动作上空耗算力。自归因则针对样本利用:一条轨迹中不同状态与动作对最终结果的贡献并不均等,把统一的稀疏奖励差异化地分配到真正起作用的步骤上,能让每条轨迹提供更精细的学习信号,从而显著提高样本效率。三个机制分别对应任务生成、探索与信用分配,协同推动可扩展的自演化。\n\n## 意义与边界\nAgentEvolver 的价值在于把智能体学习中原本高度依赖人工与随机的三个环节——出题、探索、评分——都交给 LLM 的语义能力自驱完成,勾勒出一条低成本、可扩展的自演化路径。其边界在于:论文目前仅报告初步实验(preliminary experiments),规模化与稳定性的证据还有限;而三个机制之间如何相互作用、如何配置到最优,也尚缺深入分析,这为自演化智能体的记忆设计留下了进一步探索的空间。\n\n## 在自演化谱系中的定位\nAgentEvolver 在自演化谱系中把智能体学习中原本高度依赖人工与随机的三个环节——出题、探索、评分——统一交给 LLM 的语义能力自驱完成。自提问减少对手工数据集的依赖,自导航提升探索效率,自归因改善样本利用,三者协同勾勒出一条低成本、可扩展的自演化路径。它把「用大模型的理解与推理来降低强化学习管线的数据与探索成本」这一思路系统化,呼应了业界对高效、可持续智能体训练的迫切需求。作为一个偏系统的框架,它目前以初步实验展示可行性,而三机制的相互作用与最优配置,则为后续更充分的规模化验证留下了空间。",
+    "evaluation": "abstract 表示初步实验表明,相较传统基于 RL 的基线,AgentEvolver 实现了更高效的探索、更好的样本利用率与更快的适应速度,验证自提问、自导航、自归因三机制在降低数据构建成本与提升整体学习效率上的协同作用与可扩展性。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "把任务生成、探索与信用分配都交给 LLM 自驱的三机制,可在少人工数据下实现更高效探索、更好样本利用与更快适应,推动可扩展的智能体自演化。",
+    "limitations": "仅报告初步实验,规模化与稳定性证据有限;三机制的相互作用与最优配置尚缺深入分析,普适性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2511.10395"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2511.10395"
+      }
+    ],
+    "citation": "AgentEvolver, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-agentevolver.png",
+        "caption": "AgentEvolver 在 AppWorld 与 BFCL-v3 上的性能对比:自演化机制显著提升智能体任务成功率,验证了经验驱动的自我改进效率。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-mem2evolve",
+    "page": "memory",
+    "title": "Mem2Evolve: Towards Self-Evolving Agents via Co-Evolutionary Capability Expansion and Experience Distillation",
+    "shortTitle": "Mem2Evolve",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.8,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Zihao Cheng et al.",
+    "methodFamily": "经验与资产协同演化",
+    "tags": [
+      "协同演化",
+      "经验记忆",
+      "资产记忆"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.84,
+      "reproducibility": 0.7,
+      "adoption": 0.6,
+      "selfEvolution": 0.9
+    },
+    "summary": "针对经验积累与资产创造两条演化路径被割裂的问题,让经验记忆与资产记忆协同演化:用积累经验引导动态创造工具或专家智能体,并在使用中同步获取新经验。",
+    "methodCore": "Mem2Evolve 指出现有自演化框架的一个割裂:智能体既可以靠积累经验来进化,也可以靠动态创造新资产(工具或专家智能体)来进化,但已有工作往往把这两条路径孤立看待。仅靠积累经验会受限于人工预设的静态工具集,仅靠动态创造新资产又缺乏经验指导、只能从零生成,二者都导致能力增长有限、演化不稳。\n\n## 方法总览\n为打破这一割裂,Mem2Evolve 提出「能力扩展与经验蒸馏协同演化」的新范式,落地为一个含两大核心组件的框架。经验记忆(Experience Memory)沉淀从交互中蒸馏出的经验;资产记忆(Asset Memory)保存动态创造的工具与专家智能体。框架用已积累的经验来引导资产的动态创造,借此扩展智能体的能力空间;同时在使用新资产的过程中获取新经验,回填经验记忆,使两条路径互相促进、共同进化。\n\n## 双记忆的协同演化\nMem2Evolve 的关键洞察,是让「经验」与「资产」两类记忆彼此喂养。一方面,积累的经验为创造新工具、新专家智能体提供指导,使资产不再从零盲目生成,而是有的放矢地补足当前能力的短板;另一方面,新资产投入使用后又会产生新的交互经验,这些经验被蒸馏后回填经验记忆,进一步指导下一轮资产创造。如此形成一个双向促进的闭环,既扩展了能力空间,又让演化过程更稳定,避免了单靠一条路径的局限。\n\n## 兼顾能力增长与稳定\n把两条演化路径耦合起来,兼顾了「长得更强」与「长得更稳」。仅靠经验积累,能力天花板被静态工具集卡住;仅靠资产创造,又因缺乏经验引导而质量波动、演化不稳。协同演化让经验为资产创造把关方向,让资产为经验积累开拓新的可能,二者相辅相成,使能力增长既有广度又有稳定性,这是 Mem2Evolve 相较单路径方法的核心优势。\n\n## 意义与边界\nMem2Evolve 为自演化智能体提供了一个把「学经验」与「造工具」统一起来的框架样板。其边界在于:双记忆的协同引入了额外的系统复杂度;而动态创造的资产质量仍高度依赖基座模型的能力,在较弱的基座上,资产创造的增益会明显受限,这也是这类协同演化框架在更广泛部署时需要注意的约束。\n\n## 在自演化谱系中的定位\nMem2Evolve 在自演化谱系中的贡献,是把此前被割裂看待的两条进化路径——积累经验与动态创造资产——统一进一个协同演化的框架。它以经验记忆与资产记忆两个组件互相喂养:经验为资产创造把关方向,资产使用又产出新经验回填,从而既扩展能力空间又保持演化稳定。这纠正了单路径的固有局限:仅靠经验会被静态工具集卡住,仅靠资产创造又因缺乏经验引导而质量波动。它为「学经验」与「造工具」如何相辅相成给出了范本,也提示了双记忆协同带来的系统复杂度,以及资产质量对基座能力的依赖,是这类框架走向更广泛部署时需要权衡的现实约束。",
+    "evaluation": "abstract 报告在 6 类任务、8 个基准上广泛实验,Mem2Evolve 相较标准 LLM 提升 18.53%,相较仅靠经验演化的智能体提升 11.80%,相较仅靠资产创造演化的提升 6.46%,确立其为一个更有效且更稳定的自演化智能体框架。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "经验与资产两条演化路径协同互促,相较标准 LLM 提升 18.53%,显著优于仅靠经验或仅靠资产创造的单独路径,兼顾能力增长与演化稳定。",
+    "limitations": "双记忆协同引入额外的系统复杂度;动态创造的资产质量仍高度依赖基座模型能力,弱基座下增益受限,普适性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2604.10923"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2604.10923"
+      },
+      {
+        "label": "项目主页",
+        "href": "https://buaa-irip-llm.github.io/Mem2Evolve"
+      }
+    ],
+    "citation": "Mem2Evolve, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-mem2evolve.png",
+        "caption": "Mem2Evolve:对比经验中心与能力中心两种演化范式,提出协同框架,让经验记忆与资产记忆共同演化,边创造工具与专家智能体边积累经验。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-expreflective",
+    "page": "memory",
+    "title": "Experiential Reflective Learning for Self-Improving LLM Agents",
+    "shortTitle": "ERL",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.79,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Marc-Antoine Allard et al.",
+    "methodFamily": "经验反思启发式",
+    "tags": [
+      "反思",
+      "启发式抽取",
+      "环境适应"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.82,
+      "reproducibility": 0.76,
+      "adoption": 0.62,
+      "selfEvolution": 0.85
+    },
+    "summary": "针对智能体每次从零开始、不复用过往交互的问题,对单次任务轨迹与结果反思抽取可跨任务迁移的启发式,测试时选择性检索注入上下文以引导执行并实现自我改进。",
+    "methodCore": "ERL(Experiential Reflective Learning)针对现有自主智能体的两个短板:它们难以适应专门化的环境,而且不复用过往交互,每遇到新任务都从零开始,无视此前积累的经验。ERL 提出一个简单的自我改进框架,通过经验学习实现对环境的快速适应。\n\n## 方法总览\nERL 的核心是对任务的轨迹与结果进行反思,从中生成启发式(heuristics)——可操作、可跨任务迁移的经验教训。测试时,系统依据当前任务选择性地检索相关启发式,注入智能体的上下文以引导执行。整套流程轻量且不更新权重:反思在任务完成后进行,把这一次的经验提炼成启发式存起来;后续任务则按需取用相关启发式,从而站在既有经验之上应对新情形。\n\n## 从单次尝试中提炼可迁移抽象\nERL 一个鲜明的立场,是强调从单次尝试(single-attempt)的经验中提炼可迁移的抽象,而不依赖多轮重试或大量示范。许多方法需要反复试错或大量专家轨迹才能学到东西,而 ERL 主张一次交互结束后就认真反思、抽取出「这类情形下应当怎么做」的启发式。这些启发式刻意做得抽象、可操作,能脱离具体任务的细节而迁移到相关任务上,因此比直接把原始轨迹当少样本示范更具泛化性。\n\n## 选择性检索的必要性\nERL 通过系统消融揭示,选择性检索是这套机制的关键。并非所有历史启发式都对当前任务有用,若一股脑全部注入,反而会稀释上下文、引入噪声;只有依据当前任务挑选出真正相关的启发式注入,才能有效引导执行。消融同时表明,启发式相较少样本轨迹提示能提供更可迁移的抽象——这印证了「先反思成教训、再按需取用」优于「直接堆原始例子」的设计取向。\n\n## 意义与边界\nERL 展示了一条轻量、免权重更新的智能体自我改进路径:靠对单次经验的反思与启发式的选择性复用,就能实现有效的环境适应。其边界在于:验证主要集中在 Gaia2 这一单一基准上;而启发式的质量与检索策略高度依赖基座模型的能力,跨基准的泛化性尚待检验,长期部署下的稳健性也仍需更充分的验证。\n\n## 在自演化谱系中的定位\nERL 在自演化谱系中代表了一条极简而务实的路线:靠对单次尝试经验的反思、提炼出可迁移的启发式,再以选择性检索按需注入,就能实现有效且轻量的自我改进,无需多轮重试或大量示范。它用系统消融厘清了两个关键结论——选择性检索不可或缺,启发式比少样本轨迹提示更可迁移——为「经验以什么形态、以何种方式注入才最有用」提供了有价值的对照证据。这与工作流归纳、洞见抽象、概念级记忆等经验记忆形态形成呼应,共同细化了免权重更新自演化的设计空间;而其在单一基准上的验证范围,也为跨领域泛化留下了待检验的空间。",
+    "evaluation": "abstract 报告在 Gaia2 基准上,ERL 相较 ReAct 基线将成功率提升 7.8%,在任务完成可靠性上取得大幅增益,并超越先前的经验学习方法;系统消融显示选择性检索至关重要,且启发式相较少样本轨迹提示能提供更可迁移的抽象。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "对单次尝试经验反思抽取可迁移启发式并选择性检索,即在 Gaia2 上较 ReAct 提升 7.8%,实现有效且轻量的智能体自我改进。",
+    "limitations": "主要在 Gaia2 单一基准验证;启发式质量与检索策略高度依赖基座模型,跨基准泛化尚待检验,长期稳健性仍待验证。",
+    "related": [
+      "memory-rf-reflexion",
+      "memory-rf-expel"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2603.24639"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2603.24639"
+      }
+    ],
+    "citation": "ERL, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-expreflective.png",
+        "caption": "ERL:经验积累阶段对任务结果反思生成启发式存入持久池,测试时检索相关启发式注入上下文引导执行,实现可跨任务迁移的自我改进。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-expinternalize",
+    "page": "memory",
+    "title": "Rethinking Continual Experience Internalization for Self-Evolving LLM Agents",
+    "shortTitle": "Experience Internalization",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Jingwen Chen et al.",
+    "methodFamily": "经验内化持续学习",
+    "tags": [
+      "经验内化",
+      "持续学习",
+      "能力坍缩"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.83,
+      "reproducibility": 0.74,
+      "adoption": 0.6,
+      "selfEvolution": 0.86
+    },
+    "summary": "把上下文经验转化为参数能力的经验内化在多轮学习下会出现能力坍缩,论文从经验粒度、注入模式与内化方式三个维度系统剖析,给出稳定可持续内化的简单配方。",
+    "methodCore": "这项工作重新审视经验内化(experience internalization)——把过往交互的上下文经验转化为可复用的参数能力,是 LLM 持续学习的一条有希望的路径。作者发现:先前工作大多聚焦单轮迁移,而在多轮经验学习下,现有方法会出现渐进式的能力坍缩(progressive capability collapse),而非本应期待的复利式提升。\n\n## 方法总览\n为诊断这一失败,作者从三个关键维度系统考察经验内化:经验的粒度(granularity)、经验的注入模式(injection pattern),以及内化的方式(internalization regime)。通过在这三个维度上的对照分析,他们厘清了什么样的组合才能带来稳定、可持续的内化,最终提炼出一个简单而稳健的配方,为工程化的自演化与持续学习 LLM 提供具体可操作的指导。\n\n## 经验粒度与注入模式\n在经验粒度上,作者发现原则级(principle-level)经验比实例级更持久——因为它能把可迁移的策略从轨迹特定的细节中抽象出来,不被具体案例的偶然性绑架;实例级经验则容易过拟合到个别轨迹,在多轮迭代中脆弱易坍缩。在注入模式上,按步(step-wise)注入通过让经验与中间决策状态对齐,显著优于全局注入,这一点对长程工具使用尤为关键——因为长程任务的每一步都需要恰当的经验支撑,笼统地在开头注入全部经验难以对齐到具体决策点。\n\n## 内化方式:离策略上下文蒸馏\n在内化方式上,作者论证在高质量教师轨迹上做离策略上下文蒸馏(off-policy context-distillation),比在策略(on-policy)蒸馏提供更稳定的训练信号。在策略蒸馏受限于对学生自身诱发的错误状态做局部修正,信号嘈杂且容易在多轮中累积偏差;而在优质教师轨迹上做离策略蒸馏,能提供更干净、更一致的学习目标,从而避免能力在迭代中逐步坍缩。三个维度的结论综合起来,便得到那个稳定内化的配方。\n\n## 意义与边界\n这项工作的价值在于:它没有停留在提出又一个新方法,而是系统地诊断了多轮经验内化为何会失败,并给出「原则级经验 + 按步注入 + 离策略上下文蒸馏」这一可复用的工程配方。其边界在于:论文侧重方法论剖析与配方总结,尚未在大规模长期部署与更多任务域中验证其能力上限与外推边界,这为后续把配方推向实用留下了空间,也为自演化智能体的记忆设计提供了经验证据。\n\n## 在自演化谱系中的定位\n这项工作在自演化谱系中扮演了「诊断者」与「配方给出者」的双重角色。它没有停留在提出又一个新方法,而是直面一个此前被忽视的现象——多轮经验内化会渐进坍缩而非复利提升,并从粒度、注入模式、内化方式三个维度系统拆解其成因。由此得出的「原则级经验、按步注入、离策略上下文蒸馏」组合,把把上下文经验转化为参数能力这条持续学习路径,从单轮迁移推进到可稳定迭代。这对所有希望让智能体越用越强的方法都具指导意义,也提醒后续工作:自演化不仅要看单次增益,更要验证多轮迭代下的稳定性与可持续性。",
+    "evaluation": "abstract 表明论文通过在经验粒度、注入模式、内化方式三个维度的对照分析与论证,验证原则级经验、按步注入与离策略上下文蒸馏各自的优势,证明该组合能带来稳定、可持续的经验内化,避免多轮迭代下的渐进式能力坍缩。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "原则级经验、按步注入与离策略上下文蒸馏三者结合,是避免多轮内化能力坍缩、实现稳定持续自演化的关键配方,为工程化提供明确指导。",
+    "limitations": "侧重方法论剖析与配方总结,尚未在大规模长期部署与更多任务域中验证其能力上限与外推边界,普适性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2606.04703"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2606.04703"
+      }
+    ],
+    "citation": "Experience Internalization, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-expinternalize.png",
+        "caption": "Experience Internalization:迭代上下文蒸馏下经验内化会致能力坍缩,从经验粒度、注入模式与内化方式剖析并给出稳定配方。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-maa",
+    "page": "memory",
+    "title": "Marginal Advantage Accumulation for Memory-Driven Agent Self-Evolution",
+    "shortTitle": "MAA",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.8,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Mingyu Yang et al.",
+    "methodFamily": "跨批次证据累积",
+    "tags": [
+      "轨迹蒸馏",
+      "证据累积",
+      "记忆操作评估"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.85,
+      "reproducibility": 0.74,
+      "adoption": 0.6,
+      "selfEvolution": 0.85
+    },
+    "summary": "针对批式轨迹蒸馏中同一记忆操作跨批次收到矛盾反馈的问题,跨批次累积记忆操作的边际优势带符号证据,区分稳定有效操作与偶然命中,作为后处理架构提升蒸馏质量。",
+    "methodCore": "MAA 针对批式轨迹蒸馏(batch-style trace distillation)中的一个具体难题:同一个记忆操作在不同批次里,可能收到相互矛盾的反馈。现有方法缺乏跨批次、操作级的证据累积机制,因而无法区分哪些操作是稳定有效的、哪些只是偶然命中,导致蒸馏出的记忆质量参差不齐。\n\n## 方法总览\n论文先把这一需求形式化为两个结构条件——可对齐性(alignability)与可比较性(comparability),再提出边际优势累积(Marginal Advantage Accumulation, MAA)。MAA 构造差分信号,使同一操作在不同批次间可比较;通过指数移动平均(EMA)为每个操作累积带符号(signed)的证据;并借助语义身份合并(semantic identity merging)确保操作在跨批次时可被追溯与对应。它以后处理架构(post-processing architecture)的形式工作,不改动主训练流程。\n\n## 跨批次的证据累积\nMAA 的核心思路,是把对某个记忆操作的评价从「单批次的一次性反馈」升级为「跨批次的证据累积」。单看一个批次,一个操作恰好带来好结果可能只是运气;但若在多个批次里累积它的边际优势,就能看出它是否稳定有效。为此需要先解决两个前提:不同批次的信号得能对齐(alignability),同一操作得能被识别为同一个(comparability)。MAA 用差分信号构造可比较性,用语义身份合并保证同一操作跨批次可追溯,再用 EMA 把带符号的证据逐批累积起来。\n\n## 带符号证据与后处理架构\n累积「带符号」的证据是关键:正证据表明操作稳定有益,负证据表明它常带来损害,二者相抵后剩下的净值,能可靠地把真正稳健的操作与偶然命中区分开。更实用的是,MAA 以后处理架构的形式运作,不需要改动上游的主训练流程,只在其产出之上做一层筛选,就能从噪声批次反馈中滤出真正稳健的记忆操作,提升蒸馏质量。这让它易于叠加到既有的批式蒸馏管线上。\n\n## 效果与边界\n作为一个后处理层,MAA 在效果与效率上都有说服力:它在多数设置中取得最佳结果,持续超越批级蒸馏基线,甚至匹配或超过在线替代方案,同时大幅降低了优化阶段的 token 消耗。其边界在于:作为后处理,它的上限依赖上游批式蒸馏产出的质量;而语义身份合并的准确性直接影响跨批次证据累积的可靠性——若同一操作被误判为不同、或不同操作被合并,累积出的证据便会失真,这为该方向的稳健性提出了要求。\n\n## 在自演化谱系中的定位\nMAA 在自演化谱系中针对的是一个精细却关键的工程问题:批式轨迹蒸馏中同一记忆操作跨批次收到矛盾反馈,现有方法无法区分稳定有效与偶然命中。它把这一需求抽象为可对齐性与可比较性两个结构条件,再用差分信号、EMA 累积带符号证据与语义身份合并,以后处理的方式从噪声反馈中筛出真正稳健的操作。这种「跨批次、操作级证据累积」的视角,为记忆操作的质量评估提供了一个可叠加到既有管线上的通用工具,兼顾效果与效率;而它对上游蒸馏质量与语义身份合并准确性的依赖,则界定了这一后处理思路发挥作用的前提。",
+    "evaluation": "abstract 报告作为后处理架构,MAA 在 4 个基准、4 个目标模型共 16 个设置中的 14 个取得最佳结果,持续超越现有批级蒸馏基线,并在多数设置下匹配或超过在线替代方案,同时把优化阶段的 token 消耗降低约 75%。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "跨批次累积操作级带符号证据可稳健区分有效记忆操作,后处理即在 16 个设置中 14 个取得最佳,并把优化阶段 token 消耗降低约 75%。",
+    "limitations": "作为后处理依赖上游批式蒸馏产出的质量;语义身份合并的准确性直接影响跨批次证据累积的可靠性,长期稳健性仍待验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2606.20475"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2606.20475"
+      }
+    ],
+    "citation": "MAA, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-maa.png",
+        "caption": "MAA:针对批式轨迹蒸馏中同一记忆操作跨批次收到矛盾反馈,以身份归并跨批次累积记忆操作的边际优势带符号证据,区分稳定有效与偶然命中。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-rsea",
+    "page": "memory",
+    "title": "Recursive Self-Evolving Agents via Held-Out Selection",
+    "shortTitle": "RSEA",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Michael Nguyen et al.",
+    "methodFamily": "留出集守门自演化",
+    "tags": [
+      "递归自演化",
+      "留出验证",
+      "单调安全"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.85,
+      "reproducibility": 0.76,
+      "adoption": 0.62,
+      "selfEvolution": 0.88
+    },
+    "summary": "研究靠演化自然语言产物条件化冻结策略的自演化方法,维护命令式策略、可复用技能、程序化手册三层状态并逐代改写,仅在留出集不退化时提交,实现单调安全的递归自演化。",
+    "methodCore": "RSEA 研究的是一类不更新权重、靠演化自然语言产物来条件化冻结策略的自演化方法——这些产物可以是反思、工作流、手册、备忘单或优化后的提示。作者观察到:这类方法常常只在其擅长的单一基准上报喜,缺乏公平、统一的横向比较,于是他们把它们放在同一框架下逐一对照,揭示出更清醒的图景。\n\n## 方法总览\nRSEA(Recursive Self-Evolving Agent)携带一份紧凑的三层自然语言状态:命令式策略(imperative strategy)、可复用技能(reusable skills)与程序化手册(procedural playbook)。跨代演化时,RSEA 从自身的轨迹重写这全部三层内容;但一个候选版本只有当它在一个不相交的留出划分(held-out split)上不发生退化时才被提交,采用严格的 keep-better 守门规则。若演化后的上下文会造成损害,则回退到原始的 vanilla ReAct。\n\n## 三层自然语言状态\nRSEA 把自演化的产物组织成三个层次,各司其职:命令式策略给出高层的行动方针,可复用技能沉淀具体可调用的能力,程序化手册记录成套的操作流程。这种分层让智能体既保有宏观的策略指引,又保有微观的可执行构件,跨代演化时三层一起被从自身轨迹中重写更新。相比只演化单一形态产物的方法,这种多层状态覆盖了从策略到技能到流程的不同抽象层级。\n\n## 留出集守门与单调安全\nRSEA 最关键的设计,是用严格的留出集守门(held-out selection)来保证递归自演化的单调安全(monotone-safe)。演化出的新版本不是无条件采纳,而是必须在一个与训练不相交的留出集上通过「不退化」的检验才被提交;一旦发现演化后的上下文反而有害,就回退到基线 ReAct。这一 keep-better 规则确保 RSEA 在任何基准上都不会显著劣于基础智能体。作者用一个反例强化了这一点:缺乏守门的在线上下文演化方法方差高、不安全,可能在某基准上接近最佳,却在另一基准上崩盘。\n\n## 意义与边界\nRSEA 的横向对比给出三点清醒结论:没有任何单一自然语言产物能通吃所有基准;无守门的上下文演化高方差且不安全;而严格的留出集守门正是让递归自演化保持单调安全的关键。其边界在于:留出集守门需要额外的评估开销;而不同任务上最优的产物形态各异,缺乏统一赢家,通用性因此受限,这为自演化智能体的记忆设计提供了有价值的经验证据。\n\n## 在自演化谱系中的定位\nRSEA 在自演化谱系中提供了一次难得的公平横向审视:它把反思、工作流、手册、备忘单、优化提示等多种「靠演化自然语言产物条件化冻结策略」的方法放在同一骨干上对照,揭示出没有任何单一产物能通吃所有基准的清醒结论。更重要的是,它用严格的留出集守门确立了递归自演化的单调安全——演化后的上下文若会造成损害就回退到基线,从而绝不显著劣于基础智能体。这一「keep-better 守门」的设计,针对的是无守门在线上下文演化高方差、易崩盘的真实风险,为如何让自演化既进取又安全提供了一个可推广的原则。",
+    "evaluation": "abstract 报告在 ALFWorld、GAIA、τ-bench、WebShop 四基准与 ReAct、Reflexion、GEPA、AWM、ACE、Dynamic Cheatsheet 六基线上同骨干对比:RSEA 是 ALFWorld 上最强单遍方法,达 69.3%(ReAct 64.6%,McNemar p=0.015),带重试 79.4% 为最佳;而无守门的 Dynamic Cheatsheet 在 WebShop 由 0.43 崩至 0.14。",
+    "mainFinding": "没有单一自然语言产物能通吃所有基准;严格的留出集守门是使递归自演化单调安全、绝不在任一基准上显著劣于基线的关键设计。",
+    "limitations": "留出集守门需额外评估开销;不同任务上最优产物形态各异,缺乏统一赢家,通用性受限,长期稳健性仍待验证。",
+    "related": [
+      "memory-rf-awm",
+      "memory-rf-reflexion"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2606.28374"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2606.28374"
+      }
+    ],
+    "citation": "RSEA, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-rsea.png",
+        "caption": "RSEA:维护命令式策略、可复用技能与程序化手册三层状态并逐代改写,仅在留出集不退化时提交,实现单调安全的递归自演化。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-agemem",
+    "page": "memory",
+    "title": "Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for Large Language Model Agents",
+    "shortTitle": "AgeMem",
+    "category": "memory-reflect",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Yi Yu et al.",
+    "methodFamily": "统一长短期记忆管理",
+    "tags": [
+      "长短期记忆",
+      "强化学习",
+      "工具化操作"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.84,
+      "reproducibility": 0.72,
+      "adoption": 0.62,
+      "selfEvolution": 0.86
+    },
+    "summary": "针对长短期记忆被当作分离组件、依赖启发式的问题,把长短期记忆管理统一进智能体策略,以工具化记忆操作与三阶段强化学习端到端优化记忆的读写与整理。",
+    "methodCore": "AgeMem(Agentic Memory)针对现有记忆方法的一个结构性问题:它们通常把长期记忆(LTM)与短期记忆(STM)当作两个分离的组件,依赖启发式规则或额外的辅助控制器来协调,这既限制了适应性,也阻碍了端到端优化。AgeMem 提出一个统一框架,把长短期记忆的管理直接整合进智能体的策略。\n\n## 方法总览\nAgeMem 的核心做法,是把记忆操作暴露为基于工具的动作(tool-based actions),使 LLM 智能体能够自主决定何时以及存什么、检索、更新、摘要或丢弃信息,而不再把这些决策交给外部的启发式或控制器。为训练这种统一行为,作者提出一个三阶段渐进式强化学习策略,并设计了按步(step-wise)的 GRPO,以应对记忆操作所引起的稀疏且不连续的奖励。如此,长短期记忆的读、写与整理便在同一策略下被端到端地协调起来。\n\n## 工具化的记忆操作\n把记忆操作做成工具动作,是 AgeMem 实现「统一策略管理」的关键。存、取、更新、摘要、丢弃这些操作不再由外部规则触发,而是成为智能体策略可主动选择的动作,与它的其他行为处于同一决策空间。这样,智能体可以在推理过程中自主判断当下该对记忆做什么——比如把重要信息写入长期记忆、把冗余内容丢弃、把一段历史摘要压缩,从而灵活地管理有限的上下文,突破固定窗口对长程推理的限制。\n\n## 三阶段强化学习与按步 GRPO\n训练这种统一的记忆行为并不容易,因为记忆操作带来的奖励往往稀疏且不连续——存一条记忆的好处可能要很多步之后才在问答准确率上体现。为此,AgeMem 采用三阶段渐进式强化学习,循序渐进地让智能体先掌握基础操作、再学会复杂协调;并设计按步 GRPO,把奖励更细粒度地对齐到每一步记忆操作上,缓解稀疏不连续奖励带来的训练困难。这套训练机制使读写整理的统一行为得以稳定习得。\n\n## 意义与边界\nAgeMem 的价值在于把长短期记忆从分离组件统一进策略,让智能体端到端地学会管理记忆,从而在任务表现、长期记忆质量与上下文使用效率上同时受益。其边界在于:三阶段 RL 与按步 GRPO 的训练较为复杂、成本较高;而在稀疏且不连续的记忆操作奖励下,训练的稳定性仍需更多验证,这是把统一记忆策略推向更大规模部署时需要克服的挑战。\n\n## 在自演化谱系中的定位\nAgeMem 在自演化谱系中把长期与短期记忆的管理从分离组件统一进智能体的单一策略,让存、取、更新、摘要、丢弃都成为策略可自主选择的工具动作,而非交给外部启发式或辅助控制器。为训练这种统一行为,它设计三阶段渐进式强化学习与按步 GRPO,专门应对记忆操作带来的稀疏且不连续奖励。这一「统一策略 + 分阶段强化学习」的路线,与把记忆管理、记忆构建交给学习式策略优化的一系列工作同属「学习式记忆管理」这一新兴方向,并在长短期记忆协同这一更完整的问题上向前推进,同时把复杂训练的成本与稳定性作为后续需要继续攻克的挑战。",
+    "evaluation": "abstract 报告在五个长程基准上评测,AgeMem 在多种 LLM 骨干下均持续超越强记忆增强基线,取得更优的任务表现、更高质量的长期记忆以及更高效的上下文使用,验证了统一策略管理与三阶段渐进式 RL、按步 GRPO 的有效性。绝对数值仅取自 abstract 明确报告者。",
+    "mainFinding": "把长短期记忆的读写整理统一为策略内的工具动作并用分阶段 RL 训练,可端到端提升任务表现与记忆质量,并更高效地使用上下文。",
+    "limitations": "三阶段 RL 与按步 GRPO 训练复杂、成本高;稀疏且不连续的记忆操作奖励下的训练稳定性仍需更多验证。",
+    "related": [
+      "memory-rf-memoryr1"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2601.01885"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2601.01885"
+      }
+    ],
+    "citation": "AgeMem, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-rf-agemem.png",
+        "caption": "AgeMem:对比分离式与统一式记忆管理,把长短期记忆管理统一进智能体策略,以工具化记忆操作与三阶段强化学习端到端优化读写与整理。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-gitm",
+    "page": "memory",
+    "title": "Ghost in the Minecraft: Generally Capable Agents for Open-World Environments via LLMs with Text-based Knowledge and Memory",
+    "shortTitle": "GITM",
+    "category": "memory-skill",
+    "maturity": "mature",
+    "score": 0.8,
+    "year": 2023,
+    "venue": "arXiv 2023",
+    "authors": "Xizhou Zhu et al.",
+    "methodFamily": "文本知识记忆",
+    "tags": [
+      "Minecraft",
+      "文本记忆",
+      "行动分解",
+      "可复用经验"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.8,
+      "reproducibility": 0.72,
+      "adoption": 0.74,
+      "selfEvolution": 0.72
+    },
+    "summary": "GITM 用文本化知识与记忆结合 LLM,在 Minecraft 中把成功的行动分解序列沉淀为可复用的参考经验。",
+    "methodCore": "GITM(Ghost in the Minecraft)以大语言模型(LLM)为决策核心,把文本化的知识与记忆引入 Minecraft 这类开放世界环境,目标是构建具备通用能力的智能体(Generally Capable Agents)。它不依赖强化学习(RL)控制器从零探索,而是让 LLM 凭借逻辑与常识,借文本形式的交互接口理解并驾驭复杂、稀疏奖励的世界。\n\n## 方法总览\n面对一个高层目标(例如获取钻石),GITM 让 LLM 把它递归地分解为一串结构化的子目标,再把每个子目标映射到一组预定义的结构化动作(structured actions)上执行。规划过程始终由文本化的知识与常识引导,使智能体在动手之前就能形成合理的行动路线,避免在庞大的状态空间里盲目试错。abstract 指出,这套 LLM 驱动的智能体在 ObtainDiamond 任务上相较以往方法取得了显著提升,展示出比传统 RL 控制器更强的鲁棒性。\n\n## 技能的抽象与表征\nGITM 把成功的经验抽象为纯自然语言文本而非模型参数。当一次目标分解连同其对应的动作序列被验证有效后,系统会把「为达成某目标应如何逐层分解、依次执行哪些结构化动作」这一完整流程以自然语言写入文本记忆库,形成可按语义检索的参考经验。这种表征方式把开放世界里零散的成功试探,沉淀为具备可读性与可迁移性的程序性技能(procedural knowledge),使得后续遇到相似目标时不必重新推演。\n\n## 技能的学习与复用\n整个系统运转在一个检索、复用、回写的闭环中:面对新目标时,按相关性从记忆库召回既往的成功分解流程,注入到规划提示里指导新一轮的分解与控制;执行完成后,再把新产生的有效流程回写进记忆库。随着游戏推进,记忆库中积累的可复用技能越来越丰富,智能体处理长程、复杂任务的能力也随之增强。abstract 强调,该智能体是首个采集到 Minecraft Overworld 技术树全部物品的系统,说明这种以文本记忆积累技能的方式确实支撑了对整棵技术树的广泛泛化。\n\n## 关键设计\nGITM 全程不做梯度更新,也不训练强化学习策略,技能既不是权重也不是策略网络,而是可检索的自然语言经验。abstract 特别提到它对算力要求极低,无需 GPU,单个 32 核 CPU 节点即可运行。这一设计的新颖之处在于,用文本记忆替代了传统的 RL 控制器来实现长程任务的可迁移规划,把「让智能体学会做事」从参数训练问题转化为知识组织与经验复用问题。\n\n## 研究背景与贡献\n以往围绕 Minecraft 的研究多聚焦于单一目标(如 ObtainDiamond),缺乏对更广任务谱系的泛化,而当时该任务领先成功率仅约 20%,凸显了 RL 控制器的局限。GITM 用 LLM 加文本知识与记忆的组合正面回应了这些痛点,证明了 LLM 在处理长时序、复杂任务以及适应开放世界不确定性方面的潜力,为后续以经验记忆驱动开放世界智能体的工作提供了范式参照。",
+    "evaluation": "在 Minecraft 上评测,覆盖 ObtainDiamond 等任务并考察对整棵技术树的泛化。相较基于强化学习的控制器,GITM 在 ObtainDiamond 上成功率相对提升 +47.5%,鲁棒性显著更优,且是首个采集到 Overworld 技术树全部物品的智能体。训练无需 GPU,单个 32 核 CPU 节点即可运行。",
+    "mainFinding": "以文本记忆沉淀成功分解流程作为可复用技能,使 LLM 智能体在 Minecraft 上首次解锁 Overworld 全技术树,并大幅超越 RL 控制器。",
+    "limitations": "依赖环境提供文本化的交互接口;记忆内容为特定游戏经验,跨环境迁移能力仍受限。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.17144"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.17144"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/OpenGVLab/GITM"
+      }
+    ],
+    "citation": "GITM, arXiv 2023."
+  },
+  {
+    "id": "memory-rt-jarvis-1",
+    "page": "memory",
+    "title": "JARVIS-1: Open-World Multi-task Agents with Memory-Augmented Multimodal Language Models",
+    "shortTitle": "JARVIS-1",
+    "category": "memory-skill",
+    "maturity": "mature",
+    "score": 0.81,
+    "year": 2023,
+    "venue": "IEEE TPAMI 2025",
+    "authors": "Zihao Wang et al.",
+    "methodFamily": "多模态经验记忆",
+    "tags": [
+      "多模态记忆",
+      "计划检索",
+      "自我改进",
+      "长程规划"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.82,
+      "reproducibility": 0.72,
+      "adoption": 0.72,
+      "selfEvolution": 0.7
+    },
+    "summary": "JARVIS-1 用多模态记忆存储成功的多任务计划,检索历史经验以自我改进长程规划与控制。",
+    "methodCore": "JARVIS-1 是构建在预训练多模态语言模型之上的开放世界智能体,目标是在 Minecraft 中像人类一样感知、规划与控制。它把视觉观测与人类文本指令统一映射为复杂计划,再交由目标条件化的底层控制器执行具身动作,覆盖任务理解、规划与控制的完整链路。\n\n## 方法总览\nabstract 指出,现有方法虽能处理开放世界中某些长程任务,却难以应对任务数量可能无限的情形,也缺乏随游戏时间推进而逐步增强完成能力的机制。JARVIS-1 的思路是让预训练多模态语言模型把视觉观测和文本指令转化为精细的计划,这些计划最终被下发给目标条件化的控制器执行。这样,高层的语义规划与底层的动作控制被清晰地分工,使智能体能够以与人类相近的观测和控制空间应对多样任务。\n\n## 多模态记忆的抽象与表征\nJARVIS-1 的核心是一个多模态记忆(multimodal memory)。它把成功完成任务时的计划,连同当时的多模态观测一并存入记忆,使得每一条经验都同时携带「做什么」和「当时看到什么」两方面信息。这种以计划加多模态观测为单位的存储,把智能体的真实生存经验组织成可检索的程序性知识,而非仅靠预训练阶段获得的通用先验。技能在此表征为可召回的经验条目,不涉及任何参数更新。\n\n## 技能的学习与复用\n面对新任务时,JARVIS-1 依据当前情境与视觉状态的相似度,从记忆里检索出最相关的历史成功计划,作为示例注入到规划提示中。这样,规划既利用了预训练模型的世界知识,又利用了智能体自己积累的真实经验,显著降低了长程任务的探索代价。执行完成后,新的成功经验会回写记忆,形成检索、复用、回写的自我改进闭环,使智能体随游戏时间推进不断提升多任务完成能力。\n\n## 关键设计与结果\nabstract 报告,JARVIS-1 是当时 Minecraft 中最通用的智能体,能用与人类相近的观测与控制空间完成 200 余项不同任务,从砍树等短程任务到获取钻石镐等长程任务;短程任务近乎完美,而在经典的 ObtainDiamondPickaxe 长程任务上,其可靠性达到当时最先进智能体的约 5 倍,并能完成更长时序、更具挑战的任务。这些结果说明,把多模态记忆引入开放世界通用智能体是长程可靠性提升的关键。\n\n## 研究背景与贡献\n在多模态观测下实现类人的规划与控制,被视为迈向更通用智能体的重要里程碑。JARVIS-1 的贡献在于首次系统性地把多模态记忆与规划、控制结合,支持从短程到长程任务的持续改进,展示了记忆增强的多模态语言模型在开放世界中作为通用智能体的可行路径。相比只靠预训练知识的智能体,它把真实生存经验纳入决策回路,使能力随游戏时间累积;相比纯强化学习方案,它又保留了语言模型的通用推理与常识,从而在任务数量趋于无限的开放世界里维持广泛适用性,为后续以经验记忆驱动的具身智能体研究树立了参照。",
+    "evaluation": "在 Minecraft 中评测,JARVIS-1 用与人类相近的观测与控制空间完成 200 余项不同任务,从砍树等短程到获取钻石镐等长程。短程任务近乎完美;在经典的 ObtainDiamondPickaxe 长程任务上,可靠性达到当时最先进智能体的约 5 倍,并能完成更长时序、更具挑战的任务。",
+    "mainFinding": "多模态记忆存放成功计划并按视觉情境检索复用,使开放世界长程任务可靠性达到当时 SOTA 的约 5 倍。",
+    "limitations": "复用效果取决于记忆检索质量;评测局限于 Minecraft,多模态记忆的维护成本较高。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2311.05997"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2311.05997"
+      }
+    ],
+    "citation": "JARVIS-1, IEEE TPAMI 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-jarvis-1.png",
+        "caption": "JARVIS-1:记忆增强的多模态智能体,存储成功的多任务计划并检索历史经验,自我改进以逐级解锁 Minecraft 科技树。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-synapse",
+    "page": "memory",
+    "title": "Synapse: Trajectory-as-Exemplar Prompting with Memory for Computer Control",
+    "shortTitle": "Synapse",
+    "category": "memory-skill",
+    "maturity": "growing",
+    "score": 0.78,
+    "year": 2023,
+    "venue": "ICLR 2024",
+    "authors": "Longtao Zheng et al.",
+    "methodFamily": "轨迹示例记忆",
+    "tags": [
+      "状态抽象",
+      "轨迹示例",
+      "相似度检索",
+      "计算机控制"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.8,
+      "reproducibility": 0.76,
+      "adoption": 0.68,
+      "selfEvolution": 0.55
+    },
+    "summary": "Synapse 用状态抽象与完整轨迹作为示例,并将轨迹存入记忆按相似度检索,指导计算机控制任务。",
+    "methodCore": "Synapse 是一个面向计算机控制的 LLM 智能体,它接收计算机状态、执行动作以完成复杂任务。以往此类智能体虽已展示出上下文学习(in-context learning, ICL)的价值,但受制于三方面问题:LLM 上下文长度有限而计算机状态繁杂,单个网页即可占满上下文;现有示例(如高层计划、多选题)无法表征完整轨迹,长程任务表现欠佳;智能体依赖任务专用示例、忽视任务间相似性,新任务泛化差。\n\n## 方法总览\n针对上述痛点,Synapse 提出三个核心组件协同工作。第一是状态抽象(state abstraction),第二是把完整轨迹当作示例的提示方式(trajectory-as-exemplar prompting),第三是示例记忆(exemplar memory)。三者分别缓解上下文预算、示例表征力与跨任务泛化三个瓶颈,合起来把成功经验组织为可检索、可复用的技能样例。\n\n## 状态抽象与轨迹示例\n状态抽象负责过滤原始计算机状态里与当前任务无关的信息,把冗长的界面表示压缩为紧凑形式,从而在有限上下文内容纳更多示例。轨迹示例提示则把由抽象状态与动作交替构成的完整交互轨迹当作示例喂给 LLM,而不是只给高层计划或孤立片段;由于示例保留了多步决策的完整脉络,模型在长程任务上的决策质量随之提升。这两个组件共同保证了示例既省空间又有信息量。\n\n## 示例记忆与技能复用\n示例记忆把每条示例的向量嵌入存入记忆库,面对新任务时按相似度检索出最相关的历史轨迹注入提示。这样,过往的成功轨迹被当作可检索的技能样例,在跨任务间被有选择地复用,兼顾了上下文预算与示例相关性。技能在此表征为文本轨迹的嵌入,系统不做任何参数更新,完全依靠 ICL 生效,其新颖之处在于以完整轨迹而非片段作为示例,并借相似度检索实现对未见任务的泛化。\n\n## 实验要点\nabstract 报告,Synapse 在标准任务套件 MiniWoB++ 与真实网站基准 Mind2Web 上评测。在 MiniWoB++ 上,仅用 48 个任务的演示即在 64 个任务上达到 99.2% 的平均成功率(相对提升 10%),并且是首个以 ICL 方式解出 book-flight 任务的方法;在 Mind2Web 上,平均步成功率相较此前最优提示方案相对提升 56%。这些数字直接说明了轨迹示例加相似度检索对多步决策与新任务泛化的贡献。\n\n## 研究背景与贡献\nSynapse 的价值在于系统性地拆解并逐一化解了计算机控制智能体在 ICL 范式下的三大障碍,把「示例怎么表征、怎么存、怎么取」串成一条完整的技能复用链路,为后续用轨迹记忆驱动 GUI/网页智能体的研究奠定了方法基础。",
+    "evaluation": "在标准任务套件 MiniWoB++ 与真实网站基准 Mind2Web 上评测。MiniWoB++ 上仅用 48 个任务的演示即在 64 个任务上达到 99.2% 平均成功率(相对提升 10%),并首次以 ICL 方式解出 book-flight 任务;Mind2Web 上平均步成功率相较此前最优提示方案相对提升 56%。",
+    "mainFinding": "以完整成功轨迹为示例存入记忆并按相似度检索复用,显著提升计算机控制的多步决策与新任务泛化。",
+    "limitations": "状态抽象仍需人工设计;轨迹示例随任务多样性增长,检索与上下文预算压力会上升。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2306.07863"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2306.07863"
+      }
+    ],
+    "citation": "Synapse, ICLR 2024."
+  },
+  {
+    "id": "memory-rt-skill-induction",
+    "page": "memory",
+    "title": "Skill Induction and Planning with Latent Language",
+    "shortTitle": "Skill Induction",
+    "category": "memory-skill",
+    "maturity": "mature",
+    "score": 0.75,
+    "year": 2022,
+    "venue": "ACL 2022",
+    "authors": "Pratyusha Sharma et al.",
+    "methodFamily": "语言索引技能库",
+    "tags": [
+      "技能归纳",
+      "自然语言索引",
+      "组合式技能库",
+      "规划"
+    ],
+    "scores": {
+      "clarity": 0.8,
+      "evidence": 0.78,
+      "reproducibility": 0.74,
+      "adoption": 0.62,
+      "selfEvolution": 0.5
+    },
+    "summary": "用稀疏自然语言标注从演示中归纳分层可复用技能,语言命令索引一个组合式技能库以进行规划。",
+    "methodCore": "本工作面向指令跟随与规划,研究如何从少量带稀疏自然语言标注的演示中,归纳出分层、可复用的技能,并用自然语言作为技能的抽象接口,把技能归纳与规划两端连接起来。由于该论文摘要缺失,以下内容基于标题与既有描述保守概述,不涉及未见的具体数值。\n\n## 方法总览\n系统的出发点是:人类演示中蕴含着大量可被重复利用的行为模式,但逐帧密集标注代价高昂。为此,方法只依赖稀疏的自然语言标注,从演示中自动划分并归纳出若干技能片段,每个片段对应一段可执行的低层行为序列,并与一段自然语言描述相关联,由此构成一个可按语言命令检索与组合的技能库。这样,原本连续的演示被结构化为带语义标签的技能单元。\n\n## 技能的抽象与表征\n技能在此被表征为「自然语言描述 + 低层行为序列」的配对条目,自然语言充当技能的接口与索引,行为序列则是其可执行内容。以语言作为抽象层的好处是,技能天然具备可读性与可组合性,既便于按语义检索,也便于在规划时被灵活拼接。整个技能库因此可以看作一种以语言索引的程序性记忆,把演示中的行为知识沉淀下来供反复调用。\n\n## 技能的学习与复用\n在规划阶段,模型把高层任务指令解析为一串潜在语言命令(latent language),再用这些命令依次去索引技能库并串接相应技能,从而完成新任务。任务求解由此被建模为「语言命令到技能」的映射与组合过程。因为技能以语言为接口且可组合调用,系统能够在仅有稀疏监督的条件下,把学到的行为片段泛化到训练中未见过的指令组合上,支持组合式规划。\n\n## 关键设计\n方法的关键在于用潜在语言同时服务归纳与规划两端:归纳端用稀疏语言标注界定技能边界并赋予语义,规划端用潜在语言命令检索并组合技能。这种以语言为枢纽的设计,使得技能库不依赖密集标注即可构建,也让规划过程具备了可解释、可组合的结构,是其区别于端到端、非分层基线的核心特征。\n\n## 研究背景与贡献\n在指令跟随与组合泛化的研究脉络中,如何在有限监督下获得可迁移的行为知识一直是难题。本工作的贡献在于提出以潜在语言作为技能抽象接口,从稀疏标注演示中归纳分层技能库并据此进行组合式规划,为语言索引的可复用技能与组合泛化提供了早期而有代表性的思路。它把「规划」重新理解为在语言空间里对技能的检索与拼装,而非直接在动作空间里搜索,这让高层意图与低层执行之间多了一层可解释的语言中介;同时,稀疏标注的设定降低了监督成本,使从少量演示中沉淀可复用程序性记忆成为可能,对后续把技能库与语言规划结合的工作具有启发意义。更广地看,这种以自然语言为枢纽连接归纳与规划的做法,预示了此后大量「用语言描述技能、用语言检索技能、用语言组合技能」的智能体设计,可视为语言索引技能库这一思路的早期雏形。",
+    "evaluation": "在指令跟随与组合泛化设置下评测,与端到端及非分层基线对比对新指令组合的泛化能力,并考察在稀疏自然语言标注条件下技能归纳与语言命令索引所支撑的规划成功率。(该论文摘要缺失,评测细节据方法保守概述,未含具体数值。)",
+    "mainFinding": "从稀疏语言标注归纳出分层技能库并以潜在语言命令索引组合,支撑更强的组合式规划与泛化。",
+    "limitations": "依赖演示与稀疏标注的质量;技能边界的自动划分对复杂长程任务仍具挑战。",
+    "related": [],
+    "links": [
+      {
+        "label": "ACL Anthology",
+        "href": "https://aclanthology.org/2022.acl-long.120"
+      },
+      {
+        "label": "PDF",
+        "href": "https://aclanthology.org/2022.acl-long.120.pdf"
+      }
+    ],
+    "citation": "Skill Induction, ACL 2022."
+  },
+  {
+    "id": "memory-wr-creator",
+    "page": "memory",
+    "title": "CREATOR: Tool Creation for Disentangling Abstract and Concrete Reasoning of Large Language Models",
+    "shortTitle": "CREATOR",
+    "category": "memory-skill",
+    "maturity": "growing",
+    "score": 0.76,
+    "year": 2023,
+    "venue": "Findings of EMNLP 2023",
+    "authors": "Cheng Qian et al.",
+    "methodFamily": "工具创建记忆",
+    "tags": [
+      "工具创建",
+      "抽象/具体解耦",
+      "可复用工具",
+      "代码技能"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.78,
+      "reproducibility": 0.74,
+      "adoption": 0.64,
+      "selfEvolution": 0.6
+    },
+    "summary": "CREATOR 让 LLM 通过文档与代码自行创建可复用工具,把抽象工具创建与具体决策执行解耦以提升表现。",
+    "methodCore": "CREATOR 是一个让 LLM 自行创建工具的框架。它针对 LLM 工具使用受限于 API 可得性、以及在规划与执行混杂时隐式推理不稳定的问题,提出把解题过程拆分为抽象与具体两层,让模型先造工具、再用工具,从而把复杂推理中「设计方法」与「精确执行」两种负担解耦。\n\n## 方法总览\nabstract 指出,已有工具使用方法的能力受限于两点:一是可调用的 API 未必存在,二是当规划与执行揉在一次推理里时,模型容易出错。CREATOR 的核心思想是让 LLM 成为工具的创造者(tool creator)而非仅仅是使用者,把「怎样解决这类问题」的通用方法与「针对本题的具体决策」明确分开,分别交给抽象层与具体层完成。\n\n## 技能的抽象与表征\n在抽象层,模型根据问题撰写文档、并以代码实现的方式生成通用、可复用的工具函数,专注于建模问题背后的通用方法而不纠缠于本题的具体数值。这样产生的工具本质上是以代码形式沉淀的可复用技能:文档描述其用途与适用场景,代码给出可执行实现。相比自然语言经验,代码化的工具更精确、可直接运行,也更便于在后续同类问题中被检索和调用。\n\n## 技能的学习与复用\n在具体层,模型调用自己创建的工具执行具体决策、处理返回结果并给出答案。抽象与具体的解耦(disentangle)缓解了模型在同一次推理中既要设计方法又要精确计算的认知负担,提升了鲁棒性。更重要的是,所创建的工具可以迁移到后续同类问题,使工具创建本身成为一种面向复杂推理的技能积累机制;abstract 进一步表明,让 LLM 充当工具创造者能够促进知识迁移。\n\n## 关键设计\n方法不涉及任何参数更新,技能完全以「文档 + 代码实现」的形式存在。其新颖之处在于把抽象工具创建与具体执行显式解耦,并通过实验证明这种范式优于把方法设计与计算耦合在一起的常规做法。abstract 认为,工具创建能力革新了 LLM 的问题求解范式,推动其向更高层次的人工智能迈进。\n\n## 实验要点\nCREATOR 在数学竞赛题基准 MATH 与多样表格内容基准 TabMWP 上评测,均优于 chain-of-thought、program-of-thought 以及工具使用基线。作者还新引入了包含 2K 多样问题的 Creation Challenge 数据集,专门凸显工具创建能力的必要性与益处;进一步研究显示 LLM 具备不同程度的工具创建能力,能据此适配多样情境。综合来看,CREATOR 把「解题」从一次性推理,转变为「先沉淀方法、再执行方法」的两阶段过程,让通用方法以代码工具的形式被固化下来并在后续复用,这既提升了单题表现,也为构建面向复杂推理的可复用工具库指明了方向。",
+    "evaluation": "在数学竞赛题基准 MATH 与多样表格内容基准 TabMWP 上评测,CREATOR 优于 chain-of-thought、program-of-thought 及工具使用基线;并新引入包含 2K 多样问题的 Creation Challenge 数据集以凸显工具创建能力的必要性,进一步显示其促进知识迁移、适应多样情境。",
+    "mainFinding": "以文档加代码自建工具作为沉淀技能,解耦抽象创建与具体执行,显著提升复杂推理表现并促进知识迁移。",
+    "limitations": "工具正确性依赖代码生成质量;工具库的检索与去重在规模化时需要额外机制。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.14318"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.14318"
+      }
+    ],
+    "citation": "CREATOR, Findings of EMNLP 2023.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-creator.png",
+        "caption": "CREATOR:相较通用工具使用框架,让 LLM 借文档与代码自行创建可复用工具,把抽象工具创建与具体决策执行解耦。"
+      }
+    ]
+  },
+  {
+    "id": "memory-wr-trove",
+    "page": "memory",
+    "title": "TroVE: Inducing Verifiable and Efficient Toolboxes for Solving Programmatic Tasks",
+    "shortTitle": "TroVE",
+    "category": "memory-skill",
+    "maturity": "growing",
+    "score": 0.77,
+    "year": 2024,
+    "venue": "ICML 2024",
+    "authors": "Zhiruo Wang et al.",
+    "methodFamily": "工具箱归纳",
+    "tags": [
+      "可验证工具",
+      "用-增-裁",
+      "工具库维护",
+      "程序任务"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.8,
+      "reproducibility": 0.78,
+      "adoption": 0.64,
+      "selfEvolution": 0.62
+    },
+    "summary": "TroVE 无需训练地归纳可验证高层函数工具箱,通过「用-增-裁」循环维护一个精简可复用的工具库。",
+    "methodCore": "TroVE 面向以写程序求解的任务(如表格问答、图像推理、数学计算)。它针对一个核心矛盾:只用原语函数会导致程序冗长、易错,而高层函数往往需要专家手工设计。TroVE 的答案是一种无需训练(training-free)的方法,让代码语言模型自主策展一套可复用的高层函数工具箱,并用它来写解。\n\n## 方法总览\nabstract 指出,TroVE 通过「用(using)、增(growing)、周期性裁剪(periodically trimming)」三种操作的循环来动态维护工具箱。求解每个问题时,模型可以复用已有工具、生成新的候选高层函数,或在合适时机裁剪掉低价值工具以保持库的精简。这种自维护机制让工具箱既能随任务增长而扩充,又不会无限膨胀,始终维持在一个规模受控、便于人工核验的状态。\n\n## 技能的抽象与表征\n技能在此表征为可执行的高层函数:它们把常见的子过程封装为带清晰接口的函数,写解时直接调用即可,使最终程序更简洁、更少出错。相比零散的原语调用,这些高层函数是从解题过程中抽象出来的程序性技能,可被多个问题共享复用。由于以代码形式存在,它们天然可执行、可验证,也便于人工阅读和检查。\n\n## 技能的学习与验证\n为保证工具与答案的正确性,TroVE 对同一问题采样多种实现,并借一致性验证从中挑选可靠的工具与答案。这一生成时验证(generate-and-verify)机制,使得被纳入工具箱的高层函数是「可验证的」,而非仅凭一次生成就采信。整个「用-增-裁」循环因此持续归纳出既可复用又可验证的高层技能,质量由验证而非训练来保证。\n\n## 关键设计\n方法不涉及任何参数更新,其新颖之处在于用「用-增-裁」三操作自维护出一个规模受控、可验证且便于人工核验的工具箱。周期性裁剪保证了工具库不会因不断新增而臃肿,一致性验证保证了工具的可靠性,二者共同支撑了工具箱的长期可用性。\n\n## 实验要点\nabstract 报告,在数学、表格问答与图像推理共 11 个数据集上,TroVE 相较使用 CODELLAMA 的基线以及此前基于 GPT 的方法,持续给出更简洁且更准确的解,同时工具箱规模缩小 79-98%;它还使人工核验相较基线快 31%、准确率高 13%,充分展示了可验证性与可复用性。同一套流程能为不同任务与数据集创建多样的函数,并揭示这些函数各自的特性。值得强调的是,工具箱缩小的同时准确率不降反升,说明「精简」与「有效」并不矛盾——通过裁剪把低价值工具剔除,反而让模型更容易选中真正合适的高层函数,这对在长期运行中控制技能库膨胀、维持可维护性具有直接的实践价值。",
+    "evaluation": "在数学、表格问答与图像推理共 11 个数据集上评测,TroVE 相较使用 CODELLAMA 的基线与此前基于 GPT 的方法持续给出更简洁且更准确的解,工具箱规模缩小 79-98%;并使人工核验相较基线快 31%、准确率高 13%。",
+    "mainFinding": "用「用-增-裁」循环加一致性验证自维护可验证工具箱,使解更简洁准确且工具库缩小 79-98%。",
+    "limitations": "适用范围以可执行程序任务为主;工具验证依赖可自动判分的场景。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2401.12869"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2401.12869"
+      }
+    ],
+    "citation": "TroVE, ICML 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-wr-trove.png",
+        "caption": "TroVE:无需训练地归纳可验证的高层函数工具箱,通过用、增、裁循环维护精简可复用工具库,生成更优程序解。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rt-learn-by-interact",
+    "page": "memory",
+    "title": "Learn-by-interact: A Data-Centric Framework for Self-Adaptive Agents in Realistic Environments",
+    "shortTitle": "Learn-by-interact",
+    "category": "memory-skill",
+    "maturity": "growing",
+    "score": 0.79,
+    "year": 2025,
+    "venue": "ICML 2025",
+    "authors": "Hongjin Su et al.",
+    "methodFamily": "交互合成经验",
+    "tags": [
+      "数据中心",
+      "轨迹合成",
+      "反向构造指令",
+      "ICL检索"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.8,
+      "reproducibility": 0.76,
+      "adoption": 0.66,
+      "selfEvolution": 0.72
+    },
+    "summary": "无需人工标注,通过与环境交互合成轨迹并反向构造指令,形成可用于 ICL 检索与训练的经验数据。",
+    "methodCore": "Learn-by-interact 是一个以数据为中心(data-centric)的框架,目标是在无人工标注的前提下,把 LLM 智能体自适应地适配到任意真实环境。abstract 指出,现有 LLM 在发邮件、数据分析等数字任务上的能力常受限于缺乏来自对应环境的高质量智能体数据,该框架正是为解决这一数据瓶颈而生。\n\n## 方法总览\n框架的运作分为两步。第一步,让智能体依据文档等信息自主与真实环境交互,合成大量执行轨迹;第二步,通过反向构造(backward construction),对交互历史做总结或抽象,反向构造出对应的自然语言指令,从而批量得到高质量的「指令-轨迹」经验数据。这样,环境交互本身被转化为可规模化生产的训练素材,绕开了昂贵的人工标注。\n\n## 技能的抽象与表征\n这里的技能以合成的「指令-轨迹」数据形式表征:轨迹记录了在环境中如何一步步达成目标,指令则是对这段轨迹意图的自然语言概括。反向构造是关键一环——它不是先有指令再采数据,而是先交互采到轨迹,再回头概括出指令,从而保证指令与轨迹严格对齐、且覆盖智能体真实能达成的行为空间。abstract 显示,反向构造对训练贡献显著,是数据质量的重要来源。\n\n## 技能的学习与复用\n所得经验数据支持两条复用路径。其一是检索式上下文学习(ICL):推理时用面向智能体优化的检索方法,按相关性从数据库召回相关经验注入提示,此路径不改动模型参数。其二是训练/微调:用合成数据直接更新模型参数。两条路径共同把交互经验转化为可复用的技能数据,使智能体在部署环境中自适应地提升表现。abstract 的消融还表明,该检索管线优于常规的检索增强生成(RAG)。\n\n## 关键设计\n方法的新颖之处在于反向构造与面向智能体的检索管线,以及把自己定位为通用智能体数据合成的基础设施。它既能服务训练也能服务免训练的 ICL,兼顾了灵活性与实用性,适应了 LLM 越来越多地被部署到真实环境的趋势。\n\n## 实验要点\nabstract 报告,在 SWE-bench、WebArena、OSWorld 与 Spider2-V 等真实编码、网页与桌面环境上,基线结果最多提升:ICL 用 Claude-3.5 提升达 12.2%,训练用 Codestral-22B 提升达 19.5%;反向构造对训练的贡献达 14.0%。消融进一步显示了合成数据在 ICL 中的效率,以及其检索管线相较常规 RAG 的优越性。作者预期,随着 LLM 越来越多地部署到真实环境,Learn-by-interact 有望成为智能体数据合成的基础设施——它把「让智能体适配新环境」从依赖人工标注,转变为依赖可自动扩展的交互与反向构造,这对需要快速落地到大量异构环境的场景尤为关键。",
+    "evaluation": "在 SWE-bench、WebArena、OSWorld 与 Spider2-V 等真实编码、网页与桌面环境上评测。基线结果最多提升:ICL 用 Claude-3.5 提升达 12.2%,训练用 Codestral-22B 提升达 19.5%;反向构造对训练贡献达 14.0%。消融显示合成数据在 ICL 中的效率及其检索管线优于常规 RAG。",
+    "mainFinding": "自主交互合成轨迹并反向构造指令,得到可检索或可训练的经验数据,在多个真实环境显著提升成功率。",
+    "limitations": "反向构造的指令质量影响数据可用性;交互合成成本随环境复杂度上升。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2501.10893"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2501.10893"
+      }
+    ],
+    "citation": "Learn-by-interact, ICML 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-rt-learn-by-interact.png",
+        "caption": "Learn-by-interact:无需人工标注,先自指令生成多样指令,与环境交互合成轨迹并反向构造指令,形成可供 ICL 检索与训练的经验。"
+      }
+    ]
+  },
+  {
+    "id": "memory-rf-skillweaver",
+    "page": "memory",
+    "title": "SkillWeaver: Web Agents can Self-Improve by Discovering and Honing Skills",
+    "shortTitle": "SkillWeaver",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.76,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Boyuan Zheng et al.",
+    "methodFamily": "自主技能发现",
+    "tags": [
+      "网页智能体",
+      "技能发现",
+      "API蒸馏",
+      "技能迁移"
+    ],
+    "scores": {
+      "clarity": 0.8,
+      "evidence": 0.74,
+      "reproducibility": 0.68,
+      "adoption": 0.58,
+      "selfEvolution": 0.85
+    },
+    "summary": "SkillWeaver 让网页智能体自主发现技能、练习并蒸馏为稳健的 API,持续扩充可插拔技能库并支持技能迁移。",
+    "methodCore": "SkillWeaver 是一个以技能为中心的框架,让网页智能体通过自主合成可复用技能(封装为 API)来实现自我改进。abstract 借用人类在复杂环境中生存的类比——通过探索环境、把经验分层抽象为可复用技能、协作构建不断增长的技能库来自我提升——指出现有自主网页智能体恰恰缺乏这些能力,在程序知识抽象、技能精炼与技能组合上都力有不逮。\n\n## 方法总览\n给定一个新网站,SkillWeaver 让智能体经历「发现—实践—蒸馏」的循环:先自主发现候选技能,再通过实际执行去实践,最后把练习经验蒸馏为稳健、带清晰接口的 API。迭代式探索不断扩充一个轻量、即插即用(plug-and-play)的 API 库,后续任务可以直接检索并组合调用这些 API,而无需从头重新探索,从而显著增强智能体能力。\n\n## 技能的抽象与表征\n技能在此被表征为可调用的代码 API。相比松散的文本经验,API 具有标准化的接口与明确的输入输出约定,既便于程序化组合,也天然稳健、可复用。这种封装让技能同时扮演两种角色:既是智能体自身的长期程序记忆(procedural memory),沉淀了「在这个网站上如何完成某类操作」的可执行知识;又是可以跨智能体共享的资产。\n\n## 技能的学习与复用\n学习过程强调「打磨」:智能体不是把一次成功轨迹直接封存,而是通过反复执行练习来精炼技能,再蒸馏为稳健 API,以降低偶发成功带来的脆弱性。复用时,面对新任务直接检索并组合已有 API 即可完成,形成自主发现、打磨、沉淀与迁移的能力演化循环。abstract 特别强调,由强智能体合成的 API 可以迁移给较弱的智能体使用,让能力较弱者也能受益。\n\n## 关键设计\n方法不依赖参数更新,其新颖之处在于以「发现-实践-蒸馏」自建可迁移技能库,并实证验证了技能的跨智能体共享:把多样的网站交互打磨成 API 后,这些 API 可以在不同网页智能体之间无缝共享。\n\n## 实验要点\nabstract 报告,在 WebArena 与真实网站上评测自我改进效果,相对成功率提升分别达 31.8% 与 39.8%,且随探索使技能库扩充,能力持续增强;此外,由强智能体合成的 API 迁移给弱智能体,在 WebArena 上带来最高 54.3% 的提升,验证了技能作为可迁移共享资产的价值。这一结果的意义在于,它把「自我改进」与「群体共享」两条线索连了起来:单个智能体通过发现与打磨不断变强,而其成果又能以标准化 API 的形式惠及整个智能体群体,使能力较弱者也能站在他人肩膀上,朝着可协作构建、不断增长的技能生态迈进。这种「一处打磨、处处受益」的特性,把技能学习从单智能体的孤立优化,提升为可在群体间沉淀与传播的共享资产,为大规模部署的网页智能体如何共同积累并复用程序性知识给出了一个有说服力的范例。",
+    "evaluation": "在 WebArena 与真实网站上评测自我改进效果,相对成功率提升分别达 31.8% 与 39.8%,随探索技能库扩充能力持续增强;由强智能体合成的 API 迁移给弱智能体,在 WebArena 上带来最高 54.3% 的提升。",
+    "mainFinding": "自主发现并蒸馏出可插拔 API 技能库作为长期记忆,可检索复用并跨智能体迁移,显著改进网页智能体。",
+    "limitations": "自主探索的样本效率与安全性有待提升;技能库的质量管控与失效检测仍较初步。",
+    "related": [
+      "memory-rf-awm"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2504.07079"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2504.07079"
+      }
+    ],
+    "citation": "SkillWeaver, arXiv 2025."
+  },
+  {
+    "id": "memory-sk-skillsd",
+    "page": "memory",
+    "title": "Skill-SD: Skill-Conditioned Self-Distillation for Multi-turn LLM Agents",
+    "shortTitle": "Skill-SD",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.8,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Guozhi Wang et al.",
+    "methodFamily": "技能条件自蒸馏",
+    "tags": [
+      "自蒸馏",
+      "技能条件",
+      "多轮智能体",
+      "强化学习"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.83,
+      "reproducibility": 0.7,
+      "adoption": 0.66,
+      "selfEvolution": 0.85
+    },
+    "summary": "Skill-SD 把智能体自身轨迹总结为自然语言技能,作为动态特权信息条件化教师,通过蒸馏提升多轮智能体训练效率。",
+    "methodCore": "Skill-SD 关注一个训练层面的难题:用强化学习(RL)训练多轮交互智能体时,稀疏奖励与长时序严重限制了样本效率。它把智能体自身的成功经验提炼为自然语言技能,作为教师端的动态特权信息,通过蒸馏把这份指导内化到学生策略里,从而更高效、更稳定地训练多轮智能体。\n\n## 方法总览\nabstract 指出,on-policy self-distillation(OPSD)能借一个掌握真值答案的特权教师提供稠密的 token 级监督,缓解稀疏奖励;但固定的特权信息无法覆盖智能体任务中多样的有效策略,而且朴素地把 OPSD 与 RL 结合往往导致训练崩溃。Skill-SD 的思路是把「特权信息」从静态真值,换成从智能体自身轨迹中动态提炼出来的技能,并配以稳定化的蒸馏损失。\n\n## 技能的抽象与表征\n方法把智能体已完成的轨迹总结为紧凑的自然语言技能,内容描述成功行为、常见错误与工作流程。这些技能是训练专用(training-only)的:它们只被用来条件化教师,而学生始终在普通任务提示下行动。这样,技能扮演的是一种可动态更新的程序性提示,既反映了当前策略实际走得通的多样解法,又不改变学生在部署时的输入形态。\n\n## 技能的学习与稳定化\n学生通过蒸馏内化教师在技能条件下给出的指导,从而把「怎么做才对」的经验吸收进自身参数。为避免训练崩溃,方法推导出一个重要性加权的 reverse-KL 损失,提供梯度正确(gradient-correct)的 token 级蒸馏;同时让教师随学生的改进而动态同步,使特权信息始终贴合当前策略水平。技能是自生成且动态更新的,学生参数被更新,这正是它与固定特权 OPSD 的根本区别。\n\n## 关键设计\nSkill-SD 的新颖之处在于把「自生技能」当作动态特权监督来稳定 RL 蒸馏:技能来自智能体自己,能覆盖多样有效策略;稳定化损失与教师-学生同步机制则解决了 OPSD 与 RL 朴素结合时的崩溃问题,使稠密监督与策略优化得以兼容。\n\n## 实验要点\nabstract 报告,在 AppWorld 与 Sokoban 等智能体基准上,Skill-SD 相较标准 GRPO 分别提升 +14.0% 与 +10.9%,相较朴素 on-policy 蒸馏(OPD)分别提升 +42.1% 与 +40.6%,显著优于强化学习基线,验证了动态技能特权监督与稳定化损失的有效性。尤其是相较朴素 OPD 的大幅领先,直接说明「静态特权信息 + 简单蒸馏」在多轮智能体任务上远不够用,而把特权信息换成能覆盖多样有效策略、并随学生同步更新的自生技能,再配以梯度正确的稳定化损失,才是让稠密监督与策略优化协同增效的关键。",
+    "evaluation": "在 AppWorld 与 Sokoban 等智能体基准上评测。Skill-SD 相较标准 GRPO 分别提升 +14.0% 与 +10.9%,相较朴素 on-policy 蒸馏(OPD)分别提升 +42.1% 与 +40.6%,显著优于强化学习基线。",
+    "mainFinding": "把自身轨迹提炼为自然语言技能作为教师端动态特权信息,以稳定化蒸馏大幅提升多轮智能体训练效率。",
+    "limitations": "依赖教师-学生蒸馏范式与可自动判分的环境;技能总结质量会影响监督信号的可靠性。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2604.10674"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2604.10674"
+      },
+      {
+        "label": "项目主页",
+        "href": "https://k1xe.github.io/skill-sd/"
+      }
+    ],
+    "citation": "Skill-SD, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-skillsd.png",
+        "caption": "Skill-SD:学生生成 on-policy 轨迹并获任务级奖励,完成轨迹异步总结为紧凑技能存入库,作为特权信息条件化教师蒸馏,提升多轮训练效率。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-memskill",
+    "page": "memory",
+    "title": "MemSkill: Learning and Evolving Memory Skills for Self-Evolving Agents",
+    "shortTitle": "MemSkill",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.84,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Haozhen Zhang et al.",
+    "methodFamily": "可学习记忆技能",
+    "tags": [
+      "记忆技能",
+      "技能演化",
+      "控制器-执行器",
+      "闭环"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.82,
+      "reproducibility": 0.72,
+      "adoption": 0.68,
+      "selfEvolution": 0.9
+    },
+    "summary": "MemSkill 把记忆的抽取、整合、裁剪操作重构为可学习、可演化的记忆技能,形成自我改进的闭环记忆管理。",
+    "methodCore": "MemSkill 把记忆管理本身升级为可学习、可演化的技能。abstract 指出,多数 LLM 智能体的记忆系统依赖一小组静态、手工设计的抽取操作,这些固定流程把「存什么、如何修订记忆」硬编码为人类先验,在多样的交互模式下显得僵化、在长历史上效率低下。MemSkill 的答案是把这些操作重构为记忆技能(memory skills)。\n\n## 方法总览\n记忆技能被定义为用于从交互轨迹中抽取(extract)、整合(consolidate)与裁剪(prune)信息的结构化、可复用例程。换言之,原本写死的「怎么处理记忆」被拆成一组可挑选、可增删、可改写的技能。系统借鉴智能体技能(agent skill)的设计理念,由控制器与执行器协同运转,并额外引入一个设计者来演化技能集本身。\n\n## 技能的抽象与表征\n技能在此表征为结构化的文本例程,每条例程描述一种处理交互轨迹、生成或修订记忆的具体做法。这种表征的好处是可读、可复用,并且可以随需要新增或精炼,而不必改动底层模型权重。MemSkill 因此把「记忆管理策略」从固定代码变成了一份可动态维护的技能库,使记忆系统能针对不同交互模式采用不同的处理方式。\n\n## 技能的学习与演化\n系统包含三个组件:控制器(controller)学会为当前情境挑选少量相关技能;基于 LLM 的执行器(executor)按所选技能生成记忆;设计者(designer)则周期性复盘那些「所选技能产出错误或不完整记忆」的困难案例,提出精炼方案并新增技能来演化技能集。控制器的选择策略与技能集本身被共同优化,构成一个闭环:既改进「选哪些技能」,也改进「有哪些技能」,实现自演化的记忆管理。\n\n## 关键设计\n方法不更新基座模型权重,其新颖之处在于把记忆管理操作本身当作可自演化的技能,而非固定流程。通过困难案例驱动的设计者,系统能不断发现现有技能的不足并补齐,使记忆管理随部署经验持续自适应,这是它区别于静态手工抽取操作的核心。\n\n## 实验要点\nabstract 报告,在 LoCoMo、LongMemEval、HotpotQA 与 ALFWorld 上评测,MemSkill 在任务性能上优于强基线,并在不同设置下良好泛化;进一步的分析揭示了技能如何随困难案例逐步演化,为构建更自适应、自演化的 LLM 智能体记忆管理提供了洞见。这些基准覆盖了长对话记忆、长期记忆问答、多跳检索问答与具身交互等差异很大的场景,MemSkill 能在其上统一奏效,恰好印证了「把记忆操作做成可选择、可演化的技能」相较固定手工流程的适应性优势——面对不同的交互模式,系统可以调用不同的记忆技能,而不必用一套写死的抽取逻辑去硬套所有情形。",
+    "evaluation": "在 LoCoMo、LongMemEval、HotpotQA 与 ALFWorld 上评测,MemSkill 在任务性能上优于强基线并在不同设置下良好泛化;进一步的分析揭示了技能如何随困难案例逐步演化,为更自适应、自演化的记忆管理提供洞见。",
+    "mainFinding": "把记忆抽取/整合/裁剪重构为可学习可演化技能,控制器选技能、设计者演化技能集,实现自演化记忆管理。",
+    "limitations": "涉及控制器、执行器、设计者多组件,系统与调参较复杂;技能演化依赖困难案例识别的质量。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2602.02474"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2602.02474"
+      }
+    ],
+    "citation": "MemSkill, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-memskill.png",
+        "caption": "MemSkill:相较先前逐轮手工操作,采用跨度级、技能条件化生成,把记忆抽取、整合、裁剪重构为可学习可演化的技能,形成自改进闭环。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-polyskill",
+    "page": "memory",
+    "title": "PolySkill: Learning Generalizable Skills Through Polymorphic Abstraction",
+    "shortTitle": "PolySkill",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Gang Li et al.",
+    "methodFamily": "多态技能抽象",
+    "tags": [
+      "技能泛化",
+      "多态抽象",
+      "目标/实现解耦",
+      "网页智能体"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.82,
+      "reproducibility": 0.74,
+      "adoption": 0.66,
+      "selfEvolution": 0.85
+    },
+    "summary": "PolySkill 借鉴软件多态思想,将技能的抽象目标与具体实现解耦,让网页智能体学到可泛化、可组合的技能。",
+    "methodCore": "PolySkill 关注持续交互中的技能学习:LLM 正从静态使用走向在与外部环境交互中持续学习的智能体,例如在浏览网页或启用新工具时学到可复用技能。abstract 指出,现有技能学习方法往往产出过度专用于单一网站、难以泛化的技能。PolySkill 借鉴软件工程中的多态(polymorphism)思想来破解这一泛化难题。\n\n## 方法总览\n核心思想是把一个技能的抽象目标(abstract goal,即它完成什么)与具体实现(concrete implementation,即它如何执行)解耦。抽象目标定义了一个可跨站点复用的能力接口,描述「要达成的效果」;具体实现则随不同环境适配,负责「在本站点上怎么做」。这样,同一个抽象目标可以对应多种具体实现,正如多态中同一接口可有多种实现,从而支持技能在不同网站间的复用与组合。\n\n## 技能的抽象与表征\n技能被表征为「抽象目标 + 可适配实现」的结构。抽象目标层保证了通用性与可组合性,使智能体在网页导航等持续交互中学到的能力不再绑死于某一网站的具体元素;实现层则承接环境差异。这种分层表征随交互增量学习,不依赖任何参数更新,是它解决「技能过拟合单站点」的关键机制。\n\n## 技能的学习与自我探索\n除了在指定任务下学习,PolySkill 还支持没有指定任务的自我探索(self-exploration)设置:框架让智能体识别并优化自身目标,提升所提任务的质量,从而习得更好的学习课程(curriculum),进而学到跨站点通用的技能。通过让智能体自己界定并精炼目标,系统推动了在开放网页上的持续学习,而非依赖外部预设的任务清单。\n\n## 关键设计\n方法的新颖之处在于用多态抽象把技能的目标与执行分离,这被作者视为迈向「能在开放网页上持续学习并泛化的自主智能体」的关键一步。目标与实现的清晰界面,使技能既能在已见网站上高频复用,又能迁移到未见网站。\n\n## 实验要点\nabstract 报告,PolySkill 在已见网站上把技能复用率提升 1.7 倍;在 Mind2Web 上成功率最高提升 9.4%,在未见网站上提升 13.9%,同时执行步数减少超 20%;在无指定任务的自我探索设置下,还提升了所提任务的质量,并让智能体学到跨站点可泛化的技能。这里未见网站上的提升幅度大于已见网站,是一个颇具说服力的信号:它表明目标与实现的解耦确实缓解了技能对单一站点的过拟合,使抽象目标层承载的能力能迁移到全新环境;而执行步数的下降则说明复用成熟技能比临场摸索更高效,二者合起来指向在开放网页上持续学习的可行路径。",
+    "evaluation": "实验显示 PolySkill 在已见网站上把技能复用率提升 1.7 倍;在 Mind2Web 上成功率最高提升 9.4%,在未见网站上提升 13.9%,同时执行步数减少超 20%;在无指定任务的自我探索设置下还提升了所提任务的质量并习得跨站点可泛化技能。",
+    "mainFinding": "以多态抽象解耦技能的目标与实现,学到可跨站点泛化、可组合的技能,复用率与成功率显著提升。",
+    "limitations": "验证以网页导航场景为主;抽象目标与具体实现的划分质量会影响泛化效果。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2510.15863"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2510.15863"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/simonucl/PolySkill"
+      }
+    ],
+    "citation": "PolySkill, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-polyskill.png",
+        "caption": "PolySkill 概览:让网页智能体通过多态抽象学习可跨站点泛化的技能,将具体操作序列归纳为参数化、可复用的技能单元。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-cascade",
+    "page": "memory",
+    "title": "CASCADE: Cumulative Agentic Skill Creation through Autonomous Development and Evolution",
+    "shortTitle": "CASCADE",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.83,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Junwu Chen et al.",
+    "methodFamily": "累积技能创建",
+    "tags": [
+      "技能获取",
+      "科学智能体",
+      "元技能",
+      "跨智能体共享"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.84,
+      "reproducibility": 0.7,
+      "adoption": 0.66,
+      "selfEvolution": 0.88
+    },
+    "summary": "CASCADE 是一个自演化框架,通过两种元技能让智能体掌握复杂工具并编码知识,实现从「用工具」到「获取技能」的转变。",
+    "methodCore": "CASCADE 是一个自演化的智能体框架,abstract 把它定位为从「LLM + 工具使用(tool use)」向「LLM + 技能获取(skill acquisition)」转变的早期实例。它针对现有 LLM 智能体依赖预定义工具或仅停留在早期阶段的工具生成、难以适配并扩展到复杂科学任务的问题,提出用元技能来驱动能力的持续演化。\n\n## 方法总览\nCASCADE 依靠两种元技能(meta-skills)推动能力增长。其一是持续学习(continuous learning):通过网页搜索、代码抽取与记忆利用,不断吸收新知识并掌握复杂的外部工具。其二是自我反思(self-reflection):借助内省、知识图谱探索等方式修正并巩固既有经验。两种元技能一个向外扩展、一个向内修正,共同构成能力演化的双引擎。\n\n## 技能的抽象与表征\n技能在此被表征为可执行的、编码了知识的技能条目。它们不是一次性的工具调用,而是随两种元技能不断累积与修正的资产:持续学习负责把外部工具与知识转化为新的可执行技能,自我反思负责在实践中纠错、去冗并巩固。结合人机协作与记忆巩固(memory consolidation),CASCADE 得以持续累积一批可靠的可执行技能。\n\n## 技能的学习与共享\n框架在层面上不强调基座参数更新,而是靠元技能循环来演化技能集。一个重要特性是,所累积的可执行技能能够在不同智能体与科研人员之间共享复用,朝可扩展的 AI 辅助科研迈进。也就是说,一个智能体打磨出的技能可以成为团队乃至他人的共同资产,而非局限于单次会话。\n\n## 关键设计\nCASCADE 的新颖之处在于用两种元技能把「工具掌握」升级为「可累积、可共享的技能获取」。相比只会调用固定工具或临时生成脚本的智能体,CASCADE 具备了随任务推进自主吸收工具、反思纠错、并沉淀可复用技能的能力,这正是它区别于传统工具使用范式的核心。\n\n## 实验要点\nabstract 报告,在 SciSkillBench(涵盖 116 项材料科学与化学研究任务)上,CASCADE 使用 GPT-5 达到 93.3% 成功率,而去掉演化机制时仅 35.4%,凸显了自演化的巨大增益;作者还在计算分析、自主实验室实验以及对已发表论文的选择性复现等真实场景中验证了应用,展示技能可跨智能体与科研人员共享。约 58 个百分点的差距清楚地表明,在复杂科学任务上,静态调用预定义工具远不足以应对多样需求,而持续学习与自我反思两种元技能所驱动的技能累积,才是让成功率跃升的决定因素;真实实验室与论文复现场景的验证,则进一步说明所累积的技能不止停留在基准分数,而具备走向可扩展 AI 辅助科研的实用潜力。",
+    "evaluation": "在 SciSkillBench(116 项材料科学与化学研究任务)上评测,使用 GPT-5 达到 93.3% 成功率,而无演化机制时仅 35.4%;并在计算分析、自主实验室实验与已发表论文的选择性复现等真实场景中验证应用,展示技能可跨智能体与科研人员共享。",
+    "mainFinding": "以持续学习与自我反思两种元技能累积可共享的可执行技能,大幅提升复杂科学任务成功率。",
+    "limitations": "评测集中于材料与化学科研任务;高成功率依赖强基座模型(GPT-5)。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2512.23880"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2512.23880"
+      }
+    ],
+    "citation": "CASCADE, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-cascade.png",
+        "caption": "CASCADE:对比「LLM+工具使用」与「LLM+技能获取」范式,以两种元技能让智能体掌握复杂工具并编码知识,实现自演化。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-skillgen",
+    "page": "memory",
+    "title": "SkillGen: Verified Inference-Time Agent Skill Synthesis",
+    "shortTitle": "SkillGen",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Yuchen Ma et al.",
+    "methodFamily": "对比归纳技能合成",
+    "tags": [
+      "技能合成",
+      "对比归纳",
+      "干预验证",
+      "跨模型迁移"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.83,
+      "reproducibility": 0.72,
+      "adoption": 0.66,
+      "selfEvolution": 0.83
+    },
+    "summary": "SkillGen 是一个多智能体框架,从轨迹中对比归纳出单个可审计技能,并以干预方式实证验证其净效果。",
+    "methodCore": "SkillGen 面向「无需重训即可增强 LLM 智能体、且让所加程序保持可复用可控」的技能范式。abstract 指出,技能是提升智能体能力的有前景途径,但高质量技能至今仍主要靠人工撰写。SkillGen 提出一个多智能体框架,从基础智能体生成的轨迹中自动合成单个可读、可在使用前审计的技能产物。\n\n## 方法总览\nSkillGen 的产出是一个人类可读的技能产物(artifact),使用前可被检查。它不满足于对轨迹做简单总结,而是对成功与失败两类轨迹进行对比归纳(contrastive induction),再据此生成候选技能并迭代精炼。整个流程由多个智能体协作完成,把「从经验中提炼可用技能」组织成一条可控、可审计的自动化管线。\n\n## 技能的抽象与对比归纳\n对比归纳是方法的第一大要点:通过对成功与失败轨迹的比较,SkillGen 识别出可复用的成功模式、反复出现的失败模式,以及那些出现在临近成功轨迹里却在失败轨迹中缺失的关键行为。相比只看成功案例,这种成败对照能更精准地捕捉「究竟是哪一步造成了差异」,从而抽象出更有针对性的技能。技能表征为人类可读的文本产物,不涉及任何参数更新。\n\n## 技能的验证:干预式净效果\n方法的核心创新是把智能体技能建模为干预(intervention),以实证方式度量技能对整体表现的净效果。具体做法是在同一批实例上比较「加入该技能」与「不加入该技能」的结果,并同时计入两类效应:修复(repair,把原本失败的样例改对)与回退(regression,把原本成功的样例弄坏)。只有综合权衡修复与回退后净收益为正的技能才被认为真正有用,这避免了「看似有用实则拖累整体」的假象。\n\n## 关键设计\nSkillGen 的新颖之处正在于对比归纳加干预式验证这一组合:前者保证了技能抽象的质量与针对性,后者用受控对照给出了技能价值的实证度量。所生成的技能既可读可审计,又经过净效果检验,因而更可信、更可控。\n\n## 实验要点\nabstract 报告,在广泛的智能体与数据集上,SkillGen 持续提升留出集(held-out)表现,优于已有的技能生成基线,并且所生成的技能能够跨模型迁移复用。结果以定性方向为主呈现,验证了对比归纳与干预式净效果验证的有效性。这里的关键价值在于「留出集提升」与「可审计」两点的结合:前者说明合成的技能不是对训练轨迹的过拟合,而是真正抓住了可泛化的成功要素;后者则让技能在投入使用前可被人工检查,契合了在无需重训的前提下增强智能体、又保持所加程序可控这一初衷,使自动化技能合成更值得信赖。",
+    "evaluation": "在广泛的智能体与数据集上评测,SkillGen 持续提升留出集(held-out)表现,优于已有技能生成基线,且所生成的技能能够跨模型迁移复用;结果以定性方向呈现,验证对比归纳与干预式净效果验证的有效性。",
+    "mainFinding": "对比成功与失败轨迹归纳可审计技能,并以干预方式验证净效果,持续提升留出表现且可跨模型迁移。",
+    "limitations": "每次合成单个技能,面向技能库规模化组织的机制有限;对比归纳依赖成败轨迹的可得性。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2605.10999"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2605.10999"
+      }
+    ],
+    "citation": "SkillGen, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-skillgen.png",
+        "caption": "SkillGen:多智能体框架,先引出成功与失败轨迹,从中对比归纳出单个可审计技能,并以干预方式实证验证其净效果。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-mindskill",
+    "page": "memory",
+    "title": "MIND-Skill: Quality-Guaranteed Skill Generation via Multi-Agent Induction and Deduction",
+    "shortTitle": "MIND-Skill",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Mingshu Cai et al.",
+    "methodFamily": "归纳-演绎技能生成",
+    "tags": [
+      "技能归纳",
+      "演绎重构",
+      "TextGrad",
+      "质量保证"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.82,
+      "reproducibility": 0.72,
+      "adoption": 0.64,
+      "selfEvolution": 0.82
+    },
+    "summary": "MIND-Skill 用归纳与演绎两个智能体自动从成功轨迹提炼可泛化技能,并通过三重文本损失保证技能质量。",
+    "methodCore": "MIND-Skill(Multi-agent INduction and Deduction for Skills)针对一个规模化痛点:可复用的智能体技能长期依赖人工专家把丰富的领域知识提炼为可执行指南,难以规模化。abstract 指出,LLM 智能体在需要领域特定程序知识的复杂多步任务上仍常出错,而可复用技能是自然的补救手段。MIND-Skill 用归纳-演绎的多智能体框架,自动从成功轨迹中归纳可泛化技能,并给出稳健的质量保证。\n\n## 方法总览\n框架由两个智能体构成。归纳智能体(induction agent)负责从成功轨迹中抽象出可复用技能;演绎智能体(deduction agent)则尝试仅依照所归纳出的技能去重构轨迹。归纳负责「从经验里提炼规律」,演绎负责「检验这些规律是否足以复现正确行为」,二者形成一个可自检的闭环,这是方法保证质量的结构基础。\n\n## 技能的抽象与表征\n技能在此表征为文档化的可执行指南,凝练了成功轨迹中蕴含的领域程序知识。与仅靠一次总结不同,MIND-Skill 通过演绎重构来反复检验并调节技能的抽象层次:如果按技能重构出的轨迹与原轨迹一致且结果正确,说明技能既充分又准确;否则就需要修正。技能因此不是静态摘要,而是经过重构检验的可靠指南。\n\n## 技能的学习与三重文本损失\n为保证技能质量,方法引入三种文本损失:比较输入轨迹与重构轨迹的重构损失(reconstruction loss),约束重构轨迹正确性的结果损失(outcome loss),以及依据预定义标准评估文档质量并调节抽象层次的评分标准损失(rubric loss)。这三种文本损失通过 TextGrad 联合优化——注意这是文本梯度而非参数梯度的优化,最终得到的技能在优化阶段未见过的留出任务上评估,以检验其泛化。\n\n## 关键设计\nMIND-Skill 的新颖之处在于用归纳-演绎闭环加三重文本损失,为自动技能提炼提供了可验证的质量保证。归纳-演绎结构解决了「技能是否足以复现正确行为」的问题,三重损失则从重构一致性、结果正确性与文档质量三个维度共同约束技能,使自动生成的技能在质量上可控、可度量。\n\n## 实验要点\nabstract 报告,在 AppWorld 与 BFCL-v3 上评测,MIND-Skill 持续优于同期的技能生成方法;通过对重构、结果与评分标准三重文本损失的 TextGrad 联合优化,并在优化未见过的留出任务上评估,验证了所生成技能的质量与泛化能力。之所以要在留出任务上评估,是为了排除技能只是「记住」了优化阶段轨迹的可能,从而证明归纳出的技能确实抽象出了可迁移的领域程序知识;而三重损失的联合优化则把「文档写得好不好、能否复现正确行为、抽象层次是否恰当」这几个原本靠人工把关的维度,转化为可自动优化的目标,使规模化地产出高质量技能成为可能。",
+    "evaluation": "在 AppWorld 与 BFCL-v3 上评测,MIND-Skill 持续优于同期技能生成方法;通过 reconstruction、outcome 与 rubric 三重文本损失的 TextGrad 联合优化,并在优化未见过的留出任务上评估,验证所生成技能的质量与泛化。",
+    "mainFinding": "归纳提炼技能、演绎重构轨迹并以三重文本损失联合优化,自动生成质量有保证且可泛化的技能。",
+    "limitations": "依赖 TextGrad 文本优化与可判分任务;评测集中于两类工具/函数调用基准。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2605.08670"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2605.08670"
+      }
+    ],
+    "citation": "MIND-Skill, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-mindskill.png",
+        "caption": "MIND-Skill:归纳智能体把成功轨迹抽象为结构化技能文档,演绎智能体将其应用于新任务,用三重文本损失保证技能质量。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-skilltta",
+    "page": "memory",
+    "title": "Skills on the Fly: Test-Time Adaptive Skill Synthesis for LLM Agents",
+    "shortTitle": "SkillTTA",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Jingxing Wang et al.",
+    "methodFamily": "测试时技能合成",
+    "tags": [
+      "测试时自适应",
+      "轨迹检索",
+      "临时技能",
+      "失败轨迹"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.82,
+      "reproducibility": 0.74,
+      "adoption": 0.64,
+      "selfEvolution": 0.82
+    },
+    "summary": "SkillTTA 在测试时检索少量相关训练轨迹,合成针对当前任务的临时文本技能,不更新参数即实现自适应。",
+    "methodCore": "SkillTTA 关注一个现实观察:LLM 智能体能从可复用技能中获益,但测试时遇到的具体任务,往往需要比静态技能库更贴身的指导。为此 abstract 提出测试时自适应技能合成(Test-Time Adaptive Skill Synthesis):面对当前任务时,检索少量与之相关的训练轨迹,并把它们合成为一段临时、面向该任务的文本技能注入提示。\n\n## 方法总览\n方法的流程很轻:检索少量相关训练轨迹,合成任务专属技能,注入提示后由求解模型(solver)执行。关键在于求解模型保持固定,自适应完全通过生成的上下文实现,而非任何参数更新,因而整套机制轻量且即插即用。这把「技能」的产生时机从离线常驻库,转移到了推理时按需生成。\n\n## 技能的抽象与表征\n技能在此被表征为一次性合成的任务专属文本,用完即弃、不持久沉淀为常驻库。方法特别强调合成而非直接堆叠原始轨迹:它把检索到的若干轨迹提炼、重组为一段针对当前任务的指导,而不是简单地把原始轨迹拼进提示。消融显示,合成技能优于原始轨迹提示,说明这层「提炼」带来了实质增益。\n\n## 技能的学习与失败轨迹的价值\n方法的一个鲜明发现是失败轨迹尤其有用。abstract 与消融指出,失败轨迹暴露了反复出现、面向评估器(evaluator-facing)的错误模式,把这些「容易踩的坑」纳入合成,有助于生成更具针对性的指导。此外,消融还表明检索的 top-k 应保持较小——少而精的相关轨迹比大量弱相关轨迹更有效。技能的学习因而不是靠积累,而是靠对当前任务最相关信息(含失败教训)的即时提炼。\n\n## 关键设计\nSkillTTA 的新颖之处在于把技能合成从离线常驻库转为测试时按需生成,并系统化地利用失败轨迹。它不追求维护一个庞大的持久技能库,而是每次针对具体任务临时造出最贴合的指导,以最小代价换取自适应能力。\n\n## 实验要点\nabstract 报告,在 SpreadsheetBench、ALFWorld 与 BigCodeBench 上评测。相比用 GPT-5.5 的静态轨迹到技能合成,任务专属技能把 SpreadsheetBench 的 Pass@1 从 0.397 提升到 0.505、BigCodeBench 的 Pass@1 从 0.517 提升到 0.651;在 ALFWorld 上,与更重的记忆学习基线的成功率相差不到 4 个点,且在已报告方法中产生的成功轨迹最短。ALFWorld 上「用更轻的机制逼近更重基线、且轨迹最短」尤为说明问题:测试时按需合成的贴身指导,让智能体少走弯路,以远低于维护常驻技能库的代价换来接近的效果,这对追求即插即用、部署简洁的应用场景是很有吸引力的取舍。",
+    "evaluation": "在 SpreadsheetBench、ALFWorld 与 BigCodeBench 上评测。相比用 GPT-5.5 的静态轨迹到技能合成,任务专属技能把 SpreadsheetBench Pass@1 从 0.397 提升到 0.505、BigCodeBench Pass@1 从 0.517 提升到 0.651;ALFWorld 上与更重的记忆学习基线成功率相差不到 4 个点,且成功轨迹最短。",
+    "mainFinding": "测试时检索少量轨迹合成任务专属临时文本技能,不更新参数即提升成功率,失败轨迹尤其有价值。",
+    "limitations": "临时技能不持久沉淀,复用性弱于常驻技能库;效果依赖检索轨迹的相关性。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2605.16986"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2605.16986"
+      }
+    ],
+    "citation": "SkillTTA, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-skilltta.png",
+        "caption": "SkillTTA:针对原始轨迹提示噪声大、静态技能库易失配,测试时检索少量相关训练轨迹合成临时文本技能,不更新参数即自适应。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-nsi",
+    "page": "memory",
+    "title": "Lifting Traces to Logic: Programmatic Skill Induction with Neuro-Symbolic Learning for Long-Horizon Agentic Tasks",
+    "shortTitle": "NSI",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Jie-Jing Shao et al.",
+    "methodFamily": "神经符号技能归纳",
+    "tags": [
+      "神经符号",
+      "程序化技能",
+      "控制流",
+      "长程任务"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.81,
+      "reproducibility": 0.7,
+      "adoption": 0.62,
+      "selfEvolution": 0.83
+    },
+    "summary": "NSI 把交互轨迹提升为逻辑基础的模块化程序,合成显式控制流与动态变量绑定,让智能体懂得何时与为何行动。",
+    "methodCore": "NSI(Neuro-Symbolic Skill Induction)面向长程智能体任务,针对一个根本困境:基础模型驱动的智能体因纯提示式推理具有瞬时性,难以稳定地进行长程规划;而现有技能归纳方法把经验蒸馏为「状态无关」(state-blind)的参数化脚本,无法捕捉在动态环境中稳健执行所需的条件逻辑。NSI 的答案是把交互轨迹提升(lift)为以逻辑为基础的模块化程序。\n\n## 方法总览\nNSI 不把成功经验封装成一条固定的动作序列,而是把交互轨迹提升为模块化、以逻辑为基础(logic-grounded)的程序。通过合成显式的控制流(control flow)与动态的变量绑定(variable binding),这些程序能够表达「在什么条件下走哪条分支、把哪些观测绑定到哪些变量」,从而让技能具备条件判断与状态感知能力,而不是机械重放。\n\n## 技能的抽象与表征\n技能在此被表征为神经符号程序:符号化的控制流与变量绑定负责捕捉条件逻辑,神经部分负责在具体情境中做出判断。相比状态无关的线性脚本,这种表征能回答「何时(when)行动」与「为何(why)行动」两个关键问题,使技能在动态环境里更稳健。技能不依赖参数更新,而是以可执行程序的形式存在。\n\n## 技能的学习与泛化\n这一范式支持高效泛化:因为技能被表达为带条件逻辑的程序,智能体能够从少样本示例(few-shot examples)中归纳出技能,并在面对未见目标时灵活适配——只要复用其中的控制流与变量绑定结构,而不必为每个新目标重新学习整段行为。由此,智能体不再是固定序列的执行者,而演化为逻辑基础技能的构建者(architects)。\n\n## 关键设计\nNSI 的新颖之处在于用符号化的控制流与变量绑定,补足了纯参数脚本所缺失的条件逻辑。这既保留了从经验中归纳技能的能力,又赋予技能在动态、长程场景下稳健执行与灵活泛化的结构,是它区别于 state-blind 参数化脚本方法的核心。\n\n## 实验要点\nabstract 报告,在一系列智能体任务上,NSI 持续优于最新基线;实验展示了它能从少样本示例中归纳出逻辑基础的技能,并灵活泛化到未见目标,从而支撑长程规划。需要说明的是,摘要未报告具体数值指标,相关结果以定性方向呈现。从范式演进的角度看,NSI 的意义在于回应了「技能到底该以什么形式沉淀」这一问题:线性脚本记住的是「这次怎么做」,而带控制流与变量绑定的程序记住的是「在各种情况下该怎么做」,后者天然更接近人类对可复用技能的理解,也更能在动态、长时序的环境里经受住状态变化的考验,把智能体从固定序列的执行者推向逻辑基础技能的构建者。",
+    "evaluation": "在一系列智能体任务上评测,NSI 持续优于最新基线;实验展示其能从少样本示例归纳出逻辑基础的技能,并灵活泛化到未见目标,支撑长程规划。摘要未报告具体数值指标,结果以定性方向呈现。",
+    "mainFinding": "把轨迹提升为含控制流与变量绑定的逻辑程序技能,让智能体掌握何时与为何行动,并泛化到未见目标。",
+    "limitations": "程序合成对可符号化环境依赖较强;论文未报告具体数值指标。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2605.01293"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2605.01293"
+      }
+    ],
+    "citation": "NSI, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-nsi.png",
+        "caption": "NSI:相较状态盲的参数化脚本,把交互轨迹提升为逻辑基础的模块化程序,合成显式控制流与动态变量绑定,让智能体懂得何时与为何行动。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-skillpyramid",
+    "page": "memory",
+    "title": "SkillPyramid: A Hierarchical Skill Consolidation Framework for Self-Evolving Agents",
+    "shortTitle": "SkillPyramid",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.83,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Yuan Xiong et al.",
+    "methodFamily": "分层技能巩固",
+    "tags": [
+      "技能巩固",
+      "分层拓扑",
+      "自演化",
+      "技能迁移"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.83,
+      "reproducibility": 0.72,
+      "adoption": 0.66,
+      "selfEvolution": 0.88
+    },
+    "summary": "SkillPyramid 以分层技能拓扑巩固与复用经验,并在执行中组合、验证、纳入新技能,把技能池变为动态演化系统。",
+    "methodCore": "SkillPyramid 关注智能体的长期改进瓶颈:abstract 指出,近期智能体虽能灵活调用技能解决复杂任务,但其长期提升从根本上受限于缺乏系统化的技能构建、累积与迁移。没有统一的技能巩固框架,智能体往往在不同任务间冗余地构建相似能力,难以把经验转化为可复用资产,也难以把任务专用技能泛化到新场景。\n\n## 方法总览\nSkillPyramid 提出一个技能巩固(consolidation)框架,复用已有技能经验以支持更广的任务泛化。它运行在一个分层技能拓扑(hierarchical skill topology)之上,把技能按层级组织起来,使不同抽象层次、不同粒度的技能各就其位,便于检索、复用与组合,从根本上减少「重复造轮子」。\n\n## 技能的抽象与表征\n技能被表征为分层组织的可复用技能条目。分层拓扑不仅是存储结构,更体现了技能之间的组合与依赖关系:底层技能可被上层技能组合调用,任务专用技能可以被归纳为更通用的能力。这样的组织让智能体在面对新任务时,能优先复用或组合已有技能,而不必从零构建,从而把散落的经验沉淀为结构化资产。\n\n## 技能的学习与自演化\nSkillPyramid 引入自演化机制:在任务执行过程中,智能体可以组合(compose)已有技能、验证(validate)其有效性,并把新技能纳入(incorporate)拓扑。这三步在执行中闭环运转,使原本静态的技能集合被转化为一个能够持续构建、累积与迁移技能的动态演化系统。验证环节保证了纳入拓扑的新技能确实有效,避免拓扑被无效技能污染。\n\n## 关键设计\n方法不依赖基座参数更新,其新颖之处在于用分层拓扑加执行中的「组合-验证-纳入」闭环,把技能池从静态资源升级为自演化系统。分层结构支撑了跨场景的泛化与迁移,执行中的自演化则保证了技能库随任务推进不断成长与精炼,二者共同减少重复建设并提升效率。\n\n## 实验要点\nabstract 报告,在 ALFWorld、WebShop 与 ScienceWorld 上跨四种基座模型评测,SkillPyramid 使平均奖励提升 38.0%、执行步数减少 27.7%。这些结果验证了分层技能巩固与自演化机制在具身、购物与科学模拟等多种环境下带来的泛化与效率增益,整体上把技能集合从静态资源池转变为动态演化系统。跨四种基座模型都能稳定获益,说明增益主要来自技能组织与演化机制本身,而非某个特定模型的能力;奖励上升与步数下降同时出现,则印证了巩固的双重价值——既通过复用与迁移把经验变成可增值的资产,又通过避免重复构建相似能力而减少了无谓的探索开销。",
+    "evaluation": "在 ALFWorld、WebShop 与 ScienceWorld 上跨四种基座模型评测,SkillPyramid 使平均奖励提升 38.0%、执行步数减少 27.7%,验证分层技能巩固与自演化机制在具身、购物与科学模拟环境下的泛化与效率增益。",
+    "mainFinding": "以分层技能拓扑加执行中组合、验证、纳入的自演化,把静态技能池转为动态系统,提升奖励并减少步数。",
+    "limitations": "分层拓扑的构建与维护带来额外系统开销;评测集中于三类具身/购物/科学模拟环境。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2606.03692"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2606.03692"
+      }
+    ],
+    "citation": "SkillPyramid, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-skillpyramid.png",
+        "caption": "SkillPyramid:对比扁平技能库遇新任务无匹配需从零探索,以分层技能拓扑巩固复用经验,并在执行中组合、验证、纳入新技能动态演化。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-skemex",
+    "page": "memory",
+    "title": "Experience Makes Skillful: Enabling Generalizable Medical Agent Reasoning via Self-Evolving Skill Memory",
+    "shortTitle": "SkeMex",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Wenjie Li et al.",
+    "methodFamily": "技能式记忆",
+    "tags": [
+      "医疗智能体",
+      "技能记忆",
+      "价值感知检索",
+      "读写评治"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.82,
+      "reproducibility": 0.7,
+      "adoption": 0.64,
+      "selfEvolution": 0.87
+    },
+    "summary": "SkeMex 是一个部署后自演化框架,把交互轨迹蒸馏为结构化技能记忆,用价值感知检索与治理支撑长程临床推理。",
+    "methodCore": "SkeMex 面向交互式临床决策场景。abstract 指出,医疗智能体正越来越被期望支持交互式的临床决策而不只是静态问答;在这类场景中,有效的智能体必须跨不断演变的病例复用既往经验,但现有记忆机制常保留冗余、嘈杂且难以治理的原始历史轨迹,更关键的是很少区分哪些记忆对未来推理真正有用。SkeMex 提出一个部署后自演化(post-deployment self-evolution)框架来弥合这一差距。\n\n## 方法总览\nSkeMex 在不更新模型权重的前提下,通过一种技能式记忆(skill-based memory)来改进医疗智能体。它把有信息量的交互轨迹蒸馏为编码可复用程序知识的结构化技能,而不是照单全收原始轨迹,从而把嘈杂的历史转化为紧凑、可靠的经验。\n\n## 技能的抽象与多分支仓库\n蒸馏出的技能被组织为一个多分支仓库(multi-branch repository),跨越通用(general)、任务专用(task-specific)与动作级(action-level)三个层次的经验。这种分层组织让不同粒度的临床程序知识各得其所:通用分支沉淀跨病例通用的推理套路,任务专用分支承载特定任务的做法,动作级分支保留细粒度操作经验。技能统一表征为结构化文本,按其价值受治理。\n\n## 技能的价值感知检索与生命周期\n为判断哪些记忆应被复用与保留,SkeMex 依据环境反馈估计与情境相关的效用(context-dependent utility),并用它来指导价值感知(value-aware)的检索与仓库治理。整个系统通过一个「读-写-评-治」(Read-Write-Assess-Govern)的闭环生命周期持续演化:写入新技能、更新效用、提升有用记忆并移除有害条目。由此,记忆不只是被动存储,而是按其对未来推理的实际价值被主动筛选、提拔或淘汰。\n\n## 关键设计\nSkeMex 的新颖之处在于以效用估计驱动记忆的价值感知检索与「读-写-评-治」闭环治理。相比只保留原始轨迹的记忆机制,它显式回答了「哪些记忆真正有用」这一被以往忽视的问题,使智能体能积累紧凑而可靠的经验,支撑长程临床推理,且全程不更新基座权重。\n\n## 实验要点\nabstract 报告,在多样临床任务上进行离线与在线评测,SkeMex 均持续优于代表性的基于记忆的智能体;它还能跨模型基座泛化,并支持可迁移的技能记忆,表明其确实能积累紧凑可靠的经验以支撑长程临床推理。作者表示全部数据与代码将公开发布。离线与在线两种设置都占优,说明价值感知治理不仅在静态回放中有效,也能在持续演进的真实交互里维持记忆质量;而技能记忆的可迁移性进一步意味着,在一批病例上打磨出的临床程序知识可以迁移到新的模型或新的任务上复用,这对医疗这类高风险、且强调经验可靠性的领域尤为重要。",
+    "evaluation": "在多样临床任务上进行离线与在线评测,SkeMex 均持续优于代表性的基于记忆的智能体;并验证其在不同模型基座上的泛化能力以及技能记忆的可迁移性,表明其能积累紧凑可靠的经验支撑长程临床推理。",
+    "mainFinding": "把轨迹蒸馏为多分支技能记忆并以价值感知检索与读写评治闭环治理,提升可泛化的长程临床推理。",
+    "limitations": "面向医疗临床场景,跨领域迁移仍待验证;效用估计依赖可靠的环境反馈。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2606.09365"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2606.09365"
+      }
+    ],
+    "citation": "SkeMex, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-skemex.png",
+        "caption": "SkeMex:部署后自演化框架,对比常规记忆与训练式方法,把交互轨迹蒸馏为结构化技能记忆,用价值感知检索与治理支撑长程临床推理。"
+      }
+    ]
+  },
+  {
+    "id": "memory-sk-skillharness",
+    "page": "memory",
+    "title": "SkillHarness: Harnessing Safe Skills for Computer-Use Agents",
+    "shortTitle": "SkillHarness",
+    "category": "memory-skill",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Yurun Chen et al.",
+    "methodFamily": "安全技能约束",
+    "tags": [
+      "计算机使用智能体",
+      "安全技能",
+      "技能边界",
+      "选择性复用"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.82,
+      "reproducibility": 0.72,
+      "adoption": 0.64,
+      "selfEvolution": 0.8
+    },
+    "summary": "SkillHarness 面向计算机使用智能体,把技能学习与使用建模为安全约束的交互过程,识别安全技能并选择性复用。",
+    "methodCore": "SkillHarness 面向计算机使用智能体(Computer-Use Agents, CUA)。abstract 指出,CUA 正越来越多地被部署到动态交互环境中,催生了在交互过程中持续学习技能的需求;近期方法多从成功轨迹学习可复用技能,却普遍假设环境是静态且安全的,忽视了对抗交互(如提示注入 prompt injection)与环境动态(如弹窗 pop-ups)带来的风险。在动态场景下,这类假设会导致学到危险技能、执行脆弱,削弱 CUA 的可靠性。\n\n## 方法总览\nSkillHarness 提出一个在动态环境中安全驾驭技能的框架。它超越静态的技能抽象,把技能的学习与使用建模为一个受安全约束的交互过程(safety-constrained interaction process)。核心问题被明确为:CUA 如何在动态环境中安全地学习并使用技能?框架据此把「安全」提升为技能全生命周期的一等约束。\n\n## 技能的安全边界与表征\n方法引入技能边界(skill boundary):利用多源监督信号,从交互轨迹中识别出哪些是安全技能,并在技能的整个生命周期中构建自我改进的安全约束。技能因此被表征为受安全约束的可复用条目——不仅记录「怎么做」,还携带「在什么边界内做才安全」的约束信息,并随生命周期自我改进。这使得危险技能能在识别阶段被排除,而非被无差别地学入库中。\n\n## 技能的选择性复用\n在使用侧,SkillHarness 提出选择性技能复用(selective skill reuse):按上下文引导任务分解,通过选择性地激活技能子集来完成任务,而不是一股脑调用全部技能。这样既控制了在动态环境中触发风险的面,又兼顾了执行的稳定性,让智能体在面对弹窗、对抗输入等变化时仍能稳健完成任务。\n\n## 关键设计\nSkillHarness 的新颖之处在于把安全性作为技能学习与复用的一等约束纳入建模,而非事后附加。技能边界从源头识别安全技能并施加自改进约束,选择性复用则在使用时进一步收敛风险面,二者不依赖参数更新,共同回应了动态环境下 CUA 的可靠性诉求。\n\n## 实验要点\nabstract 报告,实验显示 SkillHarness 将所学技能的不安全率(unsafe rate)显著降低 57.1%,并在动态环境变化下持续提升执行稳定性,整体优于已有的技能学习基线。结果侧重在安全性与稳定性两个维度上的验证,凸显了把安全约束嵌入技能学习与复用全过程的价值。这一取向与多数只追求成功率的技能学习工作形成互补:在计算机使用智能体被真实部署、可能面对提示注入与突发弹窗的场景下,一个既高效又可能执行危险操作的技能库反而是隐患,而 SkillHarness 通过在学习端识别安全技能、在使用端选择性激活,把「不做危险的事」变成技能能力的一部分,为动态环境下 CUA 的可靠落地提供了必要的安全底座。",
+    "evaluation": "实验显示 SkillHarness 将所学技能的不安全率(unsafe rate)显著降低 57.1%,并在动态环境变化下持续提升执行稳定性,整体优于已有技能学习基线;结果侧重安全性与稳定性维度的验证。",
+    "mainFinding": "以技能边界与生命周期安全约束识别安全技能、选择性复用,大幅降低不安全率并提升动态环境执行稳定性。",
+    "limitations": "聚焦安全性与稳定性,任务成功率提升幅度未量化;安全信号依赖多源监督的可得性。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2606.20636"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2606.20636"
+      }
+    ],
+    "citation": "SkillHarness, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-sk-skillharness.png",
+        "caption": "SkillHarness:面向计算机使用智能体,对比代码技能与其方案,把技能学习与使用建模为安全约束的交互,识别安全技能并选择性复用。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-longmemeval",
+    "page": "memory",
+    "title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory",
+    "shortTitle": "LongMemEval",
+    "category": "memory-eval",
+    "maturity": "mature",
+    "score": 0.92,
+    "year": 2024,
+    "venue": "ICLR 2025",
+    "authors": "Di Wu et al.",
+    "methodFamily": "长期交互记忆基准",
+    "tags": [
+      "长期记忆",
+      "多会话",
+      "时序推理",
+      "对话助手"
+    ],
+    "scores": {
+      "clarity": 0.95,
+      "evidence": 0.9,
+      "reproducibility": 0.9,
+      "adoption": 0.9,
+      "selfEvolution": 0.4
+    },
+    "summary": "面向聊天助手长期交互记忆的综合基准，测评信息抽取、多会话推理、时序推理、知识更新与拒答五种核心能力。",
+    "methodCore": "LongMemEval 面向聊天助手在持续交互中的长期记忆能力构建综合基准。它注意到主流对话系统虽已引入记忆组件来追踪用户与助手的历史，却几乎没有工作系统检验其在长跨度、多会话交互中的真实记忆表现，因此把这一被忽视的能力单独提取出来做严格评测。\n\n## 五种核心记忆能力\n\n基准围绕五种被认为构成长期记忆基础的能力来组织任务：信息抽取(information extraction)考察系统能否从冗长对话中定位到关键事实；多会话推理(multi-session reasoning)要求把分散在不同会话中的线索整合起来作答；时序推理(temporal reasoning)检验对事件先后与时间关系的把握;知识更新(knowledge updates)考察当用户信息发生变化时系统能否用最新版本覆盖旧信息;拒答(abstention)则要求在历史中并不存在答案时诚实地拒绝作答而非臆造。这五项能力共同勾勒出一个真实助手在长期陪伴用户时必须具备的记忆素养，也把「读得到」与「读得对」区分开来。\n\n## 数据构造与可扩展交互史\n\n数据集精心构造了 500 道问题，并把每道问题嵌入可自由扩展的用户-助手聊天历史之中。这种嵌入式设计的巧妙之处在于历史长度可以任意放大，从而在不改变问题本身的前提下逼近真实的长期对话场景;当交互史被拉长、干扰信息被稀释后，系统必须在跨会话累积的海量上下文里精准定位并整合证据，任务难度随之显著上升。这样既保证了问题标注的可靠性，又赋予基准评测不同长度区间记忆退化的能力。\n\n## 三阶段记忆框架与优化\n\n为把评测转化为可操作的设计指引，LongMemEval 把长期记忆系统统一拆解为索引(indexing)、检索(retrieval)与阅读(reading)三阶段框架。基于实验洞察，论文在每一阶段提出针对性优化：会话分解(session decomposition)细化记忆存储的粒度，使检索单元更精确;事实增强键扩展(fact-augmented key expansion)在索引阶段丰富键的语义表示以提升召回;时间感知查询扩展(time-aware query expansion)则在检索时缩放与细化搜索范围，让时序相关的证据更易被命中。这些改进共同服务于同一目标——让记忆既存得清晰又取得准确。\n\n## 评测协议与指标\n\n评测同时采用记忆召回率与下游问答准确率两类指标：前者衡量系统是否把正确证据取回，后者衡量取回后能否推出正确答案，二者结合可以定位失败究竟发生在检索还是阅读环节。基准既评测商用聊天助手，也评测直接把全部历史塞入窗口的长上下文 LLM，从而在统一口径下比较「记忆机制」与「纯长上下文」两条技术路线的优劣。",
+    "evaluation": "基准评测了商用聊天助手与长上下文 LLM，发现它们在跨持续交互记忆信息时出现约 30% 的准确率下降，暴露长期记忆能力的普遍薄弱。进一步的大量实验表明，会话分解、事实增强键扩展与时间感知查询扩展等优化能同时显著提升记忆召回率与下游问答表现，为索引、检索、阅读三阶段的设计提供了明确且可操作的方向。",
+    "mainFinding": "长上下文能力并不等于长期记忆能力：商用助手与长上下文模型在跨会话记忆信息时准确率约下降 30%，凸显专门的分阶段记忆机制的必要性。",
+    "limitations": "问题为精心合成且仅 500 道、规模有限，主要评估记忆的检索与阅读，而非经验的持续演化、自我改进与在线更新。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2410.10813"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2410.10813"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/xiaowu0162/LongMemEval"
+      }
+    ],
+    "citation": "LongMemEval, ICLR 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-longmemeval.png",
+        "caption": "LongMemEval:面向聊天助手长期交互记忆的基准,展示信息抽取、多会话与时序推理、知识更新、拒答等多类问题及证据。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-locomo",
+    "page": "memory",
+    "title": "Evaluating Very Long-Term Conversational Memory of LLM Agents",
+    "shortTitle": "LOCOMO",
+    "category": "memory-eval",
+    "maturity": "mature",
+    "score": 0.9,
+    "year": 2024,
+    "venue": "ACL 2024",
+    "authors": "Adyasha Maharana et al.",
+    "methodFamily": "超长对话记忆基准",
+    "tags": [
+      "长期对话",
+      "多模态",
+      "事件图",
+      "问答"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.88,
+      "reproducibility": 0.9,
+      "adoption": 0.95,
+      "selfEvolution": 0.35
+    },
+    "summary": "通过人机协同管线生成基于人格与时序事件图的超长对话，构建评测LLM超长期对话记忆的基准LoCoMo。",
+    "methodCore": "LOCOMO 面向此前长期开放域对话研究普遍只覆盖不超过五个会话的空白，专门评测 LLM 智能体在超长期(very long-term)对话中的记忆能力。作者指出，尽管长上下文模型与检索增强生成(RAG)技术不断进步，它们在真正跨越数十个会话的对话上究竟表现如何仍是未知，因此需要一套能承载超长交互史的高质量数据与评测协议。\n\n## 人机协同的数据生成管线\n\n基准最核心的贡献是一条人机协同(machine-human)的数据生成管线。它先用基于人格画像(personas)与时序事件图(temporal event graphs)的 LLM 智能体架构来生成对话:人格画像保证每个虚拟说话人在长跨度内保持稳定的性格与偏好;时序事件图则为对话提供一条随时间推进、事件之间存在因果与先后关系的主线，使生成的对话不是零散闲聊而是有连贯生活脉络的长期交往。作者还赋予每个智能体分享与回应图像的能力，让对话天然带有多模态成分。生成之后，人工标注者对内容进行校验与编辑，重点保证长程一致性以及对事件图的忠实性，从而弥补纯自动生成在长跨度上容易前后矛盾的缺陷。\n\n## 数据规模与任务设计\n\n通过上述管线收集到的 LoCoMo 数据集，平均每段对话约 300 轮、约 9K token，最多跨越 35 个会话，远超以往数据集的长度量级;作者共收集约五十段这样的对话，数量虽不算庞大，但每段所承载的交互密度与时间跨度足以对模型的长期记忆构成实质压力。基于这些对话，基准构建三类评测任务:问答(question answering)考察对分散事实的定位与整合;事件摘要(event summarization)考察对长程叙事脉络的概括;多模态对话生成(multi-modal dialogue generation)则考察结合图像上下文继续对话的能力。三类任务共同衡量模型对冗长对话的理解，以及对长程时序与因果动态的把握;把问答、摘要与多模态生成并置的用意在于，单一任务只能反映记忆能力的某个侧面——问答偏向精确检索，摘要偏向全局归纳，多模态生成则偏向结合视觉线索的连贯回应,唯有三者合观才能刻画一个智能体在超长交往中记忆运用的全貌。\n\n## 评测口径与考察重点\n\n评测在同一批超长对话上对比长上下文 LLM 与 RAG 方法两条路线，重点观察它们能否在数十个会话累积的信息里稳定作答，以及是否会出现说话人误配(speaker attribution 错误)等典型失败。摘要与多模态生成任务则更多依赖人工与模型判分，考察生成内容的忠实性与连贯性。通过把记忆、时序推理与多模态理解耦合进同一评测场，LOCOMO 力求刻画真实长期陪伴场景下模型记忆能力的整体边界，而非孤立的单点检索。",
+    "evaluation": "基准评测了长上下文 LLM 与 RAG 方法在问答、事件摘要与多模态对话生成上的表现，结果显示模型在理解冗长对话、把握长程时序与因果动态上仍面临明显挑战，且易出现说话人误配等问题。采用长上下文或 RAG 策略能带来一定改善，但整体表现仍显著落后于人类水平，暴露超长期对话记忆的普遍瓶颈。",
+    "mainFinding": "即便借助长上下文或 RAG，模型在超长对话的记忆、时序与因果推理上仍远逊于人类，说明超长期对话记忆能力至今尚未被真正解决。",
+    "limitations": "对话由 LLM 合成且仅 50 段、规模较小，事件摘要与多模态对话生成等任务的评价较主观，且依赖人工校验与构造假设。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2402.17753"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2402.17753"
+      }
+    ],
+    "citation": "LOCOMO, ACL 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-locomo.png",
+        "caption": "LOCOMO:通过人机协同管线,基于人格与时序事件图生成超长对话,人物回应与其人设及事件一致,评测超长期对话记忆。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-ruler",
+    "page": "memory",
+    "title": "RULER: What's the Real Context Size of Your Long-Context Language Models?",
+    "shortTitle": "RULER",
+    "category": "memory-eval",
+    "maturity": "mature",
+    "score": 0.91,
+    "year": 2024,
+    "venue": "COLM 2024",
+    "authors": "Cheng-Ping Hsieh et al.",
+    "methodFamily": "合成长上下文基准",
+    "tags": [
+      "大海捞针",
+      "合成任务",
+      "有效上下文",
+      "长度可配"
+    ],
+    "scores": {
+      "clarity": 0.92,
+      "evidence": 0.9,
+      "reproducibility": 0.95,
+      "adoption": 0.95,
+      "selfEvolution": 0.2
+    },
+    "summary": "扩展大海捞针测试的合成基准，用可配置序列长度与任务复杂度评估长上下文模型的真实有效上下文。",
+    "methodCore": "RULER 针对大海捞针(needle-in-a-haystack, NIAH)测试仅能反映浅层长上下文理解的局限，构建了一个序列长度与任务复杂度都可灵活配置的合成基准。作者的出发点是:虽然 NIAH 被广泛用于评估长上下文语言模型，但从大段无关文本里检索一条信息只是最表层的能力，模型很容易在这种任务上刷到近乎满分，却掩盖了它在更长、更复杂输入上的真实退化。\n\n## 在 NIAH 之上的扩展\n\nRULER 首先在原始 NIAH 之上大幅扩展，纳入不同类型与不同数量的针的变体:针可以是数字、单词或更复杂的语义单元，数量可以从单针扩展到多针，从而把「检索一条」升级为「检索并区分多条」。这一扩展让检索类任务本身具备了梯度化的难度，避免了单针检索天然过于简单的问题。\n\n## 新增任务类别\n\n在检索之外，RULER 引入两类超越单纯上下文检索的新任务:多跳追踪(multi-hop tracing)要求模型沿着变量或指代的链条逐步追踪，考察跨越多个位置的关联推理;聚合(aggregation)则要求模型在长上下文中统计、汇总或归纳分散信息，考察全局整合而非局部定位。全基准共含 13 个代表性任务，覆盖检索、多跳追踪、聚合与问答等类别，每个任务的序列长度、针数量与干扰复杂度都可编程配置，因而能在从数千到 128K 的不同长度上自动生成受控样本。\n\n## 有效上下文的界定方式\n\nRULER 评测的核心思想是用「真实有效上下文」而非「宣称窗口大小」来刻画模型能力。它观察模型在逐步拉长的输入上何时开始失效——即准确率跌破满意阈值前所能稳定完成任务的最大长度，并以此界定有效长度。这样一来，一个宣称支持 32K 或更长的模型，若在远短于宣称长度处就已崩塌，其真实能力便被清晰揭示出来。这种以受控合成任务系统扫描长度维度的做法，使宣称长度与有效长度之间的落差得以量化;换言之，RULER 不满足于问「模型宣称支持多长」，而是逼问「在这个长度上它还能不能把事情做对」，从而把营销口径的窗口大小与工程上可信赖的有效长度清晰地区分开来。\n\n## 评测覆盖\n\n基准对多款长上下文模型在全部 13 个任务、多个长度区间上系统评测，既保留了 NIAH 的可诊断性，又通过多样任务类别把评测从「能否找到」推进到「能否追踪与聚合」，从而给出比单一 NIAH 更全面的长上下文能力画像。由此，RULER 既保留了 NIAH 易于理解、便于自动判分的优点，又通过多样任务与可配置复杂度把评测推向了更接近真实需求的深度，成为衡量长上下文模型真实能力的重要工具。作者对 Yi-34B 这类宣称支持 200K 的模型的细致分析进一步表明，随着输入长度与任务复杂度上升，其表现仍有很大改进空间，印证了宣称长度与有效长度之间的巨大鸿沟。",
+    "evaluation": "基准对 17 个长上下文 LM 在 13 个代表性任务上进行系统评测。尽管几乎所有模型在原始 NIAH 上近乎满分，但随上下文增长普遍出现大幅性能下降;模型虽宣称支持 32K 或更长，仅约半数能在 32K 维持满意表现。对支持 200K 的 Yi-34B 的分析进一步显示，随输入长度与任务复杂度提升仍有很大改进空间。",
+    "mainFinding": "模型宣称的上下文长度远大于其真实有效长度：NIAH 满分掩盖了随长度增长的严重性能衰减，亟需更严格的综合评测来揭示真实能力。",
+    "limitations": "任务全为合成构造，与真实应用场景存在差距，且不评测记忆更新、跨会话交互或经验累积等更高阶能力，仅刻画有效上下文长度而非记忆机制本身。",
+    "related": [
+      "memory-ev-nolima"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2404.06654"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2404.06654"
+      }
+    ],
+    "citation": "RULER, COLM 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-ruler.png",
+        "caption": "RULER:扩展大海捞针的合成基准,在聚合等任务中按不同分布采样词汇,以可配置长度与复杂度评估长上下文模型的真实有效上下文。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-bench-infinitebench",
+    "page": "memory",
+    "title": "∞Bench: Extending Long Context Evaluation Beyond 100K Tokens",
+    "shortTitle": "∞Bench/InfiniteBench",
+    "category": "memory-eval",
+    "maturity": "mature",
+    "score": 0.86,
+    "year": 2024,
+    "venue": "ACL 2024",
+    "authors": "Xinrong Zhang et al.",
+    "methodFamily": "超长上下文基准",
+    "tags": [
+      "100K+",
+      "中英双语",
+      "合成与真实",
+      "长依赖"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.85,
+      "reproducibility": 0.9,
+      "adoption": 0.9,
+      "selfEvolution": 0.2
+    },
+    "summary": "首个平均数据长度超过10万token的LLM长上下文基准，覆盖合成与真实的多领域任务。",
+    "methodCore": "∞Bench(InfiniteBench)针对现有公开基准多聚焦约 10K token、难以评估 100K+ 长上下文能力的问题，构建了首个平均数据长度超过十万 token 的 LLM 长上下文基准。作者指出，随着模型宣称能处理十万乃至更长 token，评测手段却没有跟上，缺乏标准化的超长上下文评测使得不同模型之间难以公平比较，也难以判断长上下文能力是否名副其实。\n\n## 合成与真实的双轨任务\n\n∞Bench 由合成与真实两类任务组成，跨越多个领域并以中英双语呈现。合成侧包含密钥检索、数字检索与键值检索等诊断性任务，它们结构清晰、便于自动判分，能精确定位模型在超长输入下的定位与检索行为;真实侧则包含长篇小说问答、代码调试与运行、数学计算与查找等贴近实际应用的任务，考察模型在自然长文本上的综合理解。双轨设计既保留了合成任务的可控性，又通过真实任务检验实用价值;合成任务因结构规整而便于精确量化模型在超长输入下的定位行为，真实任务则因贴近文档理解、代码与数学等实际用途而更能反映落地能力，二者互补避免了单一评测口径的偏颇。\n\n## 强调长程依赖的任务设计\n\n基准的一个关键设计取向是刻意让任务需要充分理解上下文中的长程依赖(long dependencies)，使得仅从上下文里检索少量片段不足以求解。换言之，∞Bench 要区分的是「真正的全局理解」与「局部定位取巧」:如果一个模型只会在长文本里找到相关段落再作答，它在这些需要整合跨越十万 token 信息的任务上就会露怯。这一取向把评测重点从检索推向整合，也正是 ∞Bench 区别于早期短上下文基准的关键——它要回答的不是「模型能否在十万 token 里找到一句话」，而是「模型能否真正读懂并综合利用这十万 token」。\n\n## 规模、双语与指标\n\n∞Bench 平均数据长度超过十万 token，是当时长度量级最大的公开基准之一，并以中英双语覆盖多领域，扩大了适用范围。各子任务以准确率或匹配分等自动指标衡量，便于在超百万上下文规模上批量评测。通过在这一规模上评测面向长上下文优化的专有与开源模型，基准考察它们整合全局信息的能力，并给出关于 LLM 处理超长上下文行为的多项分析，揭示其在极端长度下的失效模式与规律。这些分析为理解长上下文模型「宣称能力被高估」的现象提供了实证支撑。总体来看，∞Bench 以超百万 token 的规模、中英双语覆盖以及强调长程依赖的任务设计，为百万级上下文时代的模型比较提供了首个标准化标尺，也为理解模型在极端长度下的失效规律奠定了实证基础。值得一提的是，∞Bench 把中英双语纳入同一评测框架，使其不仅服务于英文社区，也为中文长上下文模型的评估提供了对齐的标尺，扩大了这一基准的适用人群与研究价值。",
+    "evaluation": "基准评测了面向长上下文优化的最先进专有与开源 LLM，覆盖合成与真实的中英双语任务。结果表明现有长上下文模型在有效处理 100K+ 上下文时仍需显著改进，尤其在需要全局理解而非局部片段检索的任务上表现薄弱;论文还给出三项关于模型处理长上下文行为的分析，进一步揭示其在超长输入下的失效规律。",
+    "mainFinding": "平均超 100K token 的评测揭示，现有长上下文模型仍难以真正整合全局信息、而非仅做局部片段检索，其宣称的长上下文能力被明显高估。",
+    "limitations": "部分任务为合成构造，模型迭代快导致榜单易过时，且不涉及交互式或跨会话记忆的读写与更新评测，评测偏静态长文档而非交互式对话历史。",
+    "related": [
+      "memory-ev-longbench"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2402.13718"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2402.13718"
+      }
+    ],
+    "citation": "∞Bench/InfiniteBench, ACL 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-bench-infinitebench.png",
+        "caption": "∞Bench:首个平均长度超十万 token 的 LLM 长上下文基准,对比多款前沿模型表现,覆盖合成与真实的多领域任务。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-longbench",
+    "page": "memory",
+    "title": "LongBench: A Bilingual, Multitask Benchmark for Long Context Understanding",
+    "shortTitle": "LongBench",
+    "category": "memory-eval",
+    "maturity": "mature",
+    "score": 0.89,
+    "year": 2023,
+    "venue": "ACL 2024",
+    "authors": "Yushi Bai et al.",
+    "methodFamily": "双语多任务长上下文基准",
+    "tags": [
+      "中英双语",
+      "多任务",
+      "真实任务",
+      "长度分析"
+    ],
+    "scores": {
+      "clarity": 0.9,
+      "evidence": 0.88,
+      "reproducibility": 0.95,
+      "adoption": 0.95,
+      "selfEvolution": 0.15
+    },
+    "summary": "首个双语、多任务、综合评估大模型长上下文理解能力的基准，覆盖21个数据集六大任务类别。",
+    "methodCore": "LongBench 针对当时缺乏面向长上下文理解的综合基准这一空白，构建了首个双语、多任务的长上下文理解评测套件，用以更严格地评估扩展上下文窗口与更复杂记忆机制所带来的收益。作者观察到，多数 LLM 只能处理数千 token 的文本，难以直接应用于书籍、报告、代码库等长序列输入，而针对这一能力的系统性评测长期缺位。\n\n## 六大任务类别\n\n基准由 21 个数据集组成，覆盖六大任务类别:单文档问答、多文档问答、摘要、少样本学习、合成任务与代码补全。这一任务谱系有意兼顾理解、聚合与生成等不同能力维度——单/多文档问答考察定位与跨文档整合，摘要考察长文本压缩，少样本学习考察在长上下文中利用示例的能力，合成任务提供可控诊断，代码补全则贴近真实工程场景。多样的类别使 LongBench 能刻画长上下文能力的不同侧面，而非单一检索;这种设计的价值在于，一个模型或许擅长在长文档里定位单条答案，却未必能跨多篇文档整合信息、也未必能对整本书做出高质量摘要，只有横跨多类任务才能暴露这种能力的不均衡。\n\n## 双语与真实长文本\n\nLongBench 兼含中英文，英文平均约 6711 词、中文约 13386 字，覆盖书籍、报告、代码库等真实长文本应用领域。双语设计扩大了评测的语言适用范围，而取材于真实文档则保证任务分布贴近实际使用场景，而非人为堆砌的合成噪声。所有数据集被标准化为统一格式，便于对 LLM 进行轻松的自动评估。\n\n## 统一指标与长度分析\n\n基准采用 F1、Rouge、准确率等自动指标，对不同类别分别度量。一个重要用途是按输入长度切分并分析同一模型在不同长度区间的性能变化趋势，从而刻画长序列处理的能力边界——随着输入变长模型如何衰减，正是长上下文技术需要攻克的核心问题。\n\n## 技术路线的实证检验\n\n借助统一评测，LongBench 得以横向检验多条长上下文技术路线的作用:扩展与缩放位置编码、在更长序列上微调、以及以检索为代表的上下文压缩技术。这为「究竟靠原生长上下文能力还是靠检索压缩」这一取舍提供了实证参照，也让不同增强手段的贡献可被量化比较。总体而言，LongBench 作为首个双语、多任务的长上下文理解基准，把此前零散、各自为政的评测收拢进统一格式，为后续研究提供了可复用、可横向对比的标准起点，其分长度分析与技术路线对照的设计也被后续大量长上下文工作沿用。这些设计使 LongBench 成为长上下文评测走向系统化的一个重要里程碑，也为后续更长、更难的基准提供了任务组织与指标选择上的范式借鉴。此外，标准化的统一格式让研究者无需为每个数据集单独编写评测脚本，大幅降低了复现与横向对比的门槛，这也是 LongBench 被后续工作广泛采用的重要原因之一。",
+    "evaluation": "基准综合评测了 8 个 LLM，发现商用模型 GPT-3.5-Turbo-16k 优于其他开源模型但在更长上下文上仍显吃力;缩放位置编码与在更长序列上微调能带来显著提升;检索等上下文压缩技术可改善弱长上下文模型，但仍落后于本身具备强长上下文理解能力的模型，无法完全弥补差距。",
+    "mainFinding": "随输入长度增加 LLM 性能显著下降，凸显长序列处理的普遍瓶颈，且强长上下文理解能力难以仅靠检索等上下文压缩技术弥补。",
+    "limitations": "多数任务平均长度仅约 6-13k，对 100K+ 超长上下文覆盖不足，且为静态文档评测而非交互式跨会话记忆读写。",
+    "related": [
+      "memory-ev-bench-infinitebench"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2308.14508"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2308.14508"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/THUDM/LongBench"
+      }
+    ],
+    "citation": "LongBench, ACL 2024."
+  },
+  {
+    "id": "memory-ev-longbench-v2",
+    "page": "memory",
+    "title": "LongBench v2: Towards Deeper Understanding and Reasoning on Realistic Long-context Multitasks",
+    "shortTitle": "LongBench v2",
+    "category": "memory-eval",
+    "maturity": "growing",
+    "score": 0.87,
+    "year": 2024,
+    "venue": "ACL 2025",
+    "authors": "Yushi Bai et al.",
+    "methodFamily": "深度推理长上下文基准",
+    "tags": [
+      "深度推理",
+      "多选题",
+      "长对话历史",
+      "推理时算力"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.86,
+      "reproducibility": 0.9,
+      "adoption": 0.85,
+      "selfEvolution": 0.2
+    },
+    "summary": "面向真实长上下文多任务、强调深度理解与推理的高难度多选基准。",
+    "methodCore": "LongBench v2 面向真实长上下文多任务，专门评估需要深度理解与推理(deep understanding and reasoning)的难题，构建了一套高难度的多选基准。相比第一代侧重覆盖广度，v2 把难度门槛显著抬高，意在检验模型在长上下文上是否具备真正的推理能力，而不仅是定位与摘录。\n\n## 题目形式与规模\n\n基准包含 503 道富有挑战性的四选一多选题，上下文长度从 8k 词一直跨越到 2M 词。多选形式便于客观、自动地判分，避免了生成式评测中指标不可靠的问题;而横跨两个数量级以上的长度区间，则让基准既能覆盖中等长文本，又能触及极端超长输入;这种跨度使同一套题目可以同时服务于「主流窗口模型」与「宣称支持百万级 token 的模型」的比较，避免了短基准无法区分强长上下文模型、而超长基准又对普通模型过于苛刻的两难。\n\n## 六大任务类别\n\n题目覆盖六大任务类别:单文档问答、多文档问答、长上下文学习(long in-context learning)、长对话历史理解、代码仓库理解与长结构化数据理解。这一谱系既包含传统文档理解，也纳入长对话历史与代码仓库这类与智能体记忆密切相关的场景，还覆盖长结构化数据，使评测贴近现实中形形色色的长上下文应用。\n\n## 数据采集与质量控制\n\n为保证广度与实用性，数据采集自近 100 位具有多样专业背景的高学历人士，由领域内人员出题以确保问题的专业深度与真实性。基准结合自动与人工双重审核来维持高质量与高难度:经过筛选后，人类专家在 15 分钟限时下也仅达到 53.7% 的准确率，这从侧面印证了任务本身的困难程度，也为模型表现提供了一个可对照的人类基线。\n\n## 评测口径与推理对比\n\n基准采用统一的多选准确率指标，并特别设置了直接作答与「含更长推理」两类模型设置的对比。这一设计的意图是把「推理时算力」(inference-time compute)单独作为变量来观察——当模型被允许进行更长的思考链再作答时，其在长上下文难题上的表现是否会明显改善。通过这种对照，LongBench v2 得以检验增强推理能力与扩展推理时算力对攻克长上下文挑战的实际作用，把长上下文评测的关注点从「读得到」进一步推向「想得通」。通过高难题目、宽长度跨度、专业出题与人机双审的组合，LongBench v2 把长上下文评测的难度标尺显著抬高，也让「推理时算力」这一变量在长上下文场景下的价值第一次被清晰地量化出来。值得注意的是，长对话历史理解与代码仓库理解这两类任务与智能体的长期记忆场景直接相关，使 LongBench v2 在纯文档理解之外，也间接触及了智能体在长交互中调用历史信息的能力。",
+    "evaluation": "基准评测显示，表现最佳的模型直接作答仅达 50.1% 准确率，而含更长推理的 o1-preview 达到 57.7%、超出人类专家基线约 4%;人类专家在 15 分钟限时下也仅达 53.7%，足见任务之难。这些结果凸显了增强推理能力与扩展推理时算力对攻克长上下文挑战的关键作用。",
+    "mainFinding": "长上下文难题的关键在推理：直接作答的模型不及人类，而具备更长推理的模型可反超人类基线，说明推理时算力是重要突破口。",
+    "limitations": "题量相对有限(仅 503 题)，以四选一多选形式衡量、可能低估生成能力，且并非交互式跨会话记忆的评测;上下文虽跨越至 2M 词但真实超长样本占比不高。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2412.15204"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2412.15204"
+      },
+      {
+        "label": "项目主页",
+        "href": "https://longbench2.github.io"
+      }
+    ],
+    "citation": "LongBench v2, ACL 2025."
+  },
+  {
+    "id": "memory-ev-l-eval",
+    "page": "memory",
+    "title": "L-Eval: Instituting Standardized Evaluation for Long Context Language Models",
+    "shortTitle": "L-Eval",
+    "category": "memory-eval",
+    "maturity": "mature",
+    "score": 0.84,
+    "year": 2023,
+    "venue": "ACL 2024",
+    "authors": "Chenxin An et al.",
+    "methodFamily": "标准化长上下文评测",
+    "tags": [
+      "标准化评测",
+      "开放/封闭任务",
+      "人工标注",
+      "评价指标"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.84,
+      "reproducibility": 0.88,
+      "adoption": 0.85,
+      "selfEvolution": 0.15
+    },
+    "summary": "为长上下文语言模型建立标准化、高质量评测套件，涵盖多样任务与评价方法。",
+    "methodCore": "L-Eval 旨在为长上下文语言模型(long-context language models, LCLMs)建立更标准化的评测，从数据集构建与评价指标两个方面弥补开源模型评测的不足。作者注意到，GPT-4、Claude 等专有模型能在扩展上下文中较好保持推理能力，而开源模型仍处于早期发展阶段;要公平衡量二者差距、并推动开源社区进步，需要一套既高质量又评价可靠的评测标准。\n\n## 数据集构建\n\n在数据集侧，L-Eval 构建了一个含 20 个子任务、508 篇长文档、2000 余条人工标注查询-回复对的评测套件，涵盖多样的问题风格、领域，以及从 3k 到 200k token 的输入长度。人工标注保证了参考答案的质量，多样的领域与长度区间则使评测覆盖面更宽。任务被分为两类:侧重推理理解(reasoning/understanding)的封闭式任务，以及侧重信息聚合(aggregation)的开放式任务;前者答案相对确定、便于客观判分，后者更贴近开放生成场景、更能检验综合能力。\n\n## 评价指标的系统考察\n\nL-Eval 的另一核心贡献在指标侧。它系统考察适用于 LCLMs 的评价方式，发现常用的 n-gram 匹配指标(如 ROUGE、BLEU 一类)普遍与人工判断相关性不佳——在长文本、开放式回复上，字面匹配往往无法反映答案的真实质量。基于这一实证，论文强烈主张采用长度指令增强(length-instruction-enhanced, LIE)评价:即在提示中约定期望的输出长度，减少因长度不匹配导致的评价偏差;同时引入 LLM 判分(LLM judges)来更贴近人工判断。这一改进旨在提升长文本评价的可靠性与一致性;作者的深层用意在于提醒社区,一个不可靠的指标会让所有长上下文比较失去意义——若评分本身与人类判断脱节，那么再精心的模型排名也只是空中楼阁，因此评价方法的升级与上下文长度的扩展同等重要。\n\n## 评测目标与意义\n\n通过把高质量数据与更可靠指标结合，L-Eval 力求给出一套更有原则的长文本评价范式，既能公平比较专有与开源模型，又能为后续 LCLMs 研究提供可复用的评测基础。它对评价方法本身的反思，也提醒社区在追逐更长上下文的同时，必须同步升级衡量长文本质量的手段。综合来看，L-Eval 从数据与指标两端同时用力，既提供了覆盖多领域、多长度的高质量评测集，又通过对指标可靠性的反思推动社区改用更贴近人类判断的评价方式，为长上下文语言模型的规范化评测奠定了基础。此外，把任务划分为侧重推理的封闭式与侧重聚合的开放式两类，也让研究者能分别观察模型在「读懂并推理」与「汇总并生成」上的差异，避免用单一分数掩盖能力结构上的不均衡。",
+    "evaluation": "基准综合评测了 4 个流行商用 LLM 与 12 个开源模型。其中 GPT-4、Claude 等专有模型能在扩展上下文中较好保持推理能力，而开源模型仍处于早期发展阶段、差距明显;实证还发现常用 n-gram 匹配指标与人工判断相关性有限，故基准倡导采用 LIE 评价与 LLM 判分以提升评价的可靠性与一致性。",
+    "mainFinding": "长文本评价的常用 n-gram 指标不可靠、需 LLM 判分与长度指令增强，且开源 LCLMs 在扩展上下文推理上仍明显落后于专有模型。",
+    "limitations": "规模相对较小、长度上限 200k，为静态文档评测，不涉及跨会话记忆、知识更新与经验演化等交互能力;评价改进主要围绕指标可靠性而非记忆动态。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2307.11088"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2307.11088"
+      }
+    ],
+    "citation": "L-Eval, ACL 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-l-eval.png",
+        "caption": "L-Eval:为长上下文语言模型建立标准化高质量评测套件,如按不同话题位置检索并测各模型准确率,涵盖多样任务与评价方法。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-memoryagentbench",
+    "page": "memory",
+    "title": "Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions (MemoryAgentBench)",
+    "shortTitle": "MemoryAgentBench",
+    "category": "memory-eval",
+    "maturity": "growing",
+    "score": 0.85,
+    "year": 2025,
+    "venue": "ICLR 2026",
+    "authors": "Yuanzhe Hu et al.",
+    "methodFamily": "记忆智能体基准",
+    "tags": [
+      "记忆智能体",
+      "增量多轮",
+      "测试时学习",
+      "选择性遗忘"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.84,
+      "reproducibility": 0.85,
+      "adoption": 0.72,
+      "selfEvolution": 0.6
+    },
+    "summary": "面向记忆智能体、按增量多轮交互设计的基准，测评准确检索、测试时学习、长程理解与冲突解决/选择性遗忘四种核心能力。",
+    "methodCore": "MemoryAgentBench 针对现有智能体基准偏重推理、规划与执行、而记忆机制评测不足的问题，从记忆科学与认知科学的经典理论出发，为「记忆智能体」(memory agents)量身设计评测。作者把配备记忆机制、能记忆、更新并检索长期信息的智能体称为记忆智能体，并指出这类能力长期因缺乏合适基准而被低估。\n\n## 四项核心记忆能力\n\n基准提炼出记忆智能体的四项核心能力:准确检索(accurate retrieval)考察能否从长期信息中取回正确内容;测试时学习(test-time learning)考察能否在部署期从新信息中即时学习并应用;长程理解(long-range understanding)考察能否整合跨越很长跨度的信息;选择性遗忘(selective forgetting)考察能否在信息冲突或过时时丢弃旧记忆。作者进一步指出，既有基准或受限于短上下文，或面向书籍问答等静态长上下文设置，既不反映记忆智能体多轮增量累积信息的交互本质，也无一能同时覆盖这全部四项能力。\n\n## 增量多轮格式\n\n为贴近记忆智能体的真实工作方式，MemoryAgentBench 把既有长上下文数据集改造，并纳入新构造的数据集，统一转为多轮增量(incremental multi-turn)格式。具体做法是以分块方式把信息逐段喂入,而非一次性把全部上下文塞进窗口，从而模拟真实的多轮、多会话信息累积过程。在这种设置下，智能体必须在交互进行中持续读写记忆——每接收一段就要决定记什么、更新什么、何时取用，这与静态一次性阅读理解有本质区别;正因为信息是逐块到达而非一次性给全，智能体无法预知未来会用到哪些内容，只能在过程中持续做取舍与整合，这恰恰模拟了真实助手在与用户长期交往中不断吸收新信息的工作方式，也把评测从「读一篇长文档」推进到「维护一段不断增长的记忆」。\n\n## 覆盖与评测口径\n\n通过精心选择与整理数据集，基准让四项核心能力都获得系统覆盖，并以各能力对应任务的准确率进行统一衡量。评测对象跨度很广，从简单的上下文型方案、检索增强生成(RAG)型方案，一直到带外部记忆模块与工具集成的高级记忆智能体，从而在同一口径下比较不同记忆架构的强弱。这种「一个基准同时压测四种能力」的设计，使得任何在单项能力上取巧的方案都难以掩盖其在其他能力上的短板，为综合记忆机制的研究提供了系统而有挑战性的试验场。通过把记忆科学的四项能力与增量多轮格式结合，MemoryAgentBench 为「记忆智能体」这一类系统提供了首个同时压测四种能力的系统性试验场，使任何单点取巧的方案都难以掩盖整体短板。",
+    "evaluation": "基准评测了从简单上下文型、RAG 型，到带外部记忆模块与工具集成的多类记忆智能体，以四项核心能力对应任务的准确率统一衡量。实证结果表明当前方法尚无法同时掌握四项能力，尤其在测试时学习与选择性遗忘上短板明显;简单长上下文方案在部分能力上仍颇具竞争力。",
+    "mainFinding": "没有现有记忆智能体能同时掌握准确检索、测试时学习、长程理解与选择性遗忘四项能力，揭示综合记忆机制的明显缺口。",
+    "limitations": "任务部分改编自既有长上下文数据集，基准较新、广泛采用度尚待积累，且遗忘等能力评测仍受构造方式约束;多轮增量格式由既有静态数据集转换而来。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2507.05257"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2507.05257"
+      }
+    ],
+    "citation": "MemoryAgentBench, ICLR 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-memoryagentbench.png",
+        "caption": "MemoryAgentBench:按增量多轮交互设计的记忆智能体基准,测评准确检索、测试时学习、长程理解与冲突解决及选择性遗忘四种互补能力。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-nolima",
+    "page": "memory",
+    "title": "NoLiMa: Long-Context Evaluation Beyond Literal Matching",
+    "shortTitle": "NoLiMa",
+    "category": "memory-eval",
+    "maturity": "growing",
+    "score": 0.85,
+    "year": 2025,
+    "venue": "ICML 2025",
+    "authors": "Ali Modarressi et al.",
+    "methodFamily": "无字面匹配大海捞针",
+    "tags": [
+      "大海捞针",
+      "潜在关联",
+      "低词面重叠",
+      "128K"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.86,
+      "reproducibility": 0.85,
+      "adoption": 0.75,
+      "selfEvolution": 0.15
+    },
+    "summary": "扩展大海捞针、令问题与针几乎无词面重叠的基准，要求模型靠潜在语义关联而非字面匹配定位信息。",
+    "methodCore": "NoLiMa 针对大海捞针(NIAH)及其变体中问题与针存在字面匹配、模型可借表面模式取巧的缺陷，扩展了大海捞针范式并精心设计针集，使问题与针之间只保留极小的词汇重叠。作者观察到，在常见的长上下文检索测试里，问题和目标信息往往共享相同的关键词，模型只需做字符串层面的匹配就能命中，这使得高分并不能证明真正的长上下文理解。\n\n## 无字面匹配的针集设计\n\n基准的核心创新在于把「针」和「问题」之间的词面重叠(lexical overlap)压到最低。由此，模型无法依赖字面匹配来定位目标，而必须推断潜在语义关联(latent associations)——例如通过同义、上位关系或常识联系，把语义相关但用词不同的问题与针挂钩，才能在充满干扰的长上下文中找到正确的针并作答。这一设计精准地堵住了表面匹配的取巧路径，把评测焦点从「找关键词」转向「懂含义」。\n\n## 长度扫描与受控生成\n\nNoLiMa 面向声称支持至少 128K token 的模型，在从短(不足 1K)到最长 128K 的多个长度区间生成受控样本，以定位与作答的准确率为指标，并系统对比同一模型在短、长上下文下的表现落差。这种沿长度维度的扫描能清晰暴露性能随长度崩塌的拐点，使「短上下文强、长上下文垮」的现象一目了然;由于短上下文基线代表了模型在无长度压力下的真实上限，用它作为参照来度量长上下文处的相对跌幅，比单看绝对分数更能说明长度本身带来的损害有多严重。\n\n## 对失效原因的归因\n\n论文进一步把长上下文性能崩塌归因于注意力机制的困难:当缺乏字面匹配这一强信号时，注意力在很长的上下文里检索语义相关信息的难度会显著上升，相关的针更容易被海量干扰稀释、被忽略。这一分析把评测现象与模型内部机制联系起来，指出问题不只是「记不住」，更是「在语义层面注意不到」。\n\n## 评测意义\n\n通过专门刻画长上下文中的深层语义关联能力，NoLiMa 揭示出许多模型此前亮眼的长上下文成绩，很大程度上建立在字面匹配的便利之上。一旦抽走这一便利，即便配备推理能力或思维链(CoT)提示的模型也难以维持表现，说明真正的长上下文语义理解仍是尚未攻克的难题。通过专门抽走字面匹配这一捷径，NoLiMa 把长上下文评测推进到「必须靠语义关联才能作答」的层面，其对注意力机制的归因分析也为理解长上下文失效的内在原因提供了新的切入点。这一发现的深层含义在于，模型此前在诸多长上下文榜单上的亮眼成绩，可能相当程度上是字面匹配这一捷径的产物，一旦抽走捷径，其真实的长上下文语义理解能力便暴露出严重不足。即便是配备推理能力或思维链提示的模型，也难以在无字面匹配的长上下文中维持表现，这说明真正的长上下文语义整合仍是一个远未被解决的开放难题。",
+    "evaluation": "基准评测了 13 个声称支持至少 128K 上下文的流行 LLM。它们在短上下文(<1K)表现良好，但随长度增加性能急剧下降:在 32K 时 11 个模型跌破其强短上下文基线的 50%;即便表现最佳的 GPT-4o 也从近满分 99.3% 降至 69.7%，连具备推理能力或 CoT 提示的模型也难以维持长上下文表现。",
+    "mainFinding": "当针与问题无字面重叠时，长上下文性能急剧崩塌，说明模型此前的长上下文表现很大程度依赖字面匹配而非真正的语义整合。",
+    "limitations": "仍属合成检索式任务、聚焦单针语义定位，不评测记忆更新、跨会话交互与经验的持续累积和演化;评测形式仍为受控合成而非真实长文档场景。",
+    "related": [
+      "memory-ev-ruler"
+    ],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2502.05167"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2502.05167"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/adobe-research/NoLiMa"
+      }
+    ],
+    "citation": "NoLiMa, ICML 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-nolima.png",
+        "caption": "NoLiMa:超越字面匹配的长上下文评测,经干草堆过滤剔除误导内容,令问题与针几乎无词面重叠,迫使模型靠潜在语义定位。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-babilong",
+    "page": "memory",
+    "title": "BABILong: Testing the Limits of LLMs with Long Context Reasoning-in-a-Haystack",
+    "shortTitle": "BABILong",
+    "category": "memory-eval",
+    "maturity": "growing",
+    "score": 0.84,
+    "year": 2024,
+    "venue": "NeurIPS 2024",
+    "authors": "Yuri Kuratov et al.",
+    "methodFamily": "长上下文推理基准",
+    "tags": [
+      "多跳推理",
+      "极长上下文",
+      "可扩展",
+      "记忆增强"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.85,
+      "reproducibility": 0.9,
+      "adoption": 0.8,
+      "selfEvolution": 0.25
+    },
+    "summary": "面向在极长文档中跨分散事实进行推理的可扩展基准，可扩展至数千万token。",
+    "methodCore": "BABILong 针对现有评测未能全面衡量模型处理长上下文效率的问题，构建了一个面向在极长文档中跨分散事实进行推理的可扩展基准。作者指出，虽然模型的输入上下文规模在急剧扩大，评测方法却没有跟上，无法回答一个关键问题:当推理所需的关键事实被分散埋在极长文本中时，模型还能不能把它们串起来推理。\n\n## 二十类推理任务\n\n基准包含 20 类多样的推理任务，如事实链(fact chaining)、简单归纳、演绎、计数以及列表/集合处理等。这些任务改编自经典的 bAbI 系列，本身就要求多步推理而非单点检索;当所需事实进一步被分散嵌入长篇自然文本中时，任务难度显著上升，因为模型既要在噪声里找到零散线索，又要正确地把它们组合推理。这样的设计把「检索」与「推理」紧密耦合，避免了只测其一的片面性;单纯的多步推理若给定紧凑上下文并不算太难，而单纯的长文本检索又不需要推理，BABILong 恰恰把二者叠加，使任务同时对定位与组合两方面能力提出要求。\n\n## 针与干草堆的构造\n\nBABILong 的构造方式是以 bAbI 式句子作为支撑事实(即针)，以自然长文本作为背景噪声(即干草堆),把少量关键事实分散嵌入超长上下文之中。与单针检索不同，这里的针可能有多条、且分布在文本各处，模型必须先把所有相关事实都找齐，再据此完成计数、归纳或推链。评测以指定长度下的作答准确率为指标，可清晰观察随长度增长的性能变化。\n\n## 可无限扩展的长度\n\n基准的一个突出特性是长度可扩展至任意规模:因为针与背景是分离构造的，可以不断往干草堆里注入更多无关文本来拉长上下文，而不改变推理任务本身。这使 BABILong 天然适合评估未来能力更强的模型;论文提供了最长至 1000 万 token 的评测切分,从而能持续追踪能力边界，不会因模型窗口变大而迅速失效。\n\n## 评测的对照价值\n\n借助可控的长度扫描，BABILong 能定量刻画模型对长上下文的有效利用率，并把纯上下文内推理与 RAG、循环记忆架构等替代方案放在同一标尺下比较，从而揭示不同技术路线在超长输入上的真实表现差异。作者据此发现，主流 LLM 实际只有效利用了上下文的一小部分，随推理复杂度上升性能急剧下滑，而经微调的循环记忆架构则能把可处理长度推到千万乃至五千万 token 量级，这种把「长度可无限扩展」与「多类推理任务」结合的评测方式，使 BABILong 成为衡量长上下文利用率的一把有力标尺。凭借这种长度可无限扩展、又把检索与多步推理紧密耦合的设计，BABILong 既能持续追踪未来更强模型的能力边界，又能清晰量化模型对长上下文的真实利用率，成为长上下文推理评测中一把颇具压力的标尺。",
+    "evaluation": "基准评测显示，流行 LLM 实际仅有效利用上下文的 10-20%，且随推理复杂度提升性能急剧下降。在替代方案中，RAG 方法在单事实问答上取得约 60% 准确率且与上下文长度无关;上下文扩展方法里，经微调的循环记忆 Transformer 表现最佳，可处理长达 5000 万 token。",
+    "mainFinding": "主流 LLM 仅有效利用上下文的 10-20% 且随推理复杂度骤降，揭示长上下文利用率极低;而循环记忆架构可将处理长度推至千万级。",
+    "limitations": "针基于合成 bAbI 事实、背景为无关自然文本，与真实长文档的分布存在差异，且不评测跨会话记忆的更新与遗忘。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2406.10149"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2406.10149"
+      }
+    ],
+    "citation": "BABILong, NeurIPS 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-babilong.png",
+        "caption": "BABILong:把与问题相关的事实藏入 PG19 长背景文本生成数据集,用循环 Transformer 回答,测超长文档中跨分散事实的推理。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-zeroscrolls",
+    "page": "memory",
+    "title": "ZeroSCROLLS: A Zero-Shot Benchmark for Long Text Understanding",
+    "shortTitle": "ZeroSCROLLS",
+    "category": "memory-eval",
+    "maturity": "mature",
+    "score": 0.8,
+    "year": 2023,
+    "venue": "EMNLP 2023 Findings",
+    "authors": "Uri Shaham et al.",
+    "methodFamily": "零样本长文本基准",
+    "tags": [
+      "零样本",
+      "长文本理解",
+      "信息聚合",
+      "排行榜"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.82,
+      "reproducibility": 0.88,
+      "adoption": 0.82,
+      "selfEvolution": 0.1
+    },
+    "summary": "面向长文本自然语言理解的零样本基准，仅含测试与小验证集，含信息融合等新任务。",
+    "methodCore": "ZeroSCROLLS 是面向长文本自然语言理解的零样本(zero-shot)基准，其突出特点是仅包含测试集与小规模验证集、不提供训练数据，以此强调对模型在无任务微调条件下的评测。作者的动机是:大模型时代越来越多的能力来自零样本泛化，因此需要一套专门在零样本设置下衡量长文本理解的标准，而非依赖为特定任务微调后的成绩。\n\n## 任务组成与信息融合\n\n基准在 SCROLLS 的基础上改编了 6 项已有任务，并新增 4 个数据集，其中包括两项新颖的信息融合(information fusing)任务，例如聚合正面评论所占的百分比。全基准共 10 项任务，涵盖基于查询的摘要、多跳问答、章节摘要排序，以及情感聚合、跨文档信息融合等。信息融合任务的引入尤为关键——它们要求模型不只是定位某处信息，而是把分散在长文本各处的信息汇总、统计并归纳,这类聚合能力被认为是长文本理解中最难、也最少被专门评测的一环。\n\n## 零样本评测设置\n\n由于不提供训练数据，ZeroSCROLLS 迫使被评模型直接以零样本方式应对各项任务，从而检验其在没有任务特定适配时对长文本的原生理解与聚合能力。这一设置既贴近大模型的实际使用方式，也避免了微调带来的能力混淆，使不同模型的比较更聚焦于泛化本身。\n\n## 统一指标与实时排行榜\n\n基准采用统一的自动指标计算综合分数，便于跨任务汇总与横向比较，并维护一个公开的实时(live)排行榜，邀请研究者在动态更新的榜单上评测新方法。实时榜单的好处是能持续容纳最新模型、跟上不断变化的技术前沿;其代价是不同时期提交的结果之间可比性会受到一定影响，但这也反映了「前沿是移动靶」的现实;作者宁可接受这一代价，也要让基准能持续接纳新模型、避免像固定榜单那样在几个月内被刷爆而失去区分力。\n\n## 考察重点\n\n通过把摘要、多跳问答与信息融合等任务放在零样本框架下同台竞技，ZeroSCROLLS 尤其能凸显模型在聚合类任务上的短板:定位式问答可能已被大模型较好解决，而需要跨文档融合与统计的任务往往连朴素基线都难以超越，从而把长文本聚合确立为一个明确且开放的研究方向。通过零样本设置、信息融合任务与实时排行榜的组合，ZeroSCROLLS 既贴近大模型的实际使用方式，又把跨文档聚合这一被长期忽视的难点推到台前，为长文本理解研究指出了明确的攻坚方向。值得强调的是，信息融合任务要求模型跨越整篇长文本做统计与归纳，这类聚合恰恰无法通过定位单一片段完成，因此成为区分「会检索」与「会理解全局」两类能力的关键试金石。正因如此，多数模型在这些聚合任务上甚至难以超越朴素基线，这一鲜明反差使 ZeroSCROLLS 得以把信息聚合确立为一个尚未随模型规模自然涌现、亟待专门攻克的核心能力。",
+    "evaluation": "基准综合评测了开源与闭源大模型，结果发现 Claude 优于 ChatGPT，而 GPT-4 取得最高平均分;在问答类任务上零样本 LLM 可媲美微调模型，但在情感聚合、跨文档信息融合等聚合类任务上，多数模型仍难以超越朴素基线，说明聚合类能力尚未随规模自然涌现。",
+    "mainFinding": "零样本 LLM 在长文本问答上已具竞争力，但在跨文档聚合与信息融合类任务上普遍受挫，揭示信息聚合仍是尚未攻克的开放难题。",
+    "limitations": "上下文长度相对较短，聚合任务仍是未解挑战，且为静态文本理解而非交互式跨会话记忆的评测;实时排行榜使不同时期结果的可比性受到影响。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2305.14196"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2305.14196"
+      }
+    ],
+    "citation": "ZeroSCROLLS, EMNLP 2023 Findings.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-zeroscrolls.png",
+        "caption": "ZeroSCROLLS:面向长文本理解的零样本基准,聚合前沿模型在十项任务上的平均表现,含信息融合等新任务并标注各模型可处理长度。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-perltqa",
+    "page": "memory",
+    "title": "PerLTQA: A Personal Long-Term Memory Dataset for Memory Classification, Retrieval, and Synthesis in Question Answering",
+    "shortTitle": "PerLTQA",
+    "category": "memory-eval",
+    "maturity": "growing",
+    "score": 0.78,
+    "year": 2024,
+    "venue": "SIGHAN @ ACL 2024",
+    "authors": "Yiming Du et al.",
+    "methodFamily": "个人长期记忆问答基准",
+    "tags": [
+      "语义/情景记忆",
+      "记忆分类",
+      "记忆检索",
+      "记忆合成"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.78,
+      "reproducibility": 0.8,
+      "adoption": 0.68,
+      "selfEvolution": 0.3
+    },
+    "summary": "融合语义与情景记忆的个人长期记忆问答数据集，含世界知识、画像、社会关系、事件与对话。",
+    "methodCore": "PerLTQA 是一个融合语义记忆(semantic memory)与情景记忆(episodic memory)的个人长期记忆问答数据集，用以研究个性化记忆在问答任务中的运用，尤其聚焦社交互动与事件场景。作者强调，长期记忆在个人化交互中作用关键——它能让系统更好地利用世界知识、历史信息与用户偏好，而这需要一套能同时承载不同类型记忆的评测资源。\n\n## 两类记忆的构造\n\n数据集为 30 个虚构角色构造两类互补的记忆。语义记忆包含世界知识、个人画像(profiles)与社会关系,刻画相对稳定、事实性的背景信息;情景记忆包含个人事件与对话记录,刻画随时间发生、带有情境色彩的经历。围绕这些内容，基准构建了含 8593 道问题的综合评测集，问题设计紧扣社交互动与事件，使个性化记忆的调用成为回答的必要条件。这种「语义+情景」的双重结构，比只覆盖单一记忆类型的数据集更贴近人类记忆的组织方式;人在回答涉及自身的问题时，往往要同时调动关于世界的稳定常识和关于亲身经历的具体片段，PerLTQA 正是要检验模型能否像这样在两类记忆之间灵活切换与协同。\n\n## 记忆整合与生成框架\n\n基于该数据集，论文提出一个记忆整合与生成框架，由三大组件构成:记忆分类(Memory Classification)先判定当前问题需要调用哪一类记忆;记忆检索(Memory Retrieval)再从个人记忆库中取回相关条目;记忆合成(Memory Synthesis)最后综合多条记忆合成答案。这一三段式流程把「用哪类记忆、取哪些记忆、如何整合成答案」拆解为可分别评测的环节，使个性化记忆问答的失败点更易定位。\n\n## 评测口径\n\n基准以记忆分类的准确率、检索的表现，以及合成答案的质量共同衡量系统对个性化长期记忆的组织与调用能力。作者用五个 LLM 与三个检索器来评测该框架,既覆盖生成侧也覆盖检索侧。一个值得注意的观察是，在记忆分类这一环节上，基于 BERT 的小型分类模型反而显著优于 ChatGLM3、ChatGPT 等大型 LLM，说明并非所有记忆子任务都由更大的模型主导，专门的组件设计仍有价值。整体上，PerLTQA 通过把个人记忆细分为语义与情景两类、并把问答拆解为分类-检索-合成三步，为个性化长期记忆的研究提供了结构化的评测抓手。整体上，PerLTQA 通过把个人记忆细分为语义与情景两类、并把问答拆解为分类-检索-合成三步，为个性化长期记忆的组织与调用提供了结构化、可分环节诊断的评测抓手。值得注意的是，小型 BERT 分类器在记忆分类环节反超大型 LLM 这一现象，提示并非所有记忆子任务都由更大的模型主导，专门化的组件设计在个性化记忆系统中仍具有不可替代的价值。",
+    "evaluation": "基准用五个 LLM 与三个检索器评测该记忆整合框架。实验表明，在记忆分类任务上基于 BERT 的分类模型显著优于 ChatGLM3、ChatGPT 等 LLM;研究还凸显了有效记忆整合对问答表现的重要性，验证了记忆分类、检索、合成三段式框架在个性化问答中的价值与可行性。",
+    "mainFinding": "个性化记忆的组织与调用仍有专门优化空间：小型 BERT 分类器在记忆分类上胜过大型 LLM，且有效记忆整合对问答至关重要。",
+    "limitations": "数据为 LLM 合成、仅 30 个虚构角色、规模有限，主要评测记忆分类/检索/合成而非长期演化、更新与遗忘。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2402.16288"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2402.16288"
+      }
+    ],
+    "citation": "PerLTQA, SIGHAN @ ACL 2024.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-perltqa.png",
+        "caption": "PerLTQA:融合语义与情景记忆的个人长期记忆问答数据集,经六步管线生成世界知识、画像、社会关系、事件与对话。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-helmet",
+    "page": "memory",
+    "title": "HELMET: How to Evaluate Long-Context Language Models Effectively and Thoroughly",
+    "shortTitle": "HELMET",
+    "category": "memory-eval",
+    "maturity": "growing",
+    "score": 0.86,
+    "year": 2024,
+    "venue": "ICLR 2025",
+    "authors": "Howard Yen et al.",
+    "methodFamily": "综合长上下文评测",
+    "tags": [
+      "应用导向",
+      "七类任务",
+      "可靠排名",
+      "全上下文推理"
+    ],
+    "scores": {
+      "clarity": 0.88,
+      "evidence": 0.87,
+      "reproducibility": 0.88,
+      "adoption": 0.8,
+      "selfEvolution": 0.2
+    },
+    "summary": "涵盖七类应用导向任务的综合长上下文基准，针对合成任务覆盖不足、长度不够、指标不可靠等问题给出更可靠排名。",
+    "methodCore": "HELMET 针对开发者在评测长上下文语言模型(LCLMs)时常依赖 NIAH 等合成任务、或随意挑选任务子集，导致评测信号噪声大、模型之间难以比较的问题，构建了一个涵盖七类应用导向任务的综合基准。作者系统分析了既有基准的四大缺陷——应用覆盖不足、上下文长度不够、指标不可靠、以及与基座(base)模型不兼容，并逐一给出对策。\n\n## 七类应用导向任务\n\n基准覆盖七大类别:检索、检索增强生成(RAG)、段落重排(passage re-ranking)、ALCE 式带引用生成、长文档问答、摘要与多样的上下文学习(in-context learning)。这些类别都以真实下游应用为导向，而非合成诊断任务，意在检验模型在实际使用场景下的长上下文能力。作者发现不同类别之间趋势各异、彼此相关性低，因此单靠任一类任务都不足以代表整体，必须跨类别做整体评测。\n\n## 针对既有缺陷的四项改进\n\nHELMET 在设计上针对性地修补了旧基准的短板:其一，加入可控的长度配置(最长 128K token)，解决长度不够的问题;其二，引入基于模型的评价(model-based evaluation)以获得比 n-gram 匹配更可靠的指标;其三,采用少样本提示(few-shot prompting)来稳健地评测基座模型，解决基座模型难以直接遵循指令的兼容性问题;其四，通过多样、应用导向的任务扩大覆盖面。这些改进共同提升了评测信号的可靠性与一致性;作者特别强调,旧基准之所以噪声大，往往是这四个缺陷叠加的结果——长度太短则区分不出强弱，指标不可靠则排名失真，覆盖太窄则以偏概全，与基座模型不兼容则连公平起跑线都无法保证，因此必须系统地一并修补而非只改其一。\n\n## 可靠排名与快速迭代\n\n借助上述设计，HELMET 力求给出与下游应用相关性更高、更稳定的前沿模型排名，而不是像 NIAH 那样用一个近乎人人满分的合成任务来区分模型。作者在 59 个长上下文模型上做了综合研究，发现合成 NIAH 并不能可靠预测下游性能，且开源模型在需要全上下文推理或遵循复杂指令时明显落后于闭源模型、差距随长度扩大。基于评测成本的现实考量，作者还特别建议用其 RAG 任务来快速迭代模型开发——因为该任务既易于运行，又能较好地预测其他下游表现，从而在「全面评测」与「快速反馈」之间提供了实用折中。通过修补覆盖、长度、指标与基座兼容四大缺陷，并提供可用于快速迭代的 RAG 子任务，HELMET 为长上下文模型确立了一套更可靠、更贴近下游应用的整体评测范式。作者在多达五十余个长上下文模型上的系统研究还表明，各应用类别之间趋势各异、彼此相关性低，这从实证上论证了「必须跨多样任务做整体评测、而非依赖单一合成任务」这一核心主张。",
+    "evaluation": "基准对 59 个长上下文模型进行综合研究，发现 NIAH 等合成任务不能可靠预测下游性能;HELMET 各应用类别趋势各异、彼此相关性低;尽管多数模型 NIAH 近满分，但在需全上下文推理或遵循复杂指令时开源模型显著落后于闭源模型，且差距随长度扩大，作者建议用其 RAG 任务快速迭代模型。",
+    "mainFinding": "合成 NIAH 并非下游性能的可靠预测器；需跨多样应用导向任务的整体评测，开源模型在全上下文推理上随长度扩大而愈发落后。",
+    "limitations": "评测成本较高、部分依赖模型判分，偏文档类任务，不覆盖跨会话交互记忆与经验的持续演化和更新;评价高度依赖模型判分带来一定的稳定性风险。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2410.02694"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2410.02694"
+      }
+    ],
+    "citation": "HELMET, ICLR 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-helmet.png",
+        "caption": "HELMET:涵盖七类应用导向任务的综合长上下文基准,针对 NIAH 饱和、RULER 等合成任务失真的问题,给出更可靠的模型排名。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-memora",
+    "page": "memory",
+    "title": "From Recall to Forgetting: Benchmarking Long-Term Memory for Personalized Agents",
+    "shortTitle": "Memora",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.83,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Md Nayem Uddin et al.",
+    "methodFamily": "个性化长期记忆基准",
+    "tags": [
+      "长期记忆",
+      "遗忘感知",
+      "个性化智能体"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.82,
+      "reproducibility": 0.78,
+      "adoption": 0.6,
+      "selfEvolution": 0.78
+    },
+    "summary": "面向个性化智能体的长期记忆基准，覆盖数周至数月的用户对话，围绕记忆巩固与随情况变化的更新能力测评记住、推理、推荐三类以记忆为基础的任务。",
+    "methodCore": "Memora 针对现有基准把长期记忆评测简化为从过往对话检索事实、难以反映记忆随时间巩固与频繁知识更新的问题，构建了一个跨越数周至数月长期用户对话的长期记忆基准。作者指出，真正的个性化智能体需要在很长时间里维持持久记忆，并随用户情况变化而不断更新;而只测「能否从历史中查到某条事实」远不足以刻画这种动态能力。\n\n## 三类以记忆为基础的任务\n\n基准围绕记忆巩固(consolidation)与知识更新两条主线，设置三类以记忆为基础的任务:记住(remembering)考察能否在长跨度后仍准确保留信息;推理(reasoning)考察能否基于分散且演变的记忆做出正确推断;推荐(recommending)考察能否依据用户当前的偏好状态给出恰当建议。三类任务共同要求个性化智能体在跨会话中维持持久记忆，并在用户情况改变时及时更新，而非机械地复读旧内容。\n\n## 数据构造与质量控制\n\n为支撑数周至数月的超长跨度评测，基准的对话主要由自动流程构造生成，并辅以质量保障:一方面采用自动化的记忆锚定检查(memory-grounding checks)来验证每个待答问题确实有记忆依据、答案确实由记忆支撑;另一方面引入人工评估来把关数据质量。这种自动加人工的双重校验，在保证长跨度数据可规模化生成的同时，尽量维持了标注的可靠性;数周至数月的对话若纯靠人工撰写几乎不可行，而纯自动生成又易在长跨度上产生前后矛盾或无依据的问答，锚定检查与人工把关的组合正是在可扩展性与质量之间寻求平衡的务实之举。\n\n## 遗忘感知的评价指标\n\nMemora 的一个关键贡献是提出遗忘感知记忆准确率(Forgetting-Aware Memory Accuracy, FAMA)指标。传统准确率只看答案对不对，而 FAMA 在评分时额外惩罚对已过时或已失效记忆的依赖——即便最终答案表面正确，若它建立在本应被遗忘的陈旧信息之上，也会被扣分。这样就把「是否复用了失效记忆」直接纳入衡量，更真实地检验模型能否在记忆演变时正确地更新与遗忘，而不是靠运气蒙对。\n\n## 评测意义\n\n通过把长跨度对话、三类记忆任务与遗忘感知指标结合，Memora 把长期记忆评测的重心从「检索」明确转向「巩固与更新」，尤其能暴露模型频繁沿用失效记忆、难以协调不断演变记忆的系统性缺陷。凭借长跨度对话、三类记忆任务与遗忘感知指标 FAMA 的组合，Memora 把长期记忆评测的重心从「能否检索」明确转向「能否巩固与更新」，为个性化智能体的记忆研究提供了新的、更贴近真实长期陪伴的评测视角。值得强调的是，FAMA 通过对复用失效记忆的惩罚，把「记忆是否被及时淘汰」这一此前难以量化的动态特性纳入了评分，使基准得以区分「碰巧答对」与「真正维护好了记忆的时效性」两种情况。",
+    "evaluation": "基准评测了四款 LLM 与六种记忆智能体，以 remembering、reasoning、recommending 三类任务的表现及遗忘感知准确率 FAMA 为指标。结果揭示模型频繁复用已失效记忆、难以协调不断演变的记忆，而记忆智能体仅带来边际提升，暴露个性化长期记忆在巩固与更新环节上的明显短板。",
+    "mainFinding": "长期记忆的关键不在检索而在更新与遗忘：模型频繁复用失效记忆、记忆智能体仅边际改善，凸显记忆巩固与更新能力的缺失。",
+    "limitations": "数周至数月的长跨度对话依赖自动构造与人工校验，任务集与所评记忆系统覆盖仍较有限、基准较新。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2604.20006"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2604.20006"
+      }
+    ],
+    "citation": "Memora, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-memora.png",
+        "caption": "Memora 基准的三类任务:Remembering(回忆检索)、Updating(更新覆盖)与 Forgetting(遗忘失效),系统评测个性化长期记忆。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-structmemeval",
+    "page": "memory",
+    "title": "Evaluating Memory Structure in LLM Agents",
+    "shortTitle": "StructMemEval",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.8,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Alina Shutova et al.",
+    "methodFamily": "记忆结构组织基准",
+    "tags": [
+      "记忆结构",
+      "知识组织",
+      "记忆架构"
+    ],
+    "scores": {
+      "clarity": 0.83,
+      "evidence": 0.78,
+      "reproducibility": 0.75,
+      "adoption": 0.58,
+      "selfEvolution": 0.72
+    },
+    "summary": "测评智能体主动组织长期记忆结构、而非仅做事实回忆的基准，任务需以交易账本、待办清单、树状层级等特定结构组织知识才能可靠解决。",
+    "methodCore": "StructMemEval 针对多数长期记忆基准只考察简单事实保持、多跳回忆与基于时间的变化——而这些能力用一个简单的检索增强 LLM 即可完成、无法检验复杂记忆层级——的问题，提出了一个评测智能体能否主动组织记忆结构的基准。作者的核心洞察是:随着记忆架构越来越复杂，仅靠「能不能回忆事实」已无法区分不同框架的高下，真正的分水岭在于智能体能否像人一样把知识组织成合适的结构。\n\n## 需要结构化组织的任务\n\n基准收集了一批人类必须依靠特定知识结构才能求解的任务，例如交易账本(transaction ledgers)、待办清单(to-do lists)与树状层级(trees)等。这些任务的共同点是:如果只把接收到的信息平铺存储、被动检索，就很难得出正确答案;必须把长期记忆主动组织成与任务相匹配的结构——账本需要按条目累加与核对，待办清单需要维护状态与优先级，树则需要维护层级与从属关系。由此，基准把「主动组织记忆」而非「被动检索事实」确立为核心考察点;它的巧妙之处在于选取的任务本身就自带明确的结构化正确性标准——账本的收支必须平、待办项的状态必须一致、树的层级必须自洽，因而只要模型没能维护好相应结构，错误就会以可判定的方式显现出来，无需额外的主观评分。\n\n## 对比式评测设计\n\nStructMemEval 通过对比两类系统在这些任务上的表现来揭示结构组织能力的差异:一类是简单的检索增强 LLM,一类是配备显式记忆机制的记忆智能体。这种对照能直接显示出扁平检索方案在需要结构化知识的任务上的力不从心，也能显示出显式记忆智能体在被恰当引导时的潜力。\n\n## 自主结构识别的探测\n\n基准的一个精心设计是特别检验模型在有无组织提示两种条件下的表现差异。当明确提示应当如何组织记忆(比如告诉它用账本或树)时，记忆智能体往往能可靠求解;但当不给提示、要求模型自行判断该采用何种记忆结构时，现代 LLM 却经常无法识别所需的结构。这一对照把「会用结构」与「会选结构」区分开来，精准暴露出自主结构组织能力的明显不足。\n\n## 研究意义\n\n作为初步研究，StructMemEval 通过这套需结构化知识的任务与有/无提示的对照，为记忆研究指出了一个此前被忽视的方向:未来的记忆框架与 LLM 训练不仅要提升回忆准确率，更要培养智能体自主识别并维护恰当记忆结构的能力。通过需结构化知识的任务与有无提示的对照，StructMemEval 把「会用结构」与「会选结构」清晰区分，为未来记忆框架设计与 LLM 训练指出了培养自主结构组织能力这一被忽视的方向。作者选取的账本、待办清单与树等任务都自带明确的结构化正确性标准，因而模型一旦未能维护好相应结构，错误便会以可判定的方式显现，这使 StructMemEval 在考察高阶组织能力的同时仍保持了评测的客观性。",
+    "evaluation": "初步实验显示，简单检索增强 LLM 难以完成这些需结构化组织的任务;而记忆智能体在被提示如何组织记忆时能可靠求解。然而研究也发现，现代 LLM 在未被提示时往往无法自行识别所需的记忆结构，揭示自主结构组织能力的明显不足与未来的改进方向。",
+    "mainFinding": "复杂记忆需主动的结构化组织而非扁平检索：模型在被提示结构时能解题，却常无法自主识别应当采用何种记忆结构。",
+    "limitations": "为初步实验、任务与模型覆盖有限，结构组织能力尚依赖显式提示触发、缺乏对自主性的系统评估;任务多需人类式结构化知识、构造成本较高。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2602.11243"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2602.11243"
+      }
+    ],
+    "citation": "StructMemEval, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-structmemeval.png",
+        "caption": "StructMemEval:评测智能体主动组织长期记忆结构而非仅事实回忆,任务需以交易账本、状态跟踪、树状层级等特定结构组织知识方能解决。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-mem2actbench",
+    "page": "memory",
+    "title": "Mem2ActBench: A Benchmark for Evaluating Long-Term Memory Utilization in Task-Oriented Autonomous Agents",
+    "shortTitle": "Mem2ActBench",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.81,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Yiting Shen et al.",
+    "methodFamily": "任务型记忆应用基准",
+    "tags": [
+      "记忆应用",
+      "工具调用",
+      "参数锚定"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.8,
+      "reproducibility": 0.76,
+      "adoption": 0.58,
+      "selfEvolution": 0.75
+    },
+    "summary": "评测任务型自主智能体能否主动利用长期记忆执行工具动作的基准，考察智能体的工具选择与参数锚定，而非仅被动回应显式问题的孤立事实检索。",
+    "methodCore": "Mem2ActBench 针对既有基准只测智能体被动检索孤立事实、却忽视更关键的「主动运用记忆执行任务」这一能力的问题，构建了评测任务型自主智能体能否主动利用长期记忆来执行工具动作的基准。作者强调，在真实的工具型智能体部署中，记忆的价值不在于回答显式问题，而在于驱动正确的动作。\n\n## 持久助手场景\n\n基准模拟一种持久助手(persistent assistant)场景:用户在漫长而间断的交互中反复提及同一主题，并期望此前建立的偏好与任务状态被隐式沿用，而无需每次重新说明。在这种设置下，智能体必须主动从长期记忆中调取相关信息，用它来完成两件核心工作——工具选择(tool selection),即挑出正确的工具;以及参数锚定(parameter grounding),即用记忆里的偏好与状态来正确填充工具调用的参数。相比被动问答，这一场景把记忆直接接入了行动闭环;它真正考验的不是「你还记得用户说过什么」，而是「你能否在不被提醒的情况下，自觉把用户过去的偏好落实到这次工具调用的每一个参数上」，后者才是持久助手真正带来体验差异的地方。\n\n## 数据合成管线\n\n数据由一条自动化管线构造。它先合并 ToolACE、BFCL、Oasst1 等异构来源，再通过一致性建模(consistency modeling)消解不同来源之间的冲突，从而合成 2029 个会话、平均每会话约 12 轮用户-助手-工具交互。这些会话构成带有偏好与状态演变的「记忆链」。在此基础上，管线采用逆向生成(reverse-generation)方法，从记忆链反推出 400 个工具使用任务——先有记忆再造问题，从而保证任务确实依赖记忆。经人工评估确认，其中 91.3% 的任务强依赖记忆，即离开记忆便无法正确完成。\n\n## 评测口径\n\n基准在这 400 个经人工确认强依赖记忆的工具使用任务上评测记忆框架，指标聚焦两点:工具选择的正确性，以及调用参数锚定的准确率。这两个指标直接衡量记忆是否被正确地转化为动作，而非停留在能否复述某条事实的层面。\n\n## 研究意义\n\n通过把评测从「被动检索」推进到「主动应用」，Mem2ActBench 揭示当前记忆系统在用记忆锚定工具参数上的普遍不足，为面向任务执行的记忆能力评估提供了一个新的、贴近真实智能体部署的抓手。通过持久助手场景、异构数据合成与逆向生成的组合，Mem2ActBench 把记忆评测从被动检索推进到主动应用，为面向任务执行、贴近真实智能体部署的记忆能力评估提供了一个新的抓手。值得强调的是，经人工评估确认其中 91.3% 的任务强依赖记忆，这意味着智能体若不能主动调取并应用长期记忆，就几乎无法正确选择工具或锚定参数，从而保证了基准确实在考察记忆应用而非泛化推理。",
+    "evaluation": "基准在 400 个经人工确认强依赖记忆的工具使用任务上评测了七种代表性记忆框架，以工具选择的正确性与调用参数锚定的准确率为指标。实验表明，当前记忆系统在主动利用记忆进行参数锚定上仍明显不足，凸显亟需更有效的方法来评估并改进任务执行环节中的记忆应用能力。",
+    "mainFinding": "记忆的价值在于驱动动作而非被动检索：当前记忆系统在主动调用记忆选择工具、锚定调用参数上普遍不足，揭示任务执行中的记忆应用缺口。",
+    "limitations": "数据由异构来源自动合成，任务领域偏工具调用、覆盖范围仍较有限，记忆依赖性由逆向生成与人工校验保证，真实交互分布仍需验证。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2601.19935"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2601.19935"
+      }
+    ],
+    "citation": "Mem2ActBench, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-mem2actbench.png",
+        "caption": "Mem2ActBench:对比事实检索与记忆驱动的任务执行,要求智能体结合过往记忆主动选择工具并锚定参数,而非被动回应显式问题。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-esmemeval",
+    "page": "memory",
+    "title": "ES-MemEval: Benchmarking Conversational Agents on Personalized Long-Term Emotional Support",
+    "shortTitle": "ES-MemEval",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.78,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Tiantian Chen et al.",
+    "methodFamily": "长期情感支持记忆基准",
+    "tags": [
+      "情感支持",
+      "长期对话",
+      "用户建模"
+    ],
+    "scores": {
+      "clarity": 0.81,
+      "evidence": 0.78,
+      "reproducibility": 0.74,
+      "adoption": 0.56,
+      "selfEvolution": 0.68
+    },
+    "summary": "面向个性化长期情感支持场景的对话记忆基准，系统评测信息抽取、时序推理、冲突检测、拒答与用户建模五种核心记忆能力，覆盖问答、摘要与对话生成任务。",
+    "methodCore": "ES-MemEval 针对现有长期对话基准主要聚焦静态、显式的事实检索、难以评测用户信息分散、隐式且持续演变场景的问题，面向在线情感支持(emotional support)这类复杂的长期 Web 服务，构建了一个综合记忆基准。作者指出，情感支持场景对记忆的要求格外苛刻:用户的自我披露往往碎片化、含蓄，且用户状态会随时间不断变化，这正是传统「查事实」式评测覆盖不到的盲区。\n\n## 五种核心记忆能力\n\n基准系统评测五种核心记忆能力:信息抽取(information extraction)考察从零散披露中提取关键用户信息;时序推理(temporal reasoning)考察对事件与状态随时间演变的把握;冲突检测(conflict detection)考察发现前后不一致信息的能力;拒答(abstention)考察在缺乏依据时诚实不作答;用户建模(user modeling)则考察对用户画像与状态的动态维护。这五项能力共同刻画了长期情感陪伴所需的记忆素养，尤其把「用户状态演变」与「隐式披露」纳入正式评测维度。\n\n## 三类评测任务\n\n为多角度检验上述能力，基准覆盖三类任务:问答考察对具体记忆的精确调用;摘要考察对长期交互的概括;对话生成考察在记忆支撑下生成个性化、连贯回应的能力。三类任务把记忆能力从「答对一个问题」扩展到「持续维持一段有记忆的关系」，更贴近真实情感支持服务的形态;在情感支持中，一次回应若忽略了用户此前透露的处境，不仅答非所问，还可能造成情感上的伤害，因此对记忆的忠实与连贯有着比一般问答更高的要求。\n\n## EvoEmo 数据集\n\n为支撑基准，论文配套提出多会话数据集 EvoEmo。它专门刻画碎片化、隐式的用户自我披露(user disclosures)以及不断变化的用户状态——用户不会一次性说清所有情况，而是零散地、间接地透露，且其处境与情绪会随会话推进而改变。这种数据设计使基准能在贴近真实的长期个性化对话中，检验记忆与检索如何配合应对隐式且演变的信息，从而凸显既有基准无法覆盖的场景与用户建模难点。\n\n## 评测意义\n\n通过把五种记忆能力、三类任务与 EvoEmo 数据结合，ES-MemEval 尤其能揭示显式长期记忆对减少幻觉与实现个性化的必要性，以及 RAG 在处理时序动态和演变用户状态上的局限，从而推动记忆与检索在长期个性化对话中的更稳健融合。凭借五种记忆能力、三类任务与专门刻画隐式演变的 EvoEmo 数据集，ES-MemEval 把长期对话记忆评测推进到「用户信息分散、隐式且持续演变」这一贴近真实服务的复杂场景，凸显了记忆与检索融合的必要性与当前范式的局限。",
+    "evaluation": "基准在问答、摘要、对话生成任务上评测了开源长上下文、商用及检索增强(RAG)型 LLM。大量实验表明，显式长期记忆对减少幻觉、实现有效个性化至关重要;RAG 能提升事实一致性，却难以应对时序动态与不断演变的用户状态，揭示当前记忆与检索范式的潜力与明显局限。",
+    "mainFinding": "显式长期记忆对减少幻觉与个性化不可或缺，而 RAG 虽提升事实一致性却难处理时序动态与演变的用户状态，需二者更稳健融合。",
+    "limitations": "领域集中于情感支持对话，EvoEmo 数据为构造生成，基准较新、实际采用度与外部验证仍有待积累;五种能力的评价部分依赖模型判分与人工标注。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2602.01885"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2602.01885"
+      }
+    ],
+    "citation": "ES-MemEval, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-esmemeval.png",
+        "caption": "ES-MemEval:面向个性化长期情感支持的对话记忆基准,基于跨月碎片化倾诉,评测信息抽取、时序推理、冲突检测、拒答与用户建模。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-evomembench",
+    "page": "memory",
+    "title": "EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective",
+    "shortTitle": "EvoMemBench",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.84,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Yuyao Wang et al.",
+    "methodFamily": "自演化记忆基准",
+    "tags": [
+      "自演化",
+      "跨情节记忆",
+      "长上下文对比"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.83,
+      "reproducibility": 0.8,
+      "adoption": 0.6,
+      "selfEvolution": 0.85
+    },
+    "summary": "从自演化视角评测智能体记忆的统一基准，沿记忆范围与记忆内容两个维度组织任务，在标准化协议下比较15种记忆方法与强长上下文基线。",
+    "methodCore": "EvoMemBench 针对现有 LLM 智能体基准主要评估推理、规划与执行、而记忆的存储、更新与检索能力因缺乏系统评测手段而被长期忽视的问题，从自演化(self-evolving)视角构建了一个统一的记忆基准。作者认为，记忆之所以重要，正在于它让智能体能够随时间存储、更新并复用信息;而要公平衡量这一能力，需要一套能覆盖不同记忆形态、又统一可比的评测协议。\n\n## 两条正交组织轴\n\n基准沿两条正交的轴来组织任务。第一条是记忆范围(memory scope)，区分情节内(in-episode)与跨情节(cross-episode)——前者考察在单次任务过程中维持与利用记忆，后者考察把一次任务学到的东西迁移复用到后续任务。第二条是记忆内容(memory content)，区分知识导向(knowledge-oriented)与执行导向(execution-oriented)——前者关注事实性知识的存取，后者关注过程性经验与动作策略的存取。两轴交叉形成四类设置，把存储、更新、检索这三种基础记忆能力落到统一而细分的评测框架中。\n\n## 标准化对比协议\n\n在这一标准化协议下，EvoMemBench 比较了 15 种代表性记忆方法与强长上下文基线。把「记忆机制」与「直接塞进长上下文」放在同一口径下对照，是该基准的关键设计:它能回答一个现实问题——在什么情况下额外的记忆机制才真正比长上下文基线更有价值;毕竟若把全部历史直接塞进足够大的窗口就能解决问题，专门的记忆模块便显得多余，而 EvoMemBench 正是要通过两轴四类设置界定出记忆机制真正不可替代的场景，避免记忆研究陷入「为记忆而记忆」的空转。评测考察不同记忆形式在四类设置下随任务演进的存储与复用效果，从而刻画各类方法的适用边界。\n\n## 研究发现与意义\n\n通过系统对比，基准得出若干重要观察:当前记忆系统远非通用解，长上下文基线在很多情况下仍极具竞争力;记忆在当前上下文不足或任务困难时增益最大;检索类方法在知识密集设置中表现强，而过程性与长期记忆方法在其存储经验与任务结构相匹配时更适合执行导向任务。基准开源了代码，意在推动更有效的智能体记忆系统研究，并为不同场景下的记忆形式选型提供公平、可复现的实证依据。通过两条正交轴、标准化协议与开源实现，EvoMemBench 让不同记忆形式在自演化视角下得以公平对比，其「没有单一记忆形式全场景最优」的结论也为实际系统的记忆选型提供了切实可用的实证依据。作者进一步发现，检索类方法在知识密集设置中表现突出，而过程性与长期记忆方法在其存储经验与任务结构相匹配时更适合执行导向任务，这一细致的场景化结论为记忆研究提供了超越「谁更好」的分场景指引。",
+    "evaluation": "基准在标准化协议下对比了 15 种代表性记忆方法与强长上下文基线。结果显示当前记忆系统远非通用解:长上下文基线仍很有竞争力，记忆在当前上下文不足或任务困难时增益最大;检索类方法在知识密集设置中表现强，而过程性与长期记忆方法在存储经验匹配任务结构时更适合执行导向任务。",
+    "mainFinding": "没有单一记忆形式全场景最优：长上下文基线仍强，记忆增益取决于上下文是否不足，检索适合知识密集、过程记忆适合执行导向任务。",
+    "limitations": "记忆方法与任务设置虽多但仍有限，自演化能力多为回顾式评估而非在线部署中的持续演化评测;两轴四类设置虽系统但仍难穷尽真实任务分布。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2605.18421"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2605.18421"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/DSAIL-Memory/EvoMemBench"
+      }
+    ],
+    "citation": "EvoMemBench, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-evomembench.png",
+        "caption": "EvoMemBench:从自演化视角评测智能体记忆的统一基准,沿记忆范围与记忆内容两维度组织任务,标准化协议下比较多种记忆方法与长上下文基线。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-evomemory",
+    "page": "memory",
+    "title": "Evo-Memory: Benchmarking LLM Agent Test-time Learning with Self-Evolving Memory",
+    "shortTitle": "Evo-Memory",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.85,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Tianxin Wei et al.",
+    "methodFamily": "自演化记忆流式基准",
+    "tags": [
+      "测试时学习",
+      "自演化记忆",
+      "经验复用"
+    ],
+    "scores": {
+      "clarity": 0.86,
+      "evidence": 0.84,
+      "reproducibility": 0.82,
+      "adoption": 0.62,
+      "selfEvolution": 0.88
+    },
+    "summary": "评测LLM智能体测试时学习与自演化记忆的综合流式基准与框架，要求模型在演进的任务流中每次交互后持续检索、整合并更新记忆。",
+    "methodCore": "Evo-Memory 针对现有评测多局限于静态对话、把记忆当作被动检索、忽视「跨演进任务流累积并复用经验」能力的问题，提出了一个评测自演化记忆的综合流式基准与框架。作者从有状态性(statefulness)出发,指出它对 LLM 智能体的长期规划与问题求解至关重要——而要维持状态就必须让记忆能随交互持续更新，这一动态过程恰恰长期缺乏系统评测。\n\n## 顺序任务流的评测设置\n\n基准的核心设计是把数据集组织成顺序任务流(sequential task streams)，要求 LLM 在每次交互之后都去搜索、适配并演化(search, adapt, and evolve)其记忆，而不是一次性读入静态历史再作答。这种流式设置直接对应真实部署中的场景——交互式问题助手或具身智能体要面对源源不断的任务流，若不能从累积交互中学习，就会不断丢失宝贵的上下文洞见。由此，Evo-Memory 把评测重心明确落在部署期的测试时演化(test-time evolution)上。\n\n## 统一实现与广覆盖\n\n为公平比较，基准统一实现了十余种代表性记忆模块，并在 10 个数据集上评测,这些数据集既包含多轮目标导向任务，也包含单轮推理与问答任务,从而覆盖较宽的任务谱系。统一实现避免了各方法因工程细节不同而难以比较的问题，使记忆机制本身的优劣得以凸显;记忆方法的报告结果常因检索器、提示模板、判分口径各异而难以横向对照，Evo-Memory 把十余种模块纳入同一实现框架与同一批任务流,让「谁更会在流式交互中演化记忆」这一问题有了公平的答案。\n\n## 基线与 ReMem 框架\n\n为更好地衡量经验复用，论文提供了一个检索并利用先前经验的基线方法 ExpRAG。在此之上，进一步提出 ReMem——一个 action-think-memory 精炼流水线，把推理(think)、任务动作(action)与记忆更新(memory)三者紧密耦合。其核心思想是让模型在行动与思考的同时同步精炼记忆，形成推理-动作-记忆的闭环，从而实现随任务流推进的持续改进(continual improvement),而非把记忆更新当作事后附加步骤。\n\n## 研究意义\n\n通过流式基准、统一模块实现与 ReMem 框架的结合，Evo-Memory 弥补了现有评测在经验累积与复用上的缺口，实证地表明现有模型常无法从累积交互中学习，而紧耦合的自演化记忆能带来持续改进，为测试时记忆演化研究提供了可复现的实验平台。凭借顺序任务流设置、十余种模块的统一实现与 ReMem 的推理-动作-记忆闭环，Evo-Memory 把评测重心从静态检索推向部署期的测试时演化，为经验累积与复用这一长期被忽视的能力提供了可复现的实验平台。",
+    "evaluation": "基准在 10 个多轮目标导向与单轮推理/问答数据集上，以顺序任务流形式评测了十余种代表性记忆模块及 ExpRAG、ReMem 基线。结果显示现有模型常无法从累积交互中学习、丢失宝贵的上下文洞见;而紧耦合推理-动作-记忆更新的 ReMem 能带来持续改进，验证测试时演化的必要性与有效性。",
+    "mainFinding": "记忆应在任务流中持续演化而非被动检索：现有模型难从累积交互学习，而推理-动作-记忆紧耦合的 ReMem 实现持续改进。",
+    "limitations": "记忆模块与流式任务实现复杂，任务多需可自动判分、领域覆盖有限，自演化以可自动评测的任务流为前提，带来额外工程负担。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2511.20857"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2511.20857"
+      }
+    ],
+    "citation": "Evo-Memory, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-evomemory.png",
+        "caption": "Evo-Memory:评测测试时学习与自演化记忆的流式基准与框架,对比召回与复用,要求模型在演进任务流中每次交互后持续检索、整合并更新记忆。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-stale",
+    "page": "memory",
+    "title": "STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?",
+    "shortTitle": "STALE",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Hanxiang Chao et al.",
+    "methodFamily": "记忆失效检测基准",
+    "tags": [
+      "隐式冲突",
+      "记忆修订",
+      "状态感知"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.82,
+      "reproducibility": 0.78,
+      "adoption": 0.58,
+      "selfEvolution": 0.8
+    },
+    "summary": "评测LLM智能体能否察觉自身记忆已失效的基准，聚焦隐式冲突：后续观察在无显式否定的情况下即令早先记忆作废，需靠上下文推断与常识识别。",
+    "methodCore": "STALE 针对当前基准主要衡量静态事实检索、忽视「依据新证据修订既有信念」能力的问题，专门评测 LLM 智能体能否察觉自身记忆已经失效。作者识别出一种关键却被忽视的失效模式——隐式冲突(Implicit Conflict):后续观察在没有任何显式否定的情况下，就已使早先的记忆作废，模型必须靠上下文推断与常识推理才能察觉这种作废。这比处理明确的「A 改为 B」式更新要困难得多;显式更新有清晰的触发信号，模型只需检测到否定或替换即可改写记忆，而隐式冲突没有任何显式标记，模型必须先在语义层面推断出「新信息与旧记忆不相容」，再主动认定旧记忆失效，这一步推断正是当前系统普遍缺失的能力。\n\n## 隐式冲突的定义与难点\n\n隐式冲突的核心难点在于「没有明说」。例如用户新透露的某一情况，在逻辑或常识上意味着旧记忆不再成立，但用户并没有直接说「忘掉那条」。模型若只做字面匹配或简单检索，就会继续沿用过时记忆;要正确处理，必须像人一样推断出新旧信息之间的隐含矛盾。STALE 把这种能力单独提炼出来作为评测目标。\n\n## 基准规模与构造\n\n为严格评测这一能力，基准构建了 400 个专家校验(expert-validated)的冲突场景，共 1200 条评测查询，覆盖 100 多个日常主题，上下文最长达 150K token。这些隐式冲突场景高度依赖专家的人工构造与校验，以确保矛盾确实是隐式的、且判定标准可靠。大跨度的上下文长度使评测同时兼具「长上下文」与「状态冲突」两重挑战。\n\n## 三维探测框架\n\nSTALE 提出一个三维探测框架来分解状态感知能力:状态解析(State Resolution)测模型能否发现某条旧信念已经过时;前提抵抗(Premise Resistance)测模型能否拒绝那些错误地预设了旧状态的查询,而不是顺着错误前提作答;隐式策略适应(Implicit Policy Adaptation)测模型能否在下游行为中主动应用已更新的状态，而非仅在被问到时才承认变化。这三维把「察觉过时—抵抗误导—据新行动」拆解为可分别测量的环节。\n\n## 原型方法\n\n为建立初始基线，论文还给出原型 CUPMem,它通过结构化状态整合(state consolidation)与传播感知搜索(propagation-aware search)来强化写入时的记忆修订,即在存入记忆时就主动裁决状态、并把一处更新传播到相关记忆。作者据此论证:显式的状态裁决(state adjudication)是通向稳健智能体记忆的一个有前景的方向。通过隐式冲突的定义、专家校验的场景与三维探测框架，STALE 把记忆评测从静态事实检索推进到「察觉过时并据新行动」的状态感知层面，其对显式状态裁决的倡导也为稳健智能体记忆指出了一个务实方向。",
+    "evaluation": "基准系统评测了前沿 LLM 与专用记忆框架的状态感知能力。结果揭示在检索到更新证据与据此行动之间存在普遍鸿沟，即便最佳模型总体准确率也仅 55.2%;模型常接受用户查询中嵌入的过时预设，并难以意识到用户某方面状态的变化应使相关记忆一并失效。",
+    "mainFinding": "检索到更新证据与据此行动之间存在普遍鸿沟：模型能读到新证据却常沿用过时假设，显式状态裁决是稳健记忆的关键方向。",
+    "limitations": "冲突场景为人工构造、需专家校验，隐式冲突覆盖的主题与形式仍有限，CUPMem 仅为初始基线原型。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2605.06527"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2605.06527"
+      }
+    ],
+    "citation": "STALE, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-stale.png",
+        "caption": "STALE:评测智能体能否察觉记忆已失效的基准,聚焦隐式冲突场景,对话时序稀疏且仅提供部分观察,后续观察在无显式否定下即令早先记忆作废。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-memoryarena",
+    "page": "memory",
+    "title": "MemoryArena: Benchmarking Agent Memory in Interdependent Multi-Session Agentic Tasks",
+    "shortTitle": "MemoryArena",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.83,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Zexue He et al.",
+    "methodFamily": "多会话智能体记忆基准",
+    "tags": [
+      "记忆-动作耦合",
+      "多会话",
+      "经验蒸馏"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.82,
+      "reproducibility": 0.78,
+      "adoption": 0.6,
+      "selfEvolution": 0.82
+    },
+    "summary": "统一评测多会话记忆-智能体-环境循环中智能体记忆的评测场，任务含相互依赖的子任务，需把早期经验蒸馏为记忆再指导后续动作。",
+    "methodCore": "MemoryArena 针对既有评测将记忆与动作割裂的问题:一类基准只测对过往对话或文本的回忆、却不看记忆如何指导未来决策;另一类只测单会话内的行动、根本不需要长期记忆。作者指出，在真实场景中记忆与动作是紧密耦合的——智能体在与环境交互中获取记忆，又依赖这些记忆去求解后续任务，因此评测必须把二者放进同一个闭环。\n\n## 记忆-智能体-环境循环\n\n为捕捉这种耦合，MemoryArena 构建了一个统一的评测场(evaluation gym)，把记忆与动作耦合进多会话的记忆-智能体-环境循环(Memory-Agent-Environment loops)。在这个循环里，智能体先在早期交互中从自己的动作与环境反馈里蒸馏经验、写入记忆，随后在后续会话中调用这些记忆来指导决策、完成整体任务。这样，记忆不再是被动被查询的知识库，而是行动闭环中不可或缺的一环。\n\n## 相互依赖的子任务\n\n基准由人工设计的智能体任务组成，其关键特征是子任务之间存在显式的相互依赖(interdependent)关系。也就是说，后一阶段的成功依赖于前一阶段所获得并正确保存的经验;如果智能体没能在早期把有用信息蒸馏进记忆，或后期未能正确调用，整体任务就会失败。这种依赖结构强制记忆在跨会话中发挥实际作用，避免了「记忆可有可无」的评测漏洞;在许多所谓的记忆评测里，即便智能体完全不记得前情也能靠即时推理蒙混过关，而 MemoryArena 通过让后续子任务在信息上真正依赖早期经验，使得「不会用记忆」必然导致「做不成任务」，从而堵死了这一漏洞。\n\n## 覆盖场景与指标\n\nMemoryArena 支持四类场景:网页导航、偏好约束规划(preference-constrained planning)、渐进信息搜索(progressive information search)与顺序形式推理(sequential formal reasoning)。这些场景各自考察记忆在不同类型决策中的作用，并以整体任务成功率作为核心指标——即最终是否达成目标，而非中间某步的回忆准确率。这种以结果为导向的指标能真实反映记忆是否有效驱动了行动。\n\n## 与回忆型基准的对照\n\n基准的一个重要设计是与 LoCoMo 等既有长上下文记忆基准直接对照。结果显示，在 LoCoMo 这类回忆型基准上近乎饱和的智能体，一旦被放进需要靠记忆指导多会话决策的智能体设置，表现便大幅下滑。这一鲜明反差暴露出当前带记忆智能体评测的关键缺口——高回忆分并不等于会用记忆行动，从而确立了「在行动闭环中检验记忆」的新评测范式。",
+    "evaluation": "基准在网页导航、偏好约束规划、渐进信息搜索、顺序形式推理等含相互依赖子任务的多会话场景上评测带记忆的智能体，并与 LoCoMo 等既有长上下文记忆基准直接对照。结果显示，在 LoCoMo 等基准上近乎饱和的智能体，在本智能体设置中表现很差，暴露当前带记忆智能体评测的明显缺口。",
+    "mainFinding": "记忆必须在行动闭环中检验：在 LoCoMo 等回忆型基准近饱和的智能体，一旦需靠记忆指导多会话决策便大幅失败。",
+    "limitations": "任务由人工设计、规模有限，多会话记忆-智能体-环境循环的实现复杂度与评测成本均较高。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2602.16313"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2602.16313"
+      }
+    ],
+    "citation": "MemoryArena, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-memoryarena.png",
+        "caption": "MemoryArena 评测框架:在 Memory-Agent-Environment 循环中,以多会话、相互依赖的任务考察智能体的记忆组织与更新能力。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-memoryrewardbench",
+    "page": "memory",
+    "title": "MemoryRewardBench: Benchmarking Reward Models for Long-Term Memory Management in Large Language Models",
+    "shortTitle": "MemoryRewardBench",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.79,
+    "year": 2026,
+    "venue": "arXiv 2026",
+    "authors": "Zecheng Tang et al.",
+    "methodFamily": "记忆管理奖励模型基准",
+    "tags": [
+      "奖励模型",
+      "记忆管理",
+      "长文生成"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.8,
+      "reproducibility": 0.76,
+      "adoption": 0.56,
+      "selfEvolution": 0.68
+    },
+    "summary": "首个系统研究奖励模型评估长期记忆管理过程能力的基准，覆盖长上下文理解与长文生成任务、10种不同记忆管理模式，上下文8K至128K。",
+    "methodCore": "MemoryRewardBench 针对越来越多工作以分段(segment)方式处理长上下文、亟需可靠自动评估记忆质量的需求，提出了首个系统研究奖励模型(reward models, RMs)评估长期记忆管理过程能力的基准。作者指出，有效的记忆管理是让 LLM 在整段序列上传播信息的关键能力;而要规模化地改进记忆机制，就需要一种能自动、可靠地判断记忆质量好坏的手段——奖励模型正是这样一个候选评判者。\n\n## 为什么评「记忆管理过程」\n\n与直接评测最终答案不同，本基准把评测对象定为「记忆管理过程」本身。当模型以分段方式处理超长输入时，它需要在每一段决定记住什么、丢弃什么、如何压缩与传递,这一连串决策构成记忆管理模式。奖励模型若能对这些过程的优劣打分，就能作为自动化的质量信号，用于筛选、训练或改进记忆系统。因此，基准衡量的是 RM 能否可靠地区分「好的记忆管理」与「差的记忆管理」;这一评测视角新颖之处在于,它不评价记忆系统产出的最终答案，而是把奖励模型当作被考核对象，追问「充当裁判的模型自己够不够格」——只有裁判可靠，用它来自动筛选与训练记忆机制才有意义。\n\n## 任务与设置覆盖\n\n基准同时覆盖两类任务:长上下文理解(long-context comprehension)与长文生成(long-form generation)，前者考察记忆管理如何影响对长输入的准确理解，后者考察记忆管理如何影响长篇输出的连贯与一致。围绕这两类任务，基准设计了 10 种具有不同记忆管理模式(memory management patterns)的设置，上下文长度从 8K 一直跨越到 128K token。多样的设置与长度使评测能检验 RM 在各种记忆管理情形下的判别稳健性，而非只在单一模式下有效。\n\n## 评测口径\n\n评测的方式是让奖励模型对不同记忆管理过程的质量打分，再与参考判断比对，考察其能否可靠地把优劣区分开来。基准在 13 个前沿奖励模型上做了系统评测，观察它们在跨设置、跨长度条件下的一致性与准确性,从而既揭示 RM 用于评判记忆质量的可行性，也暴露其能力边界与根本局限。\n\n## 研究意义\n\n通过把奖励模型这一自动评判者引入记忆质量评估，MemoryRewardBench 为「如何规模化、自动化地衡量记忆机制好坏」提供了一个新工具与新视角,同时通过跨设置评测揭示当前 RM 的可靠性尚不足以完全替代人工判断。通过把奖励模型确立为被考核对象、并在跨长度跨模式的设置下检验其判别力，MemoryRewardBench 为「如何自动、可靠地衡量记忆管理质量」提供了首个系统性工具与新视角，也清晰划定了当前奖励模型的能力边界。",
+    "evaluation": "基准评测了 13 个前沿奖励模型对长上下文理解与长文生成中记忆管理质量的判别能力。结果显示开源与专有模型之间的性能差距在缩小，且更新一代模型无论参数量多少都持续优于前代;同时基准也暴露了当前 RM 在跨多样设置评价记忆管理时的能力上限与根本局限。",
+    "mainFinding": "用奖励模型自动评判记忆管理质量可行但受限：新一代 RM 持续超越前代、开源追平专有，但跨设置评价记忆仍有根本局限。",
+    "limitations": "聚焦奖励模型的打分能力而非端到端记忆系统评测，记忆管理模式仅 10 种、场景覆盖较为有限，评测对象为奖励模型的判别力而非记忆系统本身。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2601.11969"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2601.11969"
+      }
+    ],
+    "citation": "MemoryRewardBench, arXiv 2026.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-memoryrewardbench.png",
+        "caption": "MemoryRewardBench:首个评测奖励模型对长期记忆管理过程判断力的基准,对比整体与分段处理长序列,覆盖10种记忆模式与8K至128K上下文。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-memorybench",
+    "page": "memory",
+    "title": "MemoryBench: A Benchmark for Memory and Continual Learning in LLM Systems",
+    "shortTitle": "MemoryBench",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.82,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Qingyao Ai et al.",
+    "methodFamily": "记忆与持续学习基准",
+    "tags": [
+      "持续学习",
+      "用户反馈",
+      "服务期学习"
+    ],
+    "scores": {
+      "clarity": 0.84,
+      "evidence": 0.81,
+      "reproducibility": 0.82,
+      "adoption": 0.62,
+      "selfEvolution": 0.85
+    },
+    "summary": "评测LLM系统记忆与持续学习能力的综合基准，通过用户反馈模拟框架考察系统在服务期从累积反馈中学习的能力，覆盖多领域多语言任务。",
+    "methodCore": "MemoryBench 针对两个交织的现实——数据、参数与测试时算力的扩展正逼近上限，以及现有 LLM 记忆基准多聚焦同质的长输入阅读理解、不检验系统在服务期从累积用户反馈中学习的能力——提出了一个评测 LLM 系统记忆与持续学习(continual learning)能力的综合基准。作者受人类与传统 AI 从实践中学习、构建记忆的启发，认为「在服务过程中不断从反馈里成长」是记忆能力被长期忽视的一个重要维度。\n\n## 服务期学习的问题视角\n\n基准把关注点从「读一段长文本回答问题」转向「在持续服务中越用越好」。也就是说，一个部署中的 LLM 系统(LLMsys)会不断收到用户反馈，理想情况下它应当吸收这些反馈、更新自身记忆，并在后续交互中表现得更好。现有记忆基准大多是同质的阅读理解式长输入任务，无法检验这种服务期(service time)的持续学习，MemoryBench 正是为填补这一空白而生;它把记忆的内涵从「静态地记住给定文本」扩展到「动态地从交互反馈中沉淀经验」，这一视角与自我演化智能体的核心诉求高度契合，也把评测从一次性问答推向长期服务中的累积改进。\n\n## 用户反馈模拟框架\n\n为在可控条件下评测持续学习，作者设计了一个用户反馈模拟框架(user feedback simulation framework)。它模拟真实用户在交互中给出的反馈信号，让被评系统据此不断调整。基于这一框架，基准构建了覆盖多个领域、多种语言与多类任务类型的综合评测集,使持续学习能力可以在多样场景下被系统衡量，而非局限于单一任务。\n\n## 评测目标与指标\n\n在评测中，系统需在与模拟用户的反复交互里不断吸收反馈、更新记忆并改进后续表现。基准据此评估其持续学习能力，并同时考察记忆构建与优化算法的有效性(effectiveness)与效率(efficiency)——既看它学得对不对，也看它学得快不快、代价大不大。这种双重考量对实际部署尤为重要，因为服务期学习既要有效又不能过于昂贵。\n\n## 资源与意义\n\n论文配套开源了代码、数据集与网站以支持复现与后续研究。通过把「从累积反馈中持续学习」确立为记忆能力的新评测维度，MemoryBench 揭示当前最先进基线在效果与效率上都远不能令人满意，从而为 LLM 系统的记忆与持续学习研究开辟了一条新方向。通过用户反馈模拟框架与多领域多语言的任务覆盖，MemoryBench 把「服务期从累积反馈中持续学习」确立为记忆能力的新维度，其对效果与效率双重考量的设计也让评测更贴近真实部署的现实约束。作者还开源了代码、数据集与配套网站以支持复现与后续研究，其对最先进基线「效果与效率均远不能令人满意」的实证结论，也为服务期持续学习这一新方向标出了明确的改进空间。",
+    "evaluation": "基准借助用户反馈模拟框架，在覆盖多领域、多语言与多任务类型的设置上评测了最先进基线的持续学习能力。实验表明这些基线在效果与效率两方面都远不能令人满意，说明 LLM 系统在服务期从累积反馈中持续学习、构建记忆的能力仍有巨大提升空间与研究价值。",
+    "mainFinding": "服务期从用户反馈中持续学习是记忆的新维度：现有最先进基线在此上效果与效率均远不满意，揭示巨大的改进空间。",
+    "limitations": "反馈由模拟框架生成、与真实用户交互仍有差距，任务与领域覆盖范围仍然较为有限、评测规模仍有待进一步扩展。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2510.17281"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2510.17281"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/THUIR/MemoryBench"
+      },
+      {
+        "label": "项目主页",
+        "href": "https://memorybench.thuir.cn"
+      }
+    ],
+    "citation": "MemoryBench, arXiv 2025."
+  },
+  {
+    "id": "memory-ev-personamem2",
+    "page": "memory",
+    "title": "PersonaMem-v2: Towards Personalized Intelligence via Learning Implicit User Personas and Agentic Memory",
+    "shortTitle": "PersonaMem-v2",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.83,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Bowen Jiang et al.",
+    "methodFamily": "隐式个性化记忆基准",
+    "tags": [
+      "隐式个性化",
+      "智能体记忆",
+      "强化微调"
+    ],
+    "scores": {
+      "clarity": 0.85,
+      "evidence": 0.82,
+      "reproducibility": 0.78,
+      "adoption": 0.6,
+      "selfEvolution": 0.8
+    },
+    "summary": "面向隐式个性化的LLM数据集与智能体记忆框架，模拟千场用户-聊天机器人交互、覆盖300+场景与2万+隐式偏好、128k上下文。",
+    "methodCore": "PersonaMem-v2 把个性化(personalization)视为 AI 能力与对齐的下一个里程碑，提出了一个当前最先进的 LLM 个性化数据集，并配套开发一个智能体记忆框架。作者认为，真正的个性化不只是记住用户明说的偏好，更要能从交互中推断出用户没有明说的隐式偏好，这对长上下文推理提出了很高要求。\n\n## 数据集规模与隐式偏好\n\n数据集模拟了 1000 场真实的用户-聊天机器人交互，覆盖 300 余个场景、20000 余条用户偏好，并采用 128k token 的上下文窗口。其最关键的设计是:多数用户偏好以隐式(implicitly)方式披露，而非直白陈述——这更贴近真实交互中用户「不明说、需推断」的特点。由此，数据集把评测重心放在模型能否从长而含蓄的交互历史里推理出用户画像，而不仅是检索显式声明;这些交互与偏好均由合成流程生成。真实用户很少直白地宣告「我喜欢什么」，而是在具体请求、抱怨与选择中间接流露偏好，PersonaMem-v2 刻意让多数偏好以这种隐式方式呈现，正是为了检验模型是否具备从行为线索反推用户心智模型的能力。\n\n## 强化微调提升推理\n\n基于该数据，论文研究强化微调(reinforcement fine-tuning)如何提升模型面向用户理解与个性化的长上下文推理能力。作者观察到，前沿 LLM 虽然支持长上下文窗口，但在隐式个性化任务上真正的瓶颈是推理而非长度——它们能读到全部历史，却推不出用户的隐含偏好。通过强化微调，作者把较小的 Qwen3-4B 训练到在隐式个性化上超过更大的模型，印证了「用训练强化推理」这一路线的有效性。\n\n## 智能体记忆框架\n\n论文还开发了一个训练智能体记忆系统的框架:它为每位用户维护一份单一、人类可读(human-readable)、随时间增长的记忆。这份记忆随每次交互不断累积与精炼，最终可以用约 2k token 的紧凑记忆去替代完整的 32k 对话历史。这样做既保留了个性化所需的关键信息，又大幅压缩了输入规模，使系统在推理时无需反复吞下冗长的原始历史。\n\n## 评测口径\n\n评测以隐式个性化任务的准确率与输入 token 开销为核心指标——前者衡量个性化质量，后者衡量效率。这一双指标设计让「用更少 token 达到更高准确率」的紧凑记忆方案的价值得以清晰量化，从而把 PersonaMem-v2 定位为一个既检验隐式推理能力、又检验记忆效率的个性化基准与框架。凭借大规模隐式偏好数据、强化微调对推理的强化，以及紧凑人类可读记忆对长历史的替代，PersonaMem-v2 既揭示了隐式个性化的真正瓶颈在推理而非长度，也示范了智能体记忆作为可扩展个性化路径的价值。",
+    "evaluation": "实验显示前沿 LLM 在隐式个性化上仅达 37-48% 准确率，尽管支持长上下文，推理仍是瓶颈;通过强化微调，Qwen3-4B 被训练至 53% 准确率、超过 GPT-5;智能体记忆框架仅用 2k token 记忆替代完整 32k 历史，以 16 倍更少的输入 token 达到 55% 的 SOTA 准确率。",
+    "mainFinding": "隐式个性化的瓶颈在推理而非上下文长度：强化微调让小模型超越 GPT-5，紧凑的智能体记忆以 16 倍更省 token 达到 SOTA。",
+    "limitations": "1000 场交互与 2 万余条偏好均为模拟合成生成，隐式个性化任务的场景与领域覆盖仍相对有限，真实用户分布仍待检验。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2512.06688"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2512.06688"
+      }
+    ],
+    "citation": "PersonaMem-v2, arXiv 2025.",
+    "figures": [
+      {
+        "src": "figures/memory-ev-personamem2.png",
+        "caption": "PersonaMem-v2:面向隐式个性化的数据集与记忆框架,模拟用户跨话题跨时间与聊天机器人交互形成的长历史,聚焦隐式用户画像学习与检索。"
+      }
+    ]
+  },
+  {
+    "id": "memory-ev-needlechain",
+    "page": "memory",
+    "title": "NeedleChain: Measuring Intact Context Comprehension Capability of Large Language Models",
+    "shortTitle": "NeedleChain",
+    "category": "memory-eval",
+    "maturity": "exploring",
+    "score": 0.79,
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "authors": "Hyeonseok Moon et al.",
+    "methodFamily": "全上下文整合基准",
+    "tags": [
+      "全相关上下文",
+      "信息整合",
+      "上下文理解"
+    ],
+    "scores": {
+      "clarity": 0.82,
+      "evidence": 0.79,
+      "reproducibility": 0.8,
+      "adoption": 0.56,
+      "selfEvolution": 0.58
+    },
+    "summary": "衡量LLM完整整合全部相关证据能力的基准，其上下文全部与查询相关，避免评测退化为检索相关片段，从而更严格考察全上下文理解。",
+    "methodCore": "NeedleChain 针对许多上下文理解基准嵌入大量与查询无关内容、使评测退化为「检索相关片段」而非「整合全部信息」、从而高估模型真实理解能力的问题，构建了一个衡量 LLM 能否忠实纳入全部所给证据的基准。作者的关键论断是:当上下文里塞满无关文本时，模型只要找到少数相关片段就能作答，这掩盖了它是否真的理解全部内容。\n\n## 全相关上下文的核心设计\n\n基准最核心的设计是让上下文完全由与查询相关(query-relevant)的文本构成——没有可供跳过的无关噪声，模型必须整合所有信息才能正确作答。这一设计直接堵住了「检索取巧」的路径:既然每一句都相关，模型就不能只挑几句读，而必须完整地把全部证据串联起来。论文以一个惊人的观察印证其严格性——当上下文全部相关时，即便 GPT-4o 这类先进模型也无法可靠整合短至 200 token 的输入，说明现有以「大海捞针」为代表的基准会严重高估真实的上下文理解能力。\n\n## 三种理解顺序变体\n\nNeedleChain 包含三种在所需理解顺序(order of comprehension)上不同的变体。信息之间的依赖顺序不同，会对模型的整合能力提出不同挑战——有的需要顺序推进，有的需要逆序或交错整合。通过设置这三种变体，基准能分别检验模型在不同信息组织方式下的整合表现，而不是只用单一顺序一概而论;信息呈现的先后顺序会显著影响模型的整合难度——当结论必须等到读完靠后的证据才能确定，或当证据之间存在交错依赖时，模型更容易在中途丢失线索，三种变体正是要把这种对顺序的敏感性单独暴露出来。\n\n## 与 NIAH 的平行对照\n\n除全相关变体外，基准还配套一个基于大海捞针(NIAH)范式的平行基准。把「全相关整合」任务与「稀疏检索」任务放在一起对照，正是 NeedleChain 揭示问题的关键手法:同一模型在检索式任务上可能表现优异，却在全整合式任务上迅速崩塌，二者的落差直接量化了「检索取巧」对能力的高估幅度。\n\n## 无训练策略与意义\n\n作者还提出一个无需训练的 ROPE contraction 策略，鼓励模型在作答时反映全部可用信息,并验证其有助于忠实整合。通过全相关设计、三种顺序变体与 NIAH 平行对照，NeedleChain 把评测焦点从「能否找到相关片段」严格推进到「能否整合全部证据」，凸显全上下文整合这一被既有基准掩盖的真实难点。通过全相关上下文、三种理解顺序变体与 NIAH 平行对照的组合，NeedleChain 把评测焦点从「能否找到相关片段」严格推进到「能否整合全部证据」，尖锐地揭示了既有基准把检索误当理解、从而高估全上下文能力的问题。",
+    "evaluation": "基准在三种理解顺序不同的变体与一个平行 NIAH 基准上评测 LLM，对比检索式与全整合式任务的表现差异。结果表明当上下文全部与查询相关时，即便 GPT-4o 也无法可靠整合短至 200 token 的输入，说明现有基准会高估真实上下文理解能力;无需训练的 ROPE contraction 策略被验证有助于模型忠实纳入全部证据。",
+    "mainFinding": "当上下文全部相关时，连 GPT-4o 也无法可靠整合 200 token 输入，揭示既有基准把检索片段当作理解、严重高估全上下文能力。",
+    "limitations": "任务为构造式、聚焦全相关证据的完整整合，不评测跨会话记忆、知识更新与经验的持续演化，与真实长文档分布有别。",
+    "related": [],
+    "links": [
+      {
+        "label": "论文 arXiv",
+        "href": "https://arxiv.org/abs/2507.22411"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2507.22411"
+      }
+    ],
+    "citation": "NeedleChain, arXiv 2025."
+  }
 ];
