@@ -445,6 +445,99 @@ function Overview({
   );
 }
 
+
+function resolveAsset(src: string): string {
+  if (/^(https?:)?\/\//.test(src) || src.startsWith("data:")) return src;
+  const base = import.meta.env.BASE_URL || "/";
+  return base.replace(/\/$/, "") + "/" + src.replace(/^\//, "");
+}
+
+function splitClauses(text: string): string[] {
+  return (text || "")
+    .split(/(?<=[。；;！!])/)
+    .map((part) => part.trim())
+    .filter((part) => part.length > 1);
+}
+
+const RICH = /([A-Za-z][A-Za-z0-9+\-./]{1,}(?:\s[A-Z0-9][A-Za-z0-9+\-./]*)*|\d+(?:\.\d+)?\s?[%×xKkMB]?(?:\+)?|「[^」]{1,24}」|"[^"]{1,24}"|'[^']{1,24}')/g;
+const STOP = new Set(["a", "an", "the", "of", "to", "in", "on", "and", "or", "et", "al", "vs", "via"]);
+
+function RichText({ text }: { text: string }) {
+  const parts = (text || "").split(RICH);
+  return (
+    <>
+      {parts.map((seg, i) => {
+        if (i % 2 === 1) {
+          const bare = seg.replace(/[「」"']/g, "").toLowerCase().trim();
+          if (bare && !STOP.has(bare)) {
+            return (
+              <b className="kw" key={i}>
+                {seg}
+              </b>
+            );
+          }
+        }
+        return <span key={i}>{seg}</span>;
+      })}
+    </>
+  );
+}
+
+function SectionHead({ icon, title, hint }: { icon: string; title: string; hint?: string }) {
+  return (
+    <div className="dsec-head">
+      <span className="dsec-icon" aria-hidden>
+        {icon}
+      </span>
+      <h2>{title}</h2>
+      {hint && <span className="dsec-hint">{hint}</span>}
+    </div>
+  );
+}
+
+function ClauseList({ text, marker }: { text: string; marker?: "dot" | "check" | "warn" }) {
+  const clauses = splitClauses(text);
+  if (clauses.length <= 1) {
+    return (
+      <p className="dsec-body">
+        <RichText text={text} />
+      </p>
+    );
+  }
+  return (
+    <ul className={"clause-list " + (marker ?? "dot")}>
+      {clauses.map((clause, i) => (
+        <li key={i}>
+          <RichText text={clause} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function StructuredProse({ text }: { text: string }) {
+  const lines = (text || "").split("\n").map((line) => line.trim()).filter(Boolean);
+  const blocks: { type: "h" | "p"; text: string }[] = lines.map((line) =>
+    line.startsWith("## ") ? { type: "h", text: line.slice(3).trim() } : { type: "p", text: line },
+  );
+
+  return (
+    <div className="prose-body">
+      {blocks.map((block, i) =>
+        block.type === "h" ? (
+          <h3 key={i} className="prose-sub">
+            {block.text}
+          </h3>
+        ) : (
+          <p key={i} className="dsec-body">
+            <RichText text={block.text} />
+          </p>
+        ),
+      )}
+    </div>
+  );
+}
+
 function PaperDetail({
   item,
   onBack,
@@ -466,6 +559,14 @@ function PaperDetail({
     window.setTimeout(() => setCopied(false), 1400);
   };
 
+  const scoreDims: { label: string; value: number; weight: string }[] = [
+    { label: "叙述清晰度", value: item.scores.clarity, weight: "20%" },
+    { label: "实验证据", value: item.scores.evidence, weight: "25%" },
+    { label: "可复现性", value: item.scores.reproducibility, weight: "20%" },
+    { label: "采用广度", value: item.scores.adoption, weight: "20%" },
+    { label: "演化相关", value: item.scores.selfEvolution, weight: "15%" },
+  ];
+
   return (
     <article className="paper-detail">
       <div className="paper-detail-top">
@@ -475,16 +576,22 @@ function PaperDetail({
         <span className="detail-page-label">{page.eyebrow}</span>
       </div>
 
-      <header className="paper-hero panel">
+      <header className="paper-hero panel" style={{ "--cat": category?.color ?? "var(--teal)" } as CSSProperties}>
         <div>
-          <span className="chip" style={{ "--chip": category?.color } as CSSProperties}>
-            {category?.name}
-          </span>
+          <div className="hero-meta-row">
+            <span className="chip" style={{ "--chip": category?.color } as CSSProperties}>
+              {category?.name}
+            </span>
+            <span className={"maturity-pill " + item.maturity}>
+              <i />
+              {maturityLabels[item.maturity]}
+            </span>
+            <span className="hero-family">{item.methodFamily}</span>
+          </div>
           <h1>{item.title}</h1>
           <p className="paper-byline">
             {item.authors} · {item.venue} · {item.year}
           </p>
-          <p className="paper-abstract">{item.summary}</p>
           <div className="paper-tags">
             {item.tags.map((tag) => (
               <span key={tag}>{tag}</span>
@@ -506,51 +613,80 @@ function PaperDetail({
           </div>
         </div>
         <aside className="paper-score-card">
+          <span className="psc-label">综合评分</span>
           <b>{item.score.toFixed(2)}</b>
-          <span className={`maturity-pill ${item.maturity}`}>
-            <i />
-            {maturityLabels[item.maturity]}
-          </span>
+          <div className="psc-mini">
+            {scoreDims.map((dim) => (
+              <span key={dim.label}>
+                <i style={{ height: 18 + dim.value * 26 + "px" }} />
+              </span>
+            ))}
+          </div>
           <p>{maturityNotes[item.maturity]}</p>
         </aside>
       </header>
 
       <div className="paper-detail-grid">
         <main className="paper-reading">
-          <ReadingSection
-            label="01"
-            title="Introduction"
-            text={`这篇工作放在 ${category?.name ?? page.title} 方向下阅读。它讨论的问题是：${item.summary} 对 self-evolving agent 来说，关键在于把一次任务中的经验转化为后续可复用的资产，并让系统能判断何时使用、何时修订。`}
-          />
-          <ReadingSection label="02" title="Method" text={item.methodCore} />
-          <ReadingSection label="03" title="Experiments" text={item.evaluation} />
-          <ReadingSection label="04" title="Main Findings" text={item.mainFinding} />
-          <ReadingSection label="05" title="Limitations" text={item.limitations} />
-
-          <section className="detail-section">
-            <div className="section-index">06</div>
-            <div>
-              <h2>Figure Notes</h2>
-              <p>
-                这一块用于放论文截图、系统框图和实验表格。当前条目还没有绑定 PDF figure；补充素材后会显示原图、图注和对应段落解读。
+          <section className="detail-section highlight">
+            <div className="dsec-full">
+              <SectionHead icon="❝" title="一句话概述" />
+              <p className="lede">
+                <RichText text={item.summary} />
               </p>
-              <div className="figure-grid">
-                <FigureSlot title="Problem Setting" text="建议放 intro 中的问题定义图或任务流程图。" />
-                <FigureSlot title="System / Method" text="建议放 method 中的框架图、算法图或模块关系图。" />
-                <FigureSlot title="Experiment Table" text="建议放主要结果表、消融表或 benchmark 对比图。" />
-              </div>
             </div>
           </section>
 
           <section className="detail-section">
-            <div className="section-index">07</div>
-            <div>
-              <h2>Why This Position</h2>
-              <p>
-                该条目被放入 {category?.name ?? page.title}，因为其方法核心是 {item.methodFamily}。综合评分主要由
-                清晰度 {item.scores.clarity.toFixed(2)}、实验证据 {item.scores.evidence.toFixed(2)}、可复现性{" "}
-                {item.scores.reproducibility.toFixed(2)}、采用度 {item.scores.adoption.toFixed(2)} 和演化相关性{" "}
-                {item.scores.selfEvolution.toFixed(2)} 共同决定。
+            <div className="dsec-full">
+              <SectionHead icon="◈" title="核心方法" hint="Method" />
+              <StructuredProse text={item.methodCore} />
+              {item.figures && item.figures.length > 0 ? (
+                <div className="figure-notes">
+                  {item.figures.map((fig, i) => (
+                    <figure className="paper-figure" key={i}>
+                      <img src={resolveAsset(fig.src)} alt={fig.caption} loading="lazy" />
+                      <figcaption>
+                        <span className="fig-tag">图 {i + 1}</span>
+                        <RichText text={fig.caption} />
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ) : (
+                <p className="dsec-note figure-empty">
+                  ◧ 配图笔记：该条目暂未绑定论文原图。补充 figure 后，此处将展示框架图、算法图与关键流程图，并配图注解读。
+                </p>
+              )}
+            </div>
+          </section>
+
+          <section className="detail-section">
+            <div className="dsec-full">
+              <SectionHead icon="▲" title="实验与评估" hint="Experiments" />
+              <ClauseList text={item.evaluation} marker="dot" />
+            </div>
+          </section>
+
+          <section className="detail-section">
+            <div className="dsec-full">
+              <SectionHead icon="✦" title="主要发现" hint="Key Findings" />
+              <ClauseList text={item.mainFinding} marker="check" />
+            </div>
+          </section>
+
+          <section className="detail-section">
+            <div className="dsec-full">
+              <SectionHead icon="⚠" title="局限与边界" hint="Limitations" />
+              <ClauseList text={item.limitations} marker="warn" />
+            </div>
+          </section>
+
+          <section className="detail-section">
+            <div className="dsec-full">
+              <SectionHead icon="◎" title="为什么在这个位置" hint="Reading Position" />
+              <p className="dsec-body">
+                该条目被放入 {category?.name ?? page.title}，因为其方法核心是 {item.methodFamily}。综合评分由清晰度 {item.scores.clarity.toFixed(2)}、实验证据 {item.scores.evidence.toFixed(2)}、可复现性 {item.scores.reproducibility.toFixed(2)}、采用度 {item.scores.adoption.toFixed(2)} 和演化相关性 {item.scores.selfEvolution.toFixed(2)} 共同决定。
               </p>
             </div>
           </section>
@@ -558,13 +694,20 @@ function PaperDetail({
 
         <aside className="paper-aside">
           <section className="panel paper-side-block">
-            <h2>Score Vector</h2>
+            <h2>评分向量</h2>
             <div className="score-grid">
-              <Score label="清晰度" value={item.scores.clarity} />
-              <Score label="实验证据" value={item.scores.evidence} />
-              <Score label="可复现性" value={item.scores.reproducibility} />
-              <Score label="采用度" value={item.scores.adoption} />
-              <Score label="演化相关" value={item.scores.selfEvolution} />
+              {scoreDims.map((dim) => (
+                <div className="score-metric" key={dim.label}>
+                  <div className="sm-top">
+                    <span>{dim.label}</span>
+                    <b>{dim.value.toFixed(2)}</b>
+                  </div>
+                  <i>
+                    <em style={{ width: dim.value * 100 + "%" }} />
+                  </i>
+                  <span className="sm-weight">weight {dim.weight}</span>
+                </div>
+              ))}
             </div>
           </section>
 
@@ -595,15 +738,16 @@ function PaperDetail({
 
           <section className="panel paper-side-block">
             <h2>Links</h2>
-            <div className="link-row">
+            <div className="ref-rows">
               {item.links.length > 0 ? (
                 item.links.map((link) => (
-                  <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                  <a className="ref-row" key={link.href} href={link.href} target="_blank" rel="noreferrer">
                     {link.label}
+                    <em>↗</em>
                   </a>
                 ))
               ) : (
-                <span>待补论文链接</span>
+                <span className="ref-empty">待补论文链接</span>
               )}
             </div>
           </section>
@@ -624,40 +768,6 @@ function PaperDetail({
         </aside>
       </div>
     </article>
-  );
-}
-
-function ReadingSection({ label, title, text }: { label: string; title: string; text: string }) {
-  return (
-    <section className="detail-section">
-      <div className="section-index">{label}</div>
-      <div>
-        <h2>{title}</h2>
-        <p>{text}</p>
-      </div>
-    </section>
-  );
-}
-
-function FigureSlot({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="figure-slot">
-      <div className="fs-canvas" />
-      <strong>{title}</strong>
-      <span>{text}</span>
-    </div>
-  );
-}
-
-function Score({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="score-row">
-      <span>{label}</span>
-      <i>
-        <b style={{ width: `${value * 100}%` }} />
-      </i>
-      <em>{value.toFixed(2)}</em>
-    </div>
   );
 }
 

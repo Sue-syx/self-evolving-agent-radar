@@ -1,4 +1,5 @@
 import { importedSkillItems } from "./importedSkillItems";
+import { importedMemoryItems } from "./importedMemoryItems";
 
 export type PageKey = "overview" | "skill" | "memory" | "workflow" | "evaluation";
 export type RadarPageKey = Exclude<PageKey, "overview">;
@@ -50,6 +51,7 @@ export interface RadarItem {
   related: string[];
   links: { label: string; href: string }[];
   citation: string;
+  figures?: { src: string; caption: string }[];
 }
 
 export const maturityLabels: Record<Maturity, string> = {
@@ -74,12 +76,11 @@ const skillCategories: RadarCategory[] = [
 ];
 
 const memoryCategories: RadarCategory[] = [
-  { id: "memory-write", name: "记忆写入", color: "#c05a45", note: "决定何时把交互、事实、偏好和错误写入长期状态。" },
-  { id: "memory-retrieve", name: "记忆检索", color: "#2c8577", note: "把任务上下文映射到相关记忆片段。" },
-  { id: "memory-compress", name: "记忆压缩", color: "#43678f", note: "用摘要、聚类、图结构降低长期记忆成本。" },
-  { id: "memory-reflect", name: "反思更新", color: "#7d9350", note: "基于新证据修订、合并或删除旧记忆。" },
-  { id: "memory-consistency", name: "长期一致性", color: "#8a6497", note: "控制跨会话身份、偏好和事实冲突。" },
-  { id: "memory-eval", name: "记忆评测", color: "#8c8377", note: "评估记忆召回、抗干扰、遗忘和长期任务收益。" },
+  { id: "memory-write", name: "写入组织", color: "#c05a45", note: "决定把交互、事实、经验写入长期状态的方式，并组织成笔记、图谱、树状或分层结构。" },
+  { id: "memory-retrieve", name: "检索召回", color: "#2c8577", note: "把任务上下文映射到相关记忆片段，覆盖检索增强、自适应检索与长上下文外部记忆。" },
+  { id: "memory-reflect", name: "反思演化", color: "#7d9350", note: "基于新证据反思、提炼、修订、编辑或遗忘记忆，驱动经验累积与自我改进。" },
+  { id: "memory-skill", name: "记忆×技能", color: "#43678f", note: "把经验记忆沉淀为可复用技能：经验合成、技能归纳、工具箱记忆与技能自我发现。" },
+  { id: "memory-eval", name: "评测", color: "#8a6497", note: "评估记忆召回、抗干扰、长上下文、长期一致性与持续改进收益。" },
 ];
 
 const workflowCategories: RadarCategory[] = [
@@ -1439,7 +1440,8 @@ const seedItems: RadarItem[] = [
 
 export const radarItems: RadarItem[] = [
   ...importedSkillItems,
-  ...seedItems.filter((item) => item.page !== "skill"),
+  ...importedMemoryItems,
+  ...seedItems.filter((item) => item.page !== "skill" && item.page !== "memory"),
 ];
 
 export const pagesByKey = Object.fromEntries(radarPages.map((page) => [page.key, page])) as Record<RadarPageKey, RadarPage>;
