@@ -1,5 +1,6 @@
 import { importedSkillItems } from "./importedSkillItems";
 import { importedMemoryItems } from "./importedMemoryItems";
+import { importedEvaluationItems } from "./importedEvaluationItems";
 
 export type PageKey = "overview" | "skill" | "memory" | "workflow" | "evaluation";
 export type RadarPageKey = Exclude<PageKey, "overview">;
@@ -97,7 +98,6 @@ const evaluationCategories: RadarCategory[] = [
   { id: "eval-process", name: "过程评估", color: "#2c8577", note: "检查中间步骤、工具调用和反思质量。" },
   { id: "eval-trajectory", name: "轨迹匹配", color: "#43678f", note: "比较动作链、状态链和图结构。" },
   { id: "eval-judge", name: "自动评判", color: "#7d9350", note: "使用裁判模型、规则和多评审聚合。" },
-  { id: "eval-safety", name: "安全评估", color: "#8a6497", note: "追踪演化后权限、注入、越权和退化风险。" },
   { id: "eval-long", name: "长期演化", color: "#8c8377", note: "评估多轮自我改进后的收益与漂移。" },
 ];
 
@@ -1441,7 +1441,8 @@ const seedItems: RadarItem[] = [
 export const radarItems: RadarItem[] = [
   ...importedSkillItems,
   ...importedMemoryItems,
-  ...seedItems.filter((item) => item.page !== "skill" && item.page !== "memory"),
+  ...importedEvaluationItems,
+  ...seedItems.filter((item) => item.page !== "skill" && item.page !== "memory" && item.page !== "evaluation"),
 ];
 
 export const pagesByKey = Object.fromEntries(radarPages.map((page) => [page.key, page])) as Record<RadarPageKey, RadarPage>;
