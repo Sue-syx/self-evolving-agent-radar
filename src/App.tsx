@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 import { FilterBar, FilterState } from "./components/FilterBar";
 import { PaperList } from "./components/PaperList";
 import { RadarChart } from "./components/RadarChart";
@@ -13,6 +13,7 @@ import {
   pagesByKey,
   RadarItem,
   RadarPageKey,
+  ScoreVector,
   radarItems,
   radarPages,
 } from "./data/radarData";
@@ -23,9 +24,20 @@ const initialFilters: FilterState = {
   query: "",
   sort: "score",
   view: "grid",
+  minYear: 0,
+  minSelfEvolution: 0,
 };
 
 type NavKey = PageKey | "insights";
+type ScoreSortKey = keyof ScoreVector;
+
+const scoreSortKeys: ScoreSortKey[] = [
+  "clarity",
+  "evidence",
+  "reproducibility",
+  "adoption",
+  "selfEvolution",
+];
 
 const pageTabs: { key: NavKey; label: string }[] = [
   { key: "overview", label: "技术图谱" },
@@ -64,6 +76,7 @@ function App() {
   const [activePage, setActivePage] = useState<NavKey>(() => hashPage());
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [detailId, setDetailId] = useState<string | undefined>(() => hashPaperId());
+  const [spotlightId, setSpotlightId] = useState<string | undefined>();
 
   useEffect(() => {
     const syncFromHash = () => {
@@ -95,6 +108,7 @@ function App() {
     setActivePage(page);
     setFilters(initialFilters);
     setDetailId(undefined);
+    setSpotlightId(undefined);
     window.history.replaceState(null, "", `#${page}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -102,6 +116,7 @@ function App() {
   const openPaper = (item: RadarItem) => {
     setActivePage(item.page);
     setDetailId(item.id);
+    setSpotlightId(item.id);
     window.history.replaceState(null, "", `#paper/${item.id}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -124,6 +139,8 @@ function App() {
     const list = pageItems.filter((item) => {
       const categoryMatch = filters.category === "all" || item.category === filters.category;
       const maturityMatch = filters.maturity === "all" || item.maturity === filters.maturity;
+      const yearMatch = filters.minYear === 0 || item.year >= filters.minYear;
+      const evolutionMatch = item.scores.selfEvolution >= filters.minSelfEvolution;
       const queryText = [
         item.title,
         item.shortTitle,
@@ -136,12 +153,15 @@ function App() {
       ]
         .join(" ")
         .toLowerCase();
-      return categoryMatch && maturityMatch && (!query || queryText.includes(query));
+      return categoryMatch && maturityMatch && yearMatch && evolutionMatch && (!query || queryText.includes(query));
     });
     const sorted = [...list];
     if (filters.sort === "score") sorted.sort((a, b) => b.score - a.score);
     else if (filters.sort === "year") sorted.sort((a, b) => b.year - a.year);
-    else sorted.sort((a, b) => a.title.localeCompare(b.title));
+    else if (scoreSortKeys.includes(filters.sort as ScoreSortKey)) {
+      const sortKey = filters.sort as ScoreSortKey;
+      sorted.sort((a, b) => b.scores[sortKey] - a.scores[sortKey]);
+    } else sorted.sort((a, b) => a.title.localeCompare(b.title));
     return sorted;
   }, [filters, pageItems]);
 
@@ -206,7 +226,14 @@ function App() {
                   {filteredItems.length} / {pageItems.length}
                 </div>
               </div>
-              <RadarChart page={page} items={filteredItems} onSelect={openPaper} />
+              <RadarChart
+                page={page}
+                items={filteredItems}
+                selectedId={spotlightId}
+                activeCategory={filters.category === "all" ? undefined : filters.category}
+                onHover={setSpotlightId}
+                onSelect={openPaper}
+              />
               <Legend pageKey={activePage as RadarPageKey} />
             </section>
 
@@ -235,7 +262,14 @@ function App() {
           </div>
 
           <FilterBar page={page} filters={filters} counts={categoryCounts} onChange={setFilters} />
-          <PaperList page={page} items={filteredItems} view={filters.view} onSelect={openPaper} />
+          <PaperList
+            page={page}
+            items={filteredItems}
+            selectedId={spotlightId}
+            view={filters.view}
+            onHover={setSpotlightId}
+            onSelect={openPaper}
+          />
         </section>
       )}
     </main>
@@ -274,6 +308,29 @@ function Overview({
     { value: matureItems, label: "成熟期", color: "#34d399" },
     { value: growingItems, label: "成长期", color: "#f5b53d" },
     { value: exploringItems, label: "探索期", color: "#f2645a" },
+  ];
+  const researchQueues = [
+    {
+      label: "Top Mature",
+      note: "优先引用或作为基线阅读",
+      items: [...radarItems].filter((item) => item.maturity === "mature").sort((a, b) => b.score - a.score).slice(0, 5),
+    },
+    {
+      label: "Fast Growing",
+      note: "最值得跟踪后续工作的方向",
+      items: [...radarItems]
+        .filter((item) => item.maturity === "growing")
+        .sort((a, b) => b.scores.selfEvolution - a.scores.selfEvolution)
+        .slice(0, 5),
+    },
+    {
+      label: "Emerging",
+      note: "概念新但证据还在积累",
+      items: [...radarItems]
+        .filter((item) => item.maturity === "exploring")
+        .sort((a, b) => b.scores.selfEvolution - a.scores.selfEvolution)
+        .slice(0, 5),
+    },
   ];
 
   return (
@@ -317,6 +374,26 @@ function Overview({
         <p>四个方向分别成图，越靠外越成熟；点击雷达点进入单篇论文页，Open 进入完整方向页。</p>
       </div>
 
+      <div className="research-queue-grid">
+        {researchQueues.map((queue) => (
+          <section className="research-queue panel" key={queue.label}>
+            <div className="queue-head">
+              <h3>{queue.label}</h3>
+              <span>{queue.note}</span>
+            </div>
+            <div className="queue-list">
+              {queue.items.map((item) => (
+                <button key={item.id} onClick={() => onSelect(item)}>
+                  <span>{item.page}</span>
+                  <strong>{item.shortTitle}</strong>
+                  <b>{item.score.toFixed(2)}</b>
+                </button>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
       <div className="overview-radar-wall">
         {overviewRows.map(({ page, items, mature, growing, exploring, top }) => (
           <section key={page.key} className="overview-radar-card panel">
@@ -337,7 +414,7 @@ function Overview({
                 <i className="exploring" style={{ width: `${Math.max(8, exploring * 6)}px` }} />
               </span>
             </div>
-            <RadarChart page={page} items={items} onSelect={onSelect} />
+            <RadarChart page={page} items={items} compact onSelect={onSelect} />
             <div className="overview-paper-strip">
               {top.map((item) => (
                 <button key={item.id} onClick={() => onSelect(item)}>
@@ -368,7 +445,7 @@ function Overview({
   );
 }
 
-/* Split Chinese prose into clause-level bullets on 。；;! */
+
 function resolveAsset(src: string): string {
   if (/^(https?:)?\/\//.test(src) || src.startsWith("data:")) return src;
   const base = import.meta.env.BASE_URL || "/";
@@ -378,11 +455,10 @@ function resolveAsset(src: string): string {
 function splitClauses(text: string): string[] {
   return (text || "")
     .split(/(?<=[。；;！!])/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 1);
+    .map((part) => part.trim())
+    .filter((part) => part.length > 1);
 }
 
-/* Auto-emphasise technical terms & metrics for a dense, scannable read. */
 const RICH = /([A-Za-z][A-Za-z0-9+\-./]{1,}(?:\s[A-Z0-9][A-Za-z0-9+\-./]*)*|\d+(?:\.\d+)?\s?[%×xKkMB]?(?:\+)?|「[^」]{1,24}」|"[^"]{1,24}"|'[^']{1,24}')/g;
 const STOP = new Set(["a", "an", "the", "of", "to", "in", "on", "and", "or", "et", "al", "vs", "via"]);
 
@@ -407,58 +483,11 @@ function RichText({ text }: { text: string }) {
   );
 }
 
-type IconName = "summary" | "method" | "experiment" | "finding" | "limitation";
-
-const iconPaths: Record<IconName, ReactNode> = {
-  summary: (
-    <>
-      <path d="M7 8h7M7 11.5h4.5" />
-      <path d="M4.5 4.5h11a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4.5A1.5 1.5 0 0 1 3 12V6a1.5 1.5 0 0 1 1.5-1.5Z" />
-    </>
-  ),
-  method: (
-    <>
-      <path d="M10 2.6 17 6.4l-7 3.8-7-3.8 7-3.8Z" />
-      <path d="M3 10.2 10 14l7-3.8" />
-      <path d="M3 13.8 10 17.6l7-3.8" />
-    </>
-  ),
-  experiment: (
-    <>
-      <path d="M8 2.5v5.2L3.7 15a1.4 1.4 0 0 0 1.2 2.1h10.2a1.4 1.4 0 0 0 1.2-2.1L12 7.7V2.5" />
-      <path d="M7 2.5h6" />
-      <path d="M6.5 12.5h7" />
-    </>
-  ),
-  finding: (
-    <>
-      <path d="M10 2.5v3.2M10 14.3v3.2M2.5 10h3.2M14.3 10h3.2" />
-      <path d="M5 5l1.9 1.9M13.1 13.1 15 15M15 5l-1.9 1.9M6.9 13.1 5 15" />
-      <circle cx="10" cy="10" r="2.6" />
-    </>
-  ),
-  limitation: (
-    <>
-      <path d="M10 3.2 2.8 15.6A1.3 1.3 0 0 0 3.9 17.6h12.2a1.3 1.3 0 0 0 1.1-2L10 3.2Z" />
-      <path d="M10 8v3.4M10 14.2h.01" />
-    </>
-  ),
-};
-
-function Icon({ name }: { name: IconName }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6"
-      strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      {iconPaths[name]}
-    </svg>
-  );
-}
-
-function SectionHead({ icon, title, hint }: { icon: IconName; title: string; hint?: string }) {
+function SectionHead({ icon, title, hint }: { icon: string; title: string; hint?: string }) {
   return (
     <div className="dsec-head">
       <span className="dsec-icon" aria-hidden>
-        <Icon name={icon} />
+        {icon}
       </span>
       <h2>{title}</h2>
       {hint && <span className="dsec-hint">{hint}</span>}
@@ -476,49 +505,32 @@ function ClauseList({ text, marker }: { text: string; marker?: "dot" | "check" |
     );
   }
   return (
-    <ul className={`clause-list ${marker ?? "dot"}`}>
-      {clauses.map((c, i) => (
+    <ul className={"clause-list " + (marker ?? "dot")}>
+      {clauses.map((clause, i) => (
         <li key={i}>
-          <RichText text={c} />
+          <RichText text={clause} />
         </li>
       ))}
     </ul>
   );
 }
 
-/* Render long-form text as sub-headings ("## title") + flowing paragraphs,
-   so the Method section reads as prose rather than a wall of bullets. */
 function StructuredProse({ text }: { text: string }) {
-  const lines = (text || "").split("\n").map((l) => l.trim()).filter(Boolean);
-  const blocks: { type: "h" | "p"; text: string }[] = [];
-  for (const line of lines) {
-    if (line.startsWith("## ")) {
-      blocks.push({ type: "h", text: line.slice(3).trim() });
-    } else {
-      blocks.push({ type: "p", text: line });
-    }
-  }
-  if (!blocks.some((b) => b.type === "h")) {
-    return (
-      <div className="prose-body">
-        {blocks.map((b, i) => (
-          <p key={i} className="dsec-body">
-            <RichText text={b.text} />
-          </p>
-        ))}
-      </div>
-    );
-  }
+  const lines = (text || "").split("\n").map((line) => line.trim()).filter(Boolean);
+  const blocks: { type: "h" | "p"; text: string }[] = lines.map((line) =>
+    line.startsWith("## ") ? { type: "h", text: line.slice(3).trim() } : { type: "p", text: line },
+  );
+
   return (
     <div className="prose-body">
-      {blocks.map((b, i) =>
-        b.type === "h" ? (
+      {blocks.map((block, i) =>
+        block.type === "h" ? (
           <h3 key={i} className="prose-sub">
-            {b.text}
+            {block.text}
           </h3>
         ) : (
           <p key={i} className="dsec-body">
-            <RichText text={b.text} />
+            <RichText text={block.text} />
           </p>
         ),
       )}
@@ -540,6 +552,12 @@ function PaperDetail({
   const relatedItems = item.related
     .map((id) => radarItems.find((entry) => entry.id === id))
     .filter((entry): entry is RadarItem => Boolean(entry));
+  const [copied, setCopied] = useState(false);
+  const copyCitation = async () => {
+    await navigator.clipboard?.writeText(item.citation);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1400);
+  };
 
   const scoreDims: { label: string; value: number; weight: string }[] = [
     { label: "叙述清晰度", value: item.scores.clarity, weight: "20%" },
@@ -558,16 +576,13 @@ function PaperDetail({
         <span className="detail-page-label">{page.eyebrow}</span>
       </div>
 
-      <header
-        className="paper-hero panel"
-        style={{ "--cat": category?.color ?? "var(--teal)" } as CSSProperties}
-      >
+      <header className="paper-hero panel" style={{ "--cat": category?.color ?? "var(--teal)" } as CSSProperties}>
         <div>
           <div className="hero-meta-row">
             <span className="chip" style={{ "--chip": category?.color } as CSSProperties}>
               {category?.name}
             </span>
-            <span className={`maturity-pill ${item.maturity}`}>
+            <span className={"maturity-pill " + item.maturity}>
               <i />
               {maturityLabels[item.maturity]}
             </span>
@@ -582,14 +597,28 @@ function PaperDetail({
               <span key={tag}>{tag}</span>
             ))}
           </div>
+          <div className="research-brief">
+            <div>
+              <span>TL;DR</span>
+              <p>{item.summary}</p>
+            </div>
+            <div>
+              <span>SEA Value</span>
+              <p>{item.mainFinding}</p>
+            </div>
+            <div>
+              <span>Use With Care</span>
+              <p>{item.limitations}</p>
+            </div>
+          </div>
         </div>
         <aside className="paper-score-card">
           <span className="psc-label">综合评分</span>
           <b>{item.score.toFixed(2)}</b>
           <div className="psc-mini">
-            {scoreDims.map((d) => (
-              <span key={d.label}>
-                <i style={{ height: `${18 + d.value * 26}px` }} />
+            {scoreDims.map((dim) => (
+              <span key={dim.label}>
+                <i style={{ height: 18 + dim.value * 26 + "px" }} />
               </span>
             ))}
           </div>
@@ -601,7 +630,7 @@ function PaperDetail({
         <main className="paper-reading">
           <section className="detail-section highlight">
             <div className="dsec-full">
-              <SectionHead icon="summary" title="一句话概述" />
+              <SectionHead icon="❝" title="一句话概述" />
               <p className="lede">
                 <RichText text={item.summary} />
               </p>
@@ -610,7 +639,7 @@ function PaperDetail({
 
           <section className="detail-section">
             <div className="dsec-full">
-              <SectionHead icon="method" title="核心方法" hint="Method" />
+              <SectionHead icon="◈" title="核心方法" hint="Method" />
               <StructuredProse text={item.methodCore} />
               {item.figures && item.figures.length > 0 ? (
                 <div className="figure-notes">
@@ -634,22 +663,31 @@ function PaperDetail({
 
           <section className="detail-section">
             <div className="dsec-full">
-              <SectionHead icon="experiment" title="实验与评估" hint="Experiments" />
+              <SectionHead icon="▲" title="实验与评估" hint="Experiments" />
               <ClauseList text={item.evaluation} marker="dot" />
             </div>
           </section>
 
           <section className="detail-section">
             <div className="dsec-full">
-              <SectionHead icon="finding" title="主要发现" hint="Key Findings" />
+              <SectionHead icon="✦" title="主要发现" hint="Key Findings" />
               <ClauseList text={item.mainFinding} marker="check" />
             </div>
           </section>
 
           <section className="detail-section">
             <div className="dsec-full">
-              <SectionHead icon="limitation" title="局限与边界" hint="Limitations" />
+              <SectionHead icon="⚠" title="局限与边界" hint="Limitations" />
               <ClauseList text={item.limitations} marker="warn" />
+            </div>
+          </section>
+
+          <section className="detail-section">
+            <div className="dsec-full">
+              <SectionHead icon="◎" title="为什么在这个位置" hint="Reading Position" />
+              <p className="dsec-body">
+                该条目被放入 {category?.name ?? page.title}，因为其方法核心是 {item.methodFamily}。综合评分由清晰度 {item.scores.clarity.toFixed(2)}、实验证据 {item.scores.evidence.toFixed(2)}、可复现性 {item.scores.reproducibility.toFixed(2)}、采用度 {item.scores.adoption.toFixed(2)} 和演化相关性 {item.scores.selfEvolution.toFixed(2)} 共同决定。
+              </p>
             </div>
           </section>
         </main>
@@ -658,55 +696,54 @@ function PaperDetail({
           <section className="panel paper-side-block">
             <h2>评分向量</h2>
             <div className="score-grid">
-              {scoreDims.map((d) => (
-                <div className="score-metric" key={d.label}>
+              {scoreDims.map((dim) => (
+                <div className="score-metric" key={dim.label}>
                   <div className="sm-top">
-                    <span>{d.label}</span>
-                    <b>{d.value.toFixed(2)}</b>
+                    <span>{dim.label}</span>
+                    <b>{dim.value.toFixed(2)}</b>
                   </div>
                   <i>
-                    <em style={{ width: `${d.value * 100}%` }} />
+                    <em style={{ width: dim.value * 100 + "%" }} />
                   </i>
-                  <span className="sm-weight">权重 {d.weight}</span>
+                  <span className="sm-weight">weight {dim.weight}</span>
                 </div>
               ))}
             </div>
           </section>
 
           <section className="panel paper-side-block">
-            <h2>定位信息</h2>
+            <h2>Reading Position</h2>
             <dl className="detail-facts">
               <div>
-                <dt>方向</dt>
+                <dt>Direction</dt>
                 <dd>{page.title.replace(" Radar", "")}</dd>
               </div>
               <div>
-                <dt>分类</dt>
+                <dt>Taxonomy</dt>
                 <dd>{category?.name}</dd>
               </div>
               <div>
-                <dt>方法族</dt>
+                <dt>Method Family</dt>
                 <dd>{item.methodFamily}</dd>
               </div>
               <div>
-                <dt>年份 / 会议</dt>
-                <dd>{item.venue}</dd>
-              </div>
-              <div>
-                <dt>引用</dt>
+                <dt>Citation</dt>
                 <dd className="citation">{item.citation}</dd>
               </div>
             </dl>
+            <button className="copy-citation" type="button" onClick={copyCitation}>
+              {copied ? "已复制" : "复制引用"}
+            </button>
           </section>
 
           <section className="panel paper-side-block">
-            <h2>参考资料</h2>
+            <h2>Links</h2>
             <div className="ref-rows">
               {item.links.length > 0 ? (
                 item.links.map((link) => (
-                  <a key={link.href} className="ref-row" href={link.href} target="_blank" rel="noreferrer">
-                    <span>{link.label}</span>
-                    <em>→</em>
+                  <a className="ref-row" key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                    {link.label}
+                    <em>↗</em>
                   </a>
                 ))
               ) : (
@@ -717,7 +754,7 @@ function PaperDetail({
 
           {relatedItems.length > 0 && (
             <section className="panel paper-side-block">
-              <h2>相关论文</h2>
+              <h2>Related Papers</h2>
               <div className="related-list">
                 {relatedItems.map((related) => (
                   <button key={related.id} onClick={() => onOpenPaper(related)}>

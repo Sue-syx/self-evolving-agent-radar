@@ -1444,7 +1444,9 @@ export const radarItems: RadarItem[] = [
   ...importedMemoryItems,
   ...importedEvaluationItems,
   ...importedWorkflowItems,
-  ...seedItems.filter((item) => item.page !== "skill" && item.page !== "memory" && item.page !== "evaluation" && item.page !== "workflow"),
+  ...seedItems.filter(
+    (item) => item.page !== "skill" && item.page !== "memory" && item.page !== "evaluation" && item.page !== "workflow",
+  ),
 ];
 
 export const pagesByKey = Object.fromEntries(radarPages.map((page) => [page.key, page])) as Record<RadarPageKey, RadarPage>;

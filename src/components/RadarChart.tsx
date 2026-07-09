@@ -4,6 +4,9 @@ interface RadarChartProps {
   page: RadarPage;
   items: RadarItem[];
   selectedId?: string;
+  activeCategory?: string;
+  compact?: boolean;
+  onHover?: (id: string | undefined) => void;
   onSelect: (item: RadarItem) => void;
 }
 
@@ -43,8 +46,9 @@ const scoreToRadius = (score: number) => {
 // the rest stay as clean dots and surface their label on hover / selection.
 const LABELS_PER_SECTOR = 3;
 
-export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProps) {
+export function RadarChart({ page, items, selectedId, activeCategory, compact = false, onHover, onSelect }: RadarChartProps) {
   const sector = (Math.PI * 2) / page.categories.length;
+  const gradId = `radarFieldGrad-${page.key}-${compact ? "compact" : "full"}`;
 
   // Rank within each category so we can show labels only for the top few.
   const rankById = new Map<string, number>();
@@ -92,19 +96,34 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
     { ratio: (minRadius + (maxRadius - minRadius) * 0.4) / maxRadius, label: maturityLabels.growing },
     { ratio: 1, label: maturityLabels.mature },
   ];
+  const selected = selectedId ? placed.find((entry) => entry.item.id === selectedId) : undefined;
+  const selectedCategory = selected ? categoryById(page, selected.item.category) : undefined;
+  const tooltipX = selected
+    ? Math.max(120, Math.min(size - 120, selected.point.x + (selected.point.x > center ? -116 : 116)))
+    : 0;
+  const tooltipY = selected ? Math.max(76, Math.min(size - 80, selected.point.y - 38)) : 0;
+  const tooltipAnchor = selected && selected.point.x > center ? "end" : "start";
 
   return (
-    <div className="radar-frame">
+    <div className={`radar-frame ${compact ? "is-compact" : ""}`}>
       <svg className="radar-svg" viewBox={`0 0 ${size} ${size}`} aria-label={`${page.title} radar`}>
         <defs>
-          <radialGradient id="radarFieldGrad">
+          <radialGradient id={gradId}>
             <stop offset="0%" stopColor="rgba(20,160,143,0.10)" />
             <stop offset="60%" stopColor="rgba(20,160,143,0.03)" />
             <stop offset="100%" stopColor="rgba(20,160,143,0)" />
           </radialGradient>
         </defs>
 
-        <circle cx={center} cy={center} r={maxRadius} fill="url(#radarFieldGrad)" />
+        <circle cx={center} cy={center} r={maxRadius} fill={`url(#${gradId})`} />
+        <g className="radar-sweep-arm" aria-hidden="true">
+          <path
+            d={`M ${center} ${center} L ${center + 14} ${center - maxRadius + 18} L ${center - 5} ${
+              center - maxRadius + 4
+            } Z`}
+          />
+          <line x1={center} y1={center} x2={center} y2={center - maxRadius + 8} />
+        </g>
 
         {/* maturity rings */}
         {bands.map((band, index) => (
@@ -126,7 +145,12 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
           const textAnchor =
             Math.cos(mid) > 0.35 ? "start" : Math.cos(mid) < -0.35 ? "end" : "middle";
           return (
-            <g key={category.id}>
+            <g
+              key={category.id}
+              className={`radar-sector ${activeCategory === category.id ? "is-active" : ""} ${
+                activeCategory && activeCategory !== category.id ? "is-muted" : ""
+              }`}
+            >
               <line className="radar-axis" x1={center} y1={center} x2={edge.x} y2={edge.y} />
               <path
                 className="sector-arc"
@@ -168,7 +192,12 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
           const color = category?.color ?? "#14a08f";
           const lx = point.x + (labelAnchor === "start" ? 12 : -12);
           return (
-            <g key={`lbl-${item.id}`} className={`radar-label ${active ? "is-active" : ""}`}>
+            <g
+              key={`lbl-${item.id}`}
+              className={`radar-label ${active ? "is-active" : ""} ${
+                activeCategory && activeCategory !== item.category ? "is-muted" : ""
+              }`}
+            >
               {Math.abs(labelY - point.y) > 2 && (
                 <line
                   className="label-leader"
@@ -186,26 +215,32 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
           );
         })}
 
-        {placed.map(({ item, point }) => {
+        {placed.map(({ item, point }, index) => {
           const category = categoryById(page, item.category);
           const catColor = category?.color ?? "#14a08f";
           const fill = maturityColor[item.maturity] ?? catColor;
           const active = item.id === selectedId;
+          const muted = Boolean(activeCategory && activeCategory !== item.category);
           return (
             <g
               key={item.id}
-              className={`radar-point ${active ? "is-active" : ""}`}
+              className={`radar-point ${active ? "is-active" : ""} ${muted ? "is-muted" : ""}`}
               role="button"
               tabIndex={0}
               transform={`translate(${point.x} ${point.y})`}
               onClick={() => onSelect(item)}
+              onMouseEnter={() => onHover?.(item.id)}
+              onMouseLeave={() => onHover?.(undefined)}
+              onFocus={() => onHover?.(item.id)}
+              onBlur={() => onHover?.(undefined)}
               onKeyDown={(event) => {
                 if (event.key === "Enter" || event.key === " ") onSelect(item);
               }}
               aria-label={item.title}
-              style={{ "--pt": catColor } as React.CSSProperties}
+              style={{ "--pt": catColor, "--i": index } as React.CSSProperties}
             >
               <circle className="hit" r={12} fill="transparent" />
+              <circle className="selection-ring" r={active ? 11 : 0} fill="none" stroke={catColor} />
               <circle
                 className="dot"
                 r={active ? 7 : 4.8}
@@ -217,6 +252,35 @@ export function RadarChart({ page, items, selectedId, onSelect }: RadarChartProp
             </g>
           );
         })}
+
+        {selected && (
+          <g
+            className="radar-tooltip"
+            transform={`translate(${tooltipX} ${tooltipY})`}
+            pointerEvents="none"
+            textAnchor={tooltipAnchor}
+          >
+            <rect
+              x={tooltipAnchor === "end" ? -228 : 0}
+              y="-44"
+              width="228"
+              height="88"
+              rx="12"
+              fill="rgba(255, 254, 251, 0.96)"
+              stroke={selectedCategory?.color ?? "#14a08f"}
+            />
+            <text className="rt-kicker" x={tooltipAnchor === "end" ? -14 : 14} y="-18">
+              {selectedCategory?.name} · {maturityLabels[selected.item.maturity]}
+            </text>
+            <text className="rt-title" x={tooltipAnchor === "end" ? -14 : 14} y="4">
+              {selected.item.shortTitle}
+            </text>
+            <text className="rt-meta" x={tooltipAnchor === "end" ? -14 : 14} y="27">
+              {selected.item.year} · score {selected.item.score.toFixed(2)} · evo{" "}
+              {selected.item.scores.selfEvolution.toFixed(2)}
+            </text>
+          </g>
+        )}
       </svg>
     </div>
   );

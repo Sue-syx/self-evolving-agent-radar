@@ -6,9 +6,6 @@ npm-debug.log*
 
 # local preview / screenshot artifacts
 preview_bundle.html
-make_bundle.py
 shot*.cjs
 s_*.png
 ref_*.jpg
-.research/
-/figures/
