@@ -68,6 +68,13 @@ const catGlyphs: Record<string, ReactNode> = {
       <path d="M8 11l2 2 4-4.2" />
     </>
   ),
+  "skill-model-coevo": (
+    <>
+      <circle cx="6.5" cy="6.5" r="3" />
+      <circle cx="14.5" cy="14.5" r="3" />
+      <path d="M9 8.2c3 0.4 3.4 3.4 3.6 4.6M12.4 6.6c1.2 0.2 2.4 0.8 2.9 2M6.2 12.6c0.4 1.2 1.1 2.3 2.4 2.8" />
+    </>
+  ),
   "memory-write": (
     <>
       <path d="M13.5 3.5 17.5 7.5 8 17H4v-4l9.5-9.5Z" />

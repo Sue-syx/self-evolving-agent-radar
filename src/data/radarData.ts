@@ -75,6 +75,7 @@ const skillCategories: RadarCategory[] = [
   { id: "skill-evaluation", name: "Skill 评测", color: "#7d9350", note: "度量技能是否稳定、可迁移、可组合。" },
   { id: "skill-optimization", name: "Skill 优化", color: "#8a6497", note: "压缩、合并、修订和再训练技能库。" },
   { id: "skill-governance", name: "Skill 管理", color: "#8c8377", note: "维护权限、版本、依赖、失效和安全边界。" },
+  { id: "skill-model-coevo", name: "Skill×模型协同进化", color: "#b6763a", note: "技能库与 LLM/agent 策略权重同步更新,通过 RL、自蒸馏、参数化记忆实现联合优化。" },
 ];
 
 const memoryCategories: RadarCategory[] = [

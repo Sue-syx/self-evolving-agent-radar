@@ -5047,5 +5047,492 @@ export const importedSkillItems: RadarItem[] = [
       }
     ],
     "citation": "SkillSpector. https://github.com/nvidia/skillspector"
+  },
+  {
+    "id": "skill-coevo-sage",
+    "page": "skill",
+    "title": "SAGE:用技能库增强 GRPO 的自进化智能体",
+    "shortTitle": "SAGE",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.62,
+    "year": 2025,
+    "venue": "arXiv 2025-12",
+    "authors": "Jiongxiao Wang, Qiaojing Yan, Yawei Wang, Yijun Tian, Soumya Smruti Mishra, Zhichao Xu, Megha Gandhi, Panpan Xu, Lin Lee Cheong",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "reinforcement learning",
+      "GRPO",
+      "skill library",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.68,
+      "evidence": 0.6,
+      "reproducibility": 0.5,
+      "adoption": 0.45,
+      "selfEvolution": 0.85
+    },
+    "summary": "把技能库直接嵌入 GRPO 训练循环,通过顺序滚动与技能奖励让模型权重与技能库同步进化。",
+    "methodCore": "SAGE(Skill Augmented GRPO for self-Evolution)提出把技能库真正嵌入到强化学习的训练目标里,而不是像以往那样只用提示词驱动技能的生成和调用。以往做法受限于基座模型的指令跟随能力,技能库的质量和适配度都难以稳定提升。SAGE 面向工具型智能体,基于 CodeAct 框架,让模型通过 API 调用与环境交互,并把生成的可复用程序化函数保存为技能,后续可直接调用执行而非重复拼装底层 API。\n## 冷启动:SFT 先行\n由于开源模型在上下文提示下难以适配这种新的技能库智能体范式,SAGE 先用高级 LLM 生成的高质量专家轨迹做监督微调(SFT),让模型学会统一格式的\"任务求解 + 技能生成\"行为,为后续 RL 打好基础。这一步把技能生成与任务执行统一到同一套输出格式里,不像 Agent Skill Induction 那样只在任务结束后才定义技能。\n## 核心:顺序滚动(Sequential Rollout)\n传统 RL 每次只对单个样本计算奖励,忽略了技能在任务之间的累积效应。SAGE 的关键机制是顺序滚动:在每次滚动中,让智能体沿着一条相似任务链依次执行。随着智能体走过任务链,前面任务生成的技能会累积进技能库,并对后续任务可用。这样,技能的价值不再是孤立评估,而是在任务链条上被真实检验——一个好技能会在后续任务里持续带来收益,这种收益会通过奖励反传到模型权重。\n## 技能集成奖励(Skill-integrated Reward)\n最终奖励由两部分构成:一是可验证的结果导向奖励(任务是否成功完成),二是额外的技能质量奖励(奖励高质量的技能生成与技能利用)。两者相加共同塑造 GRPO 的优势估计,使模型学会既把任务做对,又主动沉淀和复用高质量技能。\n## 权重与技能库的协同进化\nSAGE 的本质是模型权重与外部技能库的双向协同进化:技能库为策略提供可复用的过程性经验,而 RL 又反过来优化模型选择、生成、利用技能的策略参数。这与仅靠提示、权重冻结的技能框架形成鲜明对比——SAGE 的策略权重会随训练真实更新。\n## 与提示驱动方法的区别\n以往的技能框架大多把技能生成、检索和调用交给冻结的基座模型,靠提示词临场发挥,技能质量因此受限于基座的指令跟随水平,也无法随任务反馈自我纠正。SAGE 把这一整套行为纳入 RL 训练目标,让模型在真实的成功与失败信号下学会何时生成技能、生成什么样的技能、以及如何在后续任务里复用它,策略权重因此持续更新而非固定不变。\n## 主要能力\n统一的任务求解与技能生成输出格式;顺序滚动带来的跨任务技能累积信号;结果奖励与技能奖励联合塑造的策略优化;显著降低交互步数与 token 消耗的高效执行。",
+    "evaluation": "在 AppWorld 基准上,SAGE 应用于经专家经验 SFT 的模型后,场景目标完成率(Scenario Goal Completion)提升 8.9%,同时交互步数减少 26%、生成 token 减少 59%,在准确率与效率两方面都大幅超越既有方法。HuggingFace 论文页获得 42 次以上 upvote,作者提供了配套讲解视频。",
+    "mainFinding": "把技能库嵌入 GRPO 的顺序滚动与技能集成奖励,使模型权重与技能库同步进化,在更少步数、更少 token 下取得更高的任务完成率。",
+    "limitations": "abstract 主要在 AppWorld 单一基准报告增益,跨领域普适性待验证;依赖高级 LLM 生成的专家轨迹做 SFT 冷启动,数据成本较高;顺序滚动的任务链构造方式与相似度度量对结果影响仍需更多消融。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2512.17102"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2512.17102v1"
+      },
+      {
+        "label": "HuggingFace",
+        "href": "https://huggingface.co/papers/2512.17102"
+      },
+      {
+        "label": "讲解视频",
+        "href": "https://www.youtube.com/watch?v=sHcrBDaSRGA"
+      }
+    ],
+    "citation": "Wang et al. Reinforcement Learning for Self-Improving Agent with Skill Library. arXiv:2512.17102",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-sage-overview.png",
+        "caption": "SAGE 顺序滚动与技能集成奖励总览"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-skill1",
+    "page": "skill",
+    "title": "Skill1:单策略统一进化技能选择、利用与蒸馏",
+    "shortTitle": "Skill1",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.6,
+    "year": 2026,
+    "venue": "arXiv 2026-05",
+    "authors": "Yaorui Shi, Yuxin Chen, Zhengxi Lu, Yuchun Miao, Shugui Liu, Qi Gu, Xunliang Cai, Xiang Wang, An Zhang",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "reinforcement learning",
+      "GRPO",
+      "credit assignment",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.66,
+      "evidence": 0.62,
+      "reproducibility": 0.58,
+      "adoption": 0.45,
+      "selfEvolution": 0.82
+    },
+    "summary": "用单一策略在同一任务结果信号下协同进化技能的选择、利用与蒸馏三种能力。",
+    "methodCore": "Skill1 关注一个被以往方法忽视的事实:维护一个持久技能库需要三种紧密耦合的能力——智能体要选出相关技能(selection)、在执行中用好它(utilization)、再从经验中蒸馏出新技能(distillation)。既有方法要么孤立优化这三者,要么用彼此独立、甚至冲突的奖励来源,导致技能库演化片面且互相拉扯。Skill1 的核心主张是:用同一个策略网络、同一个任务结果目标,同时进化这三种能力。\n## 单策略贯穿全生命周期\n面对新任务,同一个策略 π_θ 先生成一段自然语言查询去技能库检索候选技能,再对检索回来的候选重排序、选出最匹配的一个;随后策略在选中技能的条件下与环境做多轮交互求解任务;任务完成后,策略再对整条轨迹做反思,蒸馏出可复用的新技能写回技能库。选择、利用、蒸馏由同一组权重承担,而不是把某些环节外包给无梯度的外部模块或独立的教师模型。\n## 从单一信号做分级信用分配\nSkill1 最巧妙的地方在于信用分配:所有学习信号都来自单一的任务结果 r(τ),无需额外设计辅助奖励。它把这个结果信号分解为低频趋势与高频波动——低频趋势归因于\"选择\"能力(选对技能会带来跨回合的稳定收益),高频波动归因于\"蒸馏\"能力(蒸馏出的新技能会带来即时可辨的变化)。Skill1 在 GRPO 的基础上,把单一任务结果信号拆解成针对选择、利用、蒸馏的分阶段梯度,纳入统一的 RL 目标。\n## 协同进化的证据\n训练动态显示:选择精度、利用成功率、技能库质量在同一信号下同步提升;消融实验表明,去掉任意一个阶段的信用分配信号,都会同时拖累三种能力,证明它们相互依赖、必须协同进化。这正是\"技能库与模型权重协同进化\"的直接体现——策略权重会真实更新,而技能库随之被更好地组织。\n## 为什么必须协同而非分而治之\n如果把选择交给一个独立检索器、把蒸馏交给一个独立教师模型,三种能力就会各自朝不同方向漂移:检索器可能偏好高频出现但低价值的技能,教师模型蒸馏出的技能未必是当前策略用得上的。Skill1 把它们收拢到同一组权重、同一个结果目标下,任何一个环节的改进都会通过共享参数惠及其他环节,反之退化也会被结果信号及时惩罚。这种设计让技能库不再是一个静态外挂,而是随策略权重一起被打磨的活体资产,真正体现技能与模型的双向进化。\n## 主要能力\n单策略统一承载选择、利用、蒸馏;基于低频/高频分解的无辅助奖励信用分配;技能库质量与策略权重同步提升。",
+    "evaluation": "在 ALFWorld 与 WebShop 上,Skill1 一致超越既有基于技能的方法与标准 RL 基线;其中在 ALFWorld 上取得 97.5% 成功率,超过所有技能增强智能体基线。训练在 8 张 H800-80GB 上用 VeRL 框架完成,约 100-150 步收敛(ALFWorld 约 30 小时)。消融显示移除任一阶段信用信号都会削弱三种能力。代码已开源。",
+    "mainFinding": "证明用单策略、单一任务结果信号即可协同进化技能的选择、利用与蒸馏,三者互相依赖,联合优化优于孤立或冲突奖励的做法。",
+    "limitations": "主要在 ALFWorld、WebShop 两个基准验证,更复杂真实场景的可扩展性待考察;低频/高频信号分解对超参与任务结构较敏感;技能库长期膨胀后的检索与维护成本未充分讨论。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2605.06130"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2605.06130v3"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/AlphaLab-USTC/Skill1"
+      },
+      {
+        "label": "HuggingFace",
+        "href": "https://huggingface.co/papers/2605.06130"
+      }
+    ],
+    "citation": "Shi et al. Skill1: Unified Evolution of Skill-Augmented Agents via Reinforcement Learning. arXiv:2605.06130",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-skill1-overview.png",
+        "caption": "Skill1 单策略协同进化选择/利用/蒸馏总览"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-sgsd",
+    "page": "skill",
+    "title": "SGSD:技能条件化门控自蒸馏提升推理",
+    "shortTitle": "SGSD",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.55,
+    "year": 2026,
+    "venue": "arXiv 2026-05",
+    "authors": "Jiazhen Huang, Xiao Chen, Xiao Luo, Yong Dai, Senkang Hu, Yuzhi Zhao",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "self-distillation",
+      "reasoning",
+      "GRPO",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.6,
+      "evidence": 0.58,
+      "reproducibility": 0.55,
+      "adoption": 0.4,
+      "selfEvolution": 0.78
+    },
+    "summary": "把技能库当作教师侧特权信息,通过门控自蒸馏把稀疏验证信号变成稠密的 token 级监督更新权重。",
+    "methodCore": "SGSD(Skill-Conditioned Gated Self-Distillation)研究一个具体问题:在线自蒸馏(on-policy self-distillation)靠教师侧的特权信息(privileged information, PI)把稀疏的验证器结果变成稠密的 token 级监督,从而提升 LLM 推理。以往方法通常假设 PI 是可信的,比如参考答案或成功轨迹。SGSD 问的是:能否让 PI 来自一个从经验中提炼的技能库?这里的技能紧凑可复用,但也可能不相关甚至有误导性。\n## 把技能蒸馏当作教师假设验证\nSGSD 不做无条件模仿,而是把基于技能的自蒸馏重新表述为\"教师假设的验证\"问题。它检索技能-错误配对(skill-mistake pairs),构造一个多教师池(multi-teacher pool),让所有技能条件化的教师去给同一条纯提示词学生滚动(plain-prompt student rollout)打分。\n## 结果验证的教师极性\n验证器会检验每个教师的极性(polarity):如果一个教师支持了成功、或抑制了失败,就给出正向监督;反之,如果它的立场与结果相悖,就把该监督信号翻转。这样,即使技能库里混入了误导性技能,它们的错误引导也会被结果信号纠正,不会污染训练。\n## 稳健门控目标\n随后一个稳健的门控目标(robust gated objective)只蒸馏那些有信息量的师生分歧,同时压制不确定或极端的信号。论文给出了门控损失的导数、形状、策略梯度形式及有界影响的理论分析,保证优化过程稳定。技能库还支持在线更新与维护,随训练不断演化。\n## 权重与技能库的联合演化\nSGSD 的策略(学生模型)权重通过自蒸馏真实更新,而技能库作为教师侧特权信息在线维护,两者构成技能与模型的联合演化闭环。相比需要可信参考答案的答案条件化 OPSD,SGSD 在更弱的 PI 假设下依然有效。\n## 相比传统自蒸馏的进步\n经典的在线自蒸馏要么依赖参考答案这类强特权信息,要么无条件地模仿教师,一旦教师本身有偏,学生就会被带偏。SGSD 的门控与极性验证把这个假设放松到\"教师可能出错\"的现实场景:技能库里既有真正有用的经验,也有过时或误导性的条目,系统不预先信任任何一个,而是让最终的结果信号来裁决谁值得学、谁需要翻转、谁应该被压制。于是一个从历史经验中自动生长、可能带噪声的技能库,也能安全地充当稠密监督来源,持续把稀疏的验证结果转化为对学生权重的稳定更新。\n## 主要能力\n技能-错误配对检索与多教师池构造;结果验证的教师极性翻转机制;稳健门控目标下的稠密 token 级监督。",
+    "evaluation": "在多个数学推理基准上,SGSD 一致优于 GRPO,并在更弱的 PI 假设下与答案条件化 OPSD 保持竞争力。例如在 Qwen3-1.7B 上,SGSD 在 AIME24、AIME25、HMMT25 上平均超过 GRPO 6.2%、超过 OPSD 1.7%。论文提供完整理论证明与实验配置,代码已开源。",
+    "mainFinding": "证明可以用从经验提炼、可能有噪声的技能库替代可信参考答案作为教师特权信息,通过结果验证与门控把噪声监督转化为稳定的权重更新。",
+    "limitations": "主要在数学推理基准与较小规模模型(Qwen3-1.7B 等)验证,大模型与其他任务域的迁移性待考察;多教师池的构造与检索开销、门控超参的敏感性仍需更多实证。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2605.28791"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2605.28791v1"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/walawalagoose/SGSD"
+      }
+    ],
+    "citation": "Huang et al. Skill-Conditioned Gated Self-Distillation for LLM Reasoning. arXiv:2605.28791",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-sgsd-overview.png",
+        "caption": "SGSD 技能条件化门控自蒸馏总览"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-evotrainer",
+    "page": "skill",
+    "title": "EvoTrainer:策略与训练侧诊断协同进化",
+    "shortTitle": "EvoTrainer",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.57,
+    "year": 2026,
+    "venue": "arXiv 2026-06",
+    "authors": "EvoTrainer team",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "agentic RL",
+      "training harness",
+      "reusable skills",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.62,
+      "evidence": 0.58,
+      "reproducibility": 0.48,
+      "adoption": 0.4,
+      "selfEvolution": 0.83
+    },
+    "summary": "让 LLM 策略权重与训练侧诊断工具链一起进化,超越静态配方搜索的自动训练框架。",
+    "methodCore": "EvoTrainer 从一个反常识的观察出发:自主训练 LLM 常被框定为\"配方搜索\"(recipe search),也就是在候选训练配方之间挑选,却让训练用的诊断工具链(harness)基本保持静态。在 agentic RL 中,这个局限尤其突出——主导瓶颈会不断迁移:可能从奖励稀疏变成行为坍缩,从评测伪影变成低信息量的滚动组,从配方选择变成需要可复用的诊断工具;而标量验证分数只是可见的一种失败模式,真正的问题是解释训练所需的证据和流程本身也需要进化。\n## 把训练系统本身当作改进对象\nEvoTrainer 引入\"trainer\"这个概念,指代那个观察已完成版本、分析滚动证据、提出干预、更新诊断基础设施、并决定下一步测什么的决策系统。它区分两个时间尺度:策略(policy)在单次训练运行内改进——权重被真实更新;而 trainer 在多次训练运行之间改进——通过累积证据、修订自己的诊断工具链、复用操作性技能。\n## 两个耦合的自进化过程\n框架由两个耦合过程组成。其一是策略自进化(policy self-evolution):可运行的训练版本被生成、比较、剪枝、晋升、合并,通过受控干预推进——这一层直接更新 LLM 策略的权重。其二是 trainer 自反思(trainer self-reflection):当现有指标、分析器、回测无法解释新结果时,训练侧的诊断工具链随之进化。轨迹分析显示,被保留的策略在不同领域会发生分化,进化中的诊断能阻止无效的高分分支被错误晋升,而可复用技能会塑造后续搜索。\n## 权重与工具链的协同进化\nEvoTrainer 的核心贡献正是把\"LLM 策略权重\"与\"训练侧诊断 harness\"作为一对协同进化的对象:自主 LLM RL 应超越配方搜索,走向策略与解释它们的训练工具链的联合进化。它在数学推理、竞赛编程代码生成、仓库级软件工程三类任务上评估。\n## 与静态配方搜索的分野\n把训练当成配方搜索,默认了\"怎么评估、怎么诊断\"这套工具是给定且够用的,只需在有限候选里挑一个最好的配置。但 agentic RL 的瓶颈会随训练阶段迁移,昨天有效的诊断指标今天可能完全看不出问题所在。EvoTrainer 拒绝把诊断工具链钉死,而是让它随着策略一起成长:当旧指标解释不了新现象时,trainer 会补充新的分析器、新的回测、新的可复用技能,再据此决定下一步实验。这样,权重更新与诊断更新互为因果——更强的诊断带来更有针对性的干预,更有效的干预又暴露出诊断的新盲区,二者在多次训练运行之间螺旋上升。\n## 主要能力\n受控干预下的策略版本生成/剪枝/晋升/合并;训练侧诊断工具链的自反思式进化;跨领域可复用操作技能的累积。",
+    "evaluation": "在相同数据、代码库与评测协议下,EvoTrainer 匹配或超越人工设计的 RL 参照,在长程 agentic 软件工程(SWE)上增益最大——在 SWE-9B 上以 +4.39 BC% 超越人工设计的 RL 基线。轨迹分析证实保留策略跨领域分化、进化诊断阻止无效高分分支被晋升、可复用技能塑造后续搜索。",
+    "mainFinding": "把训练侧诊断工具链与 LLM 策略权重作为协同进化对象,超越静态配方搜索,在长程 agentic SWE 上取得最大增益。",
+    "limitations": "跨领域评测虽覆盖数学/代码/SWE 三类,但每类的绝对数值与稳定性仍需原文详查;trainer 自反思的搜索开销较大;方法对可运行训练版本的基础设施要求较高,复现门槛不低。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2606.03108"
+      }
+    ],
+    "citation": "EvoTrainer: Co-Evolving LLM Policies and Training Harnesses for Autonomous Agentic Reinforcement Learning. arXiv:2606.03108",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-evotrainer-overview.png",
+        "caption": "EvoTrainer 策略与训练侧诊断协同进化总览"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-skillr1",
+    "page": "skill",
+    "title": "Skill-R1:用双层 GRPO 递归进化智能体技能",
+    "shortTitle": "Skill-R1",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.54,
+    "year": 2026,
+    "venue": "arXiv 2026-05",
+    "authors": "Skill-R1 team",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "reinforcement learning",
+      "bi-level GRPO",
+      "skill generator",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.6,
+      "evidence": 0.55,
+      "reproducibility": 0.5,
+      "adoption": 0.4,
+      "selfEvolution": 0.8
+    },
+    "summary": "训练一个技能生成器策略,用双层组相对策略优化递归进化能引导冻结任务模型的技能。",
+    "methodCore": "Skill-R1 针对的痛点是:智能体依赖的技能(可复用的自然语言过程)通常靠提示工程或对任务模型本身做对齐来改进,这既昂贵、又与具体模型绑定,对闭源模型往往不可行。同时,技能优化不是一步式的提示工程问题,而是一个有两层耦合信用分配的递归过程——一个有用的技能应在当前上下文下提升滚动质量,而一个有用的修订应把观察到的成功和失败转化为下一轮更好的技能。\n## 分离任务执行与技能改进\nSkill-R1 把\"任务执行\"和\"技能改进\"解耦:任务 LLM 保持冻结(frozen),Skill-R1 训练的是一个技能生成器(skill generator)的策略,让它产出能引导这个冻结任务模型的技能。这一设计保留了对开源与闭源模型的黑盒兼容性,同时使适配比模型级更新便宜得多。虽然任务模型不更新,但技能生成器本身是一个策略,其权重会通过 RL 真实更新——这正是\"技能生成能力与模型权重协同进化\"的体现。\n## 多代递归改进\nSkill-R1 按多代(generation)推进。每一代,当前技能会诱导任务 LLM 产生滚动,滚动经过验证的结果被反馈回来,用于产生下一次修订。为了在这一递归过程上优化技能生成器,论文引入了带代内(intra-generation)与代间(inter-generation)优势的双层组相对策略优化目标。\n## 双层信用分配\n代内项在共享的技能条件下比较多条滚动,衡量当前技能带来的执行质量;代间项奖励那些让被诱导行为在连续代之间变得更好的修订。两者共同为\"有方向的技能进化\"提供了原则性目标,而不是一次性或启发式的自我精炼。这种把技能优化建模成递归决策问题、并用双层优势做信用分配的做法,是它区别于单次精炼的关键。\n## 与提示工程和模型级对齐的对比\n直接对任务模型做对齐既贵又与具体模型绑定,换一个基座就得重来;纯提示工程则受限于一次性的人工经验,无法从批量成功失败里系统地学。Skill-R1 把改进的载体从任务模型转移到一个专门的技能生成器策略上,任务模型始终冻结,只负责按技能执行。这样,昂贵的权重更新只发生在体量更小、可反复训练的技能生成器上,而它产出的技能对任何黑盒任务模型都通用。递归的多代结构又让技能不是一次成型,而是在每一代的验证反馈里被持续修订,信用分配则由双层优势精确落到\"这一步技能好不好\"与\"这次修订值不值\"两个层面。\n## 主要能力\n冻结任务模型下的黑盒兼容技能生成;多代递归的技能修订闭环;代内/代间双层优势的组相对策略优化。",
+    "evaluation": "在多个具有可验证奖励的基准上,Skill-R1 一致超越无技能基线与标准 GRPO;在复杂的多步任务上增益尤其明显,而单次精炼方法在这些任务上往往力不从心。论文在 arXiv 与 ResearchGate 同步发布。",
+    "mainFinding": "把技能优化建模为递归决策过程,用双层组相对策略优化训练一个可引导冻结任务模型的技能生成器,在可验证奖励任务上稳定超越 GRPO,尤其擅长复杂多步任务。",
+    "limitations": "任务模型冻结意味着能力上界仍受基座限制;双层优势的估计在长程任务上方差较大;abstract 未给出统一的绝对分数,跨基准的稳定性需原文详查。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2605.09359"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2605.09359v1"
+      },
+      {
+        "label": "ResearchGate",
+        "href": "https://www.researchgate.net/publication/404753557_Skill-R1_Agent_Skill_Evolution_via_Reinforcement_Learning"
+      }
+    ],
+    "citation": "Skill-R1: Agent Skill Evolution via Reinforcement Learning. arXiv:2605.09359",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-skillr1-overview.png",
+        "caption": "Skill-R1 双层 GRPO 递归技能进化总览"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-sia",
+    "page": "skill",
+    "title": "SIA:同时更新 harness 与权重的自改进环",
+    "shortTitle": "SIA",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.58,
+    "year": 2026,
+    "venue": "arXiv 2026-05",
+    "authors": "SIA team",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "harness update",
+      "weight update",
+      "test-time training",
+      "self-improvement",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.64,
+      "evidence": 0.6,
+      "reproducibility": 0.48,
+      "adoption": 0.42,
+      "selfEvolution": 0.86
+    },
+    "summary": "打通两条孤立路线,让反馈智能体同时改写任务智能体的脚手架与模型权重。",
+    "methodCore": "SIA 从一个尖锐判断切入:今天 AI 的进步被人类速率所限——模型由研究者设计和后训练,构建其上的智能体由工程师搭脚手架、写提示、调试和调参。让 AI(无论模型还是智能体)自己想办法改进自己,仍是开放问题。围绕这个瓶颈,自动自改进研究分裂成两条互不相通的路线。\n## 两条孤立的路线\n路线一是 harness/脚手架自改进:一个元智能体在多代之间改写任务智能体的脚手架——系统提示、工具分派逻辑、重试策略、答案抽取代码——而底层语言模型权重保持冻结。代表工作包括 Darwin Gödel Machine、Meta-Harness、Hyperagents 等。这一路线的经验规律是,脚手架编辑大多集中在软件工程层面的整洁性(解析、重试、分派),很少能带来基座模型本无法产出的领域推理。路线二是测试时后训练:一条人工编写的 RL 流水线在测试时用任务反馈更新模型自身的权重,而 harness 固定在单一的提示与评分模板。代表包括 TTRL、Discover 系列、TTT。这里收益来自内部策略变化,但交付它的流水线由人设计,不会随任务结构自适应。两条路线各自为政:harness 派不动模型,测试时训练派不动 harness。\n## SIA:同时拉动两个杠杆\nSIA 提出一个自改进环,让一个语言模型智能体(反馈智能体,Feedback-Agent)同时更新任务智能体的 harness 与权重。只需给定任务规格与一个验证器,系统就能在无进一步人工干预下,同时改进自己的脚手架与模型权重。这正是最彻底意义上的\"技能/脚手架与模型协同进化\":权重更新负责建立任何提示或脚手架都无法灌输的领域直觉,而 harness 更新让模型变得更 agentic,塑造它如何搜索、如何行动。\n## 为什么两个杠杆缺一不可\n只改脚手架,受益的是模型如何组织信息、如何调度工具、如何重试,却灌不进基座本就缺失的领域知识;只做测试时权重训练,模型内部策略确实变了,但交付它的流水线是死的,不会随任务结构自适应,遇到新形态的任务就得人工重搭。SIA 的判断是:领域直觉必须靠权重更新建立,而如何搜索、如何行动的 agentic 能力必须靠 harness 更新塑造,二者指向不同的失败模式,因此必须同时拉动。反馈智能体在同一个自改进环里交替修订脚手架与权重,让\"更懂领域的模型\"与\"更会做事的脚手架\"互相成就,这正是脚手架与模型协同进化最彻底的形态。\n## 主要能力\n反馈智能体驱动的自改进环;harness 与权重两个杠杆的联合更新;仅需任务规格与验证器的低人工干预闭环。",
+    "evaluation": "在三个差异极大的领域评估:中文法律罪名分类、底层 GPU kernel 优化、单细胞 RNA 去噪。两个杠杆并用在全部三个基准上都超越单独迭代脚手架:SIA-W+H 在 LawBench 上超越此前 SOTA 25.1%;GPU kernel 比此前 SOTA 快 12.4%(1017 vs 1161 微秒);去噪任务超越此前 SOTA 20.4%。",
+    "mainFinding": "打通 harness 自改进与测试时权重训练两条孤立路线,证明同时更新脚手架与权重优于只迭代脚手架,权重更新提供脚手架无法灌输的领域直觉。",
+    "limitations": "三个领域各自任务专用,通用性仍待验证;反馈智能体的搜索成本与稳定性、验证器质量对结果影响较大;同时更新两个杠杆带来的训练复杂度和复现门槛较高。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2605.27276v2"
+      }
+    ],
+    "citation": "SIA: Self Improving AI with Harness & Weight Updates. arXiv:2605.27276",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-sia-overview.png",
+        "caption": "SIA 反馈智能体同时更新 harness 与权重总览"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-skillrl",
+    "page": "skill",
+    "title": "SkillRL:经验蒸馏驱动的递归技能增强 RL",
+    "shortTitle": "SkillRL",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.56,
+    "year": 2026,
+    "venue": "arXiv 2026-02",
+    "authors": "SkillRL team (aiming-lab)",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "reinforcement learning",
+      "GRPO",
+      "skill distillation",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.62,
+      "evidence": 0.58,
+      "reproducibility": 0.55,
+      "adoption": 0.42,
+      "selfEvolution": 0.82
+    },
+    "summary": "把冗长轨迹蒸馏成分层 SkillBank,与 GRPO 策略优化递归耦合,加速收敛并提升成功率。",
+    "methodCore": "SkillRL 针对 LLM 智能体\"每次执行都是孤立情节\"的问题:当前智能体各自为战,无法从过去的成功或失败中学习,严重阻碍了它们的进化。既有基于记忆的方法主要是把原始轨迹直接存进外部数据库,供未来相似任务参考;虽然直观,但原始轨迹往往冗长、充满冗余和噪声,模型难以从中提取关键信息。近期工作尝试压缩轨迹、通过在线训练更新记忆库,提升了记忆效率,但它们只是模仿过去的解法,无法蒸馏出核心原则,也没有调整智能体的内部策略去利用记忆做有指导的决策——于是常在信息密度与噪声之间陷入两难,甚至性能退化。\n## 核心洞见:经验迁移需要抽象\nSkillRL 主张:有效的经验迁移需要抽象。人类专家不会记住每个情境下的每个动作,而是发展出技能——紧凑、可复用、抓住如何完成子任务本质的策略。受此启发,SkillRL 通过自动技能发现与递归技能进化,弥合原始经验与高效策略改进之间的鸿沟。\n## 经验蒸馏机制与分层 SkillBank\nSkillRL 首先引入经验蒸馏机制:把冗余轨迹蒸馏进一个分层的 SkillBank,抽象出通用技能与任务专用技能,用于高效指导决策。与只保存原始轨迹、丢弃失败样本的做法不同,SkillRL 把多样的经验(包括失败)转化为结构化技能。\n## 与 GRPO 的递归耦合\n关键在于,SkillRL 不是外挂一个静态记忆,而是让技能库与策略优化递归耦合:蒸馏出的技能指导滚动,滚动产生的新经验又被蒸馏回 SkillBank,同时策略权重通过 GRPO 更新去更好地利用这些技能。因此模型权重与技能库在训练中同步进化,而非彼此独立。这使得 SkillRL 相比原始 GRPO 与记忆增强 RL 收敛更快、成功率更高。\n## 与记忆增强 RL 的本质差别\n多数记忆增强方法把过去的原始轨迹堆进外部库,遇到相似任务再翻出来参考,本质是在模仿旧解法,既没提炼出可迁移的原则,也没有让策略学会主动利用记忆做决策,信息密度和噪声之间总在拉扯。SkillRL 先把冗长轨迹(包括失败样本)蒸馏成通用与任务专用两层的紧凑技能,再让这些技能与 GRPO 策略递归耦合:技能指导滚动,滚动产出的新经验又蒸馏回 SkillBank,同时策略权重通过 GRPO 学会更好地调用技能。技能库和模型权重因此在训练里同步成长,而不是一个静态记忆挂在一个不断变化的策略旁边,收敛更快、成功率更高也就顺理成章。\n## 主要能力\n经验蒸馏把冗长轨迹转为紧凑技能;通用/任务专用分层 SkillBank;技能库与 GRPO 策略的递归协同进化。",
+    "evaluation": "在 ALFWorld 验证集上,SkillRL 相比原始 GRPO 与记忆增强 RL 取得更快收敛与更高成功率;整体超越强基线 15.3% 以上,并随任务复杂度提升保持稳健。代码已在 GitHub(aiming-lab/SkillRL)开源,并有 OpenReview 版本。",
+    "mainFinding": "用经验蒸馏把冗长轨迹(含失败)抽象为分层 SkillBank,与 GRPO 递归耦合,使技能库与策略权重同步进化,超越记忆增强 RL 与原始 GRPO。",
+    "limitations": "主要在 ALFWorld 等交互式基准验证,更广任务域待考察;技能蒸馏质量依赖轨迹多样性;分层 SkillBank 的检索与去冗余机制在大规模下的开销需更多实证。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2602.08234"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2602.08234v1"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/aiming-lab/SkillRL"
+      },
+      {
+        "label": "OpenReview",
+        "href": "https://openreview.net/pdf?id=56D2hjARkn"
+      }
+    ],
+    "citation": "SkillRL: Evolving Agents via Recursive Skill-Augmented Reinforcement Learning. arXiv:2602.08234",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-skillrl-overview.png",
+        "caption": "SkillRL 经验蒸馏与递归技能增强 RL 流水线"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-tmem",
+    "page": "skill",
+    "title": "TMEM:用快速 LoRA 权重实现参数化记忆的回合内自进化",
+    "shortTitle": "TMEM",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.55,
+    "year": 2026,
+    "venue": "arXiv 2026-06",
+    "authors": "TMEM team",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "parametric memory",
+      "LoRA",
+      "fast weights",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.6,
+      "evidence": 0.55,
+      "reproducibility": 0.48,
+      "adoption": 0.4,
+      "selfEvolution": 0.85
+    },
+    "summary": "把蒸馏出的经验写入快速 LoRA 权重,让策略在单次滚动内实时改变,实现参数化记忆的自进化。",
+    "methodCore": "TMEM 提出一种\"回合内参数化自进化\"(intra-episode parametric self-evolution):被蒸馏出的经验会在单次滚动过程中被写入快速 LoRA 权重 Δ_t,于是策略本身在实时改变,而不只是查询外部记忆或修订提示。这与传统记忆增强智能体形成本质区别——传统方法把记忆放在上下文里,模型权重在推理期完全不变;TMEM 则让一部分权重在推理期就随经验滚动更新。\n## 带参数化记忆的智能体决策过程\nTMEM 把整个过程形式化为一个智能体决策过程:策略可以在滚动中通过快速 LoRA 更新而改变。每个情节从任务提示开始,包含至多 T 个模型生成事件。在每个生成事件 t,智能体维护工作上下文 h_t、显式文本记忆 m_t,以及由 LoRA 权重表示的快速参数化记忆 Δ_t。动作从自适应策略 π_{θ0+Δt} 采样,其语义由条件上下文决定:在普通上下文下是任务/工具动作或最终回复;在抽取上下文(带记忆写入提示 d)下则是记忆写入动作,比如摘要、QA 对、蒸馏事实或指令-响应样本。\n## 双层权重:慢基座 + 快记忆\nTMEM 的精妙在于双层权重:基座参数 θ0 在单次滚动内固定,但在 RL 训练中跨情节被优化;而 Δ_t 在滚动内变化,充当快速权重记忆(fast-weight memory)。当把 Δ_t 恒置为零时,就退化为纯显式记忆智能体。这意味着 TMEM 同时进行两种权重更新:训练期对基座 θ0 的 RL 更新,以及推理期对快速权重 Δ_t 的在线更新。\n## 记忆写入即在线 SFT\n当工作上下文超过预设长度预算时,系统用一段记忆写入提示 d,指示智能体从当前会话抽取有依据的 SFT QA 对(涵盖事实、偏好、计划、事件与时间细节),再用这些 QA 对做在线 LoRA 更新。于是\"记忆\"不再是被动检索的文本,而是被内化进快速权重的参数化经验。\n## 为什么参数化记忆更进一步\n把记忆放在上下文里,模型每次都得重新阅读、重新理解这段文本,上下文越长负担越重,而权重始终不动,经验没有被真正内化。TMEM 让一部分权重在推理期就随经验滚动,蒸馏出的 QA 对通过在线 LoRA 更新直接改写快速权重 Δ_t,策略的行为因此在单次滚动内就发生改变,而不是每步都去检索一段外部文本。基座 θ0 负责跨情节的慢速沉淀,快速权重 Δ_t 负责回合内的即时适应,二者分工明确又协同——这让\"记忆\"从被动检索的资料升级为被主动内化进参数的经验,是技能与模型协同进化在参数层面的具体落地。\n## 主要能力\n回合内快速 LoRA 权重更新;慢基座 + 快记忆的双层参数结构;上下文超限时的记忆写入即在线微调。",
+    "evaluation": "TMEM 通过跨情节 RL 优化基座、回合内 LoRA 写入快速权重,把显式经验实时内化为参数变化;论文形式化了快速权重滚动动态并给出记忆写入提示模板。相较纯显式记忆(Δ_t≡0)可恢复的退化基线,参数化记忆带来额外的实时自适应能力。绝对数值需查原文。",
+    "mainFinding": "提出回合内参数化自进化,用快速 LoRA 权重把蒸馏经验实时写入策略,使模型在单次滚动内即改变行为,超越只读外部记忆的传统做法。",
+    "limitations": "回合内频繁 LoRA 更新带来额外算力与稳定性挑战;快速权重与基座的交互、灾难性遗忘控制需更多实证;abstract 层面未给出统一的绝对基准分数,细节需原文佐证。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2606.04536"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2606.04536v1"
+      }
+    ],
+    "citation": "Scaling Self-Evolving Agents via Parametric Memory. arXiv:2606.04536",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-tmem-overview.png",
+        "caption": "TMEM 快速 LoRA 权重参数化记忆总览"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-empo2",
+    "page": "skill",
+    "title": "EMPO²:记忆驱动探索的混合在/离策略优化",
+    "shortTitle": "EMPO²",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.53,
+    "year": 2026,
+    "venue": "arXiv 2026-02",
+    "authors": "Zeyuan Liu, Jeonghye Kim, Xufang Luo, Dongsheng Li, Yuqing Yang",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "memory",
+      "exploration",
+      "on/off-policy RL",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.6,
+      "evidence": 0.56,
+      "reproducibility": 0.5,
+      "adoption": 0.4,
+      "selfEvolution": 0.78
+    },
+    "summary": "用自生成记忆驱动探索,并把非参数记忆更新参数化到混合在/离策略优化里更新权重。",
+    "methodCore": "EMPO²(Exploratory Memory-Augmented On- and Off-Policy Optimization)聚焦 LLM 智能体用 RL 训练时最大的瓶颈——探索。以往方法多利用预训练知识,但在需要发现全新状态的环境中会失效。EMPO² 是一个混合 RL 框架,用记忆驱动探索,并结合在策略与离策略更新,使 LLM 既能在有记忆时表现好,又能在没有记忆时保持稳健。\n## 自生成记忆推进探索\nEMPO² 的第一支柱是用自生成记忆(self-generated memory)推进探索。智能体在与环境交互中自己产出\"tips\"式的经验记忆,这些记忆引导策略走向此前未探索的新状态,而不是反复利用已知的高概率动作。论文的定性分析给出了大量生成 tips 的例子,并展示了它们如何改变探索行为。\n## 把非参数更新参数化\n第二支柱是把非参数的记忆更新参数化(parameterize non-parametric updates)到混合策略优化里。记忆本身是非参数的外部信息,但 EMPO² 通过混合在策略/离策略优化,把\"利用记忆探索得到的收益\"转化为对模型权重的更新——在策略部分保证与当前策略一致的稳定学习,离策略部分复用记忆增强滚动里的高价值经验。论文在附录里详细解释了策略更新中重要性采样比的处理。这样,记忆与策略权重构成协同进化:记忆帮助探索,探索的成果通过 RL 沉淀进权重。\n## 有记忆学、无记忆也稳\nEMPO² 特意设计成\"有记忆时用得好、没记忆时也稳健\":在分布内(ID)它能很好适应熟悉环境,在分布外(OOD)它只需少量带记忆的试探、无需参数更新就能适应新任务,体现了记忆用于探索未知环境的有效性。\n## 为什么探索需要记忆而不只是熵\n常规 RL 靠提高策略熵或加噪声来探索,但在需要发现全新状态的环境里,盲目的随机探索几乎撞不到有价值的路径,而依赖预训练知识的方法又倾向于反复利用已知的高概率动作,陷在局部最优。EMPO² 让智能体把交互中总结出的 tips 式经验记忆当作探索的向导,主动把策略推向此前没走过的状态;更关键的是,它不让这些收益停留在非参数的外部记忆里,而是通过混合在/离策略优化把\"借助记忆探索得到的高价值经验\"沉淀进模型权重。记忆负责开路,RL 负责把路记进参数,二者构成记忆与策略权重的协同进化闭环。\n## 主要能力\n自生成 tips 记忆驱动的探索;混合在/离策略优化的权重更新;OOD 下少样本、无参数更新的快速适应。",
+    "evaluation": "在 ScienceWorld 与 WebShop 上,EMPO² 相比 GRPO 分别取得 128.6% 与 11.3% 的提升。在 OOD 测试中,它只需少量带记忆的试探、无需参数更新即展现出对新任务的强适应性。学习曲线显示 GRPO 收敛到次优,而 EMPO² 持续改进并完成任务。项目由 Microsoft Research 与 KAIST 完成,配套 agent-lightning/empo2 代码。",
+    "mainFinding": "用自生成记忆驱动探索,并把非参数记忆更新参数化进混合在/离策略优化,在 ScienceWorld 上较 GRPO 提升 128.6%,同时保持无记忆时的稳健与 OOD 快速适应。",
+    "limitations": "主要在 ScienceWorld、WebShop 两个基准验证;自生成记忆的质量与噪声控制、混合策略中重要性采样的方差仍是难点;更大规模模型与真实开放环境的效果待考察。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2602.23008"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2602.23008v1"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/agent-lightning/empo2"
+      }
+    ],
+    "citation": "Liu et al. Exploratory Memory-Augmented LLM Agent via Hybrid On- and Off-Policy Optimization. arXiv:2602.23008",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-empo2-overview.png",
+        "caption": "EMPO² 记忆驱动探索与混合在/离策略优化总览"
+      }
+    ]
   }
 ];
