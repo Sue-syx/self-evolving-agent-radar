@@ -276,6 +276,54 @@ function App() {
   );
 }
 
+// Count-up telemetry: eases a metric from 0 → target on mount using an
+// ease-out-expo curve. Respects prefers-reduced-motion (jumps to target).
+function useCountUp(target: number, duration = 1200, delay = 0) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) {
+        setValue(target);
+        return;
+      }
+    }
+    let raf = 0;
+    let start = 0;
+    const tick = (now: number) => {
+      if (!start) start = now;
+      const t = Math.min(1, (now - start - delay) / duration);
+      const eased = t < 0 ? 0 : 1 - Math.pow(2, -10 * t); // ease-out-expo
+      setValue(Math.round(target * eased));
+      if (t < 1) raf = requestAnimationFrame(tick);
+      else setValue(target);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration, delay]);
+  return value;
+}
+
+function Metric({
+  value,
+  label,
+  color,
+  delay,
+}: {
+  value: number;
+  label: string;
+  color: string;
+  delay: number;
+}) {
+  const shown = useCountUp(value, 1300, delay);
+  return (
+    <div className="metric" style={{ ["--accent" as string]: color, ["--delay" as string]: `${delay}ms` }}>
+      <b>{shown}</b>
+      <span>{label}</span>
+    </div>
+  );
+}
+
 function Overview({
   onOpenPage,
   onSelect,
@@ -380,16 +428,16 @@ function Overview({
   return (
     <section className="overview">
       <header className="hero">
+        <div className="hero-aurora" aria-hidden />
         <div className="hero-grid">
           <div>
             <p className="hero-tag">
               <i />
               实时追踪 · 结构化演化地图
             </p>
-            <h1>
-              Self-Evolving
-              <br />
-              <span className="accent">Agent Radar</span>
+            <h1 className="hero-title">
+              <span className="hero-line">Self-Evolving</span>
+              <span className="accent hero-line">Agent Radar</span>
             </h1>
             <p className="hero-lead">
               追踪自进化 Agent 的四大能力方向——Skill、Memory、Workflow、Evaluation，
@@ -402,13 +450,16 @@ function Overview({
               <span>演化可度量</span>
             </div>
           </div>
-          <div className="hero-metrics">
-            {metrics.map((m) => (
-              <div className="metric" key={m.label} style={{ ["--accent" as string]: m.color }}>
-                <b>{m.value}</b>
-                <span>{m.label}</span>
-              </div>
-            ))}
+          <div className="hero-scope">
+            <div className="scope-rings" aria-hidden>
+              <span className="scope-sweep" />
+              <span className="scope-core" />
+            </div>
+            <div className="hero-metrics" role="group" aria-label="收录统计">
+              {metrics.map((m, i) => (
+                <Metric key={m.label} value={m.value} label={m.label} color={m.color} delay={120 + i * 90} />
+              ))}
+            </div>
           </div>
         </div>
       </header>
