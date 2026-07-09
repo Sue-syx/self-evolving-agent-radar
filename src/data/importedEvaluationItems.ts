@@ -223,7 +223,7 @@ export const importedEvaluationItems: RadarItem[] = [
   },
   {
     "id": "eval-deepresearch-bench",
-    "page": "evaluation",
+    "figures": [{"src": "figures/eval-deepresearch-bench.png", "caption": "DeepResearch Bench · 架构/流程示意"}], "page": "evaluation",
     "title": "DeepResearch Bench: A Comprehensive Benchmark for Deep Research Agents",
     "shortTitle": "DeepResearch Bench",
     "category": "eval-task",
@@ -441,7 +441,7 @@ export const importedEvaluationItems: RadarItem[] = [
   },
   {
     "id": "eval-cuarewardbench",
-    "page": "evaluation",
+    "figures": [{"src": "figures/eval-cuarewardbench.png", "caption": "CUARewardBench · 架构/流程示意"}], "page": "evaluation",
     "title": "CUARewardBench: A Benchmark for Evaluating Reward Models on Computer-using Agent",
     "shortTitle": "CUARewardBench",
     "category": "eval-process",
@@ -601,7 +601,7 @@ export const importedEvaluationItems: RadarItem[] = [
   },
   {
     "id": "eval-bench-benchmarks",
-    "page": "evaluation",
+    "figures": [{"src": "figures/eval-bench-benchmarks.png", "caption": "Benchmarking the Benchmarks · 架构/流程示意"}], "page": "evaluation",
     "title": "Benchmarking the Benchmarks: A Validity Audit of Tool-Calling Evaluation",
     "shortTitle": "Benchmarking the Benchmarks",
     "category": "eval-trajectory",
@@ -757,7 +757,7 @@ export const importedEvaluationItems: RadarItem[] = [
   },
   {
     "id": "eval-judge-multilingual",
-    "page": "evaluation",
+    "figures": [{"src": "figures/eval-judge-multilingual.png", "caption": "Multilingual Judge · 架构/流程示意"}], "page": "evaluation",
     "title": "Challenges and Recommendations for LLMs-as-a-Judge in Multilingual Settings and Low-Resource Languages",
     "shortTitle": "Multilingual Judge",
     "category": "eval-judge",
@@ -863,7 +863,7 @@ export const importedEvaluationItems: RadarItem[] = [
   },
   {
     "id": "eval-red-queen",
-    "page": "evaluation",
+    "figures": [{"src": "figures/eval-red-queen.png", "caption": "Red Queen Gödel Machine · 架构/流程示意"}], "page": "evaluation",
     "title": "The Red Queen Gödel Machine: Co-Evolving Agents and Their Evaluators",
     "shortTitle": "Red Queen Gödel Machine",
     "category": "eval-long",
@@ -911,7 +911,7 @@ export const importedEvaluationItems: RadarItem[] = [
   },
   {
     "id": "eval-anytime-valid",
-    "page": "evaluation",
+    "figures": [{"src": "figures/eval-anytime-valid.png", "caption": "SEA (Anytime-Valid) · 架构/流程示意"}], "page": "evaluation",
     "title": "Self-Evolving Agents with Anytime-Valid Certificates",
     "shortTitle": "SEA (Anytime-Valid)",
     "category": "eval-long",
@@ -959,7 +959,7 @@ export const importedEvaluationItems: RadarItem[] = [
   },
   {
     "id": "eval-evaluator-collapse",
-    "page": "evaluation",
+    "figures": [{"src": "figures/eval-evaluator-collapse.png", "caption": "Evaluator Preference Collapse · 架构/流程示意"}], "page": "evaluation",
     "title": "Multimodal Evaluator Preference Collapse: Cross-Modal Coupling in Self-Evolving Agents",
     "shortTitle": "Evaluator Preference Collapse",
     "category": "eval-long",

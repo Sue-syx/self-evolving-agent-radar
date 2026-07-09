@@ -3,7 +3,7 @@ import type { RadarItem } from "./radarData";
 export const importedWorkflowItems: RadarItem[] = [
   {
     "id": "workflow-aflow",
-    "page": "workflow",
+    "figures": [{"src": "figures/workflow-aflow.png", "caption": "AFlow · 架构/流程示意"}], "page": "workflow",
     "title": "AFlow: Automating Agentic Workflow Generation",
     "shortTitle": "AFlow",
     "category": "workflow-search",
@@ -55,7 +55,7 @@ export const importedWorkflowItems: RadarItem[] = [
   },
   {
     "id": "workflow-evoflow",
-    "page": "workflow",
+    "figures": [{"src": "figures/workflow-evoflow.png", "caption": "EvoFlow · 架构/流程示意"}], "page": "workflow",
     "title": "EvoFlow: Evolving Diverse Agentic Workflows On The Fly",
     "shortTitle": "EvoFlow",
     "category": "workflow-search",
@@ -103,7 +103,7 @@ export const importedWorkflowItems: RadarItem[] = [
   },
   {
     "id": "workflow-scoreflow",
-    "page": "workflow",
+    "figures": [{"src": "figures/workflow-scoreflow.png", "caption": "ScoreFlow · 架构/流程示意"}], "page": "workflow",
     "title": "ScoreFlow: Mastering LLM Agent Workflows via Score-based Preference Optimization",
     "shortTitle": "ScoreFlow",
     "category": "workflow-search",
@@ -155,7 +155,7 @@ export const importedWorkflowItems: RadarItem[] = [
   },
   {
     "id": "workflow-evoagent",
-    "page": "workflow",
+    "figures": [{"src": "figures/workflow-evoagent.png", "caption": "EvoAgent · 架构/流程示意"}], "page": "workflow",
     "title": "EvoAgent: Towards Automatic Multi-Agent Generation via Evolutionary Algorithms",
     "shortTitle": "EvoAgent",
     "category": "workflow-search",
@@ -493,7 +493,7 @@ export const importedWorkflowItems: RadarItem[] = [
   },
   {
     "id": "workflow-maas",
-    "page": "workflow",
+    "figures": [{"src": "figures/workflow-maas.png", "caption": "MaAS · 架构/流程示意"}], "page": "workflow",
     "title": "Multi-agent Architecture Search via Agentic Supernet",
     "shortTitle": "MaAS",
     "category": "workflow-cost",
@@ -541,7 +541,7 @@ export const importedWorkflowItems: RadarItem[] = [
   },
   {
     "id": "workflow-masrouter",
-    "page": "workflow",
+    "figures": [{"src": "figures/workflow-masrouter.png", "caption": "MasRouter · 架构/流程示意"}], "page": "workflow",
     "title": "MasRouter: Learning to Route LLMs for Multi-Agent Systems",
     "shortTitle": "MasRouter",
     "category": "workflow-cost",
@@ -709,7 +709,7 @@ export const importedWorkflowItems: RadarItem[] = [
   },
   {
     "id": "workflow-adas",
-    "page": "workflow",
+    "figures": [{"src": "figures/workflow-adas.png", "caption": "ADAS · 架构/流程示意"}], "page": "workflow",
     "title": "Automated Design of Agentic Systems",
     "shortTitle": "ADAS",
     "category": "workflow-graph",
@@ -1275,7 +1275,7 @@ export const importedWorkflowItems: RadarItem[] = [
   },
   {
     "id": "workflow-workflowgen",
-    "page": "workflow",
+    "figures": [{"src": "figures/workflow-workflowgen.png", "caption": "WorkflowGen · 架构/流程示意"}], "page": "workflow",
     "title": "WorkflowGen: An Adaptive Workflow Generation Mechanism Driven by Trajectory Experience",
     "shortTitle": "WorkflowGen",
     "category": "workflow-fsm",
@@ -1323,7 +1323,7 @@ export const importedWorkflowItems: RadarItem[] = [
   },
   {
     "id": "workflow-worfbench",
-    "page": "workflow",
+    "figures": [{"src": "figures/workflow-worfbench.png", "caption": "WorFBench · 架构/流程示意"}], "page": "workflow",
     "title": "Benchmarking Agentic Workflow Generation",
     "shortTitle": "WorFBench",
     "category": "workflow-benchmark",

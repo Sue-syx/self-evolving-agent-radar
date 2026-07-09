@@ -109,7 +109,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-wr-rise-of-llm-agents",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-wr-rise-of-llm-agents.png", "caption": "Rise of LLM Agents · 架构/流程示意"}], "page": "memory",
     "title": "The Rise and Potential of Large Language Model Based Agents: A Survey",
     "shortTitle": "Rise of LLM Agents",
     "category": "memory-write",
@@ -217,7 +217,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-wr-memory-in-ai-agents",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-wr-memory-in-ai-agents.png", "caption": "Memory in AI Agents · 架构/流程示意"}], "page": "memory",
     "title": "Memory in the Age of AI Agents",
     "shortTitle": "Memory in AI Agents",
     "category": "memory-write",
@@ -370,7 +370,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-wr-zep",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-wr-zep.png", "caption": "Zep · 架构/流程示意"}], "page": "memory",
     "title": "Zep: A Temporal Knowledge Graph Architecture for Agent Memory",
     "shortTitle": "Zep",
     "category": "memory-write",
@@ -462,7 +462,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-wr-memoryos",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-wr-memoryos.png", "caption": "MemoryOS · 架构/流程示意"}], "page": "memory",
     "title": "Memory OS of AI Agent",
     "shortTitle": "MemoryOS",
     "category": "memory-write",
@@ -607,7 +607,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-wr-memwalker",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-wr-memwalker.png", "caption": "MemWalker · 架构/流程示意"}], "page": "memory",
     "title": "Walking Down the Memory Maze: Beyond Context Limit through Interactive Reading",
     "shortTitle": "MemWalker",
     "category": "memory-write",
@@ -1106,7 +1106,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-wr-evermemos",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-wr-evermemos.png", "caption": "EverMemOS · 架构/流程示意"}], "page": "memory",
     "title": "EverMemOS: A Self-Organizing Memory Operating System for Structured Long-Horizon Reasoning",
     "shortTitle": "EverMemOS",
     "category": "memory-write",
@@ -1396,7 +1396,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-realm",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-realm.png", "caption": "REALM · 架构/流程示意"}], "page": "memory",
     "title": "REALM: Retrieval-Augmented Language Model Pre-Training",
     "shortTitle": "REALM",
     "category": "memory-retrieve",
@@ -1438,7 +1438,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-in-context-ralm",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-in-context-ralm.png", "caption": "In-Context RALM · 架构/流程示意"}], "page": "memory",
     "title": "In-Context Retrieval-Augmented Language Models",
     "shortTitle": "In-Context RALM",
     "category": "memory-retrieve",
@@ -1530,7 +1530,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-rewrite-retrieve-read",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-rewrite-retrieve-read.png", "caption": "Rewrite-Retrieve-Read · 架构/流程示意"}], "page": "memory",
     "title": "Query Rewriting for Retrieval-Augmented Large Language Models",
     "shortTitle": "Rewrite-Retrieve-Read",
     "category": "memory-retrieve",
@@ -1622,7 +1622,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-flare",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-flare.png", "caption": "FLARE · 架构/流程示意"}], "page": "memory",
     "title": "Active Retrieval Augmented Generation",
     "shortTitle": "FLARE",
     "category": "memory-retrieve",
@@ -1668,7 +1668,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-iter-retgen",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-iter-retgen.png", "caption": "Iter-RetGen · 架构/流程示意"}], "page": "memory",
     "title": "Enhancing Retrieval-Augmented Large Language Models with Iterative Retrieval-Generation Synergy",
     "shortTitle": "Iter-RetGen",
     "category": "memory-retrieve",
@@ -1914,7 +1914,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-memgpt",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-memgpt.png", "caption": "MemGPT · 架构/流程示意"}], "page": "memory",
     "title": "MemGPT: Towards LLMs as Operating Systems",
     "shortTitle": "MemGPT",
     "category": "memory-retrieve",
@@ -1960,7 +1960,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-memorizing-transformers",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-memorizing-transformers.png", "caption": "Memorizing Transformers · 架构/流程示意"}], "page": "memory",
     "title": "Memorizing Transformers",
     "shortTitle": "Memorizing Transformers",
     "category": "memory-retrieve",
@@ -2059,7 +2059,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-unlimiformer",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-unlimiformer.png", "caption": "Unlimiformer · 架构/流程示意"}], "page": "memory",
     "title": "Unlimiformer: Long-Range Transformers with Unlimited Length Input",
     "shortTitle": "Unlimiformer",
     "category": "memory-retrieve",
@@ -2108,7 +2108,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-former",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-former.png", "caption": "∞-former · 架构/流程示意"}], "page": "memory",
     "title": "∞-former: Infinite Memory Transformer",
     "shortTitle": "∞-former",
     "category": "memory-retrieve",
@@ -2198,7 +2198,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-gmemory",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-gmemory.png", "caption": "G-Memory · 架构/流程示意"}], "page": "memory",
     "title": "G-Memory: Tracing Hierarchical Memory for Multi-Agent Systems",
     "shortTitle": "G-Memory",
     "category": "memory-retrieve",
@@ -2439,7 +2439,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-self-refine",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-self-refine.png", "caption": "Self-Refine · 架构/流程示意"}], "page": "memory",
     "title": "Self-Refine: Iterative Refinement with Self-Feedback",
     "shortTitle": "Self-Refine",
     "category": "memory-reflect",
@@ -2531,7 +2531,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-generative-agents",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-generative-agents.png", "caption": "Generative Agents · 架构/流程示意"}], "page": "memory",
     "title": "Generative Agents: Interactive Simulacra of Human Behavior",
     "shortTitle": "Generative Agents",
     "category": "memory-reflect",
@@ -2626,7 +2626,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-reasoningbank",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-reasoningbank.png", "caption": "ReasoningBank · 架构/流程示意"}], "page": "memory",
     "title": "ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory",
     "shortTitle": "ReasoningBank",
     "category": "memory-reflect",
@@ -2674,7 +2674,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-retroformer",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-retroformer.png", "caption": "Retroformer · 架构/流程示意"}], "page": "memory",
     "title": "Retroformer: Retrospective Large Language Agents with Policy Gradient Optimization",
     "shortTitle": "Retroformer",
     "category": "memory-reflect",
@@ -2767,7 +2767,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-rome",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-rome.png", "caption": "ROME · 架构/流程示意"}], "page": "memory",
     "title": "Locating and Editing Factual Associations in GPT",
     "shortTitle": "ROME",
     "category": "memory-reflect",
@@ -2815,7 +2815,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-memit",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-memit.png", "caption": "MEMIT · 架构/流程示意"}], "page": "memory",
     "title": "Mass-Editing Memory in a Transformer",
     "shortTitle": "MEMIT",
     "category": "memory-reflect",
@@ -3018,7 +3018,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-tim",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-tim.png", "caption": "TiM · 架构/流程示意"}], "page": "memory",
     "title": "Think-in-Memory: Recalling and Post-thinking Enable LLMs with Long-Term Memory",
     "shortTitle": "TiM",
     "category": "memory-reflect",
@@ -3060,7 +3060,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-memorybank",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-memorybank.png", "caption": "MemoryBank · 架构/流程示意"}], "page": "memory",
     "title": "MemoryBank: Enhancing Large Language Models with Long-Term Memory",
     "shortTitle": "MemoryBank",
     "category": "memory-reflect",
@@ -3155,7 +3155,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-knowledge-unlearning",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-knowledge-unlearning.png", "caption": "Knowledge Unlearning · 架构/流程示意"}], "page": "memory",
     "title": "Knowledge Unlearning for Mitigating Privacy Risks in Language Models",
     "shortTitle": "Knowledge Unlearning",
     "category": "memory-reflect",
@@ -3201,7 +3201,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-critic",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-critic.png", "caption": "CRITIC · 架构/流程示意"}], "page": "memory",
     "title": "CRITIC: Large Language Models Can Self-Correct with Tool-Interactive Critiquing",
     "shortTitle": "CRITIC",
     "category": "memory-reflect",
@@ -3439,7 +3439,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-memgen",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-memgen.png", "caption": "MemGen · 架构/流程示意"}], "page": "memory",
     "title": "MemGen: Weaving Generative Latent Memory for Self-Evolving Agents",
     "shortTitle": "MemGen",
     "category": "memory-reflect",
@@ -3832,7 +3832,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-wr-gitm",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-wr-gitm.png", "caption": "GITM · 架构/流程示意"}], "page": "memory",
     "title": "Ghost in the Minecraft: Generally Capable Agents for Open-World Environments via LLMs with Text-based Knowledge and Memory",
     "shortTitle": "GITM",
     "category": "memory-skill",
@@ -3928,7 +3928,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-synapse",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-synapse.png", "caption": "Synapse · 架构/流程示意"}], "page": "memory",
     "title": "Synapse: Trajectory-as-Exemplar Prompting with Memory for Computer Control",
     "shortTitle": "Synapse",
     "category": "memory-skill",
@@ -3971,7 +3971,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rt-skill-induction",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rt-skill-induction.png", "caption": "Skill Induction · 架构/流程示意"}], "page": "memory",
     "title": "Skill Induction and Planning with Latent Language",
     "shortTitle": "Skill Induction",
     "category": "memory-skill",
@@ -4161,7 +4161,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-rf-skillweaver",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-rf-skillweaver.png", "caption": "SkillWeaver · 架构/流程示意"}], "page": "memory",
     "title": "SkillWeaver: Web Agents can Self-Improve by Discovering and Honing Skills",
     "shortTitle": "SkillWeaver",
     "category": "memory-skill",
@@ -4957,7 +4957,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-ev-longbench",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-ev-longbench.png", "caption": "LongBench · 架构/流程示意"}], "page": "memory",
     "title": "LongBench: A Bilingual, Multitask Benchmark for Long Context Understanding",
     "shortTitle": "LongBench",
     "category": "memory-eval",
@@ -5006,7 +5006,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-ev-longbench-v2",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-ev-longbench-v2.png", "caption": "LongBench v2 · 架构/流程示意"}], "page": "memory",
     "title": "LongBench v2: Towards Deeper Understanding and Reasoning on Realistic Long-context Multitasks",
     "shortTitle": "LongBench v2",
     "category": "memory-eval",
@@ -5838,7 +5838,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-ev-memorybench",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-ev-memorybench.png", "caption": "MemoryBench · 架构/流程示意"}], "page": "memory",
     "title": "MemoryBench: A Benchmark for Memory and Continual Learning in LLM Systems",
     "shortTitle": "MemoryBench",
     "category": "memory-eval",
@@ -5936,7 +5936,7 @@ export const importedMemoryItems: RadarItem[] = [
   },
   {
     "id": "memory-ev-needlechain",
-    "page": "memory",
+    "figures": [{"src": "figures/memory-ev-needlechain.png", "caption": "NeedleChain · 架构/流程示意"}], "page": "memory",
     "title": "NeedleChain: Measuring Intact Context Comprehension Capability of Large Language Models",
     "shortTitle": "NeedleChain",
     "category": "memory-eval",

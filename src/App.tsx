@@ -68,7 +68,7 @@ const hashPaperId = () => {
 const weights = [
   { pct: "30%", name: "技术成熟度", note: "从概念验证到大规模应用的演进程度", color: "#38e0ff" },
   { pct: "25%", name: "创新性", note: "技术的原创性与前沿程度", color: "#a78bfa" },
-  { pct: "25%", name: "落地程度", note: "在实际产品 / 项目中的应用广度", color: "#2fd2c0" },
+  { pct: "25%", name: "落地程度", note: "在实际产品 / 项目中的应用广度", color: "#c084fc" },
   { pct: "20%", name: "生态活跃度", note: "社区贡献者数量与更新频率", color: "#f5b53d" },
 ];
 
@@ -304,32 +304,76 @@ function Overview({
   });
 
   const metrics = [
-    { value: totalItems, label: "收录条目", color: "#2fd2c0" },
-    { value: matureItems, label: "成熟期", color: "#34d399" },
+    { value: totalItems, label: "收录条目", color: "#c084fc" },
+    { value: matureItems, label: "成熟期", color: "#a855f7" },
     { value: growingItems, label: "成长期", color: "#f5b53d" },
     { value: exploringItems, label: "探索期", color: "#f2645a" },
   ];
+  // Balance the highlight lists across the four directions so a single page
+  // (e.g. Memory) can't dominate. We sort by the given key, then round-robin
+  // by page, and finally cap Memory at 2 slots to leave room for Skill/Model.
+  const balanceByPage = (
+    pool: typeof radarItems,
+    keyOf: (item: (typeof radarItems)[number]) => number,
+    limit = 5
+  ) => {
+    const sorted = [...pool].sort((a, b) => keyOf(b) - keyOf(a));
+    const buckets = new Map<string, typeof radarItems>();
+    for (const item of sorted) {
+      const key = item.page ?? "other";
+      if (!buckets.has(key)) buckets.set(key, []);
+      buckets.get(key)!.push(item);
+    }
+    // Prefer Skill first, then Workflow / Evaluation, then Memory last.
+    const order = ["skill", "workflow", "evaluation", "memory"];
+    const queues = order
+      .map((k) => buckets.get(k) ?? [])
+      .concat([...buckets.entries()].filter(([k]) => !order.includes(k)).map(([, v]) => v));
+    const picked: typeof radarItems = [];
+    const memoryCap = 2;
+    let memoryUsed = 0;
+    let progressed = true;
+    while (picked.length < limit && progressed) {
+      progressed = false;
+      for (const q of queues) {
+        if (picked.length >= limit) break;
+        const next = q.shift();
+        if (!next) continue;
+        progressed = true;
+        if (next.page === "memory") {
+          if (memoryUsed >= memoryCap) continue;
+          memoryUsed += 1;
+        }
+        picked.push(next);
+      }
+    }
+    return picked.slice(0, limit);
+  };
+
   const researchQueues = [
     {
       label: "Top Mature",
       note: "优先引用或作为基线阅读",
-      items: [...radarItems].filter((item) => item.maturity === "mature").sort((a, b) => b.score - a.score).slice(0, 5),
+      items: balanceByPage(
+        radarItems.filter((item) => item.maturity === "mature"),
+        (item) => item.score
+      ),
     },
     {
       label: "Fast Growing",
       note: "最值得跟踪后续工作的方向",
-      items: [...radarItems]
-        .filter((item) => item.maturity === "growing")
-        .sort((a, b) => b.scores.selfEvolution - a.scores.selfEvolution)
-        .slice(0, 5),
+      items: balanceByPage(
+        radarItems.filter((item) => item.maturity === "growing"),
+        (item) => item.scores.selfEvolution
+      ),
     },
     {
       label: "Emerging",
       note: "概念新但证据还在积累",
-      items: [...radarItems]
-        .filter((item) => item.maturity === "exploring")
-        .sort((a, b) => b.scores.selfEvolution - a.scores.selfEvolution)
-        .slice(0, 5),
+      items: balanceByPage(
+        radarItems.filter((item) => item.maturity === "exploring"),
+        (item) => item.scores.selfEvolution
+      ),
     },
   ];
 

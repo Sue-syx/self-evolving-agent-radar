@@ -458,7 +458,7 @@ export const importedSkillItems: RadarItem[] = [
   },
   {
     "id": "skill-source-skillevolver",
-    "page": "skill",
+    "figures": [{"src": "figures/skill-source-skillevolver.png", "caption": "SkillEvolver · 架构/流程示意"}], "page": "skill",
     "title": "SkillEvolver：将技能学习视为一种元技能",
     "shortTitle": "SkillEvolver",
     "category": "skill-generation",
@@ -1988,7 +1988,7 @@ export const importedSkillItems: RadarItem[] = [
   },
   {
     "id": "skill-source-xskill",
-    "page": "skill",
+    "figures": [{"src": "figures/skill-source-xskill.png", "caption": "XSkill · 架构/流程示意"}], "page": "skill",
     "title": "XSkill:跨形态技能发现",
     "shortTitle": "XSkill",
     "category": "skill-retrieval",
@@ -2411,7 +2411,7 @@ export const importedSkillItems: RadarItem[] = [
   },
   {
     "id": "skill-source-fileasstate",
-    "page": "skill",
+    "figures": [{"src": "figures/skill-source-fileasstate.png", "caption": "File-as-State · 架构/流程示意"}], "page": "skill",
     "title": "File-as-State",
     "shortTitle": "File-as-State",
     "category": "skill-execution",
@@ -3148,7 +3148,7 @@ export const importedSkillItems: RadarItem[] = [
   },
   {
     "id": "skill-source-skill-coverage",
-    "page": "skill",
+    "figures": [{"src": "figures/skill-source-skill-coverage.png", "caption": "Skill Coverage · 架构/流程示意"}], "page": "skill",
     "title": "Skill Coverage",
     "shortTitle": "Skill Coverage",
     "category": "skill-evaluation",
@@ -3285,7 +3285,7 @@ export const importedSkillItems: RadarItem[] = [
   },
   {
     "id": "skill-source-skill-reducer",
-    "page": "skill",
+    "figures": [{"src": "figures/skill-source-skill-reducer.png", "caption": "SkillReducer · 架构/流程示意"}], "page": "skill",
     "title": "SkillReducer",
     "shortTitle": "SkillReducer",
     "category": "skill-optimization",
@@ -3435,7 +3435,7 @@ export const importedSkillItems: RadarItem[] = [
   },
   {
     "id": "skill-source-embodiskill",
-    "page": "skill",
+    "figures": [{"src": "figures/skill-source-embodiskill.png", "caption": "EmbodiSkill · 架构/流程示意"}], "page": "skill",
     "title": "EmbodiSkill",
     "shortTitle": "EmbodiSkill",
     "category": "skill-optimization",
@@ -3466,18 +3466,18 @@ export const importedSkillItems: RadarItem[] = [
     "links": [
       {
         "label": "arXiv",
-        "href": "https://arxiv.org/abs/2605.10010"
+        "href": "https://arxiv.org/abs/2605.10332"
       },
       {
         "label": "知乎详解",
         "href": "https://new.qq.com/rain/a/20260525A09ONS00"
       }
     ],
-    "citation": "EmbodiSkill. https://arxiv.org/abs/2605.10010"
+    "citation": "EmbodiSkill. https://arxiv.org/abs/2605.10332"
   },
   {
     "id": "skill-source-autoskill",
-    "page": "skill",
+    "figures": [{"src": "figures/skill-source-autoskill.png", "caption": "AutoSkill · 架构/流程示意"}], "page": "skill",
     "title": "AutoSkill",
     "shortTitle": "AutoSkill",
     "category": "skill-optimization",
@@ -5008,7 +5008,7 @@ export const importedSkillItems: RadarItem[] = [
   },
   {
     "id": "skill-source-skillspector",
-    "page": "skill",
+    "figures": [{"src": "figures/skill-source-skillspector.png", "caption": "SkillSpector · 架构/流程示意"}], "page": "skill",
     "title": "SkillSpector",
     "shortTitle": "SkillSpector",
     "category": "skill-governance",
@@ -5532,6 +5532,220 @@ export const importedSkillItems: RadarItem[] = [
       {
         "src": "figures/skillcoevo-empo2-overview.png",
         "caption": "EMPO² 记忆驱动探索与混合在/离策略优化总览"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-reskill",
+    "page": "skill",
+    "title": "ReSkill:让技能创建与策略优化在同一 RL 循环里对齐",
+    "shortTitle": "ReSkill",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.61,
+    "year": 2026,
+    "venue": "arXiv 2026-06",
+    "authors": "Zelin He, Haotian Lin, Boran Han, Wei Zhu, Haoyang Fang, Bernie Wang, Xuan Zhu, Runze Li, Matthew Reimherr",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "reinforcement learning",
+      "GRPO",
+      "skill creation",
+      "Thompson sampling",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.66,
+      "evidence": 0.62,
+      "reproducibility": 0.6,
+      "adoption": 0.45,
+      "selfEvolution": 0.84
+    },
+    "summary": "把技能创建嵌进 GRPO 的组内滚动结构,让技能版本随策略学习被即时比较、筛选与淘汰。",
+    "methodCore": "ReSkill 针对一个被长期忽视的错配:主流的技能增强 RL 把技能创建和策略优化拆成两条独立流水线,技能先离线生成、再交给策略调用。问题在于策略在训练中不断变化,离线固化的技能很可能与当下这版策略需求相冲突,反而拖累学习。ReSkill 的核心主张是让技能创建回到 RL 训练循环里,与策略优化同步推进。\n## 借用 GRPO 的组内结构\nReSkill 巧妙利用了 GRPO 的一个天然特性:每个训练步会在同一任务、同一策略下采样一组(group)滚动。这意味着组内的样本天然可比。ReSkill 于是把不同的候选技能版本分配到同一组的不同滚动里,在完全相同的任务与策略条件下直接比较——哪个技能版本最能支撑当前策略继续学习,一目了然,而不需要额外的对照实验开销。\n## 三个低开销机制\n第一是断言驱动的技能创建器(assertion-driven skill creator):它从过往经验的蓄水池里采集失败样本,做对照分析,再用断言分级与诊断定位问题,提出带触发条件的技能修订,而不是笼统地重写技能。第二是组内滚动采样,在同一组里对多个技能版本做受控比较。第三是带自适应折扣的汤普森采样(Thompson Sampling with adaptive discounting),在策略不断演化的过程中平衡对技能版本的探索与利用,让选择既不过早收敛也不盲目试探。\n## 每条滚动身兼三职\nReSkill 的精妙在于复用:每一条滚动同时承担三种角色——为策略优化贡献 GRPO 梯度、为失败诊断与技能修订提供证据、为技能版本的多臂赌博机评估提供反馈。策略权重通过标准 GRPO 梯度真实更新,技能则在整个生命周期里被自动创建、测试、精炼与淘汰,二者在同一循环里协同进化。\n## 与解耦式方法的对比\n解耦式做法里,离线生成的技能一旦入库就很难判断它是否还适配当前策略,更谈不上随策略调整。ReSkill 把技能版本的优胜劣汰交给真实的组内对照与结果信号,让技能始终与策略保持同频。断言驱动的诊断则让修订有的放矢:它不是笼统地\"再写一版技能\",而是先从失败样本里对照出到底哪一步、在什么触发条件下出了问题,再产出带条件的针对性修订,因此技能库里沉淀的是可解释、可触发的过程知识,而非一堆彼此重叠、来源不明的条目。汤普森采样的自适应折扣进一步保证:随着策略变强,早期表现好但已过时的技能版本会被逐步降权,新版本得到公平的试探机会,整个技能库因此始终朝着当下策略最需要的方向演化。\n## 主要能力\n断言驱动的失败诊断与条件化技能修订;GRPO 组内技能版本的受控比较;汤普森采样下的探索/利用平衡;单滚动三职复用带来的低训练开销。",
+    "evaluation": "在 ALFWorld(具身推理)、七个 agentic search 基准、InterCode-SQL(编码)、WANDS(网购)、ScienceWorld(科学发现)等多领域、多模型规模上评测,ReSkill 一致超越记忆型与技能型 RL 基线,在未见/困难任务上增益最大。协同进化后的策略能仅靠技能创建就在测试时适配新领域(ALFWorld→ScienceWorld)。代码以 Apache-2.0 开源。",
+    "mainFinding": "利用 GRPO 组内结构在同一策略下即时比较技能版本,让技能创建与策略优化在单个 RL 循环里对齐,在未见任务上取得最大增益并支持测试时跨域适配。",
+    "limitations": "abstract 强调\"未见任务上增益最大\"这类定性结论,单一头条数值需查正文表格;断言驱动创建器与汤普森采样引入若干超参,调优成本存在;跨七个搜索基准的稳定性仍需逐项核对。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2606.01619"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2606.01619v2"
+      },
+      {
+        "label": "代码",
+        "href": "https://github.com/amazon-science/reskill"
+      }
+    ],
+    "citation": "He et al. ReSkill: Reconciling Skill Creation with Policy Optimization in Agentic RL. arXiv:2606.01619",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-reskill-overview.png",
+        "caption": "ReSkill 系统总览:技能创建嵌入 GRPO 训练循环"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-evolvingrl",
+    "page": "skill",
+    "title": "Evolving-RL:端到端联合优化经验的抽取与利用",
+    "shortTitle": "Evolving-RL",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.59,
+    "year": 2026,
+    "venue": "arXiv 2026-05",
+    "authors": "Zhiyuan Fan, Wenwei Jin, Feng Zhang, Bin Li, Yihong Dong, Yao Hu, Jiawei Li",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "reinforcement learning",
+      "experience-driven",
+      "extractor-solver",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.64,
+      "evidence": 0.62,
+      "reproducibility": 0.5,
+      "adoption": 0.42,
+      "selfEvolution": 0.83
+    },
+    "summary": "把经验抽取与利用当作一个统一过程端到端优化,用两路评估信号分别训练抽取器与求解器。",
+    "methodCore": "Evolving-RL 关注经验驱动的自进化智能体:这类智能体从过去交互中蒸馏可复用经验,以便在部署时适配新任务。它指出既有工作的两类局限:一类偏重系统层设计(经验如何表示、如何管理),忽视了模型本身的内在能力;另一类基于 RL 的工作只优化经验的利用阶段,没有把\"自进化\"当作一个统一过程来学。Evolving-RL 是一个算法框架,主张联合改进经验的抽取(extraction)与利用(utilization)。\n## 把抽取与利用统一建模\nEvolving-RL 把经验的抽取与利用概念化为一个统一过程,而不是两个割裂的环节。它以经验抽取与评估为学习中心:从评估中导出两路监督信号,分别优化抽取器(extractor)与求解器(solver),使二者协调地协同进化。这种\"分而训之、合而进化\"的设计,让抽取器学会产出真正有用的经验,让求解器学会用好这些经验。\n## 用迁移评估对齐经验奖励\n关键在于奖励对齐:框架锚定在经验抽取与迁移评估上,把经验奖励与其实际效用对齐——一段经验值不值得抽取,取决于它迁移到后续任务时能否真的带来收益,而不是看它表面是否\"像经验\"。同时,评估阶段产生的技能条件化轨迹被复用来联合训练求解器,形成一个闭环:抽取质量与利用能力在同一个共享策略里相互强化。\n## 内化进权重的经验\nEvolving-RL 不满足于把经验塞进提示词,而是让可复用的经验模式直接内化进模型参数。因此它也是一种经验增强的 RL 算法:即便在测试时没有经验积累,性能也能得到提升。这正是经验(技能)与模型权重协同进化的体现——策略权重在训练中真实更新,经验被沉淀进参数而非仅仅悬挂在上下文里。\n## 为什么必须联合而非只优化利用\n只优化利用阶段,等于默认经验已经抽好了、只需学会怎么用;但现实是,抽取器若产出的是冗余、片面甚至误导的经验,再强的利用也无从发挥。反过来,只改进抽取而不管利用,抽出的经验也可能与求解器的实际需求脱节。Evolving-RL 用同一套评估把两端连起来:一段经验的价值由它迁移到新任务后的真实效用来度量,这个信号既回流去训练抽取器\"抽什么\",也回流去训练求解器\"怎么用\"。于是抽取器越来越懂得挑出可迁移的关键经验,求解器越来越会调用它们,二者在共享策略里形成正反馈,而不是各自朝不同目标漂移。\n## 主要能力\n抽取器与求解器的双路监督分别优化;迁移评估对齐的经验奖励;评估轨迹复用于联合训练;经验内化进权重、无测试时积累也提升。",
+    "evaluation": "在 ALFWorld 与 Mind2Web 上评测。ALFWorld 上带技能注入取得 96.0% 的整体成功率,未见任务从 GRPO(含技能)的 44.6 提升到 88.6;即便不做技能注入也达 93.1。相对 GRPO 基线,在 ALFWorld 未见任务上相对提升最高 98.7%,在 Mind2Web 上相对提升 35.8%。",
+    "mainFinding": "把经验抽取与利用统一为一个可端到端优化的过程,用双路评估信号协同训练抽取器与求解器,并把经验内化进权重,在 ALFWorld 未见任务上相对 GRPO 提升最高 98.7%。",
+    "limitations": "主要在 ALFWorld、Mind2Web 两个基准验证,更广任务域待考察;双路监督信号的构造与迁移评估的可靠性对结果影响较大;abstract/PDF 未见公开代码库,复现门槛较高。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2605.10663"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2605.10663v1"
+      }
+    ],
+    "citation": "Fan et al. Evolving-RL: End-to-End Optimization of Experience-Driven Self-Evolving Capability within Agents. arXiv:2605.10663",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-evolvingrl-overview.png",
+        "caption": "Evolving-RL 抽取器与求解器协同进化架构"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-skillmaster",
+    "page": "skill",
+    "title": "SkillMaster:训练智能体自主掌握技能的创建、精炼与选择",
+    "shortTitle": "SkillMaster",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.58,
+    "year": 2026,
+    "venue": "arXiv 2026-05",
+    "authors": "Min Yang, Jinghua Piao, Xu Xia, Xiaochong Lan, Jiaju Chen, Yongshun Gong, Yong Li",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "reinforcement learning",
+      "DualAdv-GRPO",
+      "counterfactual utility",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.64,
+      "evidence": 0.6,
+      "reproducibility": 0.5,
+      "adoption": 0.42,
+      "selfEvolution": 0.82
+    },
+    "summary": "用反事实效用评估和双优势 GRPO,把技能的创建、精炼与选择从外部资源变成内化能力。",
+    "methodCore": "SkillMaster 提出一个训练框架,教智能体自主掌握技能(autonomous skill mastery):既能创建新技能,又能精炼已有技能,还能在解题时从积累的技能库里挑选合适的技能。它的目标是把技能从\"外挂的外部资源\"转变为\"内化进模型的能力\"——技能管理不再靠外部脚本,而是由模型自己学会。\n## 三项关键设计\n第一是轨迹知情的技能复审(trajectory-informed skill review):智能体基于已完成情节里的证据,学会提出新技能、更新旧技能或保留现有技能,让技能编辑决策有据可依。第二是反事实效用评估(counterfactual utility evaluation):每一个候选的技能编辑,都用它在相关探针任务(probe tasks)上的反事实效用来评估——如果用了这次编辑,结果会不会更好?这个反事实差值为训练技能编辑决策提供了直接的学习信号,而不是靠事后延迟、混杂的奖励去猜。\n## DualAdv-GRPO 双优势估计\n第三是 DualAdv-GRPO:它为两类动作分别估计优势——一类是任务求解动作(task-solving),一类是技能编辑决策(skill-editing)。把二者的优势分开估计,稳定了联合训练,避免技能管理的稀疏、间接信号被任务求解的信号淹没或彼此干扰。模型策略通过 DualAdv-GRPO 目标训练,因此任务求解与技能管理两种行为都被学进权重。\n## 内化式的技能协同进化\nSkillMaster 的协同进化体现在:智能体自己识别技能失败、从轨迹证据里精炼过程性知识、再用尽量少的技能库编辑把改进迁移到未来任务。技能库的组织质量与策略权重同步提升,技能不再是死的外部文档,而是随模型能力一起成长的内化技能。\n## 为什么反事实评估更可靠\n技能编辑的困难在于反馈延迟且混杂:一次编辑的好坏,往往要等很多步之后的任务结果才显现,而那时结果又受多个技能共同影响,很难把功过归到某一次编辑头上。SkillMaster 用反事实效用绕开这个难题——直接在相关探针任务上比较\"用了这次编辑\"与\"没用\"的结果差,把一个原本稀疏、间接的信号变成即时、可归因的学习信号。DualAdv-GRPO 再把任务求解与技能编辑两类动作的优势分开估计,避免技能管理这种低频决策被高频的求解动作淹没,让两种能力在同一策略里稳定地共同成长。\n## 主要能力\n轨迹知情的技能提出/更新/保留决策;反事实效用评估提供的直接学习信号;DualAdv-GRPO 对求解与编辑的双优势估计;少量编辑即可迁移改进的技能维护。",
+    "evaluation": "在 ALFWorld 与 WebShop 上评测,SkillMaster 相比 SOTA 基线把整体成功率分别提升 8.8%(ALFWorld)与 9.3%(WebShop),在所有对比方法中最佳。论文另有 OpenReview 版本(id MFoZ7x1JDF),显示已投稿会议。",
+    "mainFinding": "用反事实效用评估为技能编辑提供直接学习信号,并以 DualAdv-GRPO 双优势稳定求解与技能管理的联合训练,在 ALFWorld/WebShop 上分别提升 8.8%/9.3%。",
+    "limitations": "主要在 ALFWorld、WebShop 两个基准验证,泛化性待考察;反事实效用需要构造探针任务,带来额外评估开销;abstract 未提供官方代码仓库,复现依赖 OpenReview 版本细节。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2605.08693"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2605.08693v2"
+      },
+      {
+        "label": "OpenReview",
+        "href": "https://openreview.net/forum?id=MFoZ7x1JDF"
+      }
+    ],
+    "citation": "Yang et al. SkillMaster: Toward Autonomous Skill Mastery in LLM Agents. arXiv:2605.08693",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-skillmaster-overview.png",
+        "caption": "SkillMaster 技能创建/精炼/选择与 DualAdv-GRPO 总览"
+      }
+    ]
+  },
+  {
+    "id": "skill-coevo-sapo",
+    "page": "skill",
+    "title": "SAPO:入库前验证技能效用的技能增强策略优化",
+    "shortTitle": "SAPO",
+    "category": "skill-model-coevo",
+    "maturity": "growing",
+    "score": 0.57,
+    "year": 2026,
+    "venue": "arXiv 2026-06",
+    "authors": "Zhiwei Zhang, Yudi Lin, Nikki Lijing Kuang, Linlin Wu, Xiaomin Li, Songtao Liu, Fenglong Ma",
+    "methodFamily": "skill×model co-evolution",
+    "tags": [
+      "co-evolution",
+      "reinforcement learning",
+      "GRPO",
+      "marginal utility",
+      "skill validation",
+      "weight update",
+      "active"
+    ],
+    "scores": {
+      "clarity": 0.64,
+      "evidence": 0.58,
+      "reproducibility": 0.48,
+      "adoption": 0.4,
+      "selfEvolution": 0.8
+    },
+    "summary": "用配对滚动的奖励差估计候选技能的边际效用,入库前验证并把策略自身训练成技能生成器。",
+    "methodCore": "SAPO(Skill-Augmented Policy Optimization)针对技能增强 RL 的一个薄弱环节:技能库存的是可复用的过程性知识,但既有方法很少在把新技能入库之前验证它到底有没有用。事实是,即便是顶尖闭源大模型生成的技能,效用也参差不齐;而一旦进了技能库,它们的作用又很难被单独分辨——延迟到来的滚动反馈反映的是多个技能叠加的综合效果,谁好谁坏说不清。\n## 三个针对性挑战\nSAPO 是一个在线 RL 框架,专门做入库前的技能验证,并解决三个挑战:一是要在不额外增加滚动成本的前提下估计新技能的边际效用;二是要按\"在当前已检索上下文之外的边际贡献\"给技能打分,而不是看它孤立的相关性;三是要减少对昂贵闭源 API 的依赖。\n## 配对滚动估计边际效用\nSAPO 的核心机制是把标准滚动预算一分为二,构成两组匹配的滚动,处在同一任务、同一检索上下文下:一组是基础滚动(base rollouts),只以当前检索到的技能为条件;另一组是技能增强滚动(skill-augmented rollouts),在相同技能之上再加一个从基础轨迹里归纳出的候选技能。两组的奖励差,正好估计出这个候选技能在具体上下文里的边际效用(涵盖提示内与跨提示的效用),据此提拔有用技能、过滤有害技能,而且不增加额外滚动开销。\n## 把策略训练成技能生成器\n收集到的滚动通过 GRPO 优化智能体策略;更关键的是,边际效用信号还被用来把策略本身训练成一个技能生成器,从而替代昂贵的闭源 LLM 调用。学到的技能生成似然,又反过来充当检索期重排序与过时技能剪枝的上下文相关质量分数。于是 SAPO 在一个框架里同时完成技能的归纳、验证与维护——技能库与策略权重一起演化,策略越强,它生成、评估、维护技能的能力也越强。\n## 为什么入库前验证很关键\n技能库最隐蔽的风险是\"劣质技能污染\":一个看似合理却实则误导的技能一旦入库,会在后续无数次检索中反复拉低表现,而由于反馈延迟又混杂,人们往往察觉不到是它在作祟。SAPO 的配对滚动把验证提前到入库之前——用同一任务、同一上下文下\"加不加这个候选技能\"的奖励差,干净地隔离出该技能的真实边际贡献,好的提拔、坏的直接拦在门外。更进一步,它把策略自己训练成技能生成器,既省掉每次几十美元的闭源 API 开销,又让生成似然天然可作为检索重排与过时剪枝的质量分数,技能库的归纳、验证、维护由此收进同一个随策略成长的闭环。\n## 主要能力\n配对滚动零额外开销估计边际效用;基于上下文边际贡献而非孤立相关性的打分;把策略自身训练成技能生成器、摆脱闭源 API;技能生成似然驱动的检索重排与剪枝。",
+    "evaluation": "在交互式决策与检索增强问答任务(含 ALFWorld)上评测,SAPO 一致超越既有技能增强 RL 方法,同时避免昂贵的闭源 API 调用(论文指出用 GPT-5.4 生成技能在 ALFWorld 上约需 $30/次)。具体逐项 % 增益见正文结果表。",
+    "mainFinding": "用配对滚动的奖励差在零额外开销下估计技能的上下文边际效用,入库前完成验证,并把策略自身训练成技能生成器替代闭源 API,超越既有技能增强 RL。",
+    "limitations": "配对滚动需要成对的基础/增强轨迹,预算分配对方差有影响;边际效用估计在长程任务上噪声较大;abstract 未给出统一头条数值,也未见公开代码仓库。",
+    "related": [],
+    "links": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2606.08755"
+      },
+      {
+        "label": "arXiv HTML",
+        "href": "https://arxiv.org/html/2606.08755v1"
+      }
+    ],
+    "citation": "Zhang et al. Co-Evolving Skill Generation and Policy Optimization (SAPO). arXiv:2606.08755",
+    "figures": [
+      {
+        "src": "figures/skillcoevo-sapo-overview.png",
+        "caption": "SAPO 配对滚动估计技能边际效用与入库前验证框架"
       }
     ]
   }
