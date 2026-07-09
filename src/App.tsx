@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { FilterBar, FilterState } from "./components/FilterBar";
 import { PaperList } from "./components/PaperList";
 import { RadarChart } from "./components/RadarChart";
@@ -407,11 +407,58 @@ function RichText({ text }: { text: string }) {
   );
 }
 
-function SectionHead({ icon, title, hint }: { icon: string; title: string; hint?: string }) {
+type IconName = "summary" | "method" | "experiment" | "finding" | "limitation";
+
+const iconPaths: Record<IconName, ReactNode> = {
+  summary: (
+    <>
+      <path d="M7 8h7M7 11.5h4.5" />
+      <path d="M4.5 4.5h11a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4.5A1.5 1.5 0 0 1 3 12V6a1.5 1.5 0 0 1 1.5-1.5Z" />
+    </>
+  ),
+  method: (
+    <>
+      <path d="M10 2.6 17 6.4l-7 3.8-7-3.8 7-3.8Z" />
+      <path d="M3 10.2 10 14l7-3.8" />
+      <path d="M3 13.8 10 17.6l7-3.8" />
+    </>
+  ),
+  experiment: (
+    <>
+      <path d="M8 2.5v5.2L3.7 15a1.4 1.4 0 0 0 1.2 2.1h10.2a1.4 1.4 0 0 0 1.2-2.1L12 7.7V2.5" />
+      <path d="M7 2.5h6" />
+      <path d="M6.5 12.5h7" />
+    </>
+  ),
+  finding: (
+    <>
+      <path d="M10 2.5v3.2M10 14.3v3.2M2.5 10h3.2M14.3 10h3.2" />
+      <path d="M5 5l1.9 1.9M13.1 13.1 15 15M15 5l-1.9 1.9M6.9 13.1 5 15" />
+      <circle cx="10" cy="10" r="2.6" />
+    </>
+  ),
+  limitation: (
+    <>
+      <path d="M10 3.2 2.8 15.6A1.3 1.3 0 0 0 3.9 17.6h12.2a1.3 1.3 0 0 0 1.1-2L10 3.2Z" />
+      <path d="M10 8v3.4M10 14.2h.01" />
+    </>
+  ),
+};
+
+function Icon({ name }: { name: IconName }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6"
+      strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      {iconPaths[name]}
+    </svg>
+  );
+}
+
+function SectionHead({ icon, title, hint }: { icon: IconName; title: string; hint?: string }) {
   return (
     <div className="dsec-head">
       <span className="dsec-icon" aria-hidden>
-        {icon}
+        <Icon name={icon} />
       </span>
       <h2>{title}</h2>
       {hint && <span className="dsec-hint">{hint}</span>}
@@ -554,7 +601,7 @@ function PaperDetail({
         <main className="paper-reading">
           <section className="detail-section highlight">
             <div className="dsec-full">
-              <SectionHead icon="❝" title="一句话概述" />
+              <SectionHead icon="summary" title="一句话概述" />
               <p className="lede">
                 <RichText text={item.summary} />
               </p>
@@ -563,7 +610,7 @@ function PaperDetail({
 
           <section className="detail-section">
             <div className="dsec-full">
-              <SectionHead icon="◈" title="核心方法" hint="Method" />
+              <SectionHead icon="method" title="核心方法" hint="Method" />
               <StructuredProse text={item.methodCore} />
               {item.figures && item.figures.length > 0 ? (
                 <div className="figure-notes">
@@ -587,21 +634,21 @@ function PaperDetail({
 
           <section className="detail-section">
             <div className="dsec-full">
-              <SectionHead icon="▲" title="实验与评估" hint="Experiments" />
+              <SectionHead icon="experiment" title="实验与评估" hint="Experiments" />
               <ClauseList text={item.evaluation} marker="dot" />
             </div>
           </section>
 
           <section className="detail-section">
             <div className="dsec-full">
-              <SectionHead icon="✦" title="主要发现" hint="Key Findings" />
+              <SectionHead icon="finding" title="主要发现" hint="Key Findings" />
               <ClauseList text={item.mainFinding} marker="check" />
             </div>
           </section>
 
           <section className="detail-section">
             <div className="dsec-full">
-              <SectionHead icon="⚠" title="局限与边界" hint="Limitations" />
+              <SectionHead icon="limitation" title="局限与边界" hint="Limitations" />
               <ClauseList text={item.limitations} marker="warn" />
             </div>
           </section>
